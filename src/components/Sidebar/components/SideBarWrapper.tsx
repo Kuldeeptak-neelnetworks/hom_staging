@@ -25,7 +25,7 @@ export default function SideBarWrapper({
 
       {/* Main content with dynamic width */}
       <main
-        className={`transition-all duration-300 flex-1 pl-5 py-8 ${
+        className={`transition-all duration-300 flex-1 pl-5 py-8 overflow-hidden ${
           isCollapsed ? "ml-[2rem]" : "ml-[10rem]"
         }`}
       >
