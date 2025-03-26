@@ -218,7 +218,7 @@ const OrdersContent = () => {
           filters,
         });
     }, 500),
-    [fetchAllOrdersData, orderYear, filters, page, limit] 
+    [fetchAllOrdersData, orderYear, filters, page, limit]
   );
 
   useEffect(() => {
@@ -246,7 +246,7 @@ const OrdersContent = () => {
         <BreadcrumbSection crumbs={crumbs} />
       </div> */}
 
-      <div className="w-[300px] md:w-[500px] lg:absolute z-50 mt-2 lg:mt-0 md:flex gap-2">
+      <div className="w-[300px] md:w-[500px] lg:absolute z-[100] mt-2 lg:mt-0 md:flex gap-2">
         <Select
           className="text-[0.8rem] border-red-400 w-full mb-2 md:mb-0 boxShadow"
           closeMenuOnSelect={false}
