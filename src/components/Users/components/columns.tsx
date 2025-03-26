@@ -23,17 +23,17 @@ export const columns = [
     cell: ({ row }: any) => {
       return (
         <div className="flex items-center cursor-pointer">
-          {/* <Avatar>
+          <Avatar>
             <AvatarImage src={row?.original?.avatar} className="" />
             <AvatarFallback>
               <img src={UserPic} className="" />
             </AvatarFallback>
-          </Avatar> */}
-          <UserProfileHover
+          </Avatar>
+          {/* <UserProfileHover
             picture={row?.original?.avatar}
             name={row?.original?.fullName}
             designation={row?.original?.role}
-          />
+          /> */}
         </div>
       );
     },

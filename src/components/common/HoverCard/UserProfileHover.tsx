@@ -23,7 +23,7 @@ export function UserProfileHover({ picture, designation, name }: any) {
         </Avatar>
       </HoverCardTrigger>
       <HoverCardContent className="w-fit">
-        <div className="flex justify-between space-x-4">
+        <div className="flex justify-between space-x-4 ">
           <Avatar className="h-12 w-12">
             <AvatarImage src={picture} />
             <img src={UserPic} className="" />

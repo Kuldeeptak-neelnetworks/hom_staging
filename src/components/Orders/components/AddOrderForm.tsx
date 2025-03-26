@@ -470,7 +470,10 @@ const AddOrderForm = ({ fetchAllOrdersData }: any) => {
     setCurrentPage(1); // Set to page 1 when the component mounts
   }, []);
   const [customerOptions, setCustomerOptions] = useState([]);
-  const loadOptions = async (loadedOptions: { options: any; }, { page }: any) => {
+  const loadOptions = async (
+    loadedOptions: { options: any },
+    { page }: any
+  ) => {
     // console.log("Loading page:", page); // Debug to check if page is received correctly
 
     // Default to page 1 if page is undefined
@@ -490,7 +493,7 @@ const AddOrderForm = ({ fetchAllOrdersData }: any) => {
 
       // Map the data to the format needed for AsyncPaginate
       const transformedData = response.data?.data?.customers.map(
-        (customer: { _id: any; companyName: any; }) => ({
+        (customer: { _id: any; companyName: any }) => ({
           value: customer._id,
           label: customer.companyName, // Use company name as the label
         })
@@ -1017,7 +1020,7 @@ const AddOrderForm = ({ fetchAllOrdersData }: any) => {
                       <SelectReactSelect
                         closeMenuOnSelect={true}
                         isClearable={true}
-                        options={userData?.map(
+                        options={userData?.users?.map(
                           (user: { _id: any; fullName: any }) => ({
                             value: user._id,
                             label: user.fullName,
