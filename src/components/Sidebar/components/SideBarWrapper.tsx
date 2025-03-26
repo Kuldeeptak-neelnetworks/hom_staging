@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import SideBar from "./SideBar";
 import { usePathname } from "next/navigation";
 
@@ -12,7 +12,6 @@ export default function SideBarWrapper({
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 
   const pathname = usePathname();
-  console.log("pathname", pathname);
 
   return (
     <div className="flex">
@@ -20,7 +19,9 @@ export default function SideBarWrapper({
       {pathname.startsWith("/auth") ? (
         ""
       ) : (
-        <SideBar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <SideBar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
+        </Suspense>
       )}
 
       {/* Main content with dynamic width */}

@@ -5,7 +5,7 @@ export const HomeIconSVG = ({ cssClass }: HomeIconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
+      width="24"
       height="20"
       viewBox="0 0 26 27"
       fill="none"
@@ -110,7 +110,7 @@ export const SalesIconSVG = ({ cssClass }: HomeIconProps) => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 48 48"
-      width="26"
+      width="24"
       height="25"
       className={cssClass}
       fillRule="evenodd"
@@ -323,7 +323,7 @@ export const GroupOfUsersIconSVG = ({ cssClass }: HomeIconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="22"
+      width="24"
       height="22"
       viewBox="0 0 26 26"
       fill="none"
@@ -546,8 +546,10 @@ export const PhoneIconSVG = () => {
 export const NotificationBellIconSVG = ({ cssClass }: HomeIconProps) => {
   return (
     <svg
-      width="20"
-      height="20"
+      // width="20"
+      // height="20"
+      width="24"
+      height="24"
       viewBox="0 0 32 32"
       xmlns="http://www.w3.org/2000/svg"
       className={cssClass}

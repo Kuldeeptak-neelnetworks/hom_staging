@@ -195,7 +195,7 @@ const LeadsContent: React.FC = () => {
         <BreadcrumbSection crumbs={crumbs} />
       </div> */}
 
-      <div className="w-[300px] lg:absolute z-10 mt-2 lg:mt-0">
+      <div className="w-[300px] lg:absolute z-[100] mt-2 lg:mt-0">
         <Select
           className="text-[0.8rem] boxShadow"
           closeMenuOnSelect={false}

@@ -43,7 +43,7 @@ import MenuItem from "../components/MenuItem";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 // import NotificationCard from "../../Appbar/components/NotificationCard";
 import { useNotificationStore } from "@/Store/NotificationStore";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import MenuItemData from "./MenuItemData";
 interface MenuItemIF {
   id: string;
@@ -136,6 +136,12 @@ const SideBar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
   const [open, setOpen] = useState(false);
   const [openSmallSideBar, setOpenSmallSideBar] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
+  const searchParams = useSearchParams();
+  const queryParams = searchParams.get("id");
+  const initialPage = Number(searchParams.get("page")) || 1;
+  const initialLimit = Number(searchParams.get("limit")) || 20;
+  const [page, setPage] = useState(initialPage);
+  const [limit, setLimit] = useState(initialLimit);
 
   const logoSrc = Logo.src;
   const MiniLogoSrc = MiniLogo.src;
@@ -188,8 +194,6 @@ const SideBar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
       ) {
         const itemType = notificationSingleData?.itemType;
 
-        console.log("itemType", itemType);
-
         const queryData = {
           id: notificationSingleData?.item,
         };
@@ -231,12 +235,21 @@ const SideBar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
     }
   }, [notificationTriggered, notificationSingleData]); // Include notificationSingleData if needed
 
+  // useEffect(() => {
+  //   fetchNotificationData();
+  // }, [notificationReadData]);
+  // useEffect(() => {
+  //   fetchNotificationData();
+  // }, []);
+
+  const fetchNotifications = async () => {
+    await fetchNotificationData({ page, limit });
+  };
+
   useEffect(() => {
-    fetchNotificationData();
-  }, [notificationReadData]);
-  useEffect(() => {
-    fetchNotificationData();
-  }, []);
+    fetchNotifications();
+  }, [page, limit, fetchNotificationData, notificationReadData]);
+
   return (
     <>
       {/* Mobile toggle button */}
@@ -270,7 +283,7 @@ const SideBar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
       {/* Sidebar */}
       <aside
         className={`h-screen overflow-auto bg-gradient-to-b from-[#175a5f] via-[#002123] to-[#005150] text-white  fixed transition-all duration-300 text-[0.8rem] ${
-          isCollapsed ? "w-[6rem] p-1 " : "w-[14rem] p-3"
+          isCollapsed ? "w-[6rem] p-1 " : "w-[14rem] p-2"
         }`}
         ref={sidebarRef}
         onScroll={handleScroll}
@@ -311,7 +324,12 @@ const SideBar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
         {/* Render Menu Items */}
         <ul>
           {menuItems.map((item) => (
-            <MenuItemData key={item.href} {...item} isCollapsed={isCollapsed} />
+            <MenuItemData
+              key={item.href}
+              {...item}
+              isCollapsed={isCollapsed}
+              notificationData={notificationData}
+            />
           ))}
         </ul>
       </aside>

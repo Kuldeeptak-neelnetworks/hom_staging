@@ -301,7 +301,7 @@ const QuillEditor: React.FC<QuillEditorProps> = ({
             setIsOpenReplyModel(false);
             setOpenQuill(false);
             handleClear();
-            fetchNotificationData();
+            // fetchNotificationData();
           }
         });
       } catch (error) {

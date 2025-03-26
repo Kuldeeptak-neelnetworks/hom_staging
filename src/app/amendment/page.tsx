@@ -1,4 +1,5 @@
 "use client";
+import React, { useEffect, useState } from "react";
 
 // import AmendmentContent from "@/components/Amendment/AmendmentContent";
 
@@ -9,7 +10,6 @@ const AmendmentContent = dynamic(
   () => import("@/components/Amendment/AmendmentContent"),
   { ssr: false }
 );
-import React, { useEffect, useState } from "react";
 
 const AmendmentPage: React.FC = () => {
   const [toggleWidth, setToggleWidth] = useState<boolean>(false);

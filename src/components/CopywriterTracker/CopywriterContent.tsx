@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
+import { Suspense } from "react";
 import { columns } from "./components/columns";
 import { DataTable } from "../common/data-table";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -70,8 +71,6 @@ const CopywriterContent: React.FC = () => {
       setAllCopywriter(copywriterData ? copywriterData || [] : []);
     }
   }, [copywriterData, router]);
-
-  console.log("allCopywriter222222222222",allCopywriter)
 
   const statusOptions = [
     { label: "Homepage In Process", value: "Homepage In Process" },
@@ -146,60 +145,61 @@ const CopywriterContent: React.FC = () => {
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
- 
   return (
-    <div className="px-4 py-0 relative">
-      {/* <div className="text-xl font-semibold absolute top-[-52px]">
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="px-4 py-0 relative">
+        {/* <div className="text-xl font-semibold absolute top-[-52px]">
         Copywriter Tracker
       </div> */}
 
-      <div className="w-[300px] lg:absolute  z-50 mt-2 lg:mt-0">
-        <Select
-          className="text-[0.8rem] boxShadow"
-          closeMenuOnSelect={false}
-          components={animatedComponents}
-          isMulti
-          options={statusOptions}
-          onChange={(selectedOptions) => {
-            const selectedValues =
-              selectedOptions &&
-              selectedOptions.map((option: any) => option.value);
-            setFilters((prev: any) => ({
-              ...prev,
-              status: selectedValues,
-            }));
-          }}
-          placeholder="Select Status"
+        <div className="w-[300px] lg:absolute  z-[100] mt-2 lg:mt-0">
+          <Select
+            className="text-[0.8rem] boxShadow"
+            closeMenuOnSelect={false}
+            components={animatedComponents}
+            isMulti
+            options={statusOptions}
+            onChange={(selectedOptions) => {
+              const selectedValues =
+                selectedOptions &&
+                selectedOptions.map((option: any) => option.value);
+              setFilters((prev: any) => ({
+                ...prev,
+                status: selectedValues,
+              }));
+            }}
+            placeholder="Select Status"
+          />
+        </div>
+
+        <div className="md:flex justify-center sm:justify-end my-2">
+          {copywriterData && copywriterData.length > 0 ? (
+            <PageHeader tableInstance={tableInstance} />
+          ) : (
+            ""
+          )}
+
+          <div className="flex justify-normal lg:justify-end">
+            <Link href={"/copywriter/addCopywriter"}>
+              <Button
+                variant="outline"
+                className=" text-[0.8rem] text-white bg-[#29354f] hover:bg-[#fff] hover:text-[#29354f] boxShadow"
+              >
+                New Copywriter Tracker
+              </Button>
+            </Link>
+          </div>
+        </div>
+
+        <DataTable
+          text=""
+          queryParams={queryParams ? queryParams : ""}
+          columns={columns}
+          tableInstance={tableInstance}
+          loading={loading}
         />
       </div>
-
-      <div className="md:flex justify-center sm:justify-end my-2">
-        {copywriterData && copywriterData.length > 0 ? (
-          <PageHeader tableInstance={tableInstance} />
-        ) : (
-          ""
-        )}
-
-        <div className="flex justify-normal lg:justify-end">
-          <Link href={"/copywriter/addCopywriter"}>
-            <Button
-              variant="outline"
-              className=" text-[0.8rem] text-white bg-[#29354f] hover:bg-[#fff] hover:text-[#29354f] boxShadow"
-            >
-              New Copywriter Tracker
-            </Button>
-          </Link>
-        </div>
-      </div>
-
-      <DataTable
-        text=""
-        queryParams={queryParams ? queryParams : ""}
-        columns={columns}
-        tableInstance={tableInstance}
-        loading={loading}
-      />
-    </div>
+    </Suspense>
   );
 };
 

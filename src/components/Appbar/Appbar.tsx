@@ -126,7 +126,7 @@ const Appbar: React.FC<NavBarProps> = ({ isCollapsed }) => {
 
   useEffect(() => {
     fetchUserData();
-    fetchNotificationData();
+    // fetchNotificationData();
   }, []);
 
   const singleNotificationfecthHandler = async (notificationId: string) => {
@@ -187,9 +187,9 @@ const Appbar: React.FC<NavBarProps> = ({ isCollapsed }) => {
     }
   }, [notificationTriggered, notificationSingleData]); // Include notificationSingleData if needed
 
-  useEffect(() => {
-    fetchNotificationData();
-  }, [notificationReadData]);
+  // useEffect(() => {
+  //   fetchNotificationData();
+  // }, [notificationReadData]);
 
   return (
     <nav

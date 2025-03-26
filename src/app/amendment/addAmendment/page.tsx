@@ -2,7 +2,7 @@
 import AddAmendmentForm from "@/components/Amendment/components/AddAmendmentForm";
 // import AddAmendmentForm from "@/components/Amendment/components/AddAmendmentForm";
 // import AddCopywriterForm from "@/components/CopywriterTracker/components/AddCopywriterForm";
-import SideBarContent from "@/components/Sidebar/SideBarContent";
+// import SideBarContent from "@/components/Sidebar/SideBarContent";
 import React, { useState } from "react";
 
 const AddAmendmentFormPage: React.FC = () => {

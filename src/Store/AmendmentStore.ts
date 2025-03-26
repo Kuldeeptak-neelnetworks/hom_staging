@@ -69,7 +69,8 @@ export const useAmendmentStore = create<AmendmentState & AmendmentActions>()(
         if (page) queryParams.append("page", String(page));
         if (limit) queryParams.append("limit", String(limit));
         if (searchInput) queryParams.append("search", searchInput);
-        if (filters) queryParams.append("status", filters?.status);
+        if (filters?.status !== undefined)
+          queryParams.append("status", filters?.status);
 
         const response = await baseInstance.get(
           `/amendments?${queryParams.toString()}`
@@ -113,15 +114,19 @@ export const useAmendmentStore = create<AmendmentState & AmendmentActions>()(
     addMultipleForm: async (data: any, customerId: string) => {
       set({ loading: true });
       try {
-        const response = await baseInstance.post(`/inboxs/${customerId}`, data);
+        const queryParams = new URLSearchParams();
+        queryParams.append("customerId", customerId);
+        const response = await baseInstance.post(
+          `/inboxs?${queryParams.toString()}`,
+          data
+        );
+
         if (response?.status === 201) {
           set({ addMultipleFormData: response.data?.data, loading: false });
           successToastingFunction(response.data.message);
         } else {
-          errorToastingFunction("Something Went Wrong"),
-            set({
-              loading: false,
-            });
+          errorToastingFunction("Something Went Wrong");
+          set({ loading: false });
         }
       } catch (error: any) {
         set({ loading: false });

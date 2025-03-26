@@ -8,6 +8,7 @@ const MenuItemData = memo((props: any) => {
   const {
     label,
     href,
+    notificationData,
     submenuItems = [],
     isSidebarOpen,
     icon,
@@ -29,6 +30,8 @@ const MenuItemData = memo((props: any) => {
     }
   }, [isActive]);
 
+  console.log("notificationData", notificationData);
+
   return (
     <li className="my-2">
       <Link href={href} className="hover:text-gray-400">
@@ -40,14 +43,51 @@ const MenuItemData = memo((props: any) => {
           } ${isCollapsed ? "flex-col" : "gap-3 text-base"}`}
         >
           {isCollapsed && (
-            <div className="flex flex-col text-[0.8rem] text-center">
+            <div className="flex flex-col text-[0.8rem] text-center relative">
               <span className="flex justify-center">{icon}</span>{" "}
               <span>{label}</span>
+              {label === "Inbox" &&
+                notificationData?.notifications?.some(
+                  (notification: any) => !notification?.isRead
+                ) && (
+                  <div className="absolute top-0 left-3 h-4 w-4 rounded-full bg-red-600 flex justify-center items-center">
+                    <span className="font-bold text-white text-[10px]">
+                      {
+                        notificationData?.notifications?.filter(
+                          (notification: any) => !notification?.isRead
+                        ).length
+                      }
+                    </span>
+                  </div>
+                )}
             </div>
           )}
           {!isCollapsed && (
-            <div className="flex gap-3 text-[0.9rem]">
-              <span>{icon}</span> <span>{label}</span>
+            <div className="flex gap-3 text-[0.9rem] relative">
+              <span className="w-[30px]">{icon}</span> <span>{label}</span>
+              {/* {label === "Inbox" && (
+                <div className="absolute top-0 left-3 h-4 w-4 rounded-full bg-red-600 flex justify-center items-center">
+                  <span className="font-bold text-white text-[10px]">
+                    {notificationData?.notifications?.filter(
+                      (notification: any) => !notification?.isRead
+                    )?.length || 0}
+                  </span>
+                </div>
+              )} */}
+              {label === "Inbox" &&
+                notificationData?.notifications?.some(
+                  (notification: any) => !notification?.isRead
+                ) && (
+                  <div className="absolute top-0 left-3 h-4 w-4 rounded-full bg-red-600 flex justify-center items-center">
+                    <span className="font-bold text-white text-[10px]">
+                      {
+                        notificationData?.notifications?.filter(
+                          (notification: any) => !notification?.isRead
+                        ).length
+                      }
+                    </span>
+                  </div>
+                )}
             </div>
           )}
         </div>

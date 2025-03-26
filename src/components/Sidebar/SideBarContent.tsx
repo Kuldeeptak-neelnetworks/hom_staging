@@ -158,12 +158,12 @@ const SideBarContent: React.FC<{ setToggleWidth: any }> = ({
     }
   }, [notificationTriggered, notificationSingleData]); // Include notificationSingleData if needed
 
-  useEffect(() => {
-    fetchNotificationData();
-  }, [notificationReadData]);
-  useEffect(() => {
-    fetchNotificationData();
-  }, []);
+  // useEffect(() => {
+  //   fetchNotificationData();
+  // }, [notificationReadData]);
+  // useEffect(() => {
+  //   fetchNotificationData();
+  // }, []);
   return (
     <>
       {/* Mobile toggle button */}
