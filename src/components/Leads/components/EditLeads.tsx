@@ -33,6 +33,8 @@ import {
 } from "@/common/commonFunctions";
 import * as Yup from "yup";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import AnimationForm from "@/components/common/Animation/AnimationForm";
+import { motion } from "framer-motion";
 
 const crumbs = [
   {
@@ -225,11 +227,9 @@ const EditLeads = ({}) => {
     setFieldValue,
   } = formik;
 
-
-
   return (
     <div className="px-4 py-0 relative text-[0.8rem]">
-      <div className="text-[1rem] font-semibold absolute top-[-35px]">
+      <div className="text-[1rem] font-semibold absolute top-[-30px]">
         {leadData?.customerName
           ? leadData?.customerName
           : leadData?.customer_id?.companyName
@@ -240,15 +240,20 @@ const EditLeads = ({}) => {
         <BreadcrumbSection crumbs={crumbs} />
       </div> */}
 
-      <div className="flex justify-center">
-        <ScrollArea className="h-[80vh]   px-3 py-3 w-[100%] xl:w-[56vw]">
+      <motion.div
+        initial={{ opacity: 0, x: -50, rotate: -5, scale: 0.95 }}
+        animate={{ opacity: 1, x: 0, rotate: 0, scale: 1 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+        className="flex justify-center"
+      >
+        <ScrollArea className="h-[80vh] px-3 py-3 w-[100%] xl:w-[75vw]">
           <form
             onSubmit={handleSubmit}
             className="border p-6 bg-[#fff] boxShadow"
           >
             <div className="lg:flex gap-5">
               {/* contact Person  */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                   Contact Person <span style={{ opacity: "0.5" }}> * </span>
                 </label>
@@ -270,9 +275,9 @@ const EditLeads = ({}) => {
                     </div>
                   ) : null}
                 </div>
-              </div>
+              </AnimationForm>
               {/* Lead Type  */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full" fromLeft={false}>
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                   Lead Type <span style={{ opacity: "0.5" }}> * </span>
                 </label>
@@ -310,10 +315,10 @@ const EditLeads = ({}) => {
                     </div>
                   ) : null}
                 </div>
-              </div>
+              </AnimationForm>
             </div>
             {/* OutCome */}
-            <div className="mb-3">
+            <AnimationForm className="mb-3">
               <label className="mb-2.5 block font-medium text-black dark:text-white">
                 Outcome <span style={{ opacity: "0.5" }}> * </span>
               </label>
@@ -348,12 +353,12 @@ const EditLeads = ({}) => {
                   <div className="text-red-500">{formik.errors.outcome}</div>
                 ) : null}
               </div>
-            </div>
+            </AnimationForm>
             {/*  Status*/}
             {values.outcome === "SOLD" && (
               <>
                 {/* status */}
-                <div className="mb-3">
+                <AnimationForm className="mb-3">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
                     Status
                   </label>
@@ -386,9 +391,9 @@ const EditLeads = ({}) => {
                       </SelectContent>
                     </Select>
                   </div>
-                </div>
+                </AnimationForm>
 
-                <div className="mb-3">
+                <AnimationForm className="mb-3" fromLeft={false}>
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
                     Town
                   </label>
@@ -403,9 +408,9 @@ const EditLeads = ({}) => {
                       className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
                   </div>
-                </div>
+                </AnimationForm>
                 {/* Country */}
-                <div className="mb-3">
+                <AnimationForm className="mb-3">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
                     County
                   </label>
@@ -420,9 +425,9 @@ const EditLeads = ({}) => {
                       className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
                   </div>
-                </div>
+                </AnimationForm>
                 {/*  Postcode */}
-                <div className="mb-3">
+                <AnimationForm className="mb-3" fromLeft={false}>
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
                     Post Code
                   </label>
@@ -437,13 +442,13 @@ const EditLeads = ({}) => {
                       className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
                   </div>
-                </div>
+                </AnimationForm>
               </>
             )}
 
             <div className="lg:flex gap-5">
               {/* Current website */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                   Current website
                 </label>
@@ -464,9 +469,9 @@ const EditLeads = ({}) => {
                     </div>
                   ) : null}
                 </div>
-              </div>
+              </AnimationForm>
               {/* Email Address */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full" fromLeft={false}>
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                   Email Address <span style={{ opacity: "0.5" }}>*</span>
                 </label>
@@ -504,12 +509,12 @@ const EditLeads = ({}) => {
                     </svg>
                   </span>
                 </div>
-              </div>
+              </AnimationForm>
             </div>
 
             <div className="lg:flex gap-5">
               {/* Mobile No. */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                   Mobile No.
                 </label>
@@ -533,9 +538,9 @@ const EditLeads = ({}) => {
                     <MobileIconSVG />
                   </span>
                 </div>
-              </div>
+              </AnimationForm>
               {/* Landline No. */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full" fromLeft={false}>
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                   Landline No.
                 </label>
@@ -559,10 +564,10 @@ const EditLeads = ({}) => {
                     <PhoneIconSVG />
                   </span>
                 </div>
-              </div>
+              </AnimationForm>
             </div>
             {/* Order Forecast */}
-            <div className="mb-3">
+            <AnimationForm className="mb-3">
               <label className="mb-2.5 block font-medium text-black dark:text-white">
                 Order Forecast
               </label>
@@ -582,9 +587,9 @@ const EditLeads = ({}) => {
                   </div>
                 ) : null}
               </div>
-            </div>
+            </AnimationForm>
             {/* Notes */}
-            <div className="mb-3">
+            <AnimationForm className="mb-3" fromLeft={false}>
               <label className="mb-2.5 block font-medium text-black dark:text-white">
                 Notes
               </label>
@@ -603,7 +608,7 @@ const EditLeads = ({}) => {
                   <div className="text-red-500">{formik.errors.notes}</div>
                 ) : null}
               </div>
-            </div>
+            </AnimationForm>
             {/* button  */}
             <div className="my-6 ">
               <Button
@@ -620,7 +625,7 @@ const EditLeads = ({}) => {
             </div>
           </form>
         </ScrollArea>
-      </div>
+      </motion.div>
     </div>
   );
 };

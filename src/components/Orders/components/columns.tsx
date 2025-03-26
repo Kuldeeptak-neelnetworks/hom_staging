@@ -27,6 +27,7 @@ import React from "react";
 import ChatModel from "../../common/Editor/ChatModel";
 import Link from "next/link";
 import SideDrawer from "@/components/common/Editor/SideDrawer";
+import { UserProfileHover } from "@/components/common/HoverCard/UserProfileHover";
 const UserPic = User.src;
 // const companyLogo = Logo.src;
 
@@ -152,8 +153,8 @@ export const columns = [
       if (row?.original?.createdBy !== null) {
         if (row?.original?.createdBy?.avatar !== "") {
           return (
-            <div className="flex items-center">
-              <TooltipCommon text={row?.original?.createdBy?.fullName}>
+            <div className="flex items-center cursor-pointer">
+              {/* <TooltipCommon text={row?.original?.createdBy?.fullName}>
                 <Avatar className="cursor-pointer">
                   <AvatarImage
                     src={row?.original?.createdBy?.avatar}
@@ -163,7 +164,12 @@ export const columns = [
                     <img src={UserPic} className="" />
                   </AvatarFallback>
                 </Avatar>
-              </TooltipCommon>
+              </TooltipCommon> */}
+              <UserProfileHover
+                picture={row?.original?.createdBy?.avatar}
+                name={row?.original?.createdBy?.fullName}
+                designation={row?.original?.createdBy?.role}
+              />
             </div>
           );
         } else {

@@ -268,18 +268,22 @@ const EditAmendmentContent = () => {
   };
   const handleComplateDateSelect = (selectedDate: any) => {
     if (selectedDate) {
-    setComplateDate(selectedDate);
+      setComplateDate(selectedDate);
     }
   };
 
   const currentMonth = date ? getMonth(date) : getMonth(new Date());
   const currentYear = date ? getYear(date) : getYear(new Date());
-  const currentMonthCompleteDate = completeDate ? getMonth(completeDate) : getMonth(new Date());
-  const currentYearCompleteDate = completeDate ? getYear(completeDate) : getYear(new Date());
+  const currentMonthCompleteDate = completeDate
+    ? getMonth(completeDate)
+    : getMonth(new Date());
+  const currentYearCompleteDate = completeDate
+    ? getYear(completeDate)
+    : getYear(new Date());
 
   const handleMonthChange = (
     month: string,
-    target: "date" | "completeDate" 
+    target: "date" | "completeDate"
   ) => {
     const monthIndex = months.indexOf(month);
 
@@ -317,7 +321,7 @@ const EditAmendmentContent = () => {
   };
   return (
     <div className="px-4 py-0  relative text-[0.8rem]">
-      <div className="text-[1rem] font-semibold absolute top-[-35px] text-wrap">
+      <div className="text-[1rem] font-semibold absolute top-[-30px] text-wrap">
         {amendmentDetails?.customer?.companyName
           ? amendmentDetails?.customer?.companyName
           : "loading..."}
@@ -326,7 +330,7 @@ const EditAmendmentContent = () => {
         <BreadcrumbSection crumbs={crumbs} />
       </div> */}
       <div className=" flex gap-5 justify-center ">
-        <ScrollArea className="h-[80vh]  sm:px-3 sm:py-3 w-[100%] xl:w-[56vw]">
+        <ScrollArea className="h-[80vh]  sm:px-3 sm:py-3 w-[100%] xl:w-[75vw]">
           <form
             onSubmit={handleSubmit}
             className="border p-6 bg-[#fff] boxShadow"
@@ -395,18 +399,17 @@ const EditAmendmentContent = () => {
                         </Select>
                       </div>
                       <div className="calendar-container">
-                      <Calendar
-                        mode="single"
-                        selected={date}
-                        onSelect={handleDateSelect}
-                        initialFocus
-                        month={date}
-                        onMonthChange={(date) => setDate(date)}
-                      />
+                        <Calendar
+                          mode="single"
+                          selected={date}
+                          onSelect={handleDateSelect}
+                          initialFocus
+                          month={date}
+                          onMonthChange={(date) => setDate(date)}
+                        />
                       </div>
                     </PopoverContent>
                   </Popover>
-              
                 </div>
               </div>
               {/* Complete Date */}
@@ -417,7 +420,7 @@ const EditAmendmentContent = () => {
                 <div className="relative">
                   <Popover>
                     <PopoverTrigger asChild>
-                    <Button
+                      <Button
                         variant={"outline"}
                         className={cn(
                           "w-[250px] justify-start text-left font-normal",
@@ -471,20 +474,19 @@ const EditAmendmentContent = () => {
                           </SelectContent>
                         </Select>
                       </div>
-                   
+
                       <div className="calendar-container">
-                      <Calendar
-                        mode="single"
-                        selected={completeDate}
-                        onSelect={handleComplateDateSelect}
-                        initialFocus
-                        month={completeDate}
-                        onMonthChange={(date) => setComplateDate(date)}
-                      />
+                        <Calendar
+                          mode="single"
+                          selected={completeDate}
+                          onSelect={handleComplateDateSelect}
+                          initialFocus
+                          month={completeDate}
+                          onMonthChange={(date) => setComplateDate(date)}
+                        />
                       </div>
                     </PopoverContent>
                   </Popover>
-                
                 </div>
               </div>
             </div>
@@ -585,7 +587,7 @@ const EditAmendmentContent = () => {
             <div className="my-6 ">
               <Button
                 type="submit"
-                className="lg:w-[6vw] w-full cursor-pointer border border-primary bg-primary px-4 py-1 text-white transition hover:bg-opacity-90 text-md"
+                className="lg:w-[6vw] w-full cursor-pointer border border-primary bg-[#004d4b] hover:bg-[#004d4b] hover:scale-[95%] px-4 py-1 text-white transition hover:bg-opacity-90 text-md"
               >
                 {isAmendmentValid ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />

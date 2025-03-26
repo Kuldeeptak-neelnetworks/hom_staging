@@ -61,7 +61,7 @@ export const useAmendmentStore = create<AmendmentState & AmendmentActions>()(
         page = 1,
         limit = 10,
         searchInput = "",
-        filters = [],
+        filters = "",
       } = params || {};
 
       try {

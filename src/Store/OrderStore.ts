@@ -72,7 +72,7 @@ export const useOrderStore = create<OrderState & OrderActions>()(
       page = 1,
       limit = 10,
       searchInput = "",
-      filters = [],
+      filters = "",
       year,
     } = {}) => {
       set({ loading: true });

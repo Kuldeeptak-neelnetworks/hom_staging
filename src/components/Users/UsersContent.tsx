@@ -87,17 +87,17 @@ const UsersContent: React.FC = () => {
       router.push("/auth/login");
     } else {
       setLoader(false);
-      setAllUsers(userData ? userData || [] : []);
+      setAllUsers(userData?.users ? userData?.users || [] : []);
     }
   }, [userData, router]);
 
   useEffect(() => {
-    if (Array.isArray(userData)) {
-      const filterByStatus = userData?.filter((elem: any) => {
+    if (Array.isArray(userData?.users)) {
+      const filterByStatus = userData?.users?.filter((elem: any) => {
         if (roleValue !== "all") {
           return roleValue ? elem.role === roleValue : elem;
         } else {
-          return userData;
+          return userData?.users;
         }
       });
 
@@ -167,7 +167,7 @@ const UsersContent: React.FC = () => {
   });
 
   return (
-    <div className="px-4 py-0 relative">
+    <div className="px-4 py-1 relative">
       {/* <div className="text-xl font-semibold absolute top-[-52px]">Users</div> */}
       {/* <div className="mb-1">
         <BreadcrumbSection crumbs={crumbs} />
@@ -209,7 +209,7 @@ const UsersContent: React.FC = () => {
           <Link href={"/users/addUser"}>
             <Button
               variant="outline"
-              className=" text-[0.8rem] text-white bg-[#29354f] hover:bg-[#fff] hover:text-[#29354f] "
+              className=" text-[0.8rem] text-white bg-[#0f464a] hover:bg-[#fff] hover:text-[#0f464a] "
             >
               Add New User
             </Button>

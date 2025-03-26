@@ -11,6 +11,7 @@ import { DeletedUserUIconSVG } from "@/utils/SVGs/SVGs";
 import ChatModel from "@/components/common/Editor/ChatModel";
 import Link from "next/link";
 import SideDrawer from "@/components/common/Editor/SideDrawer";
+import { UserProfileHover } from "@/components/common/HoverCard/UserProfileHover";
 
 const formatDate = (dateString: any) => {
   const date = new Date(dateString);
@@ -51,7 +52,7 @@ const renderStatus = (status: string) => (
 
 const renderPriority = (priority: string) => (
   <div
-    className={`p-1 text-center font-bold border border-l-8 w-[80px] ${
+    className={`p-1 text-center font-bold border-[#a0c1a0] border border-l-8 w-[80px] ${
       priorityStyles[priority] || ""
     }`}
   >
@@ -61,7 +62,7 @@ const renderPriority = (priority: string) => (
 
 const renderCustomerStatus = (customerStatus: string) => (
   <div
-    className={`p-1 text-center font-bold border border-l-8 w-[80px] ${
+    className={`p-1 text-center font-bold border border-[#a0c1a0] border-l-8 w-[80px] ${
       customerStatusStyles[customerStatus] || ""
     }`}
   >
@@ -141,8 +142,8 @@ export const columns = [
       if (row?.original?.generated_by) {
         if (row?.original?.generated_by?.avatar !== "") {
           return (
-            <div className="flex items-start w-[40px]">
-              <TooltipCommon text={row?.original?.generated_by?.fullName}>
+            <div className="flex items-start w-[40px] cursor-pointer">
+              {/* <TooltipCommon text={row?.original?.generated_by?.fullName}>
                 <Avatar className="cursor-pointer">
                   <AvatarImage
                     src={row?.original?.generated_by?.avatar}
@@ -152,7 +153,12 @@ export const columns = [
                     <img src={UserPic} className="" />
                   </AvatarFallback>
                 </Avatar>
-              </TooltipCommon>
+              </TooltipCommon> */}
+              <UserProfileHover
+                picture={row?.original?.generated_by?.avatar}
+                name={row?.original?.generated_by?.fullName}
+                designation={row?.original?.generated_by?.role}
+              />
             </div>
           );
         } else {

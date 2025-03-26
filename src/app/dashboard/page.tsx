@@ -11,10 +11,12 @@ import {
   logOutFunction,
 } from "../../common/commonFunctions";
 import {
+  CustomersIconSVG,
   LatestAmendmentsUIconSVG,
   LatestLeadsUIconSVG,
   LatestOrdersUIconSVG,
   LoaderIconSVG,
+  UserIconSVG,
 } from "@/utils/SVGs/SVGs";
 import {
   Card,
@@ -34,19 +36,28 @@ import { useAmendmentStore } from "@/Store/AmendmentStore";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Link from "next/link";
 import { Label } from "@/components/ui/label";
+import { useSalesStore } from "@/Store/SalesStore";
+import { motion } from "framer-motion";
 
 const DashBoardPage: React.FC = () => {
   const { fetchAmendmentData, amendmentData }: any = useAmendmentStore();
   const { fetchAllLeadData, leadData }: any = useLeadStore();
   const { fetchAllOrdersData, orderData }: any = useOrderStore();
   const { fetchAllCustomerData, customerData }: any = useCustomerStore();
-  const { fetchUsersData, userData ,userTotalOrderData,fetchUsersToatlOrders}: any = useUserStore();
+  const { fetchSalesData, SalesData }: any = useSalesStore();
+  const {
+    fetchUsersData,
+    userData,
+    userTotalOrderData,
+    fetchUsersToatlOrders,
+  }: any = useUserStore();
 
   const router = useRouter();
   const [toggleWidth, setToggleWidth] = useState<boolean>(false);
   const [allLeads, setAllLeads] = useState<any[]>([]);
   const [allOrders, setAllOrders] = useState<any[]>([]);
   const [allAmendments, setAllAmendments] = useState<any[]>([]);
+  const [orderYear, setOrderYear] = useState<any>("");
 
   let userDetails: any =
     typeof window !== "undefined" ? localStorage?.getItem("user") : null;
@@ -54,20 +65,32 @@ const DashBoardPage: React.FC = () => {
   let userRole = JSON.parse(userDetails)?.role;
 
   useEffect(() => {
-    setAllLeads(leadData?.leads && leadData?.leads ? leadData?.leads : "");
-    setAllOrders(orderData?.orders ? orderData?.orders : "");
-    setAllAmendments(amendmentData ? amendmentData : "");
+    setAllLeads(leadData?.leads && leadData?.leads ? leadData?.leads : []);
+    setAllOrders(orderData?.orders ? orderData?.orders : []);
+    setAllAmendments(
+      amendmentData?.amendments ? amendmentData?.amendments : []
+    );
   }, [leadData?.leads, orderData, amendmentData]);
 
   // ===========================================================
   const blockData = (data: any[]) => [...data].reverse().slice(0, 5);
 
   useEffect(() => {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear().toString();
+    setOrderYear(year);
+  }, []);
+
+  useEffect(() => {
+    orderYear && fetchSalesData(orderYear);
+  }, [orderYear]);
+
+  useEffect(() => {
     fetchAllLeadData();
-    fetchAllOrdersData();
-    fetchAmendmentData();
-    fetchAllCustomerData();
-    fetchUsersToatlOrders()
+    fetchAllOrdersData(1, 20);
+    fetchAmendmentData(1, 20);
+    fetchAllCustomerData(1, 20);
+    fetchUsersToatlOrders();
     userRole === "salesman" ? "" : fetchUsersData();
   }, []);
 
@@ -84,22 +107,19 @@ const DashBoardPage: React.FC = () => {
     }
   }, [allLeads, leadData]);
 
-
-
-
-
   return (
     <div className="col-span-6">
-      <div>
+      {/* <div>
         <SideBarContent setToggleWidth={setToggleWidth} />
-      </div>
+      </div> */}
       <div>
         <div
-          className={
-            toggleWidth
-              ? `sm:px-4  sm:ml-64 ml-0 bg-[#edf0f5] transition-all duration-300 relative text-[0.8rem]`
-              : `sm:px-4  sm:ml-20 ml-0  bg-[#edf0f5] transition-all duration-300 relative text-[0.8rem]`
-          }
+          // className={
+          //   toggleWidth
+          //     ? `sm:px-4 sm:ml-[14rem] ml-0 bg-[#edf0f5] transition-all duration-300 relative text-[0.8rem]`
+          //     : `sm:px-4 sm:ml-[6rem] ml-0  bg-[#edf0f5] transition-all duration-300 relative text-[0.8rem]`
+          // }
+          className={`sm:px-4 sm:ml-[3rem] ml-0  bg-[#edf0f5] transition-all duration-300 relative text-[0.8rem]`}
         >
           <div className="p-4 dark:border-gray-700">
             <div
@@ -114,108 +134,227 @@ const DashBoardPage: React.FC = () => {
             {/* <div className="mb-4">
               <BreadcrumbSection />
             </div> */}
-            {userRole === "salesman" ? (
-              <div className="sm:flex gap-3">
-                <Card className="sm:w-[25%] h-[100px] xl:h-[120px] boxShadow mb-5">
-                  <CardHeader className="p-[1rem] xl:p-[1.5rem]">
-                    <CardTitle className=" text-[0.8rem] xl:text-[1rem]">
-                      Total Leads
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-[1rem] xl:text-[1.5rem] font-bold">
-                  {userTotalOrderData.totalLeads}
-                  </CardContent>
-                </Card>
-                <Card className="sm:w-[25%] h-[100px] xl:h-[120px] boxShadow mb-5">
-                  <CardHeader className="p-[1rem] xl:p-[1.5rem]">
-                    <CardTitle className=" text-[0.8rem] xl:text-[1rem]">
-                      Total Customers
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-[1rem] xl:text-[1.5rem] font-bold">
-                  {userTotalOrderData.totalCustomers}
-                  </CardContent>
-                </Card>
-                <Card className="sm:w-[25%] h-[100px] xl:h-[120px] boxShadow mb-5">
-                  <CardHeader className="p-[1rem] xl:p-[1.5rem]">
-                    <CardTitle className=" text-[0.8rem] xl:text-[1rem]">
-                      Total Orders
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-[1rem] xl:text-[1.5rem] font-bold">
-                  {userTotalOrderData.totalOrders}
-                  </CardContent>
-                </Card>
-                <Card className="sm:w-[25%] h-[100px] xl:h-[120px] boxShadow mb-5">
-                  <CardHeader className="p-[1rem] xl:p-[1.5rem]">
-                    <CardTitle className=" text-[0.8rem] xl:text-[1rem]">
-                      Total Amendments
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-[1rem] xl:text-[1.5rem] font-bold">
-                  {userTotalOrderData.totalAmendments}
-                  </CardContent>
-                </Card>
-              </div>
-            ) : (
-              <div className="sm:flex gap-3">
-                <Card className="sm:w-[20%] h-[100px] xl:h-[120px] boxShadow mb-5">
-                  <CardHeader className="p-[1rem] xl:p-[1.5rem]">
-                    <CardTitle className=" text-[0.8rem] xl:text-[1rem]">
-                      Total Leads
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-[1rem] xl:text-[1.5rem] font-bold">
-                    {userTotalOrderData.totalLeads}
-                  </CardContent>
-                </Card>
-                <Card className="sm:w-[20%] h-[100px] xl:h-[120px] boxShadow mb-5">
-                  <CardHeader className="p-[1rem] xl:p-[1.5rem]">
-                    <CardTitle className=" text-[0.8rem] xl:text-[1rem]">
-                      Total Customers
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-[1rem] xl:text-[1.5rem] font-bold">
-                  {userTotalOrderData.totalCustomers}
-                  </CardContent>
-                </Card>
-                <Card className="sm:w-[20%] h-[100px] xl:h-[120px] boxShadow mb-5">
-                  <CardHeader className="p-[1rem] xl:p-[1.5rem]">
-                    <CardTitle className=" text-[0.8rem] xl:text-[1rem]">
-                      Total Orders
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-[1rem] xl:text-[1.5rem] font-bold">
-                  {userTotalOrderData.totalOrders}
-                  </CardContent>
-                </Card>
-                <Card className="sm:w-[20%] h-[100px] xl:h-[120px] boxShadow mb-5">
-                  <CardHeader className="p-[1rem] xl:p-[1.5rem]">
-                    <CardTitle className=" text-[0.8rem] xl:text-[1rem]">
-                      Total Amendments
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-[1rem] xl:text-[1.5rem] font-bold">
-                  {userTotalOrderData.totalAmendments}
-                  </CardContent>
-                </Card>
-                <Card className="sm:w-[20%] h-[100px] xl:h-[120px] boxShadow mb-5">
-                  <CardHeader className="p-[1rem] xl:p-[1.5rem]">
-                    <CardTitle className=" text-[0.8rem] xl:text-[1rem]">
-                      Total Users
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-[1rem] xl:text-[1.5rem] font-bold">
-                  {userTotalOrderData.totalUsers}
-                  </CardContent>
-                </Card>
-              </div>
-            )}
+
+            <div className="gap-3 sm:flex">
+              <Card
+                className={`h-[100px] boxShadow mb-5  ${
+                  userRole !== "salesman" ? "sm:w-[60%]" : "sm:w-[50%]"
+                } xl:h-[160px] px-8 py-5 flex flex-col `}
+              >
+                <p className="text-xl mb-5 font-semibold">Total Reports</p>
+                <div className="flex gap-16">
+                  <motion.div
+                    initial={{ x: +100, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{
+                      duration: 1,
+                      ease: [0.04, 0.62, 0.23, 0.98],
+                    }}
+                    className="flex gap-2"
+                  >
+                    <div className="bg-gray-100 p-2 shadow-md shadow-[#002325] rounded-[8px]">
+                      <LatestLeadsUIconSVG
+                        cssData={{
+                          fill: "#073336",
+                          width: "38px",
+                          height: "38px",
+                        }}
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[1rem] font-normal ">Leads</span>
+                      <span className="text-[1rem] font-semibold">
+                        {leadData?.totalLeads ? leadData?.totalLeads : 0}
+                      </span>
+                    </div>
+                  </motion.div>
+                  <motion.div
+                    initial={{ x: +100, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{
+                      duration: 1,
+                      ease: [0.04, 0.62, 0.23, 0.98],
+                    }}
+                    className="flex gap-2"
+                  >
+                    <div className="bg-gray-100 p-2 shadow-md rounded-[8px] shadow-[#002325] ">
+                      <CustomersIconSVG
+                        cssData={{
+                          fill: "#073336",
+                          width: "38px",
+                          height: "38px",
+                        }}
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[1rem] font-normal">Customers</span>
+                      <span className="text-[1rem] font-semibold">
+                        {customerData?.totalCount
+                          ? customerData?.totalCount
+                          : 0}
+                      </span>
+                    </div>
+                  </motion.div>
+                  <motion.div
+                    initial={{ x: +100, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{
+                      duration: 1,
+                      ease: [0.04, 0.62, 0.23, 0.98],
+                    }}
+                    className="flex gap-2"
+                  >
+                    <div className="bg-gray-100 p-2 shadow-md rounded-[8px] shadow-[#002325]">
+                      <LatestOrdersUIconSVG
+                        cssData={{
+                          fill: "#073336",
+                          width: "38px",
+                          height: "38px",
+                        }}
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[1rem] font-normal">Orders</span>
+                      <span className="text-[1rem] font-semibold">
+                        {orderData?.totalCount ? orderData?.totalCount : "0"}
+                      </span>
+                    </div>
+                  </motion.div>
+                  <motion.div
+                    initial={{ x: +100, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{
+                      duration: 1,
+                      ease: [0.04, 0.62, 0.23, 0.98],
+                    }}
+                    className="flex gap-2"
+                  >
+                    <div className="bg-gray-100 p-2 shadow-md rounded-[8px] shadow-[#002325]">
+                      <LatestAmendmentsUIconSVG
+                        cssData={{
+                          fill: "#073336",
+                          width: "38px",
+                          height: "38px",
+                        }}
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[1rem] font-normal">
+                        Amendments
+                      </span>
+                      <span>
+                        <span className="text-[1rem] font-semibold">
+                          {amendmentData?.totalCount
+                            ? amendmentData?.totalCount
+                            : 0}
+                        </span>
+                      </span>
+                    </div>
+                  </motion.div>
+                  {userRole !== "salesman" ? (
+                    <motion.div
+                      initial={{ x: +100, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{
+                        duration: 1,
+                        ease: [0.04, 0.62, 0.23, 0.98],
+                      }}
+                      className="flex gap-2"
+                    >
+                      <div className="bg-gray-100 p-2 shadow-md rounded-[8px] shadow-[#002325]">
+                        <UserIconSVG
+                          cssData={{
+                            fill: "#073336",
+                            width: "38px",
+                            height: "38px",
+                          }}
+                        />
+                      </div>
+                      <div className="flex flex-col font-normal">
+                        <span className="text-[1rem] font-normal">Users</span>
+                        <span>
+                          <span className="text-[1rem] font-semibold">
+                            {userData?.totalUsers ? userData?.totalUsers : 0}
+                          </span>
+                        </span>
+                      </div>
+                    </motion.div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </Card>
+              <Card
+                className={`h-[100px] boxShadow mb-5   ${
+                  userRole !== "salesman" ? "sm:w-[40%]" : "sm:w-[50%]"
+                }  xl:h-[160px] px-8 py-5 flex flex-col`}
+              >
+                <motion.div
+                  initial={{ x: +100, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{
+                    duration: 1,
+                    ease: [0.04, 0.62, 0.23, 0.98],
+                  }}
+                >
+                  <p className="text-xl mb-5 font-semibold">Total Sales</p>
+                  <div className="flex gap-16">
+                    <div className="flex gap-2">
+                      <div className="bg-gray-100 p-2 shadow-md shadow-[#002325] rounded-[8px]">
+                        <LatestLeadsUIconSVG
+                          cssData={{
+                            fill: "#073336",
+                            width: "38px",
+                            height: "38px",
+                          }}
+                        />
+                      </div>
+                      <div className="flex flex-col">
+                        <div className="flex">
+                          <span className="text-[1rem] font-normal ">
+                            Total Order Value :
+                          </span>
+                          <span className="text-[1rem] font-semibold mx-1">
+                            {SalesData?.totalOverallResult?.overall
+                              ?.totalOrderValue
+                              ? SalesData?.totalOverallResult?.overall
+                                  ?.totalOrderValue
+                              : 0}
+                          </span>
+                        </div>
+                        <div className="flex">
+                          <span className="text-[1rem] font-normal ">
+                            Total Orders :
+                          </span>
+                          <span className="text-[1rem] font-semibold mx-1">
+                            {SalesData?.totalOverallResult?.overall?.totalOrders
+                              ? SalesData?.totalOverallResult?.overall
+                                  ?.totalOrders
+                              : 0}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </Card>
+            </div>
             <div className="sm:grid sm:grid-cols-3 gap-4 mb-4">
               {/* latest Leads  */}
-              <div className="flex flex-col items-center  bg-[#ffffff] dark:bg-gray-800 shadow-lg my-3 sm:my-0">
-                <p className="mt-5  bg-gray-100 p-6 rounded-full">
-                  <LatestLeadsUIconSVG />
+              <motion.div
+                initial={{ x: -100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 1, ease: [0.04, 0.62, 0.23, 0.98] }}
+                className="flex flex-col items-center  bg-[#ffffff] dark:bg-gray-800 shadow-lg my-3 sm:my-0 "
+              >
+                <p className="mt-5  bg-gray-100 p-6 rounded-full ">
+                  <LatestLeadsUIconSVG
+                    cssData={{
+                      fill: "#073336",
+                      width: "38px",
+                      height: "38px",
+                    }}
+                  />
                 </p>
 
                 <p className="text-[0.8rem] md:text-[0.9rem] lg:text-[1.2rem] pt-5 pb-3 text-center font-semibold">
@@ -275,12 +414,23 @@ const DashBoardPage: React.FC = () => {
                     )}
                   </ul>
                 </div>
-              </div>
+              </motion.div>
 
               {/* New Orders  */}
-              <div className="flex flex-col items-center bg-[#ffffff] dark:bg-gray-800 shadow-lg my-3 sm:my-0">
+              <motion.div
+                initial={{ x: -100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 1, ease: [0.04, 0.62, 0.23, 0.98] }}
+                className="flex flex-col items-center bg-[#ffffff] dark:bg-gray-800 shadow-lg my-3 sm:my-0"
+              >
                 <p className="mt-5  bg-gray-100 p-6 rounded-full">
-                  <LatestOrdersUIconSVG />
+                  <LatestOrdersUIconSVG
+                    cssData={{
+                      fill: "#073336",
+                      width: "38px",
+                      height: "38px",
+                    }}
+                  />
                 </p>
                 <p className="text-[0.8rem] md:text-[0.9rem] lg:text-[1.2rem] pt-5 pb-3 text-center font-semibold">
                   New Orders
@@ -338,12 +488,23 @@ const DashBoardPage: React.FC = () => {
                     )}
                   </ul>
                 </div>
-              </div>
+              </motion.div>
 
               {/* New Amendments  */}
-              <div className="flex flex-col items-center bg-[#ffffff] dark:bg-gray-800 shadow-lg my-3 sm:my-0">
+              <motion.div
+                initial={{ x: -100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 1, ease: [0.04, 0.62, 0.23, 0.98] }}
+                className="flex flex-col items-center bg-[#ffffff] dark:bg-gray-800 shadow-lg my-3 sm:my-0"
+              >
                 <p className="mt-5 bg-gray-100 p-6 rounded-full">
-                  <LatestAmendmentsUIconSVG />
+                  <LatestAmendmentsUIconSVG
+                    cssData={{
+                      fill: "#073336",
+                      width: "38px",
+                      height: "38px",
+                    }}
+                  />
                 </p>
                 <p className="text-[0.8rem] md:text-[0.9rem] lg:text-[1.2rem] pt-5 pb-3 text-center font-semibold">
                   New Amendments
@@ -391,7 +552,7 @@ const DashBoardPage: React.FC = () => {
                     )}
                   </ul>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>

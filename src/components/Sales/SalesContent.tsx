@@ -237,7 +237,7 @@ const SalesContent: React.FC = () => {
       {/* Yearly  */}
       <div className="px-4 relative">
         <div className="lg:flex justify-end my-3">
-          <div className="w-36">
+          <div className="w-36 mt-2">
             <Selector
               onValueChange={(value: any) => setOrderYear(value)}
               name="orderyear"

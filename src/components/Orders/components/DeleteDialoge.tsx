@@ -54,7 +54,7 @@ const DeleteDialoge = ({
           </>
         ) : (
           <div className="flex items-center">
-            <TrashIcon className="h-6 w-7 p-1 hover:bg-[#29354f] text-black hover:text-[white] " />
+            <TrashIcon className="h-6 w-7 p-1 hover:bg-[#004d4b] text-black hover:text-[white] " />
             <span className="text-gray-700 text-[0.8rem] ml-2">
               {deleteText}
             </span>

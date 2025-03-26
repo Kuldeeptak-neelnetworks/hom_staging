@@ -24,6 +24,7 @@ import EventComponentBox from "./EventComponentBox";
 import { AddAppointmentDialoge } from "./AddAppointmentDialoge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import AppointmentSection from "./AppointmentSection";
+import { motion } from "framer-motion";
 
 const crumbs = [
   {
@@ -194,7 +195,12 @@ const LeadDetailsContent = () => {
         />
       </div> */}
 
-      <div className="flex flex-col md:flex-row ">
+      <motion.div
+        initial={{ opacity: 0, x: -50, scale: 0.95 }}
+        animate={{ opacity: 1, x: 0, scale: 1 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+        className="flex flex-col md:flex-row "
+      >
         {/* <div className="md:w-[45%] w-full"></div> */}
         {/* <div className="md:w-[66.5%] w-full"> */}
         <div className="md:w-[100%] w-full boxShadow">
@@ -309,7 +315,7 @@ const LeadDetailsContent = () => {
             />
           </div> */}
         </div>
-      </div>
+      </motion.div>
       {/* <div>
         <EventComponentBox
           date={date}

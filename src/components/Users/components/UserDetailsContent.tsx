@@ -55,6 +55,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 // import EventComponentBox from "./EventComponentBox";
 // import { AddAppointmentDialoge } from "./AddAppointmentDialoge";
 import User from "../../../asset/images/user.png";
+import { motion } from "framer-motion";
 
 const UserPic = User.src;
 
@@ -208,8 +209,13 @@ const UserDetailsContent = () => {
       </div> */}
       {/* Main Customer details section  */}
       <div className="flex gap-5 mt-2">
-        <div className="boxShadow">
-          <Card className="w-[575px] h-[100%]">
+        <motion.div
+          initial={{ opacity: 0, x: -50, rotate: -5, scale: 0.95 }}
+          animate={{ opacity: 1, x: 0, rotate: 0, scale: 1 }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
+          className="boxShadow mt-5"
+        >
+          <Card className="w-[40vw] h-[100%]">
             <CardHeader>
               <CardTitle className="text-[1.1rem]">User Data</CardTitle>
               <CardDescription>Details Of existing User</CardDescription>
@@ -277,7 +283,7 @@ const UserDetailsContent = () => {
           </Card>
 
           {/* ==================================== */}
-        </div>
+        </motion.div>
         <div className="flex gap-4" onClick={(e) => e.stopPropagation()}>
           {/* <Calendar
             mode="single"

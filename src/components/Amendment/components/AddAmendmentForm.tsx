@@ -297,7 +297,7 @@ const AddAmendmentForm = ({}: any) => {
       </div>
 
       <div className="flex justify-center">
-        <ScrollArea className="h-[80vh]  px-3 py-3 w-[100%] xl:w-[56vw]">
+        <ScrollArea className="h-[80vh]  px-3 py-3 w-[100%] xl:w-[75vw]">
           <form
             onSubmit={handleSubmit}
             className="border p-6 text-[0.8rem] bg-[#fff]"
@@ -389,7 +389,7 @@ const AddAmendmentForm = ({}: any) => {
                     name="generated_by"
                     closeMenuOnSelect={true}
                     isClearable={true}
-                    options={userData?.map(
+                    options={userData?.users?.map(
                       (user: { _id: any; fullName: any }) => ({
                         value: user?._id,
                         label: user?.fullName,
@@ -588,7 +588,7 @@ const AddAmendmentForm = ({}: any) => {
               <Button
                 type="submit"
                 value="Sign In"
-                className="cursor-pointer border border-primary bg-primary px-4 py-1 text-white transition hover:bg-opacity-90"
+                className="cursor-pointer border border-primary bg-[#004d4b] hover:bg-[#004d4b] hover:scale-[95%] px-4 py-1 text-white transition hover:bg-opacity-90"
               >
                 {isUserValid ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />

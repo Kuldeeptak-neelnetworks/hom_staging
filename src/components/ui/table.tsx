@@ -73,10 +73,20 @@ const TableHead = React.forwardRef<
   HTMLTableCellElement,
   React.ThHTMLAttributes<HTMLTableCellElement>
 >(({ className, ...props }, ref) => (
+  // <th
+  //   ref={ref}
+  //   className={cn(
+  //     "h-10 px-4 text-left  bg-[#0f464a] align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 overflow-x-auto ",
+  //     className
+  //   )}
+  //   {...props}
+  // />
   <th
     ref={ref}
     className={cn(
-      "h-10 px-4 text-left  bg-[#29354f] align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 overflow-x-auto",
+      "h-10 px-4 text-left bg-[#0f464a] align-middle font-medium text-muted-foreground",
+      "overflow-x-auto [&:has([role=checkbox])]:pr-0",
+      "[&:first-child]:sticky [&:first-child]:left-0 [&:first-child]:z-10 [&:first-child]:bg-[#0f464a]", // Ensures first column is sticky
       className
     )}
     {...props}

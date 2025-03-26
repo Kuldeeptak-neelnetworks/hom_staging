@@ -366,7 +366,7 @@ const EditOrder = ({}) => {
   ) => {
     const monthIndex = months.indexOf(month);
 
-    if (monthIndex === -1) return; 
+    if (monthIndex === -1) return;
 
     if (target === "firstDd") {
       const newDate = dateOfFirstDd
@@ -447,17 +447,15 @@ const EditOrder = ({}) => {
   const currentYearFirstDd = dateOfFirstDd
     ? getYear(dateOfFirstDd)
     : getYear(new Date());
-    
 
-    const currentMonthRenewalDate = renewalDate
+  const currentMonthRenewalDate = renewalDate
     ? getMonth(renewalDate)
     : getMonth(new Date());
 
-  const currentYearRenewalDate= renewalDate
+  const currentYearRenewalDate = renewalDate
     ? getYear(renewalDate)
     : getYear(new Date());
 
- 
   return (
     <div className="sm:px-4 py-0 relative">
       <div className="text-[1rem] font-semibold absolute top-[-30px]">
@@ -548,7 +546,7 @@ const EditOrder = ({}) => {
                       <SelectReactSelect
                         closeMenuOnSelect={true}
                         isClearable={true}
-                        options={userData?.map(
+                        options={userData?.users?.map(
                           (user: { _id: any; fullName: any }) => ({
                             value: user._id,
                             label: user.fullName,
@@ -596,7 +594,7 @@ const EditOrder = ({}) => {
                   Date Of Order
                 </label>
                 <div className="relative">
-                <Popover>
+                  <Popover>
                     <PopoverTrigger asChild>
                       <Button
                         variant={"outline"}
@@ -607,7 +605,7 @@ const EditOrder = ({}) => {
                       >
                         <CalendarIcon className="mr-2 h-4 w-4" />
                         {dateOfOrder ? (
-                          format(dateOfOrder,  "dd-MM-yyyy")
+                          format(dateOfOrder, "dd-MM-yyyy")
                         ) : (
                           <span>Pick a date</span>
                         )}
@@ -652,14 +650,14 @@ const EditOrder = ({}) => {
                         </Select>
                       </div>
                       <div className="calendar-container">
-                      <Calendar
-                        mode="single"
-                        selected={dateOfOrder}
-                        onSelect={handleSelectOrder}
-                        initialFocus
-                        month={dateOfOrder}
-                        onMonthChange={(date) => setDateOfOrder(date)} 
-                      />
+                        <Calendar
+                          mode="single"
+                          selected={dateOfOrder}
+                          onSelect={handleSelectOrder}
+                          initialFocus
+                          month={dateOfOrder}
+                          onMonthChange={(date) => setDateOfOrder(date)}
+                        />
                       </div>
                     </PopoverContent>
                   </Popover>
@@ -1106,7 +1104,7 @@ const EditOrder = ({}) => {
             {/* CALCULATIONS  */}
             {!loading ? (
               <div className="lg:flex gap-5 text-[0.8rem]">
-                <div className="mb-3  bg-gray-200  px-5 py-2  flex gap-10">
+                <div className="mb-3  bg-[#d3eae9]  px-5 py-2  flex gap-10">
                   <div className="flex gap-2">
                     <span className="font-bold ">◼ DD Monthly:</span>
                     <span className="">{isNaN(ddMonthly) ? 0 : ddMonthly}</span>
@@ -1216,7 +1214,7 @@ const EditOrder = ({}) => {
                   Date Of First Dd
                 </label>
                 <div className="relative">
-                <Popover>
+                  <Popover>
                     <PopoverTrigger asChild>
                       <Button
                         variant={"outline"}
@@ -1227,7 +1225,7 @@ const EditOrder = ({}) => {
                       >
                         <CalendarIcon className="mr-2 h-4 w-4" />
                         {dateOfFirstDd ? (
-                          format(dateOfFirstDd,  "dd-MM-yyyy")
+                          format(dateOfFirstDd, "dd-MM-yyyy")
                         ) : (
                           <span>Pick a date</span>
                         )}
@@ -1272,14 +1270,14 @@ const EditOrder = ({}) => {
                         </Select>
                       </div>
                       <div className="calendar-container">
-                      <Calendar
-                        mode="single"
-                        selected={dateOfFirstDd}
-                        onSelect={handleSelectFirstDd}
-                        initialFocus
-                        month={dateOfFirstDd}
-                        onMonthChange={(date) => setDateOfFirstDd(date)} 
-                      />
+                        <Calendar
+                          mode="single"
+                          selected={dateOfFirstDd}
+                          onSelect={handleSelectFirstDd}
+                          initialFocus
+                          month={dateOfFirstDd}
+                          onMonthChange={(date) => setDateOfFirstDd(date)}
+                        />
                       </div>
                     </PopoverContent>
                   </Popover>
@@ -1435,7 +1433,7 @@ const EditOrder = ({}) => {
                   Renewal Date 2024
                 </label>
                 <div className="relative">
-                <Popover>
+                  <Popover>
                     <PopoverTrigger asChild>
                       <Button
                         variant={"outline"}
@@ -1446,7 +1444,7 @@ const EditOrder = ({}) => {
                       >
                         <CalendarIcon className="mr-2 h-4 w-4" />
                         {renewalDate ? (
-                          format(renewalDate,  "dd-MM-yyyy")
+                          format(renewalDate, "dd-MM-yyyy")
                         ) : (
                           <span>Pick a date</span>
                         )}
@@ -1491,14 +1489,14 @@ const EditOrder = ({}) => {
                         </Select>
                       </div>
                       <div className="calendar-container">
-                      <Calendar
-                        mode="single"
-                        selected={renewalDate}
-                        onSelect={handleSelectRenewalDate}
-                        initialFocus
-                        month={renewalDate}
-                        onMonthChange={(date) => setRenewalDate(date)} 
-                      />
+                        <Calendar
+                          mode="single"
+                          selected={renewalDate}
+                          onSelect={handleSelectRenewalDate}
+                          initialFocus
+                          month={renewalDate}
+                          onMonthChange={(date) => setRenewalDate(date)}
+                        />
                       </div>
                     </PopoverContent>
                   </Popover>
@@ -1543,7 +1541,7 @@ const EditOrder = ({}) => {
               <Button
                 type="submit"
                 // value="Sign In"
-                className="lg:w-[6vw] w-full cursor-pointer  border border-primary bg-primary px-4 py-1 text-white transition hover:bg-opacity-90 text-md"
+                className="lg:w-[6vw] w-full cursor-pointer  border border-primary bg-[#004d4b] hover:bg-[#004d4b] hover:scale-[95%] px-4 py-1 text-white transition hover:bg-opacity-90 text-md"
               >
                 {isLeadValid ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />

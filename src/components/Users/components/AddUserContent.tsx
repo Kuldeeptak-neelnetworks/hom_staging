@@ -2,6 +2,7 @@
 import React from "react";
 
 import AddUserForm from "./AddUserForm";
+import { motion } from "framer-motion";
 const crumbs = [
   {
     id: 1,
@@ -22,14 +23,19 @@ const crumbs = [
 
 const AddUserContent = () => {
   return (
-    <div className="px-4 py-0 relative">
+    <div className="px-4 my-1 relative">
       <div className="text-md font-semibold absolute top-[-35px]">Add User</div>
       {/* <div className="mb-4">
         <BreadcrumbSection crumbs={crumbs} />
       </div> */}
-      <div className=" flex gap-5 justify-center">
+      <motion.div
+        initial={{ opacity: 0, x: -50, rotate: -5, scale: 0.95 }}
+        animate={{ opacity: 1, x: 0, rotate: 0, scale: 1 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+        className=" flex gap-5 justify-center"
+      >
         <AddUserForm />
-      </div>
+      </motion.div>
     </div>
   );
 };

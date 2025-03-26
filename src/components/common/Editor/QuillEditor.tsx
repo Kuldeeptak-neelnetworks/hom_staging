@@ -39,11 +39,9 @@ const QuillEditor: React.FC<QuillEditorProps> = ({
   amendmentId,
   copywriterId,
   websiteContentId,
-  text,quillSize
+  text,
+  quillSize,
 }) => {
-
-
-  
   const [value, setValue] = useState<string>("");
   const [images, setImages] = useState<File[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -71,7 +69,7 @@ const QuillEditor: React.FC<QuillEditorProps> = ({
   }, []);
 
   useEffect(() => {
-    userData?.forEach((item: any) => {
+    userData?.users?.forEach((item: any) => {
       if (!atValues.some((value) => value.id === item._id)) {
         // Check if the 'id' already exists in 'atValues'
         atValues.push({
@@ -180,7 +178,7 @@ const QuillEditor: React.FC<QuillEditorProps> = ({
     });
     return mentions;
   };
-const { fetchNotificationData } = useNotificationStore();
+  const { fetchNotificationData } = useNotificationStore();
   // Function to update mentioned user IDs in state
   const updateMentionedUserIds = () => {
     const editor = quillRef.current?.getEditor();
@@ -355,21 +353,18 @@ const { fetchNotificationData } = useNotificationStore();
               onChangeSelection={updateMentionedUserIds}
               placeholder={options.placeholder}
               style={{
-                height: quillSize === "size" ? "300px" : "", 
-                marginBottom: quillSize === "size" ? "42px":"",
+                height: quillSize === "size" ? "300px" : "",
+                marginBottom: quillSize === "size" ? "42px" : "",
               }}
-              // className={`custom-quill-container${quillSize || ""}`} 
+              // className={`custom-quill-container${quillSize || ""}`}
             />
           )}
         </div>
-
-      
 
         {images && images.length > 0 && text === "file" ? (
           <div className="update-file">
             <ul>
               {images.flat().map((file, index) => {
-
                 return (
                   <li key={index}>
                     <p>{getFilenameFromURL(file)}</p>

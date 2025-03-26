@@ -58,7 +58,7 @@ const notifications = [
 ];
 
 interface NavBarProps {
-  toggleSider: boolean;
+  isCollapsed: boolean;
   titleData: string;
 }
 interface UserData {
@@ -67,7 +67,7 @@ interface UserData {
   email?: string;
 }
 
-const Appbar: React.FC<NavBarProps> = ({ toggleSider }) => {
+const Appbar: React.FC<NavBarProps> = ({ isCollapsed }) => {
   const [position, setPosition] = React.useState("bottom");
   const router = useRouter();
   const [notificationTriggered, setNotificationTriggered] = useState(false);
@@ -195,86 +195,17 @@ const Appbar: React.FC<NavBarProps> = ({ toggleSider }) => {
     <nav
       className="bg-[#fff] border-gray-200 dark:bg-gray-900 shadow-lg "
       style={{ boxShadow: "0px 4px 40px rgba(39, 32, 120, 0.1)" }}
-      // className="bg-[#f2f6fa] dark:bg-gray-900"
-      // // style={{ boxShadow: "0px 4px 40px rgba(39, 32, 120, 0.1)" }}
     >
       <div
-        className={
-          toggleSider
-            ? `pl-[7rem] pr-3 flex flex-wrap items-center justify-end mx-auto py-[0.2rem] transition-all duration-300 h-[100%]`
-            : `pl-[18rem] pr-3 flex flex-wrap items-center justify-end mx-auto py-[0.2rem]  transition-all duration-300 h-[100%]`
-        }
+      // className={
+      //   isCollapsed
+      //     ? `pl-[7rem] pr-3 flex flex-wrap items-center justify-end mx-auto py-[0.2rem] transition-all duration-300 h-[100%]`
+      //     : `pl-[18rem] pr-3 flex flex-wrap items-center justify-end mx-auto py-[0.2rem]  transition-all duration-300 h-[100%]`
+      // }
+      // className={`pr-3 flex flex-wrap items-center justify-end mx-auto py-[0.2rem]  transition-all duration-300 h-[100%]`}
       >
-
-        {/* Notification section  */}
-        {/* <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <div className="text-[#29354f] mr-5 relative cursor-pointer mt-1">
-              <div className="h-4 w-4 rounded-full bg-red-600 absolute flex justify-center items-center right-3 -top-1">
-                <span className="font-bold text-white text-[10px]">
-                  {notificationData?.notifications?.filter(
-                    (notification: any) => !notification.isRead
-                  ).length || 0}
-                </span>
-              </div>
-              <NotificationBellIconSVG />
-            </div>
-
-   
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="mr-20 bg-slate-400">
-            <Card className="">
-              <CardHeader>
-                <CardTitle>Notifications</CardTitle>
-              
-                <CardDescription>
-                  You have{" "}
-                  <span className="font-bold">
-                    {notificationData?.notifications?.filter(
-                      (notification: any) => !notification.isRead
-                    ).length || 0}
-                  </span>{" "}
-                  unread messages.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="grid gap-2">
-                <div className="h-[500px]">
-                  <Tabs defaultValue="All" className="w-[700px] ">
-             
-                    <TabsContent value="All">
-                      <Card>
-                        <CardContent className="overflow-y-auto text-[0.8rem] py-2 px-5 my-2">
-                          {notificationData?.notifications?.length > 0 ? (
-                            <div className="h-[430px]">
-                              {notificationData.notifications.map(
-                                (notification: any) => (
-                                  <NotificationCard
-                                    notification={notification}
-                                    key={notification?._id}
-                                    singleNotificationfecthHandler={
-                                      singleNotificationfecthHandler
-                                    }
-                                  />
-                                )
-                              )}
-                            </div>
-                          ) : (
-                            <div>No Data found</div>
-                          )}
-                        </CardContent>
-                      </Card>
-                    </TabsContent>
-
-                  </Tabs>
-                </div>
-              </CardContent>
-            
-            </Card>
-          </DropdownMenuContent>
-        </DropdownMenu> */}
-
         {/* User Profile DropDown section */}
-        <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse relative">
+        <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse right-3 top-[1px] absolute">
           <button
             type="button"
             className="flex text-[0.8rem] bg-gray-800  md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
@@ -305,7 +236,7 @@ const Appbar: React.FC<NavBarProps> = ({ toggleSider }) => {
           <div
             className={
               openDropDown
-                ? `z-50 absolute right-2 top-6  my-4 text-base list-none bg-white divide-y border border-gray-400 divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 w-[157px]`
+                ? `z-50 absolute right-1 top-6  my-4 text-base list-none bg-white divide-y border border-gray-400 divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 w-[157px]`
                 : `z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 w-[157px]`
             }
             id="user-dropdown"

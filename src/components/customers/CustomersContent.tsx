@@ -255,7 +255,7 @@ const CustomersContent: React.FC = () => {
   });
 
   return (
-    <div className="pr-0 pl-2 py-0 relative ">
+    <div className="pr-0 pl-2 py-1 relative ">
       {/* <div className="text-xl font-semibold absolute top-[-54px]">
         Customers
       </div> */}
@@ -307,7 +307,7 @@ const CustomersContent: React.FC = () => {
           <Link href={"/customers/addCustomer"}>
             <Button
               variant="outline"
-              className=" text-[0.8rem] text-white bg-[#29354f] hover:bg-[#fff] hover:text-[#29354f] boxShadow"
+              className=" text-[0.8rem] text-white bg-[#004d4b] hover:bg-[#fff] hover:text-[#004d4b] boxShadow"
             >
               New Customer
             </Button>

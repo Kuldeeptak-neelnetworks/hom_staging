@@ -1,6 +1,3 @@
-
-
-
 "use client";
 import React, { useEffect, useRef, useState, memo } from "react";
 import { RightArrowIconSVG } from "@/utils/SVGs/SVGs";
@@ -8,18 +5,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const MenuItem = memo((props: any) => {
-  const {
-    label,
-    href,
-    submenuItems = [], 
-    isSidebarOpen,
-    icon,
-  } = props;
+  const { label, href, submenuItems = [], isSidebarOpen, icon } = props;
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const isActive = href === pathname;
   const menuItemRef = useRef<HTMLLIElement>(null);
-
 
   useEffect(() => {
     const isInitialLoad = !localStorage.getItem("hasScrolled");
@@ -38,21 +28,23 @@ const MenuItem = memo((props: any) => {
       className={`${isSidebarOpen ? "my-4" : "mt-[1rem]"} onHover px-1`}
     >
       <div className="relative">
-        <Link href={href} scroll={false}> 
+        <Link href={href} scroll={false}>
           <button
             type="button"
-            className={
-              isActive
-                ? "w-full bg-white text-gray-700 dark:text-white transition duration-75 p-1"
-                : "w-full transition duration-75 p-1"
-            }
+            className={` ${isSidebarOpen ? "pl-1" : "pl-0"}
+              ${
+                isActive
+                  ? "w-full bg-white text-gray-700 dark:text-white transition duration-75"
+                  : "w-full transition duration-75"
+              }
+            `}
             aria-controls="dropdown-example"
             data-collapse-toggle="dropdown-example"
           >
             <div
               className={`relative ${
                 isSidebarOpen
-                  ? "flex gap-10 my-[0.5rem]"
+                  ? "flex gap-5 my-[0.5rem] items-center"
                   : "my-[0.5rem] flex flex-col justify-center items-center"
               }`}
             >
@@ -101,15 +93,3 @@ const MenuItem = memo((props: any) => {
 });
 
 export default MenuItem;
-
-
-
-
-
-
-
-
-
-
-
-

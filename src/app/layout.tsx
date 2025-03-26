@@ -4,6 +4,7 @@ import "../styles/globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import DefaultLayout from "@/layout/DefaultLayout";
 import Cookies from "js-cookie";
+import SideBarWrapper from "@/components/Sidebar/components/SideBarWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,10 +19,11 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   // const token = Cookies.get("accessToken");
   // console.log("accessToken", token);
+
   return (
     <html lang="en">
       <body className={inter.className}>
-        {children}
+        <SideBarWrapper>{children}</SideBarWrapper>
         <Toaster position="top-right" richColors expand={true} />
       </body>
     </html>

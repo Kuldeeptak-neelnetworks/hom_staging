@@ -377,11 +377,11 @@ const CustomerDetailsContent = ({ handleUpdate }: any) => {
   };
 
   return (
-    <div className="px-4 py-0 relative text-[0.8rem] bg-[#f2f6fa]">
+    <div className="py-3 relative text-[0.8rem] bg-[#f2f6fa]">
       {/* <div className="text-xl font-semibold absolute top-[-50px]">
         Customer Details
       </div> */}
-      <div className="text-[1rem] font-semibold absolute top-[-35px] ml-1">
+      <div className="text-[1rem] font-semibold absolute top-[-30px] ml-0">
         {getCustomerData(customerDetails?.customerNo)}
         {" - "}
         {getCustomerData(customerDetails?.companyName)}
@@ -392,7 +392,7 @@ const CustomerDetailsContent = ({ handleUpdate }: any) => {
       </div> */}
       {/* Main Customer details section  */}
       <div className="lg:flex gap-1  justify-start">
-        <div className="w-full lg:w-[50%] mb-3 lg:mb-0 ">
+        <div className="w-full lg:w-[50%] mb-3 lg:mb-0">
           <Card className="h-[230px]">
             <CardContent className="p-0">
               <div className="flex justify-end pr-4 pt-2">

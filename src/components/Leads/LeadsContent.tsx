@@ -189,7 +189,7 @@ const LeadsContent: React.FC = () => {
   }, [filters?.outcome, leadData?.leads]);
 
   return (
-    <div className="px-4 py-0 relative">
+    <div className="px-4 py-2 relative">
       {/* <div className="text-xl font-semibold absolute top-[-60px]">Leads</div> */}
       {/* <div className="mb-1">
         <BreadcrumbSection crumbs={crumbs} />
@@ -229,7 +229,7 @@ const LeadsContent: React.FC = () => {
           <Link href={"/leads/addLead"}>
             <Button
               variant="outline"
-              className=" text-[0.8rem] text-white bg-[#29354f] hover:bg-[#fff] hover:text-[#29354f] boxShadow"
+              className=" text-[0.8rem] text-white bg-[#004d4b] hover:bg-[#fff] hover:text-[#29354f] boxShadow"
             >
               New Lead
             </Button>

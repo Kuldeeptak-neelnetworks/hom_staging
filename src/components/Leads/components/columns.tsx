@@ -19,6 +19,7 @@ import { DeletedUserUIconSVG } from "@/utils/SVGs/SVGs";
 import ChatModel from "@/components/common/Editor/ChatModel";
 import Link from "next/link";
 import SideDrawer from "@/components/common/Editor/SideDrawer";
+import { UserProfileHover } from "@/components/common/HoverCard/UserProfileHover";
 
 // const formatDate = (dateString: any) => {
 //   const date = new Date(dateString);
@@ -52,7 +53,7 @@ const outComeStyles: { [key: string]: string } = {
 
 const renderOutcome = (outcome: string) => (
   <div
-    className={`p-1  text-center font-bold border border-l-8 w-[170px] ${
+    className={`p-1  text-center font-bold border border-[#a0c1a0] border-l-8 w-[170px] ${
       outComeStyles[outcome] || ""
     }`}
   >
@@ -185,8 +186,8 @@ export const columns = [
       if (row?.original?.generated_by) {
         if (row?.original?.generated_by?.avatar !== "") {
           return (
-            <div className="flex items-center">
-              <TooltipCommon text={row?.original?.generated_by?.fullName}>
+            <div className="flex items-center cursor-pointer">
+              {/* <TooltipCommon text={row?.original?.generated_by?.fullName}>
                 <Avatar className="cursor-pointer">
                   <AvatarImage
                     src={row?.original?.generated_by?.avatar}
@@ -196,7 +197,12 @@ export const columns = [
                     <img src={UserPic} className="" />
                   </AvatarFallback>
                 </Avatar>
-              </TooltipCommon>
+              </TooltipCommon> */}
+              <UserProfileHover
+                picture={row?.original?.generated_by?.avatar}
+                name={row?.original?.generated_by?.fullName}
+                designation={row?.original?.generated_by?.avatar?.role}
+              />
             </div>
           );
         } else {

@@ -238,7 +238,7 @@ const AmendmentContent: React.FC = () => {
   });
 
   return (
-    <div className="px-4 py-0 relative">
+    <div className="px-4 py-2 relative">
       {/* <div className="text-xl font-semibold absolute top-[-60px]">
         Amendments
       </div> */}
@@ -289,7 +289,7 @@ const AmendmentContent: React.FC = () => {
           <Link href={"/amendment/addAmendment"}>
             <Button
               variant="outline"
-              className=" text-[0.8rem] text-white bg-[#29354f] hover:bg-[#fff] hover:text-[#29354f] boxShadow"
+              className=" text-[0.8rem] text-white bg-[#004d4b] hover:bg-[#fff] hover:text-[#004d4b] boxShadow"
             >
               New Amendment
             </Button>

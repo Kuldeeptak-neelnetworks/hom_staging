@@ -41,6 +41,7 @@ import { EditSmallIconSVG } from "@/utils/SVGs/SVGs";
 import { DeleteIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import DeleteDialoge from "@/components/Orders/components/DeleteDialoge";
+import { motion } from "framer-motion";
 
 const initialMeetings = [
   {
@@ -200,7 +201,12 @@ export default function AppointmentSection({ leadId }: any) {
       <h2 className="text-base font-semibold mt-2 leading-6 text-gray-900 bg-[#f6fbff]  w-fit px-1 rounded">
         Upcoming Appointments
       </h2>
-      <div className="lg:grid lg:grid-cols-12 lg:gap-x-3">
+      <motion.div
+        initial={{ opacity: 0, x: +50, scale: 0.95 }}
+        animate={{ opacity: 1, x: 0, scale: 1 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+        className="lg:grid lg:grid-cols-12 lg:gap-x-3"
+      >
         <div className="text-center lg:col-start-8 lg:col-end-13 lg:row-start-1 lg:mt-1 xl:col-start-9">
           <div className="border p-3  boxShadow bg-[#fff]">
             <div className="flex items-center text-gray-900 ">
@@ -263,7 +269,7 @@ export default function AppointmentSection({ leadId }: any) {
               ))}
             </div>
             <Button
-              className="mt-8 w-full   px-3 py-2 text-[0.8rem] font-semibold text-white shadow hover:bg-[#29354f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="mt-8 w-full bg-[#004d4b]   px-3 py-2 text-[0.8rem] font-semibold text-white shadow hover:bg-[#004d4b] hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               onClick={goToAddAppointment}
             >
               Book an Appointment
@@ -347,7 +353,7 @@ export default function AppointmentSection({ leadId }: any) {
             </ol>
           )}
         </div>
-      </div>
+      </motion.div>
       {/* Confirmation Dialog */}
       {isDeleteDialogOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">

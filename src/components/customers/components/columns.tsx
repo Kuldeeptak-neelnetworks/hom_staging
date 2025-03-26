@@ -7,6 +7,7 @@ import User from "../../../asset/images/user.png";
 import { DeletedUserUIconSVG } from "@/utils/SVGs/SVGs";
 import TooltipCommon from "@/components/common/TooltipCommon";
 import Link from "next/link";
+import { UserProfileHover } from "@/components/common/HoverCard/UserProfileHover";
 
 const UserPic = User.src;
 
@@ -29,7 +30,7 @@ const statusStyles: { [key: string]: string } = {
 
 const renderStatus = (status: string) => (
   <div
-    className={`p-1 text-center font-bold border border-l-8 w-[180px] ${
+    className={`p-1 text-center font-bold border border-[#a0c1a0] border-l-8 w-[180px] ${
       statusStyles[status] || ""
     }`}
   >
@@ -111,8 +112,8 @@ export const columns = [
       if (row?.original?.createdBy !== null) {
         if (row?.original?.createdBy?.avatar !== "") {
           return (
-            <div className="flex items-center">
-              <TooltipCommon text={row?.original?.createdBy[0]?.fullName}>
+            <div className="flex items-center cursor-pointer">
+              {/* <TooltipCommon text={row?.original?.createdBy[0]?.fullName}>
                 <Avatar className="cursor-pointer">
                   <AvatarImage
                     src={row?.original?.createdBy[0]?.avatar}
@@ -122,13 +123,29 @@ export const columns = [
                     <img src={UserPic} className="" />
                   </AvatarFallback>
                 </Avatar>
-              </TooltipCommon>
+              </TooltipCommon> */}
+              <UserProfileHover
+                picture={row?.original?.createdBy[0]?.avatar}
+                name={row?.original?.createdBy[0]?.fullName}
+                designation={row?.original?.createdBy[0]?.role}
+              />
+              {/* <TooltipCommon text={row?.original?.createdBy[0]?.fullName}>
+                <Avatar className="cursor-pointer">
+                  <AvatarImage
+                    src={row?.original?.createdBy[0]?.avatar}
+                    className=""
+                  />
+                  <AvatarFallback>
+                    <img src={UserPic} className="" />
+                  </AvatarFallback>
+                </Avatar>
+              </TooltipCommon> */}
             </div>
           );
         } else {
           return (
             <div className="flex items-center">
-              <TooltipCommon text={row?.original?.createdBy?.fullName}>
+              <TooltipCommon text={row?.original?.createdBy[0]?.fullName}>
                 <Avatar className="cursor-pointer">
                   <AvatarImage src={UserPic} className="" />
                 </Avatar>

@@ -562,28 +562,28 @@ export const NotificationBellIconSVG = ({ cssClass }: HomeIconProps) => {
     </svg>
   );
 };
-export const UserIconSVG = ({ cssClass }: any) => {
+export const UserIconSVG = ({ cssData }: any) => {
   return (
     <svg
-      width="25"
-      height="25"
+      height={cssData?.height}
+      width={cssData?.width}
+      fill={cssData?.fill}
       viewBox="0 0 32 32"
-      fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={cssClass}
+      // className={cssClass}
       // style={{ cssClass }}
     >
       <path
         fillRule="evenodd"
         clipRule="evenodd"
         d="M16 5C12.134 5 9 8.13401 9 12C9 15.866 12.134 19 16 19C19.866 19 23 15.866 23 12C23 8.13401 19.866 5 16 5ZM7 12C7 7.02944 11.0294 3 16 3C20.9706 3 25 7.02944 25 12C25 16.9706 20.9706 21 16 21C11.0294 21 7 16.9706 7 12Z"
-        fill="gray"
+        fill={cssData?.fill}
       />
       <path
         fillRule="evenodd"
         clipRule="evenodd"
         d="M16.0002 20.9988C13.718 20.9988 11.476 21.5996 9.49965 22.7407C7.52328 23.8819 5.88215 25.5233 4.74124 27.4998C4.46514 27.9781 3.85356 28.1421 3.37525 27.866C2.89693 27.5899 2.733 26.9783 3.0091 26.5C4.32553 24.2194 6.21914 22.3255 8.49957 21.0087C10.78 19.692 13.3669 18.9988 16.0002 18.9988C18.6335 18.9988 21.2203 19.692 23.5008 21.0087C25.7812 22.3255 27.6748 24.2194 28.9912 26.5C29.2673 26.9783 29.1034 27.5899 28.6251 27.866C28.1468 28.1421 27.5352 27.9781 27.2591 27.4998C26.1182 25.5233 24.4771 23.8819 22.5007 22.7407C20.5243 21.5996 18.2823 20.9988 16.0002 20.9988Z"
-        fill="gray"
+        fill={cssData?.fill}
       />
     </svg>
   );
@@ -973,6 +973,66 @@ export const EditCustomerIconSVG = () => {
     </svg>
   );
 };
+export const CustomersIconSVG = ({ cssData }: any) => {
+  return (
+    <svg
+      height={cssData?.height}
+      width={cssData?.width}
+      fill={cssData?.fill}
+      viewBox="0 0 26 26"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M7 15C5.34315 15 4 16.3431 4 18C4 19.6569 5.34315 21 7 21C8.65685 21 10 19.6569 10 18C10 16.3431 8.65685 15 7 15ZM2 18C2 15.2386 4.23858 13 7 13C9.76142 13 12 15.2386 12 18C12 20.7614 9.76142 23 7 23C4.23858 23 2 20.7614 2 18Z"
+        fill={cssData?.fill}
+      />
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M7 23C5.99091 23 4.99573 23.2349 4.09317 23.6862C3.19061 24.1375 2.40551 24.7927 1.80006 25.6C1.46869 26.0418 0.841887 26.1314 0.400059 25.8C-0.0417689 25.4686 -0.131312 24.8418 0.200059 24.4C0.991809 23.3443 2.01847 22.4875 3.19874 21.8974C4.37901 21.3072 5.68042 21 7 21C8.31958 21 9.6211 21.3072 10.8014 21.8974C11.9816 22.4875 13.0083 23.3443 13.8001 24.4C14.1314 24.8418 14.0419 25.4686 13.6001 25.8C13.1582 26.1314 12.5314 26.0418 12.2001 25.6C11.5946 24.7927 10.8095 24.1375 9.90695 23.6862C9.00439 23.2349 8.00909 23 7 23Z"
+        fill={cssData?.fill}
+      />
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M7 2C5.34315 2 4 3.34315 4 5C4 6.65685 5.34315 8 7 8C8.65685 8 10 6.65685 10 5C10 3.34315 8.65685 2 7 2ZM2 5C2 2.23858 4.23858 0 7 0C9.76142 0 12 2.23858 12 5C12 7.76142 9.76142 10 7 10C4.23858 10 2 7.76142 2 5Z"
+        fill={cssData?.fill}
+      />
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M7 10C5.99091 10 4.99573 10.2349 4.09317 10.6862C3.19061 11.1375 2.40551 11.7927 1.80006 12.6C1.46869 13.0418 0.841887 13.1314 0.400059 12.8C-0.0417689 12.4686 -0.131312 11.8418 0.200059 11.4C0.991809 10.3443 2.01847 9.4875 3.19874 8.89737C4.37901 8.30723 5.68042 8 7 8C8.31958 8 9.6211 8.30723 10.8014 8.89737C11.9816 9.4875 13.0083 10.3443 13.8001 11.4C14.1314 11.8418 14.0419 12.4686 13.6001 12.8C13.1582 13.1314 12.5314 13.0418 12.2001 12.6C11.5946 11.7927 10.8095 11.1375 9.90695 10.6862C9.00439 10.2349 8.00909 10 7 10Z"
+        fill={cssData?.fill}
+      />
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M19 15C17.3431 15 16 16.3431 16 18C16 19.6569 17.3431 21 19 21C20.6569 21 22 19.6569 22 18C22 16.3431 20.6569 15 19 15ZM14 18C14 15.2386 16.2386 13 19 13C21.7614 13 24 15.2386 24 18C24 20.7614 21.7614 23 19 23C16.2386 23 14 20.7614 14 18Z"
+        fill={cssData?.fill}
+      />
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M19 23C17.9909 23 16.9957 23.2349 16.0932 23.6862C15.1906 24.1375 14.4055 24.7927 13.8001 25.6C13.4687 26.0418 12.8419 26.1314 12.4001 25.8C11.9582 25.4686 11.8687 24.8418 12.2001 24.4C12.9918 23.3443 14.0185 22.4875 15.1987 21.8974C16.379 21.3072 17.6804 21 19 21C20.3196 21 21.6211 21.3072 22.8014 21.8974C23.9816 22.4875 25.0083 23.3443 25.8001 24.4C26.1314 24.8418 26.0419 25.4686 25.6001 25.8C25.1582 26.1314 24.5314 26.0418 24.2001 25.6C23.5946 24.7927 22.8095 24.1375 21.9069 23.6862C21.0044 23.2349 20.0091 23 19 23Z"
+        fill={cssData?.fill}
+      />
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M19 2C17.3431 2 16 3.34315 16 5C16 6.65685 17.3431 8 19 8C20.6569 8 22 6.65685 22 5C22 3.34315 20.6569 2 19 2ZM14 5C14 2.23858 16.2386 0 19 0C21.7614 0 24 2.23858 24 5C24 7.76142 21.7614 10 19 10C16.2386 10 14 7.76142 14 5Z"
+        fill={cssData?.fill}
+      />
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M19 10C17.9909 10 16.9957 10.2349 16.0932 10.6862C15.1906 11.1375 14.4055 11.7927 13.8001 12.6C13.4687 13.0418 12.8419 13.1314 12.4001 12.8C11.9582 12.4686 11.8687 11.8418 12.2001 11.4C12.9918 10.3443 14.0185 9.4875 15.1987 8.89737C16.379 8.30723 17.6804 8 19 8C20.3196 8 21.6211 8.30723 22.8014 8.89737C23.9816 9.4875 25.0083 10.3443 25.8001 11.4C26.1314 11.8418 26.0419 12.4686 25.6001 12.8C25.1582 13.1314 24.5314 13.0418 24.2001 12.6C23.5946 11.7927 22.8095 11.1375 21.9069 10.6862C21.0044 10.2349 20.0091 10 19 10Z"
+        fill={cssData?.fill}
+      />
+    </svg>
+  );
+};
 export const DownloadIconSVG = () => {
   return (
     <svg
@@ -1166,15 +1226,15 @@ export const AddFilesDarkUIconSVG = () => {
     </svg>
   );
 };
-export const LatestLeadsUIconSVG = () => {
+export const LatestLeadsUIconSVG = ({ cssData }: any) => {
   return (
     <svg
       id="bold"
-      fill="#29354f"
+      height={cssData?.height}
+      width={cssData?.width}
+      fill={cssData?.fill}
       enableBackground="new 0 0 24 24"
-      height="40"
       viewBox="0 0 24 24"
-      width="40"
       xmlns="http://www.w3.org/2000/svg"
     >
       <circle cx="20" cy="3" r="2" />
@@ -1184,13 +1244,13 @@ export const LatestLeadsUIconSVG = () => {
     </svg>
   );
 };
-export const LatestOrdersUIconSVG = () => {
+export const LatestOrdersUIconSVG = ({ cssData }: any) => {
   return (
     <svg
-      height="40"
+      height={cssData?.height}
+      width={cssData?.width}
+      fill={cssData?.fill}
       viewBox="0 0 64 64"
-      fill="#29354f"
-      width="40"
       xmlns="http://www.w3.org/2000/svg"
     >
       <g id="_14_Order" data-name="14 Order">
@@ -1207,14 +1267,14 @@ export const LatestOrdersUIconSVG = () => {
     </svg>
   );
 };
-export const LatestAmendmentsUIconSVG = () => {
+export const LatestAmendmentsUIconSVG = ({ cssData }: any) => {
   return (
     <svg
       id="a"
-      height="40"
       viewBox="0 0 64 64"
-      width="40"
-      fill="#29354f"
+      height={cssData?.height}
+      width={cssData?.width}
+      fill={cssData?.fill}
       xmlns="http://www.w3.org/2000/svg"
       data-name="Outline Expand copy"
     >

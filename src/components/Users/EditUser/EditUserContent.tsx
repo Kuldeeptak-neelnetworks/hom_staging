@@ -31,6 +31,8 @@ import {
   successToastingFunction,
 } from "@/common/commonFunctions";
 import { AxiosError } from "axios";
+import { motion } from "framer-motion";
+import AnimationForm from "@/components/common/Animation/AnimationForm";
 
 const crumbs = [
   {
@@ -240,21 +242,26 @@ const EditUserContent = () => {
   } = formik;
   return (
     <div className="px-4 py-0 relative">
-      <div className="text-xl font-semibold absolute top-[-40px]">
+      <div className="text-xl font-semibold absolute top-[-32px]">
         {userDetails?.fullName ? userDetails?.fullName : "loading..."}
       </div>
       {/* <div className="mb-4">
         <BreadcrumbSection crumbs={crumbs} />
       </div> */}
-      <div className=" flex gap-5 justify-center ">
-        <ScrollArea className="h-[80vh]   sm:px-3 sm:py-3 w-[100%] xl:w-[56vw]">
+      <motion.div
+        initial={{ opacity: 0, x: -50, rotate: -5, scale: 0.95 }}
+        animate={{ opacity: 1, x: 0, rotate: 0, scale: 1 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+        className=" flex gap-5 justify-center "
+      >
+        <ScrollArea className="h-[80vh]   sm:px-3 sm:py-3 w-[100%] xl:w-[75vw]">
           <form
             onSubmit={handleSubmit}
             className="border p-6 text-[0.8rem] bg-[#fff] boxShadow"
           >
             <div className="lg:flex gap-5">
               {/* full Name  */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white ">
                   Name
                 </label>
@@ -279,9 +286,9 @@ const EditUserContent = () => {
                     <UserIconSVG />
                   </span>
                 </div>
-              </div>
+              </AnimationForm>
               {/* Email  */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full" fromLeft={false}>
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                   Email Address
                 </label>
@@ -306,7 +313,7 @@ const EditUserContent = () => {
                     <EmailIconSVG />
                   </span>
                 </div>
-              </div>
+              </AnimationForm>
             </div>
 
             <div className="lg:flex gap-5">
@@ -356,7 +363,7 @@ const EditUserContent = () => {
                 </div>
               </div> */}
               {/* Role  */}
-              <div className="mb-5 w-full">
+              <AnimationForm className="mb-5 w-full">
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                   Role
                 </label>
@@ -385,9 +392,9 @@ const EditUserContent = () => {
                     <div className="text-red-500">{errors.role}</div>
                   ) : null}
                 </div>
-              </div>
+              </AnimationForm>
               {/* Mobile No.  */}
-              <div className="mb-5 w-full">
+              <AnimationForm className="mb-5 w-full" fromLeft={false}>
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                   Mobile No.
                 </label>
@@ -412,12 +419,12 @@ const EditUserContent = () => {
                     <MobileIconSVG />
                   </span>
                 </div>
-              </div>
+              </AnimationForm>
             </div>
 
             <div className="lg:flex gap-5">
               {/* TimeZone  */}
-              <div className="mb-5 w-full">
+              <AnimationForm className="mb-5 w-full">
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                   Time Zone
                 </label>
@@ -443,9 +450,9 @@ const EditUserContent = () => {
                     </div>
                   ) : null}
                 </div>
-              </div>
+              </AnimationForm>
               {/* jobtitle */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full" fromLeft={false}>
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                   Job Title
                 </label>
@@ -466,12 +473,12 @@ const EditUserContent = () => {
                     </div>
                   ) : null}
                 </div>
-              </div>
+              </AnimationForm>
             </div>
 
             <div className="lg:flex gap-5">
               {/* Address */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                   Address
                 </label>
@@ -492,11 +499,11 @@ const EditUserContent = () => {
                     </div>
                   ) : null}
                 </div>
-              </div>
+              </AnimationForm>
             </div>
 
             {/* Avatar */}
-            <div className="mb-3">
+            <AnimationForm className="mb-3" fromLeft={false}>
               <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                 Avatar
               </label>
@@ -520,12 +527,12 @@ const EditUserContent = () => {
                   </div>
                 )}
               </div>
-            </div>
+            </AnimationForm>
 
             <div className="my-6 ">
               <Button
                 type="submit"
-                className="lg:w-[6vw] w-full cursor-pointer  border border-primary bg-primary px-4 py-1 text-white transition hover:bg-opacity-90 text-md"
+                className="lg:w-[6vw] w-full cursor-pointer  border border-primary bg-[#004d4b] hover:bg-[#004d4b] hover:scale-[95%] px-4 py-1 text-white transition hover:bg-opacity-90 text-md"
               >
                 {isUserValid ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -536,7 +543,7 @@ const EditUserContent = () => {
             </div>
           </form>
         </ScrollArea>
-      </div>
+      </motion.div>
     </div>
   );
 };

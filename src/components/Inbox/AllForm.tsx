@@ -570,7 +570,7 @@ const AllForm = ({
   const currentYearDate = date ? getYear(date) : getYear(new Date());
 
   useEffect(() => {
-    userData?.forEach((item: any) => {
+    userData?.users?.forEach((item: any) => {
       if (!atValues.some((value) => value.id === item._id)) {
         // Check if the 'id' already exists in 'atValues'
         atValues.push({
@@ -2254,7 +2254,7 @@ const AllForm = ({
               <Button
                 type="submit"
                 value="Sign In"
-                className="cursor-pointer border border-primary bg-primary px-4 py-1 text-white transition hover:bg-opacity-90"
+                className="cursor-pointer border border-primary px-4 py-1 text-white transition hover:bg-opacity-90"
               >
                 {isUserValid ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />

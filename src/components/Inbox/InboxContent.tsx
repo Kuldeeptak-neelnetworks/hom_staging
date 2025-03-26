@@ -205,7 +205,7 @@ const InboxContent: React.FC = () => {
       </div> */}
       <div className="px-4 py-0 relative">
         <Table className="shadow-md rounded-lg border border-gray-300 ">
-          <TableHeader>
+          <TableHeader className="bg-[#0f464a]">
             <TableRow className="bg-gray-100">
               <TableHead className="text-sm font-semibold text-white py-3">
                 Assigned By
@@ -278,7 +278,7 @@ const InboxContent: React.FC = () => {
                   <TableCell className="text-right text-sm text-muted-foreground py-4">
                     <span className="text-[0.8rem]">
                       <SideDrawer
-                        length={notification?.updates?.length || 0} 
+                        length={notification?.updates?.length || 0}
                         {...{
                           amendmentId:
                             notification.itemType === "Amendment"

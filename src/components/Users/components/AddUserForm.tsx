@@ -24,6 +24,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import TimezoneSelect from "react-timezone-select";
 import { useUserStore } from "@/Store/UserStore";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+import AnimationForm from "@/components/common/Animation/AnimationForm";
 
 type User = {
   fullName: string;
@@ -182,11 +184,11 @@ const AddUserForm: React.FC = () => {
   } = formik;
 
   return (
-    <ScrollArea className="w-[60%]   p-7 my-5 border boxShadow bg-[#fff]">
+    <ScrollArea className="w-[75%]   p-7 my-5 border boxShadow bg-[#fff]">
       <form onSubmit={handleSubmit} className="text-[0.8rem] ">
         <div className="mb-3 flex gap-3">
           {/* Name  */}
-          <div className="w-full">
+          <AnimationForm className="w-full">
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               Name
             </label>
@@ -209,9 +211,9 @@ const AddUserForm: React.FC = () => {
                 <UserIconSVG cssClass={styles.commonText} />
               </span>
             </div>
-          </div>
+          </AnimationForm>
           {/* Email  */}
-          <div className="w-full">
+          <AnimationForm className="w-full" fromLeft={false}>
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               Email Address
             </label>
@@ -248,12 +250,12 @@ const AddUserForm: React.FC = () => {
                 </svg>
               </span>
             </div>
-          </div>
+          </AnimationForm>
         </div>
 
         <div className="mb-3 flex gap-3">
           {/* Password  */}
-          <div className="w-full">
+          <AnimationForm className="w-full">
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               Password
             </label>
@@ -294,9 +296,9 @@ const AddUserForm: React.FC = () => {
                 </svg>
               </span>
             </div>
-          </div>
+          </AnimationForm>
           {/* User Role */}
-          <div className="w-full">
+          <AnimationForm className="w-full" fromLeft={false}>
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               User Role
             </label>
@@ -325,10 +327,10 @@ const AddUserForm: React.FC = () => {
                 <div className="text-red-500">{errors.role}</div>
               ) : null}
             </div>
-          </div>
+          </AnimationForm>
         </div>
         {/* TimeZone  */}
-        <div className="mb-3 ">
+        <AnimationForm fromLeft={false} className="mb-3 ">
           <label className="mb-2.5 block font-medium text-black dark:text-white">
             Time Zone
           </label>
@@ -349,11 +351,11 @@ const AddUserForm: React.FC = () => {
               <div className="text-red-500">{errors.timeZone}</div>
             ) : null}
           </div>
-        </div>
+        </AnimationForm>
 
         <div className="mb-5 flex gap-3">
           {/* Contact */}
-          <div className="w-full">
+          <AnimationForm className="w-full">
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               Contact
             </label>
@@ -376,9 +378,9 @@ const AddUserForm: React.FC = () => {
                 <PhoneIconSVG />
               </span>
             </div>
-          </div>
+          </AnimationForm>
           {/* Job Title */}
-          <div className="w-full">
+          <AnimationForm className="w-full" fromLeft={false}>
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               Job Title
             </label>
@@ -397,11 +399,19 @@ const AddUserForm: React.FC = () => {
                 <div className="text-red-500">{errors.jobtitle}</div>
               ) : null}
             </div>
-          </div>
+          </AnimationForm>
         </div>
 
         {/* Address  */}
-        <div className="mb-3">
+        <AnimationForm
+          initial={{ x: +100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{
+            duration: 1,
+            ease: [0.04, 0.62, 0.23, 0.98],
+          }}
+          className="mb-3"
+        >
           <label className="mb-2.5 block font-medium text-black dark:text-white">
             Address
           </label>
@@ -419,9 +429,9 @@ const AddUserForm: React.FC = () => {
               <div className="text-red-500">{errors.address}</div>
             ) : null}
           </div>
-        </div>
+        </AnimationForm>
         {/* Avatar  */}
-        <div className="mb-3">
+        <AnimationForm fromLeft={false} className="mb-3">
           <label className="mb-2.5 block font-medium text-black dark:text-white">
             Profile Picture
           </label>
@@ -449,13 +459,13 @@ const AddUserForm: React.FC = () => {
               </div>
             )}
           </div>
-        </div>
+        </AnimationForm>
 
         <div className="mb-3">
           <Button
             type="submit"
             value="Sign In"
-            className="cursor-pointer  border border-primary bg-primary px-4 py-1 text-white transition hover:bg-opacity-90"
+            className="cursor-pointer bg-[#004d4c] hover:bg-[#004d4c] duration-200 hover:scale-[101%] border border-primary px-4 py-1 text-white transition hover:bg-opacity-90"
           >
             {isUserValid ? (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />

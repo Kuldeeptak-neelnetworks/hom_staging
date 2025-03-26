@@ -1,6 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import AllForm from "./AllForm";
 
@@ -13,7 +19,7 @@ const AddDialoge = () => {
       <DialogTrigger asChild>
         <Button
           variant="outline"
-          className="text-[0.8rem] text-white bg-[#29354f] hover:bg-[#fff] hover:text-[#29354f]"
+          className="text-[0.8rem] text-white bg-[#0f464a] my-1 hover:bg-[#fff] hover:text-[#29354f]"
         >
           New Add
         </Button>

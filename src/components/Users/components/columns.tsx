@@ -4,6 +4,7 @@ import { DataTableRowActions } from "../../common/data-table-row-actions";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import User from "../../../asset/images/user.png";
 import Link from "next/link";
+import { UserProfileHover } from "@/components/common/HoverCard/UserProfileHover";
 
 const UserPic = User.src;
 export const columns = [
@@ -21,13 +22,18 @@ export const columns = [
     header: "Profile Picture",
     cell: ({ row }: any) => {
       return (
-        <div className="flex items-center">
-          <Avatar>
+        <div className="flex items-center cursor-pointer">
+          {/* <Avatar>
             <AvatarImage src={row?.original?.avatar} className="" />
             <AvatarFallback>
               <img src={UserPic} className="" />
             </AvatarFallback>
-          </Avatar>
+          </Avatar> */}
+          <UserProfileHover
+            picture={row?.original?.avatar}
+            name={row?.original?.fullName}
+            designation={row?.original?.role}
+          />
         </div>
       );
     },

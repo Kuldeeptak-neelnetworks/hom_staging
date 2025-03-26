@@ -199,7 +199,7 @@ const SideBarContent: React.FC<{ setToggleWidth: any }> = ({
         id="sidebar-multi-level-sidebar"
         className={`fixed top-0 left-0 z-40 text-[0.8rem] ${
           toggleSider
-            ? "w-[17rem] closedSidebar"
+            ? "w-[14rem] closedSidebar"
             : `w-[6rem] OpenedSidebar ${
                 openSmallSideBar ? "" : "-translate-x-full"
               }`
@@ -212,7 +212,7 @@ const SideBarContent: React.FC<{ setToggleWidth: any }> = ({
           onScroll={handleScroll}
           className={`h-full ${
             toggleSider ? "px-3" : ""
-          } pb-4 overflow-y-auto bg-[#29354f] dark:bg-gray-800 text-[#fffff5]`}
+          } pb-4 overflow-y-auto bg-gradient-to-b from-[#175a5f] via-[#002123] to-[#005150] dark:bg-gray-800 text-[#fffff5]`}
         >
           {/* Logo Section */}
           <div
@@ -361,7 +361,7 @@ const SideBarContent: React.FC<{ setToggleWidth: any }> = ({
         </div>
       </aside>
 
-      <Appbar toggleSider={toggleSider} titleData={""} />
+      {/* <Appbar toggleSider={toggleSider} titleData={""} /> */}
     </>
   );
 };

@@ -3,6 +3,7 @@
 import * as React from "react";
 import "../../styles/common.css";
 import { ColumnDef, flexRender } from "@tanstack/react-table";
+import { motion } from "framer-motion";
 
 import {
   Table,
@@ -135,7 +136,12 @@ export function DataTable<TData, TValue>({
   // );
 
   return (
-    <div className="space-y-4 text-[#676879]">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9, y: 30 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className="space-y-4 text-[#676879]"
+    >
       <div className="border">
         <div className="h-[82vh] overflow-x-auto bg-[#fff] boxShadow">
           <Table className="bg-[#fff]">
@@ -170,25 +176,34 @@ export function DataTable<TData, TValue>({
                   </TableCell>
                 </TableRow>
               ) : tableInstance?.getRowModel()?.rows?.length !== 0 ? (
-                tableInstance.getRowModel().rows.map((row: any) => {
-                  const isHighlighted = row.original._id === queryParams; // Check if the row ID matches queryParams
-                  return (
-                    <TableRow
-                      key={row.id}
-                      className={isHighlighted ? "bg-[#ced7ea]" : ""}
-                      data-state={row.getIsSelected() && "selected"}
-                    >
-                      {row.getVisibleCells().map((cell: any) => (
-                        <TableCell key={cell.id} className="text-nowrap">
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  );
-                })
+                tableInstance
+                  .getRowModel()
+                  .rows.map((row: any, index: number) => {
+                    const isHighlighted = row.original._id === queryParams; // Check if the row ID matches queryParams
+                    return (
+                      <TableRow
+                        key={row.id}
+                        // className={isHighlighted ? "bg-[#ced7ea]" : ""}
+                        className={`${
+                          isHighlighted
+                            ? "bg-[#ced7ea]" // Highlighted row color
+                            : index % 2 !== 0
+                            ? "bg-[#d3eae9]" // Light gray for even rows
+                            : "bg-white" // White for odd rows
+                        }`}
+                        data-state={row.getIsSelected() && "selected"}
+                      >
+                        {row.getVisibleCells().map((cell: any) => (
+                          <TableCell key={cell.id} className="text-nowrap">
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )}
+                          </TableCell>
+                        ))}
+                      </TableRow>
+                    );
+                  })
               ) : (
                 <TableRow>
                   <TableCell
@@ -210,7 +225,7 @@ export function DataTable<TData, TValue>({
       ) : (
         <DataTablePagination table={tableInstance} />
       )}
-    </div>
+    </motion.div>
   );
 }
 // "use client";

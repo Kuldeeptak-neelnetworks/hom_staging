@@ -42,6 +42,8 @@ import { format } from "date-fns";
 import { useUserStore } from "@/Store/UserStore";
 import SelectReactSelect from "react-select";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import AnimationForm from "@/components/common/Animation/AnimationForm";
 
 const crumbs = [
   {
@@ -327,7 +329,12 @@ const EditCustomerContent = () => {
       {/* <div className="mb-4">
         <BreadcrumbSection crumbs={crumbs} />
       </div> */}
-      <div className=" flex gap-5 justify-center">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+        className=" flex gap-5 justify-center"
+      >
         <div className="my-3 text-[0.8rem] bg-[#fff] hover:bg-gray-300 h-fit w-fit px-2 py-1  cursor-pointer hidden text-center sm:block boxShadow ">
           <Link href={`/customers/customerDetails/${customerId}`}>Back</Link>
         </div>
@@ -338,7 +345,7 @@ const EditCustomerContent = () => {
           >
             <div className="lg:flex gap-5">
               {/* Contact Name  */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white ">
                   Contact Name
                 </label>
@@ -363,9 +370,9 @@ const EditCustomerContent = () => {
                     <UserIconSVG />
                   </span>
                 </div>
-              </div>
+              </AnimationForm>
               {/* Company Name  */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full" fromLeft={false}>
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                   Company Name <span className="text-red-500">*</span>
                 </label>
@@ -390,11 +397,11 @@ const EditCustomerContent = () => {
                     <BuildingIconSVG />
                   </span>
                 </div>
-              </div>
+              </AnimationForm>
             </div>
             <div className="lg:flex gap-5">
               {/* Email  */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                   Email Address
                 </label>
@@ -419,9 +426,9 @@ const EditCustomerContent = () => {
                     <EmailIconSVG />
                   </span>
                 </div>
-              </div>
+              </AnimationForm>
               {/* Mobile No.  */}
-              <div className="mb-5 w-full">
+              <AnimationForm className="mb-5 w-full" fromLeft={false}>
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                   Mobile No.
                 </label>
@@ -446,11 +453,11 @@ const EditCustomerContent = () => {
                     <MobileIconSVG />
                   </span>
                 </div>
-              </div>
+              </AnimationForm>
             </div>
             <div className="lg:flex gap-5">
               {/* Landline No.  */}
-              <div className="mb-5 w-full">
+              <AnimationForm className="mb-5 w-full">
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                   Landline No. (Optional)
                 </label>
@@ -475,9 +482,9 @@ const EditCustomerContent = () => {
                     <PhoneIconSVG />
                   </span>
                 </div>
-              </div>
+              </AnimationForm>
               {/* Street No. and Name */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full" fromLeft={false}>
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                   Street No. and Name
                 </label>
@@ -498,11 +505,11 @@ const EditCustomerContent = () => {
                     </div>
                   ) : null}
                 </div>
-              </div>
+              </AnimationForm>
             </div>
             <div className="lg:flex gap-5">
               {/* Town */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                   Town
                 </label>
@@ -523,7 +530,7 @@ const EditCustomerContent = () => {
                     </div>
                   ) : null}
                 </div>
-              </div>
+              </AnimationForm>
               {/* County */}
               <div className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
@@ -548,7 +555,7 @@ const EditCustomerContent = () => {
                 </div>
               </div>
               {/* Post Code  */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full" fromLeft={false}>
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                   Post Code
                 </label>
@@ -569,11 +576,11 @@ const EditCustomerContent = () => {
                     </div>
                   ) : null}
                 </div>
-              </div>
+              </AnimationForm>
             </div>
             <div className="lg:flex gap-5">
               {/* URL  */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                   URL
                 </label>
@@ -589,9 +596,9 @@ const EditCustomerContent = () => {
                     className="w-full border border-stroke bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                 </div>
-              </div>
+              </AnimationForm>
               {/* Live Date  */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full" fromLeft={false}>
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                   Live Date
                 </label>
@@ -621,24 +628,24 @@ const EditCustomerContent = () => {
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0">
-                    <div className="calendar-container">
-                      <Calendar
-                        defaultMonth={date}
-                        mode="single"
-                        selected={date}
-                        initialFocus
-                        onSelect={handleDateSelect}
-                        className=" border"
-                      />
+                      <div className="calendar-container">
+                        <Calendar
+                          defaultMonth={date}
+                          mode="single"
+                          selected={date}
+                          initialFocus
+                          onSelect={handleDateSelect}
+                          className=" border"
+                        />
                       </div>
                     </PopoverContent>
                   </Popover>
                 </div>
-              </div>
+              </AnimationForm>
             </div>
             <div className="lg:flex gap-5">
               {/* SSL  */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                   SSL
                 </label>
@@ -654,9 +661,9 @@ const EditCustomerContent = () => {
                     className="w-full border border-stroke bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                 </div>
-              </div>
+              </AnimationForm>
               {/* SiteMap  */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full" fromLeft={false}>
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                   Site Map
                 </label>
@@ -672,11 +679,11 @@ const EditCustomerContent = () => {
                     className="w-full  border border-stroke bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                 </div>
-              </div>
+              </AnimationForm>
             </div>
             <div className="lg:flex gap-5">
               {/* HT Access  */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                   HT Access
                 </label>
@@ -692,9 +699,9 @@ const EditCustomerContent = () => {
                     className="w-full border border-stroke bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                 </div>
-              </div>
+              </AnimationForm>
               {/* GA Code  */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full" fromLeft={false}>
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                   GA Code
                 </label>
@@ -710,11 +717,11 @@ const EditCustomerContent = () => {
                     className="w-full border border-stroke bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                 </div>
-              </div>
+              </AnimationForm>
             </div>
             <div className="lg:flex gap-5">
               {/* New GA Code  */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                   New GA Code
                 </label>
@@ -730,9 +737,9 @@ const EditCustomerContent = () => {
                     className="w-full  border border-stroke bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                 </div>
-              </div>
+              </AnimationForm>
               {/* Orders/Renewals  */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full" fromLeft={false}>
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                   Orders/Renewals
                 </label>
@@ -748,11 +755,11 @@ const EditCustomerContent = () => {
                     className="w-full border border-stroke bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                 </div>
-              </div>
+              </AnimationForm>
             </div>
             <div className="lg:flex gap-5">
               {/* Status */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                   Status
                 </label>
@@ -789,7 +796,7 @@ const EditCustomerContent = () => {
                     </div>
                   ) : null}
                 </div>
-              </div>
+              </AnimationForm>
               {/* User Name */}
               {/* <div className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white ">
@@ -837,7 +844,7 @@ const EditCustomerContent = () => {
 
               {/* Assigned User */}
               {role !== "salesman" ? (
-                <div className="mb-3 w-full">
+                <AnimationForm className="mb-3 w-full" fromLeft={false}>
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
                     Assigned User
                   </label>
@@ -851,7 +858,7 @@ const EditCustomerContent = () => {
                       <SelectReactSelect
                         closeMenuOnSelect={true}
                         isClearable={true}
-                        options={userData?.map(
+                        options={userData?.users?.map(
                           (user: { _id: any; fullName: any }) => ({
                             value: user._id,
                             label: user.fullName,
@@ -874,9 +881,9 @@ const EditCustomerContent = () => {
                       </div>
                     ) : null}
                   </div>
-                </div>
+                </AnimationForm>
               ) : (
-                <div className="mb-3 w-full">
+                <AnimationForm className="mb-3 w-full" fromLeft={false}>
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
                     Assigned User
                   </label>
@@ -890,7 +897,7 @@ const EditCustomerContent = () => {
                       className="w-full border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
                   </div>
-                </div>
+                </AnimationForm>
               )}
             </div>
             {/* Logo */}
@@ -924,7 +931,7 @@ const EditCustomerContent = () => {
               <Button
                 type="submit"
                 // value="Sign In"
-                className="lg:w-[6vw] w-full cursor-pointer border border-primary bg-primary px-4 py-1 text-white transition hover:bg-opacity-90 text-md"
+                className="lg:w-[6vw] w-full cursor-pointer bg-[#004d4b] hover:bg-[#004d4b] hover:scale-[95%] border border-primary px-4 py-1 text-white transition hover:bg-opacity-90 text-md"
               >
                 {isCustomerValid ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -935,7 +942,7 @@ const EditCustomerContent = () => {
             </div>
           </form>
         </ScrollArea>
-      </div>
+      </motion.div>
     </div>
   );
 };
