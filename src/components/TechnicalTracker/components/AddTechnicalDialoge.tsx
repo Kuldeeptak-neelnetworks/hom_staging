@@ -34,7 +34,7 @@ const AddTechnicalDialoge = ({
         <DialogHeader>
           <DialogTitle>Add New Technical </DialogTitle>
         </DialogHeader>
-        <AddTechnicalForm setOpen={setOpen} getAllTechnical={getAllTechnical} />
+        <AddTechnicalForm />
       </DialogContent>
     </Dialog>
   );
