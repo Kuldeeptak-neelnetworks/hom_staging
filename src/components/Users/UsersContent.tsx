@@ -184,13 +184,13 @@ const UsersContent: React.FC = () => {
           <SelectContent className="text-[0.8rem]">
             <SelectGroup>
               <SelectLabel className="text-[0.8rem]">Select</SelectLabel>
-              <SelectItem value="all" className="text-[0.8rem]">
+              <SelectItem value="all" className="text-[0.8rem] ">
                 All
               </SelectItem>
-              <SelectItem value="admin" className="text-[0.8rem]">
+              <SelectItem value="admin" className="text-[0.8rem] ">
                 Admin
               </SelectItem>
-              <SelectItem value="salesman" className="text-[0.8rem]">
+              <SelectItem value="salesman" className="text-[0.8rem] ">
                 Sales Person
               </SelectItem>
             </SelectGroup>

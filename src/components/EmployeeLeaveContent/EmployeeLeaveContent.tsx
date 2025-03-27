@@ -329,7 +329,7 @@ const EmployeeLeaveContent: React.FC = () => {
           <Button
             variant="outline"
             className={`text-[0.8rem] text-white  hover:bg-[#fff] hover:text-[#29354f] ${
-              isShow ? "bg-slate-500" : "bg-[#29354f]"
+              isShow ? "bg-[#145f64] opacity-55" : "bg-[#0f464a]"
             }`}
             onClick={showTable}
           >
@@ -340,7 +340,7 @@ const EmployeeLeaveContent: React.FC = () => {
             <Link href={"/employeeLeaveManagement/addEmployeeLeave"}>
               <Button
                 variant="outline"
-                className=" text-[0.8rem] text-white bg-[#29354f] hover:bg-[#fff] hover:text-[#29354f] "
+                className=" text-[0.8rem] text-white bg-[#0f464a] hover:bg-[#fff] hover:text-[#29354f] "
               >
                 New Leave
               </Button>

@@ -168,7 +168,7 @@ const AddCopywriterForm = ({}: any) => {
 
   return (
     <div className="p-4 relative">
-      <div className="text-[1rem] font-semibold absolute top-[-50px]">
+      <div className="text-[1rem] font-semibold absolute top-[-30px]">
         Add Copywriter Tracker
       </div>
 

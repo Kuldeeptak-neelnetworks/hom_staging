@@ -157,7 +157,7 @@ const AllForm = ({
   const currentYearDate = date ? getYear(date) : getYear(new Date());
 
   useEffect(() => {
-    userData?.forEach((item: any) => {
+    userData?.users?.forEach((item: any) => {
       if (!atValues.some((value) => value.id === item._id)) {
         atValues.push({
           id: item?._id,

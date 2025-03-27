@@ -171,12 +171,12 @@ const EmployeeLeaveDetailsContent = () => {
       {/* <div className="mb-4">
         <BreadcrumbSection crumbs={crumbs} />
       </div> */}
-      <div className="flex gap-5 mt-2">
+      <div className="flex gap-5 pt-2">
         {/* <div className="my-3 text-[0.8rem] bg-[#fff] hover:bg-gray-300 h-fit px-2 py-1 rounded cursor-pointer hidden text-center sm:block w-fit boxShadow ">
           <Link href={`/employeeLeaveManagement`}>Back</Link>
         </div> */}
         <div className="boxShadow">
-          <Card className="w-[575px] h-[100%]">
+          <Card className="w-[75vw] h-[100%]">
             <CardHeader>
               <CardTitle>Employee Leave Details</CardTitle>
               <CardDescription>Details Of existing Employee</CardDescription>

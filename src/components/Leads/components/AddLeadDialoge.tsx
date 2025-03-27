@@ -28,7 +28,7 @@ const AddLeadDialoge = ({ getMyLeadData }: { getMyLeadData: () => void }) => {
         </Button>
       </DialogTrigger>
       {/* form Section  */}
-      <DialogContent className="sm:max-w-[775px]">
+      <DialogContent className="sm:max-w-[75vw]">
         <DialogHeader>
           <DialogTitle>Add New Lead</DialogTitle>
           {/* <DialogDescription>Add New Lead here</DialogDescription> */}

@@ -146,13 +146,13 @@ const EditTechnical = () => {
 
   return (
     <div className="p-4 relative text-[0.8rem]">
-      <div className="text-[1rem] font-semibold absolute top-[-35px] text-wrap">
+      <div className="text-[1rem] font-semibold absolute top-[-30px] text-wrap">
         {technical?.customer?.companyName
           ? technical?.customer?.companyName
           : "loading..."}
       </div>
       <div className=" flex gap-5 justify-center">
-        <ScrollArea className="h-[80vh]   sm:px-3 sm:py-3 w-[100%] xl:w-[56vw]">
+        <ScrollArea className="h-[80vh]   sm:px-3 sm:py-3 w-[100%] xl:w-[75vw]">
           <form
             onSubmit={handleSubmit}
             className="border p-6 bg-[#fff]  boxShadow"
@@ -172,7 +172,7 @@ const EditTechnical = () => {
                     id="timeTakenMinutes"
                     name="timeTakenMinutes"
                     placeholder="Enter time taken minutes"
-                    className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full  border border-stroke border-[#2e8b577d] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                 </div>
               </div>
@@ -186,7 +186,7 @@ const EditTechnical = () => {
                       <Button
                         variant={"outline"}
                         className={cn(
-                          "w-[100%] justify-start text-left font-normal text-md",
+                          "w-[100%] justify-start text-left font-normal text-md border border-[#2e8b577d]",
                           !completeDate && "text-muted-foreground"
                         )}
                       >
@@ -197,15 +197,15 @@ const EditTechnical = () => {
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0">
-                    <div className="calendar-container">
-                      <Calendar
-                        defaultMonth={completeDate}
-                        mode="single"
-                        selected={completeDate}
-                        initialFocus
-                        onSelect={handleCompleteDateSelect}
-                        className=" border"
-                      />
+                      <div className="calendar-container">
+                        <Calendar
+                          defaultMonth={completeDate}
+                          mode="single"
+                          selected={completeDate}
+                          initialFocus
+                          onSelect={handleCompleteDateSelect}
+                          className=" border"
+                        />
                       </div>
                     </PopoverContent>
                   </Popover>
@@ -327,7 +327,7 @@ const EditTechnical = () => {
             <div className="my-6 ">
               <Button
                 type="submit"
-                className="lg:w-[6vw] w-full cursor-pointer  border border-primary bg-primary px-4 py-1 text-white transition hover:bg-opacity-90 text-md"
+                className="lg:w-[6vw] w-full cursor-pointer  border border-primary bg-[#004d4b] hover:bg-[#004d4b] hover:scale-[95%] px-4 py-1 text-white transition hover:bg-opacity-90 text-md"
               >
                 {isTechnicalValid ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />

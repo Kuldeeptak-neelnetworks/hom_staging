@@ -56,15 +56,15 @@ const TechnicalTrackerDetailsContent = () => {
 
   return (
     <div className="px-4 py-0 relative">
-      <div className="text-[1rem] font-semibold absolute top-[-40px]">
+      <div className="text-[1rem] font-semibold absolute top-[-30px]">
         {technicalDetails?.customer?.companyName
           ? technicalDetails?.customer?.companyName
           : "loading..."}
       </div>
 
-      <div className="flex gap-5 mt-2">
+      <div className="flex gap-5 mt-2 pt-2">
         <div className="">
-          <Card className="w-[575px] h-[100%] boxShadow">
+          <Card className="w-[75vw] h-[100%] boxShadow">
             <CardHeader>
               <CardTitle className="text-[1rem]">Technical Data</CardTitle>
               <CardDescription>

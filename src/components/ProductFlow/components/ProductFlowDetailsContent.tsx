@@ -140,7 +140,7 @@ const ProductFlowDetailsContent = () => {
 
   return (
     <div className="px-4 py-0 relative">
-      <div className="text-[1rem] font-semibold absolute top-[-40px]">
+      <div className="text-[1rem] font-semibold absolute top-[-30px]">
         {productDetails?.customer?.companyName
           ? productDetails?.customer?.companyName
           : "loading..."}
@@ -149,7 +149,7 @@ const ProductFlowDetailsContent = () => {
         <BreadcrumbSection crumbs={crumbs} />
       </div> */}
       {/* Main Customer details section  */}
-      <div className="flex gap-5 mt-2">
+      <div className="flex gap-5 mt-2 py-2">
         <div className="">
           <Card className="w-[575px] h-[100%] boxShadow">
             <CardHeader>

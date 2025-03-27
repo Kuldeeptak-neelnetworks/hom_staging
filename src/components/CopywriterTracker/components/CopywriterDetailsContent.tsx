@@ -50,12 +50,12 @@ const CopywriterDetailsContent = () => {
 
   return (
     <div className="px-4 py-0 relative">
-      <div className="text-[1rem] font-semibold absolute top-[-40px]">
+      <div className="text-[1rem] font-semibold absolute top-[-30px]">
         {copywriterDetails?.customer?.companyName
           ? copywriterDetails?.customer?.companyName
           : "loading..."}
       </div>
-      <div className="flex gap-5 mt-2">
+      <div className="flex gap-5 pt-2">
         <div className="">
           <Card className="w-[575px] h-[100%]">
             <CardHeader>

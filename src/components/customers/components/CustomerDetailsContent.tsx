@@ -377,7 +377,7 @@ const CustomerDetailsContent = ({ handleUpdate }: any) => {
   };
 
   return (
-    <div className="py-3 relative text-[0.8rem] bg-[#f2f6fa]">
+    <div className="py-3 relative text-[0.8rem] ">
       {/* <div className="text-xl font-semibold absolute top-[-50px]">
         Customer Details
       </div> */}
@@ -843,7 +843,7 @@ const CustomerDetailsContent = ({ handleUpdate }: any) => {
           textTab === "orders" ||
           textTab === "invoices" ||
           textTab === "files") && (
-          <div className="w-full">
+          <div className="w-full ">
             <ActivitySection activityDetails={acData} className="w-full" />
           </div>
         )}

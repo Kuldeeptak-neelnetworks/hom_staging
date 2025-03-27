@@ -347,7 +347,7 @@ const EditAmendmentContent = () => {
                       <Button
                         variant={"outline"}
                         className={cn(
-                          "w-[250px] justify-start text-left font-normal",
+                          "w-full justify-start text-left font-normal border border-[#2e8b577d]",
                           !date && "text-muted-foreground"
                         )}
                       >
@@ -423,7 +423,7 @@ const EditAmendmentContent = () => {
                       <Button
                         variant={"outline"}
                         className={cn(
-                          "w-[250px] justify-start text-left font-normal",
+                          "w-full justify-start text-left font-normal border-[#2e8b577d] border",
                           !completeDate && "text-muted-foreground"
                         )}
                       >
@@ -436,7 +436,7 @@ const EditAmendmentContent = () => {
                       </Button>
                     </PopoverTrigger>
 
-                    <PopoverContent className="w-auto p-0">
+                    <PopoverContent className="w-auto p-0 ">
                       <div className="flex justify-between p-2">
                         <Select
                           onValueChange={(month) =>

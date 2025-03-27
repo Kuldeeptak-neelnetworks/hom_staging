@@ -101,7 +101,7 @@ const TableCell = React.forwardRef<
   <td
     ref={ref}
     className={cn(
-      "px-4 h-8 align-middle [&:has([role=checkbox])]:pr-0 first:sticky first:left-0 z-50",
+      "px-4 h-8 align-middle [&:has([role=checkbox])]:pr-0 first:sticky first:left-0 z-40",
       rowIndex !== undefined && rowIndex % 2 !== 0
         ? "bg-[#d3eae9]"
         : "bg-white",

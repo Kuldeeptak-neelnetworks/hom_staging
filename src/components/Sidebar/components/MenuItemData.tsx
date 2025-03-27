@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState, memo } from "react";
 import { RightArrowIconSVG } from "@/utils/SVGs/SVGs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 
 const MenuItemData = memo((props: any) => {
   const {
@@ -35,12 +36,19 @@ const MenuItemData = memo((props: any) => {
   return (
     <li className="my-2">
       <Link href={href} className="hover:text-gray-400">
-        <div
-          className={`flex items-center p-2 rounded  transition-all ${
-            isActive
-              ? "bg-white text-green-800"
-              : "hover:bg-gray-50 hover:text-green-800"
-          } ${isCollapsed ? "flex-col" : "gap-3 text-base"}`}
+        <motion.div
+          className={`flex items-center p-2 rounded transition-all 
+    ${
+      isActive
+        ? "bg-gradient-to-r from-white to-green-100 text-green-800"
+        : "hover:bg-gradient-to-r from-green-100 to-green-300 hover:text-green-800"
+    } ${isCollapsed ? "flex-col" : "gap-3 text-base"}`}
+
+          // className={`flex items-center p-2 rounded  transition-all ${
+          //   isActive
+          //     ? "bg-white text-green-800"
+          //     : "hover:bg-gray-50 hover:text-green-800"
+          // } ${isCollapsed ? "flex-col" : "gap-3 text-base"}`}
         >
           {isCollapsed && (
             <div className="flex flex-col text-[0.8rem] text-center relative">
@@ -90,7 +98,7 @@ const MenuItemData = memo((props: any) => {
                 )}
             </div>
           )}
-        </div>
+        </motion.div>
       </Link>
     </li>
   );

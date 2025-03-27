@@ -266,7 +266,7 @@ const EditLeads = ({}) => {
                     type="text"
                     id="contactPerson"
                     name="contactPerson"
-                    className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full border-[#2e8b577d]  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {formik.touched.contactPerson &&
                   formik.errors.contactPerson ? (
@@ -614,7 +614,7 @@ const EditLeads = ({}) => {
               <Button
                 type="submit"
                 // value="Sign In"
-                className="lg:w-[6vw] w-full cursor-pointer  border border-primary bg-primary px-4 py-1 text-white transition hover:bg-opacity-90 text-md"
+                className="lg:w-[6vw] w-full cursor-pointer  border border-primary bg-[#004d4b] hover:bg-[#004d4b] hover:scale-[95%] px-4 py-1 text-white transition hover:bg-opacity-90 text-md"
               >
                 {isLeadValid ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />

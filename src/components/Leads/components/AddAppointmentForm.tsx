@@ -233,7 +233,7 @@ const AddAppointmentForm: React.FC<AddAppointmentFormProps> = ({
     <form onSubmit={handleSubmit} className="overflow-y-auto text-[0.8rem]">
       <div className="px-3 py-3">
         {/* Name   */}
-        <div className="mb-3">
+        <div className="mb-3 ">
           <label className="mb-2.5 block font-medium text-black dark:text-white">
             Appointment Title
           </label>
@@ -246,7 +246,7 @@ const AddAppointmentForm: React.FC<AddAppointmentFormProps> = ({
               onBlur={handleBlur}
               value={values.title}
               placeholder="Title"
-              className=" border border-stroke bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+              className=" border border-stroke bg-transparent w-full py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
             />
             {touched.title && errors.title ? (
               <div className="text-red-500">{errors.title}</div>
@@ -282,7 +282,7 @@ const AddAppointmentForm: React.FC<AddAppointmentFormProps> = ({
         {/*  Date  */}
         <div className="mb-3">
           <label className="mb-2.5 block font-medium text-black dark:text-white">
-          Appointment Date
+            Appointment Date
           </label>
           <div className="relative">
             <Popover>
@@ -290,7 +290,7 @@ const AddAppointmentForm: React.FC<AddAppointmentFormProps> = ({
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "w-[250px] justify-start text-left font-normal",
+                    "w-full justify-start text-left font-normal",
                     !date && "text-muted-foreground"
                   )}
                 >
@@ -390,7 +390,7 @@ const AddAppointmentForm: React.FC<AddAppointmentFormProps> = ({
             <div>
               <input
                 type="time"
-                className=" border border-stroke bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary "
+                className=" border border-stroke bg-transparent  py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary "
                 id="time"
                 name="time"
                 onChange={handleChange}
@@ -465,7 +465,7 @@ const AddAppointmentForm: React.FC<AddAppointmentFormProps> = ({
           <Button
             type="submit"
             value="Sign In"
-            className="cursor-pointer border border-primary bg-primary py-1 text-white transition hover:bg-opacity-90"
+            className="cursor-pointer border border-primary bg-[#004d4b] hover:bg-[#004d4b] hover:scale-[95%] py-1 text-white transition hover:bg-opacity-90"
           >
             {isUserValid ? (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />

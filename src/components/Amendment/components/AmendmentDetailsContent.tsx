@@ -201,14 +201,14 @@ const AmendmentDetailsContent = () => {
   //   });
   return (
     <div className="sm:px-4 py-0 relative ">
-      <div className="text-[1rem] font-semibold absolute top-[-40px] px-4 sm:px-0">
+      <div className="text-[1rem] font-semibold absolute top-[-30px] px-4 sm:px-0">
         {amendmentDetails?.customer?.companyName || "Loading..."}
       </div>
       {/* <div className="mb-4">
         <BreadcrumbSection crumbs={crumbs} />
       </div> */}
       {/* Main Customer details section  */}
-      <div className="flex gap-5 mt-2 ">
+      <div className="flex gap-5 mt-2 pt-4">
         <div className="">
           <Card className="w-[575px] h-[100%] boxShadow">
             <CardHeader>

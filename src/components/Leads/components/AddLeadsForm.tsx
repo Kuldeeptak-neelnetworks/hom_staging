@@ -174,8 +174,6 @@ const AddLeadForm: React.FC = () => {
     fetchAllCustomerData();
   }, []);
 
-
-
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1); // Page state
   const [currentPage, setCurrentPage] = useState(1);
@@ -283,32 +281,31 @@ const AddLeadForm: React.FC = () => {
               </label>
               <div className="relative">
                 {customerData?.customers?.length > 0 && (
-                <Select
-                  onValueChange={(value: any) => {
-                    setSelectedCustomerId(value);
-                  
-                  }}
-                  name="customerName"
-                >
-                  <SelectTrigger className="text-black">
-                    <SelectValue placeholder="Select a Company" />
-                  </SelectTrigger>
-                  <SelectContent className="text-black">
-                    <SelectGroup>
-                      <SelectLabel>Select</SelectLabel>
-                      {customerData?.customers?.length > 0 &&
-                        customerData?.customers?.map((customer: any) => {
-                          return (
-                            <SelectItem value={"" + customer?._id}>
-                              {customer?.companyName}
-                            </SelectItem>
-                          );
-                        })}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              )}
-               {/* <AsyncPaginate
+                  <Select
+                    onValueChange={(value: any) => {
+                      setSelectedCustomerId(value);
+                    }}
+                    name="customerName"
+                  >
+                    <SelectTrigger className="text-black">
+                      <SelectValue placeholder="Select a Company" />
+                    </SelectTrigger>
+                    <SelectContent className="text-black">
+                      <SelectGroup>
+                        <SelectLabel>Select</SelectLabel>
+                        {customerData?.customers?.length > 0 &&
+                          customerData?.customers?.map((customer: any) => {
+                            return (
+                              <SelectItem value={"" + customer?._id}>
+                                {customer?.companyName}
+                              </SelectItem>
+                            );
+                          })}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                )}
+                {/* <AsyncPaginate
                     loadOptions={loadOptions} // Function to load customer options asynchronously
                     closeMenuOnSelect={true} // Close the dropdown when an option is selected
                     isClearable={true} // Make the dropdown clearable
@@ -626,7 +623,7 @@ const AddLeadForm: React.FC = () => {
         <div className="mb-3">
           <Button
             type="submit"
-            className="cursor-pointer  border border-primary bg-primary px-4 py-1 text-white transition hover:bg-opacity-90"
+            className="cursor-pointer  border border-primary bg-[#004d4b] hover:bg-[#004d4b] hover:scale-[95%] px-4 py-1 text-white transition hover:bg-opacity-90"
           >
             {isLead ? (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />

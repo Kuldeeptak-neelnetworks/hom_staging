@@ -109,7 +109,7 @@ const AddEmployeeLeaveForm: React.FC = () => {
 
         const isSuccess = await addEmployeeLeaveData(data);
         if (isSuccess) {
-          router.push("/employeeLeaveManagement"); 
+          router.push("/employeeLeaveManagement");
         }
       } catch (error: any) {
         console.log("Unexpected error", error);
@@ -346,14 +346,14 @@ const AddEmployeeLeaveForm: React.FC = () => {
                     </Select>
                   </div>
                   <div className="calendar-container">
-                  <Calendar
-                    mode="single"
-                    selected={startDate}
-                    onSelect={handleStartDate}
-                    initialFocus
-                    month={startDate}
-                    onMonthChange={(date) => setStartDate(date)}
-                  />
+                    <Calendar
+                      mode="single"
+                      selected={startDate}
+                      onSelect={handleStartDate}
+                      initialFocus
+                      month={startDate}
+                      onMonthChange={(date) => setStartDate(date)}
+                    />
                   </div>
                 </PopoverContent>
               </Popover>
@@ -416,14 +416,14 @@ const AddEmployeeLeaveForm: React.FC = () => {
                     </Select>
                   </div>
                   <div className="calendar-container">
-                  <Calendar
-                    mode="single"
-                    selected={endDate}
-                    onSelect={handleEndDate}
-                    initialFocus
-                    month={endDate}
-                    onMonthChange={(date) => setEndDate(date)}
-                  />
+                    <Calendar
+                      mode="single"
+                      selected={endDate}
+                      onSelect={handleEndDate}
+                      initialFocus
+                      month={endDate}
+                      onMonthChange={(date) => setEndDate(date)}
+                    />
                   </div>
                 </PopoverContent>
               </Popover>
@@ -491,14 +491,14 @@ const AddEmployeeLeaveForm: React.FC = () => {
                   </Select>
                 </div>
                 <div className="calendar-container">
-                <Calendar
-                  mode="single"
-                  selected={returnDate}
-                  onSelect={handleReturnDate}
-                  initialFocus
-                  month={returnDate}
-                  onMonthChange={(date) => setReturnDate(date)}
-                />
+                  <Calendar
+                    mode="single"
+                    selected={returnDate}
+                    onSelect={handleReturnDate}
+                    initialFocus
+                    month={returnDate}
+                    onMonthChange={(date) => setReturnDate(date)}
+                  />
                 </div>
               </PopoverContent>
             </Popover>
@@ -527,7 +527,7 @@ const AddEmployeeLeaveForm: React.FC = () => {
           <Button
             type="submit"
             value="Sign In"
-            className="cursor-pointer border border-primary bg-primary px-4 py-1 text-white transition hover:bg-opacity-90"
+            className="cursor-pointer border border-primary bg-[#0f464a] px-4 py-1 text-white transition hover:bg-opacity-90"
           >
             {isUserValid ? (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />

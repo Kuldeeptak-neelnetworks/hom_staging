@@ -38,12 +38,12 @@ const ActivitySection = ({ activityDetails }: any) => {
   //   fetchEditorData()
   //  })
   return (
-    <div className="overflow-x-hidden border bg-[#fff] px-1 mt-1 py-1 boxShadow w-full h-[70vh]">
+    <div className="overflow-x-hidden overflow-y-hidden border bg-[#fff] px-1 mt-1 py-1 boxShadow w-full h-[50vh] ">
       <div className="font-bold ml-3 bg-[#fff] w-fit px-3">Activity</div>
-      <div className="h-[64vh] overflow-y-auto">
+      <div className="h-[50vh] overflow-y-hidden ">
         {activityDetails && (
           <div className="relative">
-            <table className="border border-collapse w-full mt-2">
+            <table className="border border-collapse w-full mt-2 ">
               {/* Sticky header */}
               {/* <thead className="bg-[#29354f] sticky top-0 z-10 text-white">
                 <tr className="border text-white">
@@ -70,7 +70,7 @@ const ActivitySection = ({ activityDetails }: any) => {
                   {activityDetails?.map((activity: any) => (
                     <tr
                       key={activity?._id}
-                      className="border hover:bg-[#94eeec85] duration-200"
+                      className="border hover:bg-gradient-to-r from-green-200 to-white duration-200"
                     >
                       <td className="border py-1 px-4 h-10">
                         {formatDateOfSlash(activity?.createdAt) || "N/A"}

@@ -465,7 +465,7 @@ const AddUserForm: React.FC = () => {
           <Button
             type="submit"
             value="Sign In"
-            className="cursor-pointer bg-[#004d4c] hover:bg-[#004d4c] duration-200 hover:scale-[101%] border border-primary px-4 py-1 text-white transition hover:bg-opacity-90"
+            className="cursor-pointer bg-[#004d4b] hover:bg-[#004d4b] hover:scale-[95%] border border-primary px-4 py-1 text-white transition hover:bg-opacity-90"
           >
             {isUserValid ? (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />

@@ -1583,7 +1583,7 @@ const AddOrderForm = ({ fetchAllOrdersData }: any) => {
             <div className="my-1 ">
               <Button
                 type="submit"
-                className="lg:w-[6vw] w-full cursor-pointer  border border-primary bg-primary px-4 py-1 text-white transition hover:bg-opacity-90 text-md"
+                className="lg:w-[6vw] w-full cursor-pointer  border border-primary bg-[#004d4b] hover:bg-[#004d4b] hover:scale-[95%] px-4 py-1 text-white transition hover:bg-opacity-90 text-md"
               >
                 {isOrder ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />

@@ -74,14 +74,14 @@ const WebsiteContentDetails = () => {
 
   return (
     <div className="px-4 py-0 relative ">
-      <div className="text-[1rem] font-semibold absolute top-[-45px]">
+      <div className="text-[1rem] font-semibold absolute top-[-30px]">
         {websiteContentDetails?.customer?.companyName
           ? websiteContentDetails?.customer?.companyName
           : "loading..."}
       </div>
-      <div className=" gap-5 mt-2">
-        <div className="flex justify-center">
-          <Card className="h-[90vh] overflow-auto">
+      <div className="gap-5 pt-2">
+        <div className="flex justify-center ">
+          <Card className="h-[90vh] overflow-auto w-[75vw]">
             <CardHeader>
               <CardTitle className="text-[1rem]">
                 New Website Content Data
@@ -270,12 +270,15 @@ const WebsiteContentDetails = () => {
                     </Label>
 
                     <div className="mx-2">
-                      {websiteContentDetails?.isCopywriterRequired &&
-                      websiteContentDetails.isCopywriterRequired.length > 0
-                        ? websiteContentDetails.isCopywriterRequired.map(
+                      {/* {websiteContentDetails?.isCopywriterRequired &&
+                      websiteContentDetails?.isCopywriterRequired?.length > 0
+                        ? websiteContentDetails?.isCopywriterRequired?.map(
                             (item, index) => <p key={index}>{item}</p>
                           )
-                        : "N/A"}
+                        : "N/A"} */}
+                    </div>
+                    <div className="mx-2">
+                      {websiteContentDetails?.isCopywriterRequired}
                     </div>
                   </div>
                   <div className="flex items-center pb-[10px] mb-[10px] border-b border-b-[#ddd] text-[0.8rem]">

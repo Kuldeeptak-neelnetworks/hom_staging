@@ -203,7 +203,7 @@ const EditCopywriter = () => {
     : getYear(new Date());
   return (
     <div className="p-4 relative text-[0.8rem]">
-      <div className="text-[1rem] font-semibold absolute top-[-50px] ">
+      <div className="text-[1rem] font-semibold absolute top-[-30px] ">
         {copywriter?.customer?.companyName
           ? copywriter?.customer?.companyName
           : "loading..."}
@@ -329,14 +329,14 @@ const EditCopywriter = () => {
                       </Select>
                     </div>
                     <div className="calendar-container">
-                    <Calendar
-                      mode="single"
-                      selected={dateComplete}
-                      onSelect={handleComplateDateSelect}
-                      initialFocus
-                      month={dateComplete}
-                      onMonthChange={(date) => setDateComplete(date)}
-                    />
+                      <Calendar
+                        mode="single"
+                        selected={dateComplete}
+                        onSelect={handleComplateDateSelect}
+                        initialFocus
+                        month={dateComplete}
+                        onMonthChange={(date) => setDateComplete(date)}
+                      />
                     </div>
                   </PopoverContent>
                 </Popover>

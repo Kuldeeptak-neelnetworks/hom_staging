@@ -69,8 +69,8 @@ export function AddAppointmentDialoge() {
         >
           Back
         </div>
-        <div className="flex justify-center w-[50vw] border bg-[#fff] boxShadow">
-          <div className="flex justify-center w-[50vw] ">
+        <div className="flex justify-center  border bg-[#fff] boxShadow">
+          <div className="flex justify-center w-[75vw] ">
             <div className="w-full p-3">
               <AddAppointmentForm leadId={leadIdString} />
             </div>

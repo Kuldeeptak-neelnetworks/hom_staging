@@ -34,6 +34,8 @@ import { useAmendmentStore } from "@/Store/AmendmentStore";
 import AddTechnicalDialoge from "./components/AddTechnicalDialoge";
 import TechnicalPage from "@/app/technical/page";
 import { useTechnicalStore } from "@/Store/TechnicalStore";
+import Link from "next/link";
+import { Button } from "../ui/button";
 const animatedComponents = makeAnimated();
 
 // Crumbs Array
@@ -152,7 +154,7 @@ const TechnicalTrackerContent: React.FC = () => {
   });
 
   return (
-    <div className="px-4 py-0 relative">
+    <div className="px-4 py-2 relative">
       {/* <div className="text-xl font-semibold absolute top-[-50px]">
         Technical Tracker
       </div> */}
@@ -184,7 +186,17 @@ const TechnicalTrackerContent: React.FC = () => {
         ) : (
           ""
         )}
-        <AddTechnicalDialoge getAllTechnical={fetchTechnicalData} />
+        {/* <AddTechnicalDialoge getAllTechnical={fetchTechnicalData} /> */}
+        <div className="flex justify-normal lg:justify-end">
+          <Link href={"/technical/addTechnicalTracker"}>
+            <Button
+              variant="outline"
+              className=" text-[0.8rem] text-white bg-[#004d4b] hover:bg-[#fff] hover:text-[#004d4b] boxShadow"
+            >
+              New Technical
+            </Button>
+          </Link>
+        </div>
       </div>
 
       <DataTable

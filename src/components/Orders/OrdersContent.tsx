@@ -240,15 +240,15 @@ const OrdersContent = () => {
   }, [searchInput, debouncedSearch, page, limit, orderYear, filters]);
 
   return (
-    <div className="px-4 py-0 relative">
+    <div className="px-4 py-0 relative pt-2">
       {/* <div className="text-xl font-semibold absolute top-[-60px]">Orders</div> */}
       {/* <div className="mb-1">
         <BreadcrumbSection crumbs={crumbs} />
       </div> */}
 
-      <div className="w-[300px] md:w-[500px] lg:absolute z-[100] mt-2 lg:mt-0 md:flex gap-2">
+      <div className="w-[300px] md:w-[500px] lg:absolute  mt-2 lg:mt-0 md:flex gap-2">
         <Select
-          className="text-[0.8rem] border-red-400 w-full mb-2 md:mb-0 boxShadow"
+          className="text-[0.8rem] border-red-400 w-full mb-2 z-[50] md:mb-0 boxShadow"
           closeMenuOnSelect={false}
           components={animatedComponents}
           isMulti
@@ -277,7 +277,7 @@ const OrdersContent = () => {
               className="text-[0.8rem] text-gray-50 "
             />
           </SelectTrigger>
-          <SelectContent className="text-[0.8rem] ">
+          <SelectContent className="text-[0.8rem] z-[60]">
             <SelectGroup>
               <SelectLabel className="text-[0.8rem]">Select a year</SelectLabel>
               {yearOptions &&
@@ -304,7 +304,7 @@ const OrdersContent = () => {
         </Selector>
       </div>
 
-      <div className="md:flex justify-center sm:justify-end my-2">
+      <div className="md:flex justify-center sm:justify-end mb-2">
         {
           <div className="mt-[3px]">
             <PageHeader
@@ -319,7 +319,7 @@ const OrdersContent = () => {
           <Link href={"/orders/addOrder"}>
             <Button
               variant="outline"
-              className="text-[0.8rem] text-white bg-[#29354f] hover:bg-[#fff] hover:text-[#29354f] boxShadow"
+              className="text-[0.8rem] text-white  bg-[#004d4b]  hover:bg-[#fff] hover:text-[#004d4b] boxShadow"
             >
               Add Order
             </Button>

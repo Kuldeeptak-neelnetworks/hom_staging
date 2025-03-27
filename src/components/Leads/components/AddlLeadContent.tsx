@@ -23,7 +23,7 @@ const crumbs = [
 const AddLeadContent = () => {
   return (
     <div className="px-4 py-0 relative">
-      <div className="text-md font-semibold absolute top-[-35px]">New Lead</div>
+      <div className="text-md font-semibold absolute top-[-30px]">New Lead</div>
       {/* <div className="mb-4">
         <BreadcrumbSection crumbs={crumbs} />
       </div> */}

@@ -334,7 +334,7 @@ const EditWebsiteContent = () => {
   ];
   return (
     <div className="p-4 relative text-[0.8rem]">
-      <div className="text-[1rem] font-semibold absolute top-[-50px] ">
+      <div className="text-[1rem] font-semibold absolute top-[-30px] ">
         {websiteContent?.customer?.companyName
           ? websiteContent?.customer?.companyName
           : "loading..."}
@@ -344,7 +344,7 @@ const EditWebsiteContent = () => {
         <div className="my-3 text-[0.8rem] hover:bg-gray-300 h-fit px-2 py-1 rounded cursor-pointer hidden text-center sm:block w-fit bg-[#fff] boxShadow">
           <Link href={`/websiteContent`}>Back</Link>
         </div>
-        <ScrollArea className="h-[80vh]   px-3 py-3 w-[100%] xl:w-[56vw]">
+        <ScrollArea className="h-[80vh]   px-3 py-3 w-[100%] xl:w-[75vw]">
           <form
             onSubmit={handleSubmit}
             className="border p-6 text-[0.8rem] bg-[#fff] boxShadow "

@@ -255,11 +255,11 @@ const InboxContent: React.FC = () => {
                       className={`${
                         notification?.isRead
                           ? "bg-white text-gray-700 hover:bg-gray-50"
-                          : "bg-blue-50 text-blue-800 hover:bg-blue-100"
-                      } transition-all duration-300 ease-in-out cursor-pointer`}
+                          : "bg-[#b5b6b629]  hover:bg-gradient-to-r from-green-200 to-white"
+                      } transition-all duration-300 ease-in-out cursor-pointer border-b border-gray-300`}
                     >
-                      <TableCell
-                        className="font-semibold text-sm text-gray-800 py-4"
+                      <td
+                        className="font-semibold text-sm text-gray-800 py-4 pl-3"
                         style={{ position: "inherit" }}
                       >
                         <div className="flex items-center space-x-2">
@@ -281,9 +281,9 @@ const InboxContent: React.FC = () => {
                             </span>
                           )}
                         </div>
-                      </TableCell>
+                      </td>
 
-                      <TableCell className="text-left text-sm text-black py-4">
+                      <TableCell className="text-left text-sm text-black py-4 bg-transparent">
                         <div className="font-semibold">
                           {/* {notification?.mentionedUsers && (
                         <span className="text-[#1f76c2] text-xs">
@@ -300,7 +300,7 @@ const InboxContent: React.FC = () => {
                         </div>
                       </TableCell>
 
-                      <TableCell className="text-right text-sm text-muted-foreground py-4">
+                      <TableCell className="text-right text-sm text-muted-foreground py-4 bg-transparent">
                         <span className="text-[0.8rem]">
                           <SideDrawer
                             length={notification?.updates?.length || 0}
@@ -343,12 +343,12 @@ const InboxContent: React.FC = () => {
                         </span>
                       </TableCell>
 
-                      <TableCell className="text-left text-sm text-muted-foreground py-4">
+                      <TableCell className="text-left text-sm text-muted-foreground py-4 bg-transparent">
                         <span className="text-[0.8rem]">
                           {timeAgo(notification.createdAt)}
                         </span>
                       </TableCell>
-                      <TableCell className="text-right text-sm text-muted-foreground py-4">
+                      <TableCell className="text-right text-sm text-muted-foreground py-4 bg-transparent">
                         <DeleteDialoge
                           id={notification._id}
                           entity="notifications"

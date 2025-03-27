@@ -283,8 +283,8 @@ const AddCustomerForm: React.FC = () => {
   const currentYear = date ? getYear(date) : getYear(new Date());
 
   return (
-    <ScrollArea className=" p-7 w-full lg:w-[70%] border my-5 h-[90vh] bg-[#fff] boxShadow">
-      <form onSubmit={handleSubmit} className="text-[0.8rem] bg-[#fff]">
+    <ScrollArea className=" p-7 w-full lg:w-[70%] border my-5 h-[90vh] bg-[#fff] boxShadow  text-green-800">
+      <form onSubmit={handleSubmit} className="text-[0.8rem] ">
         <div className="mb-3 lg:flex gap-3">
           {/* User List */}
           {/* <div className="w-full mb-2 lg:mb-0">
@@ -925,7 +925,7 @@ const AddCustomerForm: React.FC = () => {
         <div className="mb-3 mt-3">
           <Button
             type="submit"
-            className="cursor-pointer  border border-primary bg-primary px-4 py-1 text-white transition hover:bg-opacity-90"
+            className="cursor-pointer  border border-primary bg-[#004d4b] hover:bg-[#004d4b] hover:scale-[95%] px-4 py-1 text-white transition hover:bg-opacity-90"
           >
             {isCustomerValid ? (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />

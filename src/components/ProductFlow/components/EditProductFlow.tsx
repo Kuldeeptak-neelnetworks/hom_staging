@@ -209,96 +209,106 @@ const EditProductFlow = () => {
   //   setDemoCompletedDate(selectedDate);
   // };
   const handlePhase1Instructed = (selectedDate: Date | undefined) => {
-      if (selectedDate) {
-        setDatePhase1Instructed(selectedDate);
-      }
+    if (selectedDate) {
+      setDatePhase1Instructed(selectedDate);
+    }
+  };
+
+  const handlePhase2Instructed = (selectedDate: Date | undefined) => {
+    if (selectedDate) {
+      setDatePhase2Instructed(selectedDate);
+    }
+  };
+
+  const handleDemoCompletedDate = (selectedDate: Date | undefined) => {
+    if (selectedDate) {
+      setDemoCompletedDate(selectedDate);
+    }
+  };
+
+  const handleLiveDate = (selectedDate: Date | undefined) => {
+    if (selectedDate) {
+      setLiveDate(selectedDate);
+    }
+  };
+
+  const startYear = getYear(new Date()) - 100;
+  const endYear = getYear(new Date()) + 100;
+
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  // Generate the years array using the fixed startYear and endYear
+  const years = Array.from(
+    { length: endYear - startYear + 1 },
+    (_, i) => startYear + i
+  );
+  const handleMonthChange = (
+    month: string,
+    target: "phase1" | "phase2" | "demo" | "live"
+  ) => {
+    const monthIndex = months.indexOf(month);
+    if (monthIndex === -1) return;
+
+    const dateMap = {
+      phase1: setDatePhase1Instructed,
+      phase2: setDatePhase2Instructed,
+      demo: setDemoCompletedDate,
+      live: setLiveDate,
     };
-  
-    const handlePhase2Instructed = (selectedDate: Date | undefined) => {
-      if (selectedDate) {
-        setDatePhase2Instructed(selectedDate);
-      }
+
+    const currentDate = {
+      phase1: datePhase1Instructed,
+      phase2: datePhase2Instructed,
+      demo: demoCompletedDate,
+      live: liveDate,
+    }[target];
+
+    const newDate = currentDate
+      ? setMonth(currentDate, monthIndex)
+      : setMonth(new Date(), monthIndex);
+
+    dateMap[target](newDate);
+  };
+  const handleYearChange = (
+    year: string,
+    target: "phase1" | "phase2" | "demo" | "live"
+  ) => {
+    const yearNumber = parseInt(year);
+    if (isNaN(yearNumber)) return;
+
+    const dateMap = {
+      phase1: setDatePhase1Instructed,
+      phase2: setDatePhase2Instructed,
+      demo: setDemoCompletedDate,
+      live: setLiveDate,
     };
-  
-    const handleDemoCompletedDate = (selectedDate: Date | undefined) => {
-      if (selectedDate) {
-        setDemoCompletedDate(selectedDate);
-      }
-    };
-  
-    const handleLiveDate = (selectedDate: Date | undefined) => {
-      if (selectedDate) {
-        setLiveDate(selectedDate);
-      }
-    };
-  
-    const startYear = getYear(new Date()) - 100;
-    const endYear = getYear(new Date()) + 100;
-  
-    const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-  
-    // Generate the years array using the fixed startYear and endYear
-    const years = Array.from(
-      { length: endYear - startYear + 1 },
-      (_, i) => startYear + i
-    );
-    const handleMonthChange = (month: string, target: "phase1" | "phase2" | "demo" | "live") => {
-      const monthIndex = months.indexOf(month);
-      if (monthIndex === -1) return;
-    
-      const dateMap = {
-        phase1: setDatePhase1Instructed,
-        phase2: setDatePhase2Instructed,
-        demo: setDemoCompletedDate,
-        live: setLiveDate,
-      };
-    
-      const currentDate = {
-        phase1: datePhase1Instructed,
-        phase2: datePhase2Instructed,
-        demo: demoCompletedDate,
-        live: liveDate,
-      }[target];
-    
-      const newDate = currentDate ? setMonth(currentDate, monthIndex) : setMonth(new Date(), monthIndex);
-    
-      dateMap[target](newDate);
-    };
-   const handleYearChange = (year: string, target: "phase1" | "phase2" | "demo" | "live") => {
-      const yearNumber = parseInt(year);
-      if (isNaN(yearNumber)) return;
-    
-      const dateMap = {
-        phase1: setDatePhase1Instructed,
-        phase2: setDatePhase2Instructed,
-        demo: setDemoCompletedDate,
-        live: setLiveDate,
-      };
-    
-      const currentDate = {
-        phase1: datePhase1Instructed,
-        phase2: datePhase2Instructed,
-        demo: demoCompletedDate,
-        live: liveDate,
-      }[target];
-    
-      const newDate = currentDate ? setYear(currentDate, yearNumber) : setYear(new Date(), yearNumber);
-      
-      dateMap[target](newDate);
-    };
+
+    const currentDate = {
+      phase1: datePhase1Instructed,
+      phase2: datePhase2Instructed,
+      demo: demoCompletedDate,
+      live: liveDate,
+    }[target];
+
+    const newDate = currentDate
+      ? setYear(currentDate, yearNumber)
+      : setYear(new Date(), yearNumber);
+
+    dateMap[target](newDate);
+  };
   const getCurrentMonthAndYear = (date: Date | undefined) => ({
     month: date ? getMonth(date) : getMonth(new Date()),
     year: date ? getYear(date) : getYear(new Date()),
@@ -313,7 +323,7 @@ const EditProductFlow = () => {
     getCurrentMonthAndYear(liveDate);
   return (
     <div className="p-4 relative text-[0.8rem]">
-      <div className="text-[1rem] font-semibold absolute top-[-50px] ">
+      <div className="text-[1rem] font-semibold absolute top-[-30px] ">
         {productFlow?.customer?.companyName
           ? productFlow?.customer?.companyName
           : "loading..."}
@@ -390,14 +400,16 @@ const EditProductFlow = () => {
                         </Select>
                       </div>
                       <div className="calendar-container">
-                      <Calendar
-                        mode="single"
-                        selected={datePhase1Instructed}
-                        onSelect={handlePhase1Instructed}
-                        initialFocus
-                        month={datePhase1Instructed}
-                        onMonthChange={(date) => setDatePhase1Instructed(date)}
-                      />
+                        <Calendar
+                          mode="single"
+                          selected={datePhase1Instructed}
+                          onSelect={handlePhase1Instructed}
+                          initialFocus
+                          month={datePhase1Instructed}
+                          onMonthChange={(date) =>
+                            setDatePhase1Instructed(date)
+                          }
+                        />
                       </div>
                     </PopoverContent>
                   </Popover>
@@ -464,14 +476,16 @@ const EditProductFlow = () => {
                         </Select>
                       </div>
                       <div className="calendar-container">
-                      <Calendar
-                        mode="single"
-                        selected={datePhase2Instructed}
-                        onSelect={handlePhase2Instructed}
-                        initialFocus
-                        month={datePhase2Instructed}
-                        onMonthChange={(date) => setDatePhase2Instructed(date)}
-                      />
+                        <Calendar
+                          mode="single"
+                          selected={datePhase2Instructed}
+                          onSelect={handlePhase2Instructed}
+                          initialFocus
+                          month={datePhase2Instructed}
+                          onMonthChange={(date) =>
+                            setDatePhase2Instructed(date)
+                          }
+                        />
                       </div>
                     </PopoverContent>
                   </Popover>
@@ -541,14 +555,14 @@ const EditProductFlow = () => {
                         </Select>
                       </div>
                       <div className="calendar-container">
-                      <Calendar
-                        mode="single"
-                        selected={demoCompletedDate}
-                        onSelect={handleDemoCompletedDate}
-                        initialFocus
-                        month={demoCompletedDate}
-                        onMonthChange={(date) => setDemoCompletedDate(date)}
-                      />
+                        <Calendar
+                          mode="single"
+                          selected={demoCompletedDate}
+                          onSelect={handleDemoCompletedDate}
+                          initialFocus
+                          month={demoCompletedDate}
+                          onMonthChange={(date) => setDemoCompletedDate(date)}
+                        />
                       </div>
                     </PopoverContent>
                   </Popover>
@@ -616,14 +630,14 @@ const EditProductFlow = () => {
                         </Select>
                       </div>
                       <div className="calendar-container">
-                      <Calendar
-                        mode="single"
-                        selected={liveDate}
-                        onSelect={handleLiveDate}
-                        initialFocus
-                        month={liveDate}
-                        onMonthChange={(date) => setLiveDate(date)}
-                      />
+                        <Calendar
+                          mode="single"
+                          selected={liveDate}
+                          onSelect={handleLiveDate}
+                          initialFocus
+                          month={liveDate}
+                          onMonthChange={(date) => setLiveDate(date)}
+                        />
                       </div>
                     </PopoverContent>
                   </Popover>

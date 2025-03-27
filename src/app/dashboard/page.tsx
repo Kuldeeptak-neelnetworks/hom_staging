@@ -108,7 +108,7 @@ const DashBoardPage: React.FC = () => {
   }, [allLeads, leadData]);
 
   return (
-    <div className="col-span-6">
+    <div className="col-span-6 h-[95vh] bg-[#0ba09817]">
       {/* <div>
         <SideBarContent setToggleWidth={setToggleWidth} />
       </div> */}
@@ -119,7 +119,7 @@ const DashBoardPage: React.FC = () => {
           //     ? `sm:px-4 sm:ml-[14rem] ml-0 bg-[#edf0f5] transition-all duration-300 relative text-[0.8rem]`
           //     : `sm:px-4 sm:ml-[6rem] ml-0  bg-[#edf0f5] transition-all duration-300 relative text-[0.8rem]`
           // }
-          className={`sm:px-4 sm:ml-[3rem] ml-0  bg-[#edf0f5] transition-all duration-300 relative text-[0.8rem]`}
+          className={`sm:px-4 sm:ml-[3rem] ml-0   transition-all duration-300 relative text-[0.8rem] `}
         >
           <div className="p-4 dark:border-gray-700">
             <div
@@ -152,7 +152,7 @@ const DashBoardPage: React.FC = () => {
                     }}
                     className="flex gap-2"
                   >
-                    <div className="bg-gray-100 p-2 shadow-md shadow-[#002325] rounded-[8px]">
+                    <div className="bg-gray-100 p-2 shadow-md shadow-[#002325] rounded-[8px] bg-gradient-to-r from-white to-green-100">
                       <LatestLeadsUIconSVG
                         cssData={{
                           fill: "#073336",
@@ -177,7 +177,7 @@ const DashBoardPage: React.FC = () => {
                     }}
                     className="flex gap-2"
                   >
-                    <div className="bg-gray-100 p-2 shadow-md rounded-[8px] shadow-[#002325] ">
+                    <div className="bg-gray-100 p-2 shadow-md rounded-[8px] shadow-[#002325] bg-gradient-to-r from-white to-green-100">
                       <CustomersIconSVG
                         cssData={{
                           fill: "#073336",
@@ -204,7 +204,7 @@ const DashBoardPage: React.FC = () => {
                     }}
                     className="flex gap-2"
                   >
-                    <div className="bg-gray-100 p-2 shadow-md rounded-[8px] shadow-[#002325]">
+                    <div className="bg-gray-100 p-2 shadow-md rounded-[8px] shadow-[#002325] bg-gradient-to-r from-white to-green-100">
                       <LatestOrdersUIconSVG
                         cssData={{
                           fill: "#073336",
@@ -229,7 +229,7 @@ const DashBoardPage: React.FC = () => {
                     }}
                     className="flex gap-2"
                   >
-                    <div className="bg-gray-100 p-2 shadow-md rounded-[8px] shadow-[#002325]">
+                    <div className="bg-gray-100 p-2 shadow-md rounded-[8px] shadow-[#002325] bg-gradient-to-r from-white to-green-100">
                       <LatestAmendmentsUIconSVG
                         cssData={{
                           fill: "#073336",
@@ -261,7 +261,7 @@ const DashBoardPage: React.FC = () => {
                       }}
                       className="flex gap-2"
                     >
-                      <div className="bg-gray-100 p-2 shadow-md rounded-[8px] shadow-[#002325]">
+                      <div className="bg-gray-100 p-2 shadow-md rounded-[8px] shadow-[#002325] bg-gradient-to-r from-white to-green-100">
                         <UserIconSVG
                           cssData={{
                             fill: "#073336",
@@ -300,7 +300,7 @@ const DashBoardPage: React.FC = () => {
                   <p className="text-xl mb-5 font-semibold">Total Sales</p>
                   <div className="flex gap-16">
                     <div className="flex gap-2">
-                      <div className="bg-gray-100 p-2 shadow-md shadow-[#002325] rounded-[8px]">
+                      <div className="bg-gray-100 p-2 shadow-md shadow-[#002325] rounded-[8px] bg-gradient-to-r from-white to-green-100">
                         <LatestLeadsUIconSVG
                           cssData={{
                             fill: "#073336",
@@ -342,12 +342,19 @@ const DashBoardPage: React.FC = () => {
             <div className="sm:grid sm:grid-cols-3 gap-4 mb-4">
               {/* latest Leads  */}
               <motion.div
+                // initial={{ x: -100, opacity: 0 }}
+                // animate={{ x: 0, opacity: 1 }}
+                // transition={{ duration: 1, ease: [0.04, 0.62, 0.23, 0.98] }}
                 initial={{ x: -100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 1, ease: [0.04, 0.62, 0.23, 0.98] }}
-                className="flex flex-col items-center  bg-[#ffffff] dark:bg-gray-800 shadow-lg my-3 sm:my-0 "
+                whileHover={{
+                  scale: 1.02,
+                  boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)",
+                }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="flex flex-col items-center  bg-[#ffffff] dark:bg-gray-800 shadow-lg my-3 sm:my-0 hover:bg-gradient-to-r from-white to-green-100 text-green-800"
               >
-                <p className="mt-5  bg-gray-100 p-6 rounded-full ">
+                <p className="mt-5  bg-[#00817a29] p-6 rounded-full ">
                   <LatestLeadsUIconSVG
                     cssData={{
                       fill: "#073336",
@@ -418,12 +425,19 @@ const DashBoardPage: React.FC = () => {
 
               {/* New Orders  */}
               <motion.div
+                // initial={{ x: -100, opacity: 0 }}
+                // animate={{ x: 0, opacity: 1 }}
+                // transition={{ duration: 1, ease: [0.04, 0.62, 0.23, 0.98] }}
                 initial={{ x: -100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 1, ease: [0.04, 0.62, 0.23, 0.98] }}
-                className="flex flex-col items-center bg-[#ffffff] dark:bg-gray-800 shadow-lg my-3 sm:my-0"
+                whileHover={{
+                  scale: 1.02,
+                  boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)",
+                }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="flex flex-col items-center bg-[#ffffff] dark:bg-gray-800 shadow-lg my-3 sm:my-0 hover:bg-gradient-to-r from-white to-green-100 text-green-800"
               >
-                <p className="mt-5  bg-gray-100 p-6 rounded-full">
+                <p className="mt-5 bg-[#00817a29] p-6 rounded-full">
                   <LatestOrdersUIconSVG
                     cssData={{
                       fill: "#073336",
@@ -492,12 +506,19 @@ const DashBoardPage: React.FC = () => {
 
               {/* New Amendments  */}
               <motion.div
+                // initial={{ x: -100, opacity: 0 }}
+                // animate={{ x: 0, opacity: 1 }}
+                // transition={{ duration: 1, ease: [0.04, 0.62, 0.23, 0.98] }}
                 initial={{ x: -100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 1, ease: [0.04, 0.62, 0.23, 0.98] }}
-                className="flex flex-col items-center bg-[#ffffff] dark:bg-gray-800 shadow-lg my-3 sm:my-0"
+                whileHover={{
+                  scale: 1.02,
+                  boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)",
+                }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="flex flex-col items-center bg-[#ffffff] dark:bg-gray-800 shadow-lg my-3 sm:my-0 hover:bg-gradient-to-r from-white to-green-100 text-green-800"
               >
-                <p className="mt-5 bg-gray-100 p-6 rounded-full">
+                <p className="mt-5 bg-[#00817a29] p-6 rounded-full">
                   <LatestAmendmentsUIconSVG
                     cssData={{
                       fill: "#073336",
