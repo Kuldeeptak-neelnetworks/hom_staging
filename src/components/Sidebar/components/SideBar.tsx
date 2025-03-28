@@ -142,7 +142,7 @@ const SideBar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
   const initialLimit = Number(searchParams.get("limit")) || 20;
   const [page, setPage] = useState(initialPage);
   const [limit, setLimit] = useState(initialLimit);
-  const [role, setRole] = useState();
+  const [role, setRole] = useState<string | null>(null);
 
   const logoSrc = Logo.src;
   const MiniLogoSrc = MiniLogo.src;
@@ -256,8 +256,6 @@ const SideBar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
 
     setRole(storedRole);
   }, []);
-
-  console.log("rrrr", role);
 
   return (
     <>
