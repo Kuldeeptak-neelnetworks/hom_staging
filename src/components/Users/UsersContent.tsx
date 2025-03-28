@@ -173,7 +173,7 @@ const UsersContent: React.FC = () => {
         <BreadcrumbSection crumbs={crumbs} />
       </div> */}
 
-      <div className="w-[300px] lg:absolute mt-2 lg:mt-0">
+      <div className="w-[300px] lg:absolute pt-2 lg:mt-0">
         <Select onValueChange={(value: any) => setRoleValue(value)} name="role">
           <SelectTrigger className="border-[#73819c] boxShadow">
             <SelectValue

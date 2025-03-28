@@ -31,8 +31,6 @@ const MenuItemData = memo((props: any) => {
     }
   }, [isActive]);
 
-  console.log("notificationData", notificationData);
-
   return (
     <li className="my-2">
       <Link href={href} className="hover:text-gray-400">

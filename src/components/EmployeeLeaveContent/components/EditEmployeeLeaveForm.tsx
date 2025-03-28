@@ -87,8 +87,6 @@ const EditEmployeeLeaveForm = () => {
   }: any = useEmployeeLeaveStore();
   const { employeeLeaveId } = useParams();
 
-
-
   const formatDate = (dateString: any) => {
     if (!dateString) return "";
     const date = new Date(dateString);
@@ -315,7 +313,7 @@ const EditEmployeeLeaveForm = () => {
   };
   return (
     <div className="p-4 relative text-[0.8rem]">
-      <div className="text-[1rem] font-semibold absolute top-[-50px] ">
+      <div className="text-[1rem] font-semibold absolute top-[-30px] ">
         {fetchedEmployeeData?.employeeId?.fullName
           ? fetchedEmployeeData?.employeeId?.fullName
           : "loading..."}
@@ -325,7 +323,7 @@ const EditEmployeeLeaveForm = () => {
         <div className="my-3 text-[0.8rem] bg-[#fff] hover:bg-gray-300 h-fit px-2 py-1 cursor-pointer hidden text-center sm:block w-fit boxShadow ">
           <Link href={`/employeeLeaveManagement`}>Back</Link>
         </div>
-        <ScrollArea className="h-[80vh]  sm:px-3 sm:py-3 w-[100%] xl:w-[56vw]">
+        <ScrollArea className="h-[80vh]  sm:px-3 sm:py-3 w-[100%] xl:w-[75vw]">
           <form
             onSubmit={handleSubmit}
             className="border p-6 bg-[#fff] boxShadow"
@@ -393,66 +391,73 @@ const EditEmployeeLeaveForm = () => {
                   Start Date
                 </label>
                 <div className="relative">
-                <Popover>
-  <PopoverTrigger asChild>
-    <Button
-      variant={"outline"}
-      className={cn(
-        "w-[250px] justify-start text-left font-normal",
-        !startDate && "text-muted-foreground"
-      )}
-    >
-      <CalendarIcon className="mr-2 h-4 w-4" />
-      {startDate ? format(startDate, "yyyy-MM-dd") : <span>Pick a date</span>}
-    </Button>
-  </PopoverTrigger>
-  <PopoverContent className="w-auto p-0">
-    <div className="flex justify-between p-2">
-      <Select
-        onValueChange={(month) => handleMonthChange(month, "start")}
-        value={months[currentMonthStart]}
-      >
-        <SelectTrigger className="w-[110px]">
-          <SelectValue placeholder="Month" />
-        </SelectTrigger>
-        <SelectContent>
-          {months.map((month) => (
-            <SelectItem key={month} value={month}>
-              {month}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-[250px] justify-start text-left font-normal",
+                          !startDate && "text-muted-foreground"
+                        )}
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {startDate ? (
+                          format(startDate, "yyyy-MM-dd")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0">
+                      <div className="flex justify-between p-2">
+                        <Select
+                          onValueChange={(month) =>
+                            handleMonthChange(month, "start")
+                          }
+                          value={months[currentMonthStart]}
+                        >
+                          <SelectTrigger className="w-[110px]">
+                            <SelectValue placeholder="Month" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {months.map((month) => (
+                              <SelectItem key={month} value={month}>
+                                {month}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
 
-      <Select
-        onValueChange={(year) => handleYearChange(year, "start")}
-        value={currentYearStart.toString()}
-      >
-        <SelectTrigger className="w-[110px]">
-          <SelectValue placeholder="Year" />
-        </SelectTrigger>
-        <SelectContent>
-          {years.map((year) => (
-            <SelectItem key={year} value={year.toString()}>
-              {year}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-    </div>
-    <div className="calendar-container">
-    <Calendar
-      mode="single"
-      selected={startDate}
-      onSelect={handleStartDate}
-      initialFocus
-      month={startDate}
-      onMonthChange={(date) => setStartDate(date)}
-    />
-    </div>
-  </PopoverContent>
-</Popover>
-
+                        <Select
+                          onValueChange={(year) =>
+                            handleYearChange(year, "start")
+                          }
+                          value={currentYearStart.toString()}
+                        >
+                          <SelectTrigger className="w-[110px]">
+                            <SelectValue placeholder="Year" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {years.map((year) => (
+                              <SelectItem key={year} value={year.toString()}>
+                                {year}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="calendar-container">
+                        <Calendar
+                          mode="single"
+                          selected={startDate}
+                          onSelect={handleStartDate}
+                          initialFocus
+                          month={startDate}
+                          onMonthChange={(date) => setStartDate(date)}
+                        />
+                      </div>
+                    </PopoverContent>
+                  </Popover>
                 </div>
               </div>
               {/* End Date  */}
@@ -461,69 +466,73 @@ const EditEmployeeLeaveForm = () => {
                   End Date
                 </label>
                 <div className="relative">
-                <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant={"outline"}
-                    className={cn(
-                      "w-[250px] justify-start text-left font-normal",
-                      !endDate && "text-muted-foreground"
-                    )}
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {endDate ? (
-                      format(endDate, "dd-MM-yyyy")
-                    ) : (
-                      <span>Pick a date</span>
-                    )}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0">
-                  <div className="flex justify-between p-2">
-                    <Select
-                      onValueChange={(month) => handleMonthChange(month, "end")}
-                      value={months[currentMonthEnd]}
-                    >
-                      <SelectTrigger className="w-[110px]">
-                        <SelectValue placeholder="Month" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {months.map((month) => (
-                          <SelectItem key={month} value={month}>
-                            {month}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-[250px] justify-start text-left font-normal",
+                          !endDate && "text-muted-foreground"
+                        )}
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {endDate ? (
+                          format(endDate, "dd-MM-yyyy")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0">
+                      <div className="flex justify-between p-2">
+                        <Select
+                          onValueChange={(month) =>
+                            handleMonthChange(month, "end")
+                          }
+                          value={months[currentMonthEnd]}
+                        >
+                          <SelectTrigger className="w-[110px]">
+                            <SelectValue placeholder="Month" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {months.map((month) => (
+                              <SelectItem key={month} value={month}>
+                                {month}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
 
-                    <Select
-                      onValueChange={(year) => handleYearChange(year, "end")}
-                      value={currentYearEnd.toString()}
-                    >
-                      <SelectTrigger className="w-[110px]">
-                        <SelectValue placeholder="Year" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {years.map((year) => (
-                          <SelectItem key={year} value={year.toString()}>
-                            {year}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="calendar-container">
-                  <Calendar
-                    mode="single"
-                    selected={endDate}
-                    onSelect={handleEndDate}
-                    initialFocus
-                    month={endDate}
-                    onMonthChange={(date) => setEndDate(date)}
-                  />
-                  </div>
-                </PopoverContent>
-              </Popover>
+                        <Select
+                          onValueChange={(year) =>
+                            handleYearChange(year, "end")
+                          }
+                          value={currentYearEnd.toString()}
+                        >
+                          <SelectTrigger className="w-[110px]">
+                            <SelectValue placeholder="Year" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {years.map((year) => (
+                              <SelectItem key={year} value={year.toString()}>
+                                {year}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="calendar-container">
+                        <Calendar
+                          mode="single"
+                          selected={endDate}
+                          onSelect={handleEndDate}
+                          initialFocus
+                          month={endDate}
+                          onMonthChange={(date) => setEndDate(date)}
+                        />
+                      </div>
+                    </PopoverContent>
+                  </Popover>
                 </div>
               </div>
             </div>
@@ -534,73 +543,73 @@ const EditEmployeeLeaveForm = () => {
                   Date you will return to office *
                 </label>
                 <div className="relative">
-                <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant={"outline"}
-                  className={cn(
-                    "w-[250px] justify-start text-left font-normal",
-                    !returnDate && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {returnDate ? (
-                    format(returnDate, "dd-MM-yyyy")
-                  ) : (
-                    <span>Pick a date</span>
-                  )}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0">
-                <div className="flex justify-between p-2">
-                  <Select
-                    onValueChange={(month) =>
-                      handleMonthChange(month, "returnDate")
-                    }
-                    value={months[currentMonthReturnDate]}
-                  >
-                    <SelectTrigger className="w-[110px]">
-                      <SelectValue placeholder="Month" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {months.map((month) => (
-                        <SelectItem key={month} value={month}>
-                          {month}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-[250px] justify-start text-left font-normal",
+                          !returnDate && "text-muted-foreground"
+                        )}
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {returnDate ? (
+                          format(returnDate, "dd-MM-yyyy")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0">
+                      <div className="flex justify-between p-2">
+                        <Select
+                          onValueChange={(month) =>
+                            handleMonthChange(month, "returnDate")
+                          }
+                          value={months[currentMonthReturnDate]}
+                        >
+                          <SelectTrigger className="w-[110px]">
+                            <SelectValue placeholder="Month" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {months.map((month) => (
+                              <SelectItem key={month} value={month}>
+                                {month}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
 
-                  <Select
-                    onValueChange={(year) =>
-                      handleYearChange(year, "returnDate")
-                    }
-                    value={currentYearReturnDate.toString()}
-                  >
-                    <SelectTrigger className="w-[110px]">
-                      <SelectValue placeholder="Year" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {years.map((year) => (
-                        <SelectItem key={year} value={year.toString()}>
-                          {year}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="calendar-container">
-                <Calendar
-                  mode="single"
-                  selected={returnDate}
-                  onSelect={handleReturnDate}
-                  initialFocus
-                  month={returnDate}
-                  onMonthChange={(date) => setReturnDate(date)}
-                />
-                </div>
-              </PopoverContent>
-            </Popover>
+                        <Select
+                          onValueChange={(year) =>
+                            handleYearChange(year, "returnDate")
+                          }
+                          value={currentYearReturnDate.toString()}
+                        >
+                          <SelectTrigger className="w-[110px]">
+                            <SelectValue placeholder="Year" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {years.map((year) => (
+                              <SelectItem key={year} value={year.toString()}>
+                                {year}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="calendar-container">
+                        <Calendar
+                          mode="single"
+                          selected={returnDate}
+                          onSelect={handleReturnDate}
+                          initialFocus
+                          month={returnDate}
+                          onMonthChange={(date) => setReturnDate(date)}
+                        />
+                      </div>
+                    </PopoverContent>
+                  </Popover>
                 </div>
               </div>
               {/* Leave Reason */}
@@ -681,7 +690,7 @@ const EditEmployeeLeaveForm = () => {
             <div className="my-6 ">
               <Button
                 type="submit"
-                className="lg:w-[6vw] cursor-pointer border border-primary bg-primary px-4 py-1 text-white transition hover:bg-opacity-90 text-md"
+                className="lg:w-[6vw] cursor-pointer border border-primary bg-[#004d4b] hover:bg-[#004d4b] hover:scale-[95%] px-4 py-1 text-white transition hover:bg-opacity-90 text-md"
               >
                 {isEmployeeLeaveValid ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />

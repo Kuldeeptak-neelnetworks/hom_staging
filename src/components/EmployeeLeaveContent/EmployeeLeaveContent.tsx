@@ -252,7 +252,7 @@ const EmployeeLeaveContent: React.FC = () => {
 
   return (
     <>
-      <div className="px-4 py-0 relative">
+      <div className="px-4 py-2 relative">
         {/* <div className="text-xl font-semibold absolute top-[-52px]">Users</div> */}
         {/* <div className="mb-1">
         <BreadcrumbSection crumbs={crumbs} />

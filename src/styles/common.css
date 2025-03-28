@@ -202,10 +202,12 @@
 }
 /* ========================================= */
 .ql-toolbar.ql-snow {
-  border-color: hsl(214.3 31.8% 91.4%) !important;
+  /* border-color: hsl(214.3 31.8% 91.4%) !important; */
+  border-color: #288c8170 !important;
 }
 .ql-container.ql-snow {
-  border-color: hsl(214.3 31.8% 91.4%) !important;
+  /* border-color: hsl(214.3 31.8% 91.4%) !important; */
+  border-color: #288c8170 !important;
 }
 
 /* ============================================= */

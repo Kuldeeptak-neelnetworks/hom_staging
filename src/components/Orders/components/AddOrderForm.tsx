@@ -600,7 +600,7 @@ const AddOrderForm = ({ fetchAllOrdersData }: any) => {
                       <Button
                         variant={"outline"}
                         className={cn(
-                          "w-[250px] justify-start text-left font-normal",
+                          "w-full justify-start text-left font-normal",
                           !dateOfOrder && "text-muted-foreground"
                         )}
                       >

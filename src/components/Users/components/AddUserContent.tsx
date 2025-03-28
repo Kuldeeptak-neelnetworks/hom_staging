@@ -24,7 +24,7 @@ const crumbs = [
 const AddUserContent = () => {
   return (
     <div className="px-4 my-1 relative">
-      <div className="text-md font-semibold absolute top-[-35px]">Add User</div>
+      <div className="text-md font-semibold absolute top-[-30px]">Add User</div>
       {/* <div className="mb-4">
         <BreadcrumbSection crumbs={crumbs} />
       </div> */}

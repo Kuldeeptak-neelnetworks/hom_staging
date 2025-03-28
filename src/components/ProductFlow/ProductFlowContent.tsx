@@ -163,12 +163,12 @@ const ProductflowContent: React.FC = () => {
   });
 
   return (
-    <div className="px-4 py-0 relative">
+    <div className="px-4 py-2 relative">
       {/* <div className="text-xl font-semibold absolute top-[-52px]">
         Product Flow
       </div> */}
 
-      <div className="w-[300px] lg:absolute  z-[100] mt-2 lg:mt-0">
+      <div className="w-[300px] lg:absolute mt-1  z-[100] ">
         <Select
           className="text-[0.8rem] boxShadow"
           closeMenuOnSelect={false}
@@ -199,7 +199,7 @@ const ProductflowContent: React.FC = () => {
           <Link href={"/productFlow/addProductFlow"}>
             <Button
               variant="outline"
-              className=" text-[0.8rem] text-white bg-[#29354f] hover:bg-[#fff] hover:text-[#29354f] boxShadow"
+              className=" text-[0.8rem] text-white bg-[#004d4b]  hover:text-[#004d4b] boxShadow"
             >
               New Product Flow
             </Button>

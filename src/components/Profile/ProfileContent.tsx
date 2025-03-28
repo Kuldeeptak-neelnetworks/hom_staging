@@ -177,14 +177,14 @@ const ProfileContent = () => {
 
   return (
     <div className="p-4 relative text-[0.8rem]">
-      <div className="text-xl font-semibold absolute top-[-35px]">Profile</div>
+      <div className="text-xl font-semibold absolute top-[-30px]">Profile</div>
       {/* <div className="mb-1">
         <BreadcrumbSection crumbs={crumbs} />
       </div> */}
 
       <div className="flex justify-center">
-        <div className="sm:max-w-[775px] w-full">
-          <ScrollArea className="h-[44rem]  px-3 py-3">
+        <div className="sm:max-w-[75vw] w-full">
+          <ScrollArea className="h-[44rem]  px-3 py-3 bg-[#fff]">
             <form className="mt-5" onSubmit={handleSubmit}>
               <div className="mb-3">
                 {/* {logoPreview ? (
@@ -308,7 +308,7 @@ const ProfileContent = () => {
               <div className="mb-3">
                 <Button
                   type="submit"
-                  className="cursor-pointer  border border-primary bg-primary px-4 py-1 text-white transition hover:bg-opacity-90 w-[6rem]"
+                  className="cursor-pointer  border border-primary bg-[#004d4b] hover:bg-[#004d4b] hover:scale-[95%]  px-4 py-1 text-white transition hover:bg-opacity-90 w-[6rem]"
                 >
                   {isUserValid ? (
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />

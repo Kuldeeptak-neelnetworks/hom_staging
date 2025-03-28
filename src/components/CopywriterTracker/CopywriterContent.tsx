@@ -147,12 +147,12 @@ const CopywriterContent: React.FC = () => {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div className="px-4 py-0 relative">
+      <div className="px-4 py-2 relative">
         {/* <div className="text-xl font-semibold absolute top-[-52px]">
         Copywriter Tracker
       </div> */}
 
-        <div className="w-[300px] lg:absolute  z-[100] mt-2 lg:mt-0">
+        <div className="w-[300px] lg:absolute  z-[100] mt-2 ">
           <Select
             className="text-[0.8rem] boxShadow"
             closeMenuOnSelect={false}
@@ -183,7 +183,7 @@ const CopywriterContent: React.FC = () => {
             <Link href={"/copywriter/addCopywriter"}>
               <Button
                 variant="outline"
-                className=" text-[0.8rem] text-white bg-[#29354f] hover:bg-[#fff] hover:text-[#29354f] boxShadow"
+                className=" text-[0.8rem] text-white bg-[#004d4b]  hover:bg-[#fff] hover:text-[#004d4b] boxShadow"
               >
                 New Copywriter Tracker
               </Button>

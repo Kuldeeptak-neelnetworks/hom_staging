@@ -35,6 +35,7 @@ import { useRouter } from "next/navigation";
 import { AxiosError } from "axios";
 import { useEmployeeLeaveStore } from "@/Store/EmployeeLeaveStore";
 import { format, getMonth, getYear, setMonth, setYear } from "date-fns";
+import { motion } from "framer-motion";
 
 interface UserData {
   fullName?: string;
@@ -231,7 +232,7 @@ const AddEmployeeLeaveForm: React.FC = () => {
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               Rep Name
             </label>
-            <div className="relative">
+            <div>
               <input
                 type="text"
                 id="repName"
@@ -240,7 +241,7 @@ const AddEmployeeLeaveForm: React.FC = () => {
                 placeholder="Rep Name"
                 readOnly
                 disabled
-                className="w-full border border-stroke bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full border border-[#2e8b577d] bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
 
               <span className="absolute right-4 top-2">
@@ -254,7 +255,7 @@ const AddEmployeeLeaveForm: React.FC = () => {
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               Leave Type
             </label>
-            <div className="relative">
+            <div className="relative ">
               <Select
                 onValueChange={(value: any) =>
                   formik.setFieldValue("leaveType", value)
@@ -297,7 +298,7 @@ const AddEmployeeLeaveForm: React.FC = () => {
                   <Button
                     variant={"outline"}
                     className={cn(
-                      "w-[250px] justify-start text-left font-normal",
+                      "w-full justify-start text-left font-normal border-[#2e8b577d]",
                       !startDate && "text-muted-foreground"
                     )}
                   >
@@ -369,7 +370,7 @@ const AddEmployeeLeaveForm: React.FC = () => {
                   <Button
                     variant={"outline"}
                     className={cn(
-                      "w-[250px] justify-start text-left font-normal",
+                      "w-full justify-start text-left font-normal border-[#2e8b577d]",
                       !endDate && "text-muted-foreground"
                     )}
                   >
@@ -440,7 +441,7 @@ const AddEmployeeLeaveForm: React.FC = () => {
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "w-[250px] justify-start text-left font-normal",
+                    "w-full justify-start text-left font-normal border-[#2e8b577d]",
                     !returnDate && "text-muted-foreground"
                   )}
                 >
@@ -505,7 +506,7 @@ const AddEmployeeLeaveForm: React.FC = () => {
           </div>
         </div>
         <div className="mb-3">
-          <label className="mb-2.5 block font-medium text-black dark:text-white">
+          <label className="mb-2.5 block font-medium text-black dark:text-white ">
             Leave Reason
           </label>
           <div className="relative">
@@ -516,18 +517,19 @@ const AddEmployeeLeaveForm: React.FC = () => {
               id="leaveReason"
               name="leaveReason"
               placeholder="Enter Your leave Reason"
-              className="w-full border border-stroke bg-transparent py-2 pl-6 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+              className="w-full border border-[#2e8b577d] bg-transparent py-2 pl-6 pr-10  outline-none  focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
             />
-            {touched.leaveReason && errors.leaveReason ? (
-              <div className="text-red-500">{errors.leaveReason}</div>
-            ) : null}
           </div>
+
+          {touched.leaveReason && errors.leaveReason ? (
+            <div className="text-red-500">{errors.leaveReason}</div>
+          ) : null}
         </div>
         <div className="mb-3">
           <Button
             type="submit"
             value="Sign In"
-            className="cursor-pointer border border-primary bg-[#0f464a] px-4 py-1 text-white transition hover:bg-opacity-90"
+            className="cursor-pointer border border-primary bg-[#004d4b] hover:bg-[#004d4b] hover:scale-[95%] px-4 py-1 text-white transition hover:bg-opacity-90"
           >
             {isUserValid ? (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />

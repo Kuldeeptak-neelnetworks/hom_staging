@@ -142,6 +142,7 @@ const SideBar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
   const initialLimit = Number(searchParams.get("limit")) || 20;
   const [page, setPage] = useState(initialPage);
   const [limit, setLimit] = useState(initialLimit);
+  const [role, setRole] = useState();
 
   const logoSrc = Logo.src;
   const MiniLogoSrc = MiniLogo.src;
@@ -250,6 +251,14 @@ const SideBar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
     fetchNotifications();
   }, [page, limit, fetchNotificationData, notificationReadData]);
 
+  useEffect(() => {
+    const storedRole = localStorage.getItem("userRoleHOM");
+
+    setRole(storedRole);
+  }, []);
+
+  console.log("rrrr", role);
+
   return (
     <>
       {/* Mobile toggle button */}
@@ -322,7 +331,7 @@ const SideBar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
         </div>
 
         {/* Render Menu Items */}
-        <ul>
+        {/* <ul>
           {menuItems.map((item) => (
             <MenuItemData
               key={item.href}
@@ -331,7 +340,32 @@ const SideBar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
               notificationData={notificationData}
             />
           ))}
-        </ul>
+        </ul> */}
+        {role === "salesman" ? (
+          <ul>
+            {menuItems
+              .filter((item) => item?.label !== "Users")
+              .map((data) => (
+                <MenuItemData
+                  key={data.href}
+                  {...data}
+                  isCollapsed={isCollapsed}
+                  notificationData={notificationData}
+                />
+              ))}
+          </ul>
+        ) : (
+          <ul>
+            {menuItems.map((item) => (
+              <MenuItemData
+                key={item.href}
+                {...item}
+                isCollapsed={isCollapsed}
+                notificationData={notificationData}
+              />
+            ))}
+          </ul>
+        )}
       </aside>
 
       <Appbar isCollapsed={isCollapsed} titleData={""} />

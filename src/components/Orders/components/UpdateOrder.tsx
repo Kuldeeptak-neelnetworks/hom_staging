@@ -173,11 +173,11 @@ const UpdateOrder = ({ orderId }: any) => {
               </div>
             )}
 
-            <section className="bg-white text-gray-800 border border-gray-300  my-2">
-              <div className="px-6 py-4 mx-auto">
+            <section className="bg-white text-gray-800 border border-[#288c8170]  my-2">
+              <div className="px-6 py-4 mx-auto bg-[#ecfbff]">
                 <div className="flex flex-wrap -m-4">
                   <div className="p-4 md:w-full flex flex-col items-start">
-                    <div className="flex items-center justify-between w-full border-b border-gray-300 pb-2 mb-2 relative">
+                    <div className="flex items-center justify-between w-full border-b border-[#288c8170] pb-2 mb-2 relative">
                       <div className="flex items-center">
                         <Avatar className="cursor-pointer">
                           <AvatarImage
@@ -270,7 +270,7 @@ const UpdateOrder = ({ orderId }: any) => {
 
                     <FilePreviewList files={editor.files || []} />
 
-                    <div className="flex items-center justify-between flex-wrap  mt-2 w-full  border-t-2 border-gray-100">
+                    <div className="flex items-center justify-between flex-wrap  mt-2 w-full  border-t border-[#288c8170]">
                       <div className="flex justify-between items-center gap-2">
                         <LikeComponent
                           likes={editor.likes}

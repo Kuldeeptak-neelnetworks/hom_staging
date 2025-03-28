@@ -25,11 +25,12 @@ const ProfilePage: React.FC = () => {
         <SideBarContent setToggleWidth={setToggleWidth} />
       </div> */}
       <div
-      // className={
-      //   toggleWidth
-      //     ? `sm:px-4  p-0 sm:ml-64 ml-0  transition-all duration-300`
-      //     : `sm:px-4  p-0 sm:ml-20 ml-0 transition-all duration-300`
-      // }
+        // className={
+        //   toggleWidth
+        //     ? `sm:px-4  p-0 sm:ml-64 ml-0  transition-all duration-300`
+        //     : `sm:px-4  p-0 sm:ml-20 ml-0 transition-all duration-300`
+        // }
+        className={`sm:px-2 p-0 sm:ml-[2rem] ml-0 transition-all duration-300  bg-[#0ba09817] min-h-[95vh] `}
       >
         <div className=" dark:border-gray-700">
           <ProfileContent />
