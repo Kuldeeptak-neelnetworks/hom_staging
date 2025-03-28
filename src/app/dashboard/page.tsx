@@ -138,11 +138,13 @@ const DashBoardPage: React.FC = () => {
             <div className="gap-3 sm:flex">
               <Card
                 className={`h-[100px] boxShadow mb-5  ${
-                  userRole !== "salesman" ? "sm:w-[60%]" : "sm:w-[50%]"
+                  userRole !== "salesman" ? "sm:w-[70%]" : "sm:w-[60%]"
                 } xl:h-[160px] px-8 py-5 flex flex-col `}
               >
-                <p className="text-xl mb-5 font-semibold">Total Reports</p>
-                <div className="flex gap-16">
+                <p className="text-xl mb-5 font-semibold text-green-800">
+                  Total Reports
+                </p>
+                <div className="flex justify-between">
                   <motion.div
                     initial={{ x: +100, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
@@ -286,7 +288,7 @@ const DashBoardPage: React.FC = () => {
               </Card>
               <Card
                 className={`h-[100px] boxShadow mb-5   ${
-                  userRole !== "salesman" ? "sm:w-[40%]" : "sm:w-[50%]"
+                  userRole !== "salesman" ? "sm:w-[30%]" : "sm:w-[40%]"
                 }  xl:h-[160px] px-8 py-5 flex flex-col`}
               >
                 <motion.div
@@ -297,7 +299,9 @@ const DashBoardPage: React.FC = () => {
                     ease: [0.04, 0.62, 0.23, 0.98],
                   }}
                 >
-                  <p className="text-xl mb-5 font-semibold">Total Sales</p>
+                  <p className="text-xl mb-5 font-semibold text-green-800">
+                    Total Sales
+                  </p>
                   <div className="flex gap-16">
                     <div className="flex gap-2">
                       <div className="bg-gray-100 p-2 shadow-md shadow-[#002325] rounded-[8px] bg-gradient-to-r from-white to-green-100">
@@ -315,11 +319,18 @@ const DashBoardPage: React.FC = () => {
                             Total Order Value :
                           </span>
                           <span className="text-[1rem] font-semibold mx-1">
-                            {SalesData?.totalOverallResult?.overall
+                            {/* {SalesData?.totalOverallResult?.overall
                               ?.totalOrderValue
                               ? SalesData?.totalOverallResult?.overall
                                   ?.totalOrderValue
-                              : 0}
+                              : 0} */}
+                            {SalesData?.totalOverallResult?.overall
+                              ?.totalOrderValue
+                              ? (
+                                  SalesData.totalOverallResult.overall
+                                    .totalOrderValue / 1000
+                                ).toFixed(0) + "K+"
+                              : "0"}
                           </span>
                         </div>
                         <div className="flex">

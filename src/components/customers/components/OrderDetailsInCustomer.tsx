@@ -62,20 +62,20 @@ const OrderDetailsInCustomer = ({ orderData }: any) => {
 
   return (
     <div className=" px-1 py-1">
-      <div className="max-h-[174px] min-h-[174px] overflow-scroll flex gap-3 flex-col">
+      <div className="max-h-[174px] min-h-[174px] overflow-scroll flex flex-col">
         {orderData
           ? orderData &&
             orderData?.map((order: any) => {
               return (
                 <section
-                  className="bg-white text-gray-800 border border-[#e1e8f0]  my-2 mx-1"
+                  className="bg-white text-gray-800 border border-[#c4e9e9]  my-2 mx-1"
                   key={order?._id}
                   id={`editor-${order?._id}`}
                 >
                   <div className="px-6 py-4 mx-auto">
                     <div className="flex flex-wrap -m-4">
                       <div className="p-2 w-full flex flex-col items-start">
-                        <div className="flex items-center justify-between w-full border-b border-[#e1e8f0] pb-2 mb-2 relative">
+                        <div className="flex items-center justify-between w-full border-b border-[#c4e9e9] pb-2 mb-2 relative">
                           <div className="flex items-center">
                             <Avatar className="cursor-pointer">
                               <AvatarImage

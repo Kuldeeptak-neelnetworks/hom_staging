@@ -76,7 +76,7 @@ const TableHead = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-      "h-10 px-4 text-left  bg-[#0f464a] align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 overflow-x-auto first:sticky first:left-0",
+      "h-10 px-4 text-left  bg-[#0f464a] align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 overflow-x-auto first:sticky first:left-0 first:z-10 first:bg-[#0f464a] first:shadow-right",
       className
     )}
     {...props}
@@ -102,6 +102,7 @@ const TableCell = React.forwardRef<
     ref={ref}
     className={cn(
       "px-4 h-8 align-middle [&:has([role=checkbox])]:pr-0 first:sticky first:left-0 z-40",
+      "first:shadow-right transition-shadow duration-300 ",
       rowIndex !== undefined && rowIndex % 2 !== 0
         ? "bg-[#d3eae9]"
         : "bg-white",

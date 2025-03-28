@@ -60,6 +60,36 @@ export const useCustomerStore = create<CustomerState & CustomerActions>()(
     customerData: [],
     addedOrder: {},
     loading: false,
+    // fetchAllCustomerData: async (params) => {
+    //   set({ loading: true });
+    //   const {
+    //     page = 1,
+    //     limit = 10,
+    //     searchInput = "",
+    //     filters = [],
+    //   } = params || {};
+    //   try {
+    //     const queryParams = new URLSearchParams();
+    //     if (page) queryParams.append("page", String(page));
+    //     if (limit) queryParams.append("limit", String(limit));
+    //     if (searchInput && searchInput !== "" && searchInput !== undefined)
+    //       queryParams.append("search", searchInput);
+    //     if (filters?.status !== undefined)
+    //       queryParams.append("status", filters?.status);
+
+    //     const response = await baseInstance.get(
+    //       `/customers?${queryParams.toString()}`
+    //     );
+    //     if (response.status === 200) {
+    //       set({ customerData: response?.data?.data, loading: false });
+    //     } else {
+    //       set({ customerData: response?.data?.message, loading: false });
+    //     }
+    //   } catch (error: any) {
+    //     logOutFunction(error?.response?.data?.message);
+    //     set({ customerData: error?.response?.data?.message, loading: false });
+    //   }
+    // },
     fetchAllCustomerData: async (params) => {
       set({ loading: true });
       const {
@@ -68,6 +98,13 @@ export const useCustomerStore = create<CustomerState & CustomerActions>()(
         searchInput = "",
         filters = [],
       } = params || {};
+
+      if (page > 1) {
+        set({ loading: false });
+      } else {
+        set({ loading: true });
+      }
+
       try {
         const queryParams = new URLSearchParams();
         if (page) queryParams.append("page", String(page));

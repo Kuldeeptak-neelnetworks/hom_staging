@@ -199,30 +199,30 @@ const CustomersContent: React.FC = () => {
   // ========================================
 
   // Debounced search API call
-  const debouncedSearch = useCallback(
-    debounce((searchInput) => {
-      fetchAllCustomerData({
-        page,
-        limit,
-        searchInput,
-        filters,
-      });
-    }, 500),
-    [fetchAllCustomerData, filters, page, limit]
-  );
+  // const debouncedSearch = useCallback(
+  //   debounce((searchInput) => {
+  //     fetchAllCustomerData({
+  //       page,
+  //       limit,
+  //       searchInput,
+  //       filters,
+  //     });
+  //   }, 500),
+  //   [fetchAllCustomerData, filters, page, limit]
+  // );
 
-  useEffect(() => {
-    debouncedSearch(searchInput);
-    fetchAllCustomerData({
-      page,
-      limit,
-      searchInput,
-      filters,
-    });
-    return () => {
-      debouncedSearch.cancel();
-    };
-  }, [searchInput, debouncedSearch, page, limit, filters]);
+  // useEffect(() => {
+  //   debouncedSearch(searchInput);
+  //   fetchAllCustomerData({
+  //     page,
+  //     limit,
+  //     searchInput,
+  //     filters,
+  //   });
+  //   return () => {
+  //     debouncedSearch.cancel();
+  //   };
+  // }, [searchInput, debouncedSearch, page, limit, filters]);
 
   const tableInstance = useReactTable({
     data,
@@ -254,6 +254,54 @@ const CustomersContent: React.FC = () => {
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
+  // ==========================
+  useEffect(() => {
+    if (searchInput !== "") {
+      setPage(1);
+    }
+  }, [searchInput]);
+
+  const debouncedSearch = useCallback(
+    debounce((searchInput) => {
+      fetchAllCustomerData({
+        page,
+        limit,
+        searchInput,
+        filters,
+      });
+    }, 500),
+    [fetchAllCustomerData, filters, page, limit]
+  );
+
+  useEffect(() => {
+    fetchAllCustomerData({
+      page,
+      limit,
+      searchInput,
+      filters,
+    });
+  }, [page, limit, searchInput, filters, fetchAllCustomerData]);
+
+  useEffect(() => {
+    if (searchInput !== "") {
+      debouncedSearch(searchInput);
+    } else {
+      fetchAllCustomerData({ page, limit, searchInput, filters });
+    }
+
+    return () => {
+      debouncedSearch.cancel();
+    };
+  }, [
+    searchInput,
+    debouncedSearch,
+    page,
+    limit,
+    filters,
+    fetchAllCustomerData,
+  ]);
+  // ==========================
+
   return (
     <div className="pr-0 pl-2 py-1 relative ">
       {/* <div className="text-xl font-semibold absolute top-[-54px]">
@@ -284,7 +332,7 @@ const CustomersContent: React.FC = () => {
             option: (provided, state) => ({
               ...provided,
               backgroundColor: state.isSelected
-                ? "#29354f"
+                ? "#0f464a"
                 : provided.backgroundColor,
               color: state.isSelected ? "white" : provided.color,
               ":hover": {

@@ -95,8 +95,8 @@ const AddUserForm: React.FC = () => {
   const formik = useFormik({
     initialValues: {
       fullName: "",
-      email: "",
-      password: "",
+      userEmail: "",
+      userPassword: "",
       role: "",
       mobileNo: "",
       address: "",
@@ -108,7 +108,7 @@ const AddUserForm: React.FC = () => {
       fullName: Yup.string()
         .min(2, "Must be 2 characters or more")
         .required("Name Required"),
-      password: Yup.string()
+      userPassword: Yup.string()
         .min(8, "Must be 8 characters or more")
         .max(20, "Not More than 20 Characters")
         .required("Password Required"),
@@ -132,8 +132,8 @@ const AddUserForm: React.FC = () => {
         setIsUserValid(() => true);
         const formData = new FormData();
         formData.append("fullName", values.fullName);
-        formData.append("email", values.email);
-        formData.append("password", values.password);
+        formData.append("email", values.userEmail);
+        formData.append("password", values.userPassword);
         formData.append("role", values.role);
         formData.append("mobileNo", `0${values.mobileNo}`);
         formData.append("jobtitle", values.jobtitle);
@@ -185,13 +185,11 @@ const AddUserForm: React.FC = () => {
 
   return (
     <ScrollArea className="w-[75%]   p-7 my-5 border boxShadow bg-[#fff]">
-      <form onSubmit={handleSubmit} className="text-[0.8rem] ">
-        <div className="mb-3 flex gap-3">
+      <form onSubmit={handleSubmit} className="text-[0.8rem]  text-[#004d4b]">
+        <div className="mb-3 flex gap-3 ">
           {/* Name  */}
           <AnimationForm className="w-full">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
-              Name
-            </label>
+            <label className="mb-2.5 block font-semibold">Name</label>
             <div className="relative">
               <input
                 type="text"
@@ -201,7 +199,7 @@ const AddUserForm: React.FC = () => {
                 onBlur={handleBlur}
                 value={values.fullName}
                 placeholder="Name"
-                className="w-full  border border-stroke bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full  border border-[#2e8b577d] bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               {touched.fullName && errors.fullName ? (
                 <div className="text-red-500">{errors.fullName}</div>
@@ -214,22 +212,21 @@ const AddUserForm: React.FC = () => {
           </AnimationForm>
           {/* Email  */}
           <AnimationForm className="w-full" fromLeft={false}>
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
-              Email Address
-            </label>
+            <label className="mb-2.5 block font-semibold">Email Address</label>
             <div className="relative">
               <input
                 type="email"
                 id="email"
                 name="email"
+                autoComplete="off"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.email}
+                value={values.userEmail}
                 placeholder="Enter Your Email"
-                className="w-full  border border-stroke bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full  border border-[#2e8b577d] bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
-              {touched.email && errors.email ? (
-                <div className="text-red-500">{errors.email}</div>
+              {touched.userEmail && errors.userEmail ? (
+                <div className="text-red-500">{errors.userEmail}</div>
               ) : null}
 
               <span className="absolute right-4 top-2">
@@ -256,22 +253,21 @@ const AddUserForm: React.FC = () => {
         <div className="mb-3 flex gap-3">
           {/* Password  */}
           <AnimationForm className="w-full">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
-              Password
-            </label>
+            <label className="mb-2.5 block font-semibold">Password</label>
             <div className="relative">
               <input
                 type="password"
+                autoComplete="off"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.password}
+                value={values.userPassword}
                 id="password"
                 name="password"
                 placeholder="6+ Characters, 1 Capital letter"
-                className="w-full  border border-stroke bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full  border border-[#2e8b577d] bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
-              {touched.password && errors.password ? (
-                <div className="text-red-500">{errors.password}</div>
+              {touched.userPassword && errors.userPassword ? (
+                <div className="text-red-500">{errors.userPassword}</div>
               ) : null}
 
               <span className="absolute right-4 top-2">
@@ -299,9 +295,7 @@ const AddUserForm: React.FC = () => {
           </AnimationForm>
           {/* User Role */}
           <AnimationForm className="w-full" fromLeft={false}>
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
-              User Role
-            </label>
+            <label className="mb-2.5 block font-semibold ">User Role</label>
             <div className="relative">
               <Select
                 onValueChange={(value: any) =>
@@ -331,12 +325,10 @@ const AddUserForm: React.FC = () => {
         </div>
         {/* TimeZone  */}
         <AnimationForm fromLeft={false} className="mb-3 ">
-          <label className="mb-2.5 block font-medium text-black dark:text-white">
-            Time Zone
-          </label>
+          <label className="mb-2.5 block font-semibold">Time Zone</label>
           <div className="relative">
             <TimezoneSelect
-              className="w-full  border border-stroke bg-transparent  text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+              className="w-full rounded-0  border  bg-transparent  text-black outline-none focus:border-primary focus-visible:shadow-none  dark:bg-form-input dark:text-white "
               value={selectedTimezone.value}
               name="timeZone"
               id="timeZone"
@@ -356,9 +348,7 @@ const AddUserForm: React.FC = () => {
         <div className="mb-5 flex gap-3">
           {/* Contact */}
           <AnimationForm className="w-full">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
-              Contact
-            </label>
+            <label className="mb-2.5 block font-semibold">Contact</label>
             <div className="relative">
               <input
                 type="tel"
@@ -368,7 +358,7 @@ const AddUserForm: React.FC = () => {
                 id="mobileNo"
                 name="mobileNo"
                 placeholder="Enter Your Number"
-                className="w-full  border border-stroke bg-transparent py-2 pl-6 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full  border border-[#2e8b577d] bg-transparent py-2 pl-6 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               {formik.touched.mobileNo && formik.errors.mobileNo ? (
                 <div className="text-red-500">{formik.errors.mobileNo}</div>
@@ -381,9 +371,7 @@ const AddUserForm: React.FC = () => {
           </AnimationForm>
           {/* Job Title */}
           <AnimationForm className="w-full" fromLeft={false}>
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
-              Job Title
-            </label>
+            <label className="mb-2.5 block font-semibold">Job Title</label>
             <div className="relative">
               <input
                 type="text"
@@ -393,7 +381,7 @@ const AddUserForm: React.FC = () => {
                 id="jobtitle"
                 name="jobtitle"
                 placeholder="Enter Job Title"
-                className="w-full  border border-stroke bg-transparent py-2 pl-6 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full  border border-[#2e8b577d] bg-transparent py-2 pl-6 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               {touched.jobtitle && errors.jobtitle ? (
                 <div className="text-red-500">{errors.jobtitle}</div>
@@ -412,9 +400,7 @@ const AddUserForm: React.FC = () => {
           }}
           className="mb-3"
         >
-          <label className="mb-2.5 block font-medium text-black dark:text-white">
-            Address
-          </label>
+          <label className="mb-2.5 block font-semibold">Address</label>
           <div className="relative">
             <textarea
               onChange={handleChange}
@@ -423,7 +409,7 @@ const AddUserForm: React.FC = () => {
               id="address"
               name="address"
               placeholder="Enter Your Address"
-              className="w-full  border border-stroke bg-transparent py-2 pl-6 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+              className="w-full  border border-[#2e8b577d] bg-transparent py-2 pl-6 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
             />
             {touched.address && errors.address ? (
               <div className="text-red-500">{errors.address}</div>
@@ -432,9 +418,7 @@ const AddUserForm: React.FC = () => {
         </AnimationForm>
         {/* Avatar  */}
         <AnimationForm fromLeft={false} className="mb-3">
-          <label className="mb-2.5 block font-medium text-black dark:text-white">
-            Profile Picture
-          </label>
+          <label className="mb-2.5 block font-semibold ">Profile Picture</label>
           <div className="relative">
             <input
               type="file"
@@ -447,7 +431,7 @@ const AddUserForm: React.FC = () => {
               id="avatar"
               name="avatar"
               placeholder="choose your file"
-              className="w-full  border border-stroke bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+              className="w-full  border border-[#2e8b577d] bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
             />
             {logoPreview && (
               <div className="mt-2">

@@ -16,7 +16,7 @@ export default function SideBarWrapper({
   return (
     <div className="flex">
       {/* Sidebar */}
-      {pathname.startsWith("/auth") ? (
+      {pathname.startsWith("/auth") || pathname === "/" ? (
         ""
       ) : (
         <Suspense fallback={<div>Loading...</div>}>

@@ -41,6 +41,9 @@ import WORD from "../../../asset/images/word.png";
 import Logo from "../../../asset/images/companydummylog.png";
 import User from "../../../asset/images/user.png";
 import ReportFileSection from "@/components/common/Editor/ReportFileSection";
+import AnimationForm from "@/components/common/Animation/AnimationForm";
+import { motion } from "framer-motion";
+
 const UserLogo = User.src;
 const PDFPic = PDF.src;
 
@@ -376,12 +379,14 @@ const CustomerDetailsContent = ({ handleUpdate }: any) => {
     return filename;
   };
 
+  console.log("customerDetails", customerDetails);
+
   return (
     <div className="py-3 relative text-[0.8rem] ">
       {/* <div className="text-xl font-semibold absolute top-[-50px]">
         Customer Details
       </div> */}
-      <div className="text-[1rem] font-semibold absolute top-[-30px] ml-0">
+      <div className="text-[1rem] font-semibold absolute top-[-30px] ml-0 text-[#004d4b]">
         {getCustomerData(customerDetails?.customerNo)}
         {" - "}
         {getCustomerData(customerDetails?.companyName)}
@@ -392,8 +397,8 @@ const CustomerDetailsContent = ({ handleUpdate }: any) => {
       </div> */}
       {/* Main Customer details section  */}
       <div className="lg:flex gap-1  justify-start">
-        <div className="w-full lg:w-[50%] mb-3 lg:mb-0">
-          <Card className="h-[230px]">
+        <AnimationForm className="w-full lg:w-[50%] mb-3 lg:mb-0">
+          <Card className="h-[230px] border-[#d9eeee] shadow-[1px_1px_1px_#d9eeee,-1px_-1px_1px_#d9eeee,1px_-1px_1px_#d9eeee,-1px_1px_1px_#d9eeee]">
             <CardContent className="p-0">
               <div className="flex justify-end pr-4 pt-2">
                 <TooltipCommon text="Edit Customer">
@@ -535,8 +540,11 @@ const CustomerDetailsContent = ({ handleUpdate }: any) => {
             activityDetails={activityDetails}
             className="w-full "
           /> */}
-        </div>
-        <div className="w-full border bg-[#fff] lg:w-[50%] update">
+        </AnimationForm>
+        <AnimationForm
+          fromLeft={false}
+          className="w-full border bg-[#fff] lg:w-[50%] update border-[#d9eeee] shadow-[1px_1px_1px_#d9eeee,-1px_-1px_1px_#d9eeee,1px_-1px_1px_#d9eeee,-1px_1px_1px_#d9eeee]"
+        >
           <Tabs
             value={textTab}
             onValueChange={setTextTab}
@@ -544,20 +552,20 @@ const CustomerDetailsContent = ({ handleUpdate }: any) => {
             className="w-full"
           >
             <TabsList className="grid grid-cols-5">
-              <TabsTrigger value="activity" className="bg-[#fff]">
+              <TabsTrigger value="activity" className="bg-[#d9eeee] ">
                 Update
               </TabsTrigger>
-              <TabsTrigger value="orders" className="bg-[#fff]">
+              <TabsTrigger value="orders" className="bg-[#d9eeee]">
                 Orders
               </TabsTrigger>
-              <TabsTrigger value="invoices" className="bg-[#fff]">
+              <TabsTrigger value="invoices" className="bg-[#d9eeee]">
                 Invoices
               </TabsTrigger>
-              <TabsTrigger value="updates" className="bg-[#fff]">
+              <TabsTrigger value="updates" className="bg-[#d9eeee]">
                 Reports
               </TabsTrigger>
 
-              <TabsTrigger value="files" className="bg-[#fff]">
+              <TabsTrigger value="files" className="bg-[#d9eeee]">
                 Files
               </TabsTrigger>
             </TabsList>
@@ -669,7 +677,7 @@ const CustomerDetailsContent = ({ handleUpdate }: any) => {
                             if (fileExtension === "pdf") {
                               return (
                                 <div
-                                  className="border flex items-center h-24 hover:bg-zinc-100 my-1 mx-1"
+                                  className="border flex items-center h-24 hover:bg-[#e9f5f5] my-1 mx-1 border-[#d9eeee]"
                                   key={editData?._id}
                                 >
                                   <div className="border m-3 flex items-center hover:border-b-zinc-600 hover:shadow-lg">
@@ -679,7 +687,7 @@ const CustomerDetailsContent = ({ handleUpdate }: any) => {
                                       target="_blank"
                                       rel="noopener noreferrer"
                                     >
-                                      <div className="flex items-center justify-center h-[70px] w-[100px] bg-gray-200">
+                                      <div className="flex items-center justify-center h-[70px] w-[100px] bg-gray-200 hover:bg-green-100">
                                         <img
                                           src={PDFPic}
                                           alt="PDF"
@@ -699,7 +707,7 @@ const CustomerDetailsContent = ({ handleUpdate }: any) => {
                                         {getFilenameFromURL(editData)}
                                       </a>
                                     </div>
-                                    <div className="flex items-center gap-3">
+                                    {/* <div className="flex items-center gap-3">
                                       <span>
                                         <TooltipCommon
                                           text={editData.uploadedBy?.fullName}
@@ -723,7 +731,7 @@ const CustomerDetailsContent = ({ handleUpdate }: any) => {
                                       <span>
                                         {formatDate(editData?.createdAt)}
                                       </span>
-                                    </div>
+                                    </div> */}
                                   </div>
                                 </div>
                               );
@@ -835,9 +843,14 @@ const CustomerDetailsContent = ({ handleUpdate }: any) => {
               </Card>
             </TabsContent>
           </Tabs>
-        </div>
+        </AnimationForm>
       </div>
-      <div className="lg gap-1  justify-start">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9, y: 30 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="lg gap-1  justify-start border-[#d9eeee] shadow-[1px_1px_1px_#d9eeee,-1px_-1px_1px_#d9eeee,1px_-1px_1px_#d9eeee,-1px_1px_1px_#d9eeee]"
+      >
         {(textTab === "activity" ||
           textTab === "updates" ||
           textTab === "orders" ||
@@ -847,7 +860,7 @@ const CustomerDetailsContent = ({ handleUpdate }: any) => {
             <ActivitySection activityDetails={acData} className="w-full" />
           </div>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 };

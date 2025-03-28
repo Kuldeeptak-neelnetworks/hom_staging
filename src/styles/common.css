@@ -343,6 +343,20 @@
   border-radius: 5px;
 } */
 
+/* ================== */
+/* TimeZone Dropdown style  */
+/* .css-13cymwt-control {
+  border-radius: 0 !important;
+  border-width: 0 !important;
+} */
+
+/* ======================= */
+.shadow-right {
+  box-shadow: 3px 0 5px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease-in-out;
+}
+/* ======================== */
+
 .overflowSection > div :nth-child(1) {
   display: inline-table !important;
 }

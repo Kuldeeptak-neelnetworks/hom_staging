@@ -42,6 +42,7 @@ import {
 import { LoaderIconSVG } from "@/utils/SVGs/SVGs";
 import { useUserStore } from "@/Store/UserStore";
 import { useCustomerStore } from "@/Store/CustomerStore";
+import AnimationForm from "@/components/common/Animation/AnimationForm";
 // interface AddCustomerFormProps {
 //   setOpen: (newValue: boolean | ((prevCount: boolean) => boolean)) => void;
 //   getMyCustomerData: () => void;
@@ -322,7 +323,7 @@ const AddCustomerForm: React.FC = () => {
           </div> */}
           {/* Assigned User */}
           {role !== "salesman" ? (
-            <div className="mb-3 w-full">
+            <AnimationForm className="mb-3 w-full">
               <label className="mb-2.5 block font-medium text-black dark:text-white">
                 Assigned User
               </label>
@@ -360,9 +361,9 @@ const AddCustomerForm: React.FC = () => {
                   </div>
                 ) : null}
               </div>
-            </div>
+            </AnimationForm>
           ) : (
-            <div className="mb-3 w-full">
+            <AnimationForm className="mb-3 w-full">
               <label className="mb-2.5 block font-medium text-black dark:text-white">
                 Assigned User
               </label>
@@ -376,10 +377,10 @@ const AddCustomerForm: React.FC = () => {
                   className="w-full border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                 />
               </div>
-            </div>
+            </AnimationForm>
           )}
           {/* Contact Name  */}
-          <div className="w-full">
+          <AnimationForm fromLeft={false} className="w-full">
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               Contact Name
             </label>
@@ -403,12 +404,12 @@ const AddCustomerForm: React.FC = () => {
                 <UserIconSVG cssClass={styles.commonText} />
               </span>
             </div>
-          </div>
+          </AnimationForm>
         </div>
 
         <div className="mb-3 lg:flex gap-3">
           {/* Company Name  */}
-          <div className="w-full mb-2 lg:mb-0">
+          <AnimationForm className="w-full mb-2 lg:mb-0">
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               Company Name <span className="text-red-500">*</span>
             </label>
@@ -432,9 +433,9 @@ const AddCustomerForm: React.FC = () => {
                 <BuildingIconSVG />
               </span>
             </div>
-          </div>
+          </AnimationForm>
           {/* Email  */}
-          <div className="w-full">
+          <AnimationForm fromLeft={false} className="w-full">
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               Email Address
             </label>
@@ -472,12 +473,12 @@ const AddCustomerForm: React.FC = () => {
                 </svg>
               </span>
             </div>
-          </div>
+          </AnimationForm>
         </div>
 
         <div className="mb-3 lg:flex gap-3">
           {/* Mobile No.  */}
-          <div className="w-full mb-2 lg:mb-0">
+          <AnimationForm className="w-full mb-2 lg:mb-0">
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               Mobile No.
             </label>
@@ -501,10 +502,10 @@ const AddCustomerForm: React.FC = () => {
                 <MobileIconSVG />
               </span>
             </div>
-          </div>
+          </AnimationForm>
 
           {/* Landline No.  */}
-          <div className="w-full">
+          <AnimationForm fromLeft={false} className="w-full">
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               Landline No. (Optional)
             </label>
@@ -528,12 +529,12 @@ const AddCustomerForm: React.FC = () => {
                 <PhoneIconSVG />
               </span>
             </div>
-          </div>
+          </AnimationForm>
         </div>
 
         <div className="mb-3 lg:flex gap-3">
           {/* Street No. and Name */}
-          <div className="w-full mb-2 lg:mb-0">
+          <AnimationForm className="w-full mb-2 lg:mb-0">
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               Street No. and Name
             </label>
@@ -553,9 +554,9 @@ const AddCustomerForm: React.FC = () => {
                 </div>
               ) : null}
             </div>
-          </div>
+          </AnimationForm>
           {/* Town */}
-          <div className="w-full">
+          <AnimationForm fromLeft={false} className="w-full">
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               Town
             </label>
@@ -575,12 +576,12 @@ const AddCustomerForm: React.FC = () => {
                 </div>
               ) : null}
             </div>
-          </div>
+          </AnimationForm>
         </div>
 
         <div className="mb-3 lg:flex gap-3">
           {/* County */}
-          <div className="w-full mb-2 lg:mb-0">
+          <AnimationForm className="w-full mb-2 lg:mb-0">
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               County
             </label>
@@ -600,9 +601,9 @@ const AddCustomerForm: React.FC = () => {
                 </div>
               ) : null}
             </div>
-          </div>
+          </AnimationForm>
           {/* Post Code  */}
-          <div className="w-full">
+          <AnimationForm fromLeft={false} className="w-full">
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               Post Code
             </label>
@@ -622,12 +623,12 @@ const AddCustomerForm: React.FC = () => {
                 </div>
               ) : null}
             </div>
-          </div>
+          </AnimationForm>
         </div>
 
         <div className="mb-3 lg:flex gap-3">
           {/* URL  */}
-          <div className="w-full mb-2 lg:mb-0">
+          <AnimationForm className="w-full mb-2 lg:mb-0">
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               URL
             </label>
@@ -642,9 +643,9 @@ const AddCustomerForm: React.FC = () => {
                 className="w-full border border-stroke bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
             </div>
-          </div>
+          </AnimationForm>
           {/* SSL  */}
-          <div className="w-full">
+          <AnimationForm fromLeft={false} className="w-full">
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               SSL
             </label>
@@ -659,12 +660,12 @@ const AddCustomerForm: React.FC = () => {
                 className="w-full border border-stroke bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
             </div>
-          </div>
+          </AnimationForm>
         </div>
 
         <div className="mb-3 lg:flex gap-3">
           {/* SiteMap  */}
-          <div className="w-full mb-2 lg:mb-0">
+          <AnimationForm className="w-full mb-2 lg:mb-0">
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               Site Map
             </label>
@@ -684,9 +685,9 @@ const AddCustomerForm: React.FC = () => {
                 </div>
               ) : null}
             </div>
-          </div>
+          </AnimationForm>
           {/* HT Access  */}
-          <div className="w-full">
+          <AnimationForm fromLeft={false} className="w-full">
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               HT Access
             </label>
@@ -706,12 +707,12 @@ const AddCustomerForm: React.FC = () => {
                 </div>
               ) : null}
             </div>
-          </div>
+          </AnimationForm>
         </div>
 
         <div className="mb-3 lg:flex gap-3">
           {/* GA Code  */}
-          <div className="w-full mb-2 lg:mb-0">
+          <AnimationForm className="w-full mb-2 lg:mb-0">
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               GA Code
             </label>
@@ -731,9 +732,9 @@ const AddCustomerForm: React.FC = () => {
                 </div>
               ) : null}
             </div>
-          </div>
+          </AnimationForm>
           {/* New GA Code  */}
-          <div className="w-full">
+          <AnimationForm fromLeft={false} className="w-full">
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               New GA Code
             </label>
@@ -753,12 +754,12 @@ const AddCustomerForm: React.FC = () => {
                 </div>
               ) : null}
             </div>
-          </div>
+          </AnimationForm>
         </div>
 
         <div className="mb-3 lg:flex gap-3">
           {/* Status */}
-          <div className="w-full mb-2 lg:mb-0">
+          <AnimationForm className="w-full mb-2 lg:mb-0">
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               Status
             </label>
@@ -797,9 +798,9 @@ const AddCustomerForm: React.FC = () => {
                 </div>
               ) : null}
             </div>
-          </div>
+          </AnimationForm>
           {/* Logo */}
-          <div className="w-full">
+          <AnimationForm fromLeft={false} className="w-full">
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               Logo
             </label>
@@ -825,11 +826,11 @@ const AddCustomerForm: React.FC = () => {
                 </div>
               )}
             </div>
-          </div>
+          </AnimationForm>
         </div>
 
         {/* Live Date  */}
-        <div className="w-full">
+        <AnimationForm fromLeft={false} className="w-full">
           <label className="mb-2.5 block font-medium text-black dark:text-white">
             Live Date
           </label>
@@ -839,7 +840,7 @@ const AddCustomerForm: React.FC = () => {
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "w-[250px] justify-start text-left font-normal",
+                    "w-[250px] justify-start text-left font-normal text-black",
                     !date && "text-muted-foreground"
                   )}
                 >
@@ -920,7 +921,7 @@ const AddCustomerForm: React.FC = () => {
               </PopoverContent>
             </Popover> */}
           </div>
-        </div>
+        </AnimationForm>
 
         <div className="mb-3 mt-3">
           <Button
