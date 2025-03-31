@@ -756,7 +756,7 @@ const AllForm = ({
           Select Type
         </label>
         <Select2
-          className="text-[0.8rem] boxShadow"
+          className="text-[0.8rem] boxShadow rounded-0"
           closeMenuOnSelect={true}
           components={animatedComponents}
           options={contentOptions}
@@ -1149,7 +1149,7 @@ const AllForm = ({
               <Button
                 type="submit"
                 value="Sign In"
-                className="cursor-pointer border-0 rounded-lg p-2 h-9 bg-[#013642] px-4 py-1 text-white transition hover:bg-opacity-90"
+                className="cursor-pointer border-0  bg-[#004d4b] hover:bg-[#004d4b] hover:scale-[95%] p-2 h-9 px-4 py-1 text-white transition hover:bg-opacity-90"
               >
                 {isUserValid ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -1496,7 +1496,7 @@ const AllForm = ({
               <Button
                 type="submit"
                 value=""
-                className="cursor-pointer  border-0 rounded-lg p-2 h-9 bg-[#013642] px-4 py-1 text-white transition hover:bg-opacity-90"
+                className="cursor-pointer  border-0  bg-[#004d4b] hover:bg-[#004d4b] hover:scale-[95%] p-2 h-9 px-4 py-1 text-white transition hover:bg-opacity-90"
               >
                 {isCustomerValid ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -2065,7 +2065,7 @@ const AllForm = ({
               <Button
                 type="submit"
                 value="Sign In"
-                className="cursor-pointer border-0 rounded-lg p-2 h-9 bg-[#013642] px-4 py-1 text-white transition hover:bg-opacity-90"
+                className="cursor-pointer border-0 p-2 h-9 bg-[#004d4b] hover:bg-[#004d4b] hover:scale-[95%] px-4 py-1 text-white transition hover:bg-opacity-90"
               >
                 {isUserValid ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -2508,7 +2508,7 @@ const AllForm = ({
               <Button
                 type="submit"
                 value="Sign In"
-                className="cursor-pointer border-0 rounded-lg p-2 h-9 bg-[#013642] px-4 py-1 text-white transition hover:bg-opacity-90"
+                className="cursor-pointer border-0 p-2 h-9 bg-[#004d4b] hover:bg-[#004d4b] hover:scale-[95%] px-4 py-1 text-white transition hover:bg-opacity-90"
               >
                 {isUserValid ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -2841,7 +2841,7 @@ const AllForm = ({
             <div className="mb-3">
               <Button
                 type="submit"
-                className="cursor-pointer border-0 p-2 h-9 bg-[#013642] px-4 py-1 text-white transition hover:bg-opacity-90"
+                className="cursor-pointer border-0 p-2 h-9 bg-[#004d4b] hover:bg-[#004d4b] hover:scale-[95%] px-4 py-1 text-white transition hover:bg-opacity-90"
               >
                 {isUserValid ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />

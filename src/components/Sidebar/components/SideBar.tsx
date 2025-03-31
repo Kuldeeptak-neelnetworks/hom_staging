@@ -127,7 +127,7 @@ const menuItems = [
   {
     href: "/employeeLeaveManagement",
     icon: <EmployeeLeaveLogoSVG cssClass={"sidebar-icon-svg"} />,
-    label: "Emplyee Leave",
+    label: "Employee Leave",
   },
 ];
 

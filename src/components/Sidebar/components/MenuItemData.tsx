@@ -35,7 +35,7 @@ const MenuItemData = memo((props: any) => {
     <li className="my-2">
       <Link href={href} className="hover:text-gray-400">
         <motion.div
-          className={`flex items-center p-2 rounded transition-all 
+          className={`flex items-center p-2 transition-all 
     ${
       isActive
         ? "bg-gradient-to-r from-white to-green-100 text-green-800"
