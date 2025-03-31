@@ -204,7 +204,7 @@ export default function LeaveSection({
                         config={{
                           steps: {
                             label: "Leaves",
-                            color: "#859bc9",
+                            color: "#004040",
                           },
                         }}
                       >
