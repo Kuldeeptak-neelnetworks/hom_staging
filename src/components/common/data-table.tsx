@@ -34,6 +34,8 @@ export function DataTable<TData, TValue>({
   loading,
   text,
 }: DataTableProps<TData, TValue>) {
+  const scrollContainerRef = React.useRef<HTMLDivElement>(null);
+  const [isScrolling, setIsScrolling] = React.useState(false);
   // return (
   //   <div className="space-y-4 text-[#676879]">
   //     <div className=" border">
@@ -134,6 +136,17 @@ export function DataTable<TData, TValue>({
   //     <DataTablePagination table={tableInstance} />
   //   </div>
   // );
+  React.useEffect(() => {
+    const handleScroll = () => {
+      if (scrollContainerRef.current) {
+        setIsScrolling(scrollContainerRef.current.scrollLeft > 0);
+      }
+    };
+
+    const container = scrollContainerRef.current;
+    container?.addEventListener("scroll", handleScroll);
+    return () => container?.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <motion.div
@@ -143,9 +156,12 @@ export function DataTable<TData, TValue>({
       className="space-y-4 text-[#676879]"
     >
       <div className="border">
-        <div className="h-[82vh] overflow-x-auto bg-[#fff] boxShadow">
-          <Table className="bg-[#fff]">
-            <TableHeader className="bg-[#29354f] sticky top-0 z-0">
+        <div
+          ref={scrollContainerRef}
+          className="h-[82vh] overflow-x-auto bg-[#fff] boxShadow"
+        >
+          <Table className="bg-[#fff]" isScrolling={isScrolling}>
+            <TableHeader className="bg-[#29354f] sticky top-0 z-50">
               {tableInstance?.getHeaderGroups()?.map((headerGroup: any) => (
                 <TableRow key={headerGroup?.id}>
                   {headerGroup?.headers?.map((header: any) => (
@@ -153,6 +169,7 @@ export function DataTable<TData, TValue>({
                       key={header?.id}
                       colSpan={header?.colSpan}
                       className={`text-nowrap text-white`}
+                      isScrolling={isScrolling}
                     >
                       {header?.isPlaceholder
                         ? null
@@ -188,7 +205,7 @@ export function DataTable<TData, TValue>({
                           isHighlighted
                             ? "bg-[#ced7ea]" // Highlighted row color
                             : index % 2 !== 0
-                            ? "bg-[#d3eae9]" // Light gray for even rows
+                            ? "bg-[#E2F2F1]" // Light gray for even rows
                             : "bg-white" // White for odd rows
                         }`}
                         data-state={row.getIsSelected() && "selected"}
@@ -198,6 +215,7 @@ export function DataTable<TData, TValue>({
                             key={cell.id}
                             rowIndex={index}
                             className="text-nowrap"
+                            isScrolling={isScrolling}
                           >
                             {flexRender(
                               cell.column.columnDef.cell,

@@ -4,9 +4,9 @@ import { cn } from "@/lib/utils";
 
 const Table = React.forwardRef<
   HTMLTableElement,
-  React.HTMLAttributes<HTMLTableElement>
->(({ className, ...props }, ref) => (
-  <div className="relative w-full   pb-2">
+  React.HTMLAttributes<HTMLTableElement> & { isScrolling?: boolean }
+>(({ className, isScrolling, ...props }, ref) => (
+  <div className="relative w-full">
     <table
       ref={ref}
       className={cn(
@@ -14,6 +14,7 @@ const Table = React.forwardRef<
         className
       )}
       {...props}
+      data-scrolling={isScrolling ? "true" : "false"} // Pass scroll state
     />
   </div>
 ));
@@ -71,12 +72,13 @@ TableRow.displayName = "TableRow";
 
 const TableHead = React.forwardRef<
   HTMLTableCellElement,
-  React.ThHTMLAttributes<HTMLTableCellElement>
->(({ className, ...props }, ref) => (
+  React.ThHTMLAttributes<HTMLTableCellElement> & { isScrolling?: boolean }
+>(({ className, isScrolling, ...props }, ref) => (
   <th
     ref={ref}
     className={cn(
-      "h-10 px-4 text-left  bg-[#0f464a] align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 overflow-x-auto first:sticky first:left-0 first:z-40 first:bg-[#0f464a] first:shadow-right",
+      "h-10 px-4 text-left  bg-[#0f464a] align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 overflow-x-auto first:sticky first:left-0 z-40 first:bg-[#0f464a] first:shadow-right",
+      isScrolling ? "first:shadow-md" : "",
       className
     )}
     {...props}
@@ -96,16 +98,20 @@ TableHead.displayName = "TableHead";
 
 const TableCell = React.forwardRef<
   HTMLTableCellElement,
-  React.TdHTMLAttributes<HTMLTableCellElement> & { rowIndex?: number }
->(({ className, rowIndex, ...props }, ref) => (
+  React.TdHTMLAttributes<HTMLTableCellElement> & { rowIndex?: number } & {
+    isScrolling?: boolean;
+  }
+>(({ className, isScrolling, rowIndex, ...props }, ref) => (
   <td
     ref={ref}
     className={cn(
       "px-4 h-8 align-middle [&:has([role=checkbox])]:pr-0 first:sticky first:left-0 z-10",
-      "first:shadow-right transition-shadow duration-300 ",
       rowIndex !== undefined && rowIndex % 2 !== 0
-        ? "bg-[#d3eae9]"
+        ? "bg-[#E2F2F1]"
         : "bg-white",
+      isScrolling
+        ? "first:bg-[#437c7c] first:text-white  first:duration-700"
+        : "first:duration-700",
       className
     )}
     {...props}
