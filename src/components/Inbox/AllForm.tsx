@@ -756,7 +756,8 @@ const AllForm = ({
           Select Type
         </label>
         <Select2
-          className="text-[0.8rem] boxShadow rounded-0"
+          className="text-[0.8rem] boxShadow rounded-0  boxShadow react-select-custom-styling__container"
+          classNamePrefix="react-select-custom-styling"
           closeMenuOnSelect={true}
           components={animatedComponents}
           options={contentOptions}
@@ -800,23 +801,6 @@ const AllForm = ({
                   //   errorToastingFunction("Error loading Client");
                   //   console.error("Async Paginate Client:", error);
                   // }}
-                  styles={{
-                    option: (provided, state) => ({
-                      ...provided,
-                      backgroundColor: state.isSelected ? "#007bff" : "white",
-                      cursor: "pointer",
-                      color: state.isSelected ? "white" : "black",
-                      ":hover": {
-                        backgroundColor: state.isSelected
-                          ? "#007bff"
-                          : "#f1f3f5",
-                      },
-                    }),
-                    singleValue: (provided) => ({
-                      ...provided,
-                      color: "black",
-                    }),
-                  }}
                 />
               </div>
               {/* <div className="relative">
@@ -1030,8 +1014,18 @@ const AllForm = ({
                   <SelectContent>
                     <SelectGroup>
                       <SelectLabel>Select</SelectLabel>
-                      <SelectItem value="Standard">Standard</SelectItem>
-                      <SelectItem value="Urgent">Urgent</SelectItem>
+                      <SelectItem
+                        value="Standard"
+                        className="hover:bg-[#e9f5f5] data-[state=checked]:bg-[#e9f5f5] mb-1"
+                      >
+                        Standard
+                      </SelectItem>
+                      <SelectItem
+                        value="Urgent"
+                        className="hover:bg-[#e9f5f5] data-[state=checked]:bg-[#e9f5f5]"
+                      >
+                        Urgent
+                      </SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
@@ -1061,8 +1055,18 @@ const AllForm = ({
                     <SelectContent>
                       <SelectGroup>
                         <SelectLabel>Select</SelectLabel>
-                        <SelectItem value="Live Site">Live Site</SelectItem>
-                        <SelectItem value="Demo Link">Demo Link</SelectItem>
+                        <SelectItem
+                          value="Live Site"
+                          className="hover:bg-[#e9f5f5] data-[state=checked]:bg-[#e9f5f5] mb-1"
+                        >
+                          Live Site
+                        </SelectItem>
+                        <SelectItem
+                          value="Demo Link"
+                          className="hover:bg-[#e9f5f5] data-[state=checked]:bg-[#e9f5f5]"
+                        >
+                          Demo Link
+                        </SelectItem>
                       </SelectGroup>
                     </SelectContent>
                   </Select>
