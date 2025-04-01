@@ -111,6 +111,7 @@ export default function SideDrawer({
     fetchCopywriterUpdateData,
     fetchProductFlowUpdateData,
     fetchWebsiteContentUpdateData,
+    websiteContentUpdateData,
     copywriterUpdateData,
   }: any = useEditorStore();
 
@@ -213,7 +214,7 @@ export default function SideDrawer({
           </>
         )}
       </div>
-      <Dialog open={open} onClose={setOpen} className="relative z-[120]">
+      <Dialog open={open} onClose={setOpen} className="relative z-[54]">
         <div
           onClick={() => setOpen(false)}
           className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"

@@ -168,7 +168,7 @@ const ProductflowContent: React.FC = () => {
         Product Flow
       </div> */}
 
-      <div className="w-[300px] lg:absolute mt-1  z-[100] ">
+      <div className="w-[300px] lg:absolute mt-1 z-[52] ">
         <Select
           className="text-[0.8rem] boxShadow"
           closeMenuOnSelect={false}

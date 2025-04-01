@@ -53,8 +53,8 @@ const DeleteDialoge = ({
             <Cross1Icon className="h-6 w-6 p-1 " />
           </>
         ) : (
-          <div className="flex items-center">
-            <TrashIcon className="h-6 w-7 p-1 hover:bg-[#004d4b] text-black hover:text-[white] " />
+          <div className="flex items-center ">
+            <TrashIcon className="h-6 w-7 p-1  text-black hover:text-[white] " />
             <span className="text-gray-700 text-[0.8rem] ml-2">
               {deleteText}
             </span>
@@ -62,7 +62,7 @@ const DeleteDialoge = ({
         )}
       </DialogTrigger>
       {/* form Section  */}
-      <DialogContent className="sm:max-w-[500px]">
+      <DialogContent className="sm:max-w-[500px] z-[120]">
         <DialogHeader>
           <DialogTitle className="flex justify-center">
             <div style={{ fontSize: "14px" }}>

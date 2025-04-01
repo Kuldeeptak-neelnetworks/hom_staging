@@ -246,9 +246,9 @@ const OrdersContent = () => {
         <BreadcrumbSection crumbs={crumbs} />
       </div> */}
 
-      <div className="w-[300px] md:w-[500px] lg:absolute md:flex gap-2">
+      <div className="w-[300px] md:w-[500px] lg:absolute z-[52] md:flex gap-2">
         <Select
-          className="text-[0.8rem] border-red-400 w-full mb-2 z-[50] md:mb-0 boxShadow"
+          className="text-[0.8rem] border-red-400 w-full mb-2  md:mb-0 boxShadow"
           closeMenuOnSelect={false}
           components={animatedComponents}
           isMulti

@@ -402,6 +402,7 @@ export const columns = [
       <DataTableColumnHeader column={column} title="Update" />
     ),
     cell: ({ row }: any) => {
+      console.log("row?.original", row?.original);
       return (
         <SideDrawer
           websiteContentId={row?.original?._id}

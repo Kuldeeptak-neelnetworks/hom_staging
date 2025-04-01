@@ -456,7 +456,7 @@ const EditChatModel = ({
   // }, [userData]);
 
   useEffect(() => {
-    userData?.forEach((item: any) => {
+    userData?.users?.forEach((item: any) => {
       if (!atValues.some((value) => value.id === item._id)) {
         // Check if the 'id' already exists in 'atValues'
         atValues.push({

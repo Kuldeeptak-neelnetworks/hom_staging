@@ -159,7 +159,7 @@ const TechnicalTrackerContent: React.FC = () => {
         Technical Tracker
       </div> */}
 
-      <div className="w-[300px] lg:absolute z-[100] mt-2">
+      <div className="w-[300px] lg:absolute z-[52] mt-2">
         <Select
           className="text-[0.8rem] boxShadow"
           closeMenuOnSelect={false}

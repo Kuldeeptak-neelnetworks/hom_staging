@@ -172,7 +172,7 @@ const UpdateAmendment = ({ amendmentId }: any) => {
           <React.Fragment key={editor.id || index}>
             {editor.isPinned === true && (
               <div className="flex justify-end mb-2">
-                <p className="bg-orange-400 text-white flex items-center px-3 py-1 rounded-full text-xs shadow-lg">
+                <p className="bg-orange-400 text-white flex items-center px-3 py-1  text-xs shadow-lg">
                   <DrawingPinIcon className="mr-1 h-4 w-4" />
                   Pinned
                 </p>
@@ -212,7 +212,7 @@ const UpdateAmendment = ({ amendmentId }: any) => {
                         <DotsHorizontalIcon className="h-5 w-5 text-gray-700 hover:text-gray-900" />
                       </div>
                       {isModalOpen && selectedEditorId === editor._id && (
-                        <div className="absolute top-0 right-0 bg-white w-52 z-50  shadow-lg p-4">
+                        <div className="absolute top-0 right-0 bg-white w-52 z-50  shadow-lg p-4 border border-[lightseagreen]">
                           <div className="">
                             <div
                               className="cursor-pointer flex justify-end "
@@ -221,7 +221,7 @@ const UpdateAmendment = ({ amendmentId }: any) => {
                               <Cross1Icon className="h-4 w-4 text-gray-700 hover:text-gray-900" />
                             </div>
 
-                            <div className="flex items-center py-2 hover:bg-slate-100">
+                            <div className="flex items-center py-2 hover:bg-[rgb(149,207,206)] hover:bg-gradient-to-r from-[#84b9b9c4] to-green-50 via-[#84b9b9c4]/95 transition duration-300 ">
                               <DeleteDialoge
                                 id={editor._id}
                                 entity="updates"
@@ -233,7 +233,7 @@ const UpdateAmendment = ({ amendmentId }: any) => {
                                 deleteText="Delete Update"
                               />
                             </div>
-                            <div className="flex items-center py-2 hover:bg-slate-100">
+                            <div className="flex items-center py-2 hover:bg-[rgb(149,207,206)] hover:bg-gradient-to-r from-[#84b9b9c4] to-green-50 via-[#84b9b9c4]/95 transition duration-300">
                               {editor.isPinned ? (
                                 <div
                                   onClick={() => handlePinFalse(editor._id)}
@@ -256,7 +256,7 @@ const UpdateAmendment = ({ amendmentId }: any) => {
                                 </div>
                               )}
                             </div>
-                            <div className="flex items-center py-2 cursor-pointer hover:bg-slate-100">
+                            <div className="flex items-center py-2 cursor-pointer hover:bg-[rgb(149,207,206)] hover:bg-gradient-to-r from-[#84b9b9c4] to-green-50 via-[#84b9b9c4]/95 transition duration-300">
                               <EditChatModel
                                 id={editor._id}
                                 setIsModalOpen={setIsModalOpen}
@@ -324,7 +324,6 @@ const UpdateAmendment = ({ amendmentId }: any) => {
                             handleEdit={""}
                             copywriterId={""}
                             websiteContentId={""}
-                     
                           />
                         </div>
                       )}
@@ -447,7 +446,6 @@ const UpdateAmendment = ({ amendmentId }: any) => {
                                   handleEdit={""}
                                   copywriterId={""}
                                   websiteContentId={""}
-                         
                                 />
                               </div>
                             )}
