@@ -51,7 +51,7 @@ const MonthlySalesBarChart: React.FC<MonthlySalesBarChartProps> = ({
       {
         label: "Total Order Value",
         data: totalOrderValueData,
-        backgroundColor: "rgba(153, 102, 255, 0.6)",
+        backgroundColor: "#0f464ad1",
       },
     ],
   };

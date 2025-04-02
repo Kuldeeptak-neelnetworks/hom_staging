@@ -314,6 +314,7 @@ const CustomersContent: React.FC = () => {
       <div className="w-[300px] lg:absolute  z-[100] mt-2 ">
         <Select
           className="text-[0.8rem] boxShadow border-none"
+          classNamePrefix="react-select-custom-styling"
           closeMenuOnSelect={false}
           isClearable
           components={animatedComponents}
@@ -328,18 +329,18 @@ const CustomersContent: React.FC = () => {
             setPage(1);
           }}
           placeholder="Select a Status"
-          styles={{
-            option: (provided, state) => ({
-              ...provided,
-              backgroundColor: state.isSelected
-                ? "#0f464a"
-                : provided.backgroundColor,
-              color: state.isSelected ? "white" : provided.color,
-              ":hover": {
-                backgroundColor: state.isSelected ? "#29354f" : "#f0f0f0",
-              },
-            }),
-          }}
+          // styles={{
+          //   option: (provided, state) => ({
+          //     ...provided,
+          //     backgroundColor: state.isSelected
+          //       ? "#0f464a"
+          //       : provided.backgroundColor,
+          //     color: state.isSelected ? "white" : provided.color,
+          //     ":hover": {
+          //       backgroundColor: state.isSelected ? "#29354f" : "#f0f0f0",
+          //     },
+          //   }),
+          // }}
         />
       </div>
 

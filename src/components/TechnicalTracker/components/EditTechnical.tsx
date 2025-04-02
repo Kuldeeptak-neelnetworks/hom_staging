@@ -29,6 +29,7 @@ import {
   successToastingFunction,
 } from "@/common/commonFunctions";
 import { useTechnicalStore } from "@/Store/TechnicalStore";
+import Link from "next/link";
 
 interface TechnicalDetailType {
   id: number;
@@ -152,6 +153,9 @@ const EditTechnical = () => {
           : "loading..."}
       </div>
       <div className=" flex gap-5 justify-center">
+        <div className="my-6 text-[0.8rem] bg-[#fff] hover:bg-gray-300 h-fit px-2 py-1  cursor-pointer hidden text-center sm:block w-fit boxShadow ">
+          <Link href={`/technical`}>Back</Link>
+        </div>
         <ScrollArea className="h-[80vh]   sm:px-3 sm:py-3 w-[100%] xl:w-[75vw]">
           <form
             onSubmit={handleSubmit}

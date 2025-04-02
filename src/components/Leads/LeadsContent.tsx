@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { columns } from "./components/columns";
 import { DataTable } from "../common/data-table";
 import AddLeadDialoge from "./components/AddLeadDialoge";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import BreadcrumbSection from "../common/BreadcrumbSection";
 import { useLeadStore } from "@/Store/LeadStore";
 import {
@@ -34,6 +34,8 @@ import makeAnimated from "react-select/animated";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import SideDrawer from "../common/Editor/SideDrawer";
+import CustomPagination from "../CustomPagination/CustomPagination";
+import { debounce } from "lodash";
 
 const animatedComponents = makeAnimated();
 
@@ -70,11 +72,13 @@ const LeadsContent: React.FC = () => {
     outcome: [],
   });
 
-  const data = useMemo(() => allLeads, [allLeads]);
-
-  useEffect(() => {
-    fetchAllLeadData();
-  }, []);
+  const [searchInput, setSearchInput] = useState("");
+  const [totalPages, setTotalPages] = useState(1);
+  const initialPage = Number(searchParams.get("page")) || 1;
+  const initialLimit = Number(searchParams.get("limit")) || 20;
+  const [page, setPage] = useState(initialPage);
+  const [limit, setLimit] = useState(initialLimit);
+  const pathname = usePathname();
 
   const outcome = [
     { label: "Appointement Made", value: "Appointement Made" },
@@ -83,6 +87,18 @@ const LeadsContent: React.FC = () => {
     { label: "Old Client", value: "Old Client" },
     { label: "Arrange an Appointment", value: "Arrange an Appointment" },
   ];
+
+  const debouncedSearch = useCallback(
+    debounce((input) => {
+      fetchAllLeadData({ page, limit, searchInput: input, filters });
+    }, 500),
+    [fetchAllLeadData, filters, page, limit]
+  );
+
+  useEffect(() => {
+    debouncedSearch(searchInput);
+    return () => debouncedSearch.cancel();
+  }, [searchInput, page, limit, filters, debouncedSearch]);
 
   useEffect(() => {
     if (
@@ -98,36 +114,7 @@ const LeadsContent: React.FC = () => {
     }
   }, [leadData?.leads, leadData, router]);
 
-  // Table Instance
-  // const tableInstance = useReactTable({
-  //   data,
-  //   columns,
-  //   // initialState: {
-  //   //   pagination: {
-  //   //     pageIndex: 2, //custom initial page index
-  //   //     pageSize: 20, //custom default page size
-  //   //   },
-  //   // },
-  //   state: {
-  //     sorting,
-  //     columnVisibility,
-  //     rowSelection,
-  //     globalFilter: filtering,
-  //     columnFilters,
-  //   },
-  //   onGlobalFilterChange: setFiltering,
-  //   enableRowSelection: true,
-  //   onRowSelectionChange: setRowSelection,
-  //   onSortingChange: setSorting,
-  //   onColumnFiltersChange: setColumnFilters,
-  //   onColumnVisibilityChange: setColumnVisibility,
-  //   getCoreRowModel: getCoreRowModel(),
-  //   getFilteredRowModel: getFilteredRowModel(),
-  //   getPaginationRowModel: getPaginationRowModel(),
-  //   getSortedRowModel: getSortedRowModel(),
-  //   getFacetedRowModel: getFacetedRowModel(),
-  //   getFacetedUniqueValues: getFacetedUniqueValues(),
-  // });
+  const data = useMemo(() => allLeads, [allLeads]);
 
   const tableInstance = useReactTable({
     data,
@@ -174,8 +161,8 @@ const LeadsContent: React.FC = () => {
 
   useEffect(() => {
     if (Array.isArray(leadData?.leads)) {
-      const filterByOutcome: any =
-        leadData &&
+      const filterByStatus =
+        leadData?.leads &&
         leadData?.leads?.filter((elem: any) => {
           if (filters?.outcome?.length > 0) {
             return filters?.outcome?.includes(elem?.outcome);
@@ -184,9 +171,19 @@ const LeadsContent: React.FC = () => {
           }
         });
 
-      setAllLeads(filterByOutcome);
+      setAllLeads(filterByStatus);
     }
   }, [filters?.outcome, leadData?.leads]);
+
+  const onPageChange = (newPage: number, newLimit: number) => {
+    setPage(newPage);
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.set("page", newPage.toString());
+    params.set("limit", newLimit.toString());
+
+    router.push(`${pathname}?${params.toString()}`);
+  };
 
   return (
     <div className="px-4 py-2 relative">
@@ -198,32 +195,36 @@ const LeadsContent: React.FC = () => {
       <div className="w-[300px] lg:absolute z-[52] mt-2">
         <Select
           className="text-[0.8rem] boxShadow"
+          classNamePrefix="react-select-custom-styling"
           closeMenuOnSelect={false}
+          isClearable
           components={animatedComponents}
-          isMulti
           options={outcome}
           // value={filters.outcome}
-          onChange={(selectedOptions) => {
-            const selectedValues =
-              selectedOptions &&
-              selectedOptions.map((option: any) => option.value);
+          onChange={(selectedOption: any) => {
+            const selectedValues = selectedOption ? selectedOption.value : [];
             setFilters((prev: any) => ({
               ...prev,
               outcome: selectedValues,
             }));
+            setPage(1);
           }}
-          placeholder="Select Outcome"
+          placeholder="Select an Outcome"
           // className="react-select-custom-styling__container "
           // classNamePrefix="react-select-custom-styling"
         />
       </div>
 
       <div className="md:flex justify-center sm:justify-end my-2">
-        {allLeads?.length > 0 ? (
+        {/* {allLeads?.length > 0 ? (
           <PageHeader tableInstance={tableInstance} />
         ) : (
           ""
-        )}
+        )} */}
+        <PageHeader
+          tableInstance={tableInstance}
+          setSearchInput={setSearchInput}
+        />
         {/* <AddLeadDialoge getMyLeadData={fetchAllLeadData} /> */}
         <div className="flex justify-normal lg:justify-end ">
           <Link href={"/leads/addLead"}>
@@ -237,11 +238,19 @@ const LeadsContent: React.FC = () => {
         </div>
       </div>
       <DataTable
-        text=""
+        text="lead"
         queryParams={queryParams ? queryParams : ""}
         columns={columns}
         tableInstance={tableInstance}
         loading={loading}
+      />
+      <CustomPagination
+        setLimit={setLimit}
+        limit={limit}
+        page={page}
+        onPageChange={onPageChange}
+        data={allLeads}
+        totalPages={totalPages}
       />
     </div>
   );

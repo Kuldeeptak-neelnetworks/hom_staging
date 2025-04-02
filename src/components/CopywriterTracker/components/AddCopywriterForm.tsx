@@ -31,6 +31,7 @@ import { useUserStore } from "@/Store/UserStore";
 import { useCustomerStore } from "@/Store/CustomerStore";
 import { useCopywriterStore } from "@/Store/CopywriterStore";
 import { format, getMonth, getYear, setMonth, setYear } from "date-fns";
+import Link from "next/link";
 const AddCopywriterForm = ({}: any) => {
   const router = useRouter();
   const [customerLoading, setCustomerLoading] = useState(false);
@@ -173,6 +174,9 @@ const AddCopywriterForm = ({}: any) => {
       </div>
 
       <div className="flex justify-center">
+        <div className="my-6 text-[0.8rem] bg-[#fff] hover:bg-gray-300 h-fit px-2 py-1  cursor-pointer hidden text-center sm:block w-fit boxShadow ">
+          <Link href={`/copywriter`}>Back</Link>
+        </div>
         <ScrollArea className="h-[80vh]  px-3 py-3 w-[100%] xl:w-[56vw]">
           <form
             onSubmit={handleSubmit}

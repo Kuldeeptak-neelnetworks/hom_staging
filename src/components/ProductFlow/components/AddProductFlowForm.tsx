@@ -30,6 +30,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { useUserStore } from "@/Store/UserStore";
 import { useCustomerStore } from "@/Store/CustomerStore";
 import { useProductflowStore } from "@/Store/ProductFlowStore";
+import Link from "next/link";
 
 const AddProductFlowForm = ({}: any) => {
   const router = useRouter();
@@ -314,6 +315,9 @@ const AddProductFlowForm = ({}: any) => {
       </div>
 
       <div className="flex justify-center">
+        <div className="my-6 text-[0.8rem] bg-[#fff] hover:bg-gray-300 h-fit px-2 py-1  cursor-pointer hidden text-center sm:block w-fit boxShadow ">
+          <Link href={`/productFlow`}>Back</Link>
+        </div>
         <ScrollArea className="h-[80vh]   px-3 py-3 w-[100%] xl:w-[56vw] ">
           <form
             onSubmit={handleSubmit}
@@ -758,7 +762,7 @@ const AddProductFlowForm = ({}: any) => {
             <div className="my-6 ">
               <Button
                 type="submit"
-                className="lg:w-[6vw] cursor-pointer  border border-primary bg-primary px-4 py-1 text-white transition hover:bg-opacity-90 text-md"
+                className="lg:w-[6vw] cursor-pointer  border border-primary bg-[#004d4b] hover:bg-[#004d4b] hover:scale-[95%]  px-4 py-1 text-white transition hover:bg-opacity-90 text-md"
               >
                 {isProductFlowValid ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />

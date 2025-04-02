@@ -44,13 +44,13 @@ const RenewalsBarChart: React.FC<RenewalsBarChartProps> = ({
         label: "Count",
         data: countData,
         // backgroundColor: "rgba(75, 192, 192, 0.6)",
-        backgroundColor: "rgba(0, 175, 0, 0.66)",
+        backgroundColor: "#0f464ad1",
       },
       {
         label: "Total Order Value",
         data: totalOrderValueData,
         // backgroundColor: "rgba(153, 102, 255, 0.6)",
-        backgroundColor: "rgba(160, 92, 174, 0.98)",
+        backgroundColor: "rgba(75, 192, 192, 0.6)",
       },
     ],
   };

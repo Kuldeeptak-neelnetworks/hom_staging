@@ -35,6 +35,7 @@ import * as Yup from "yup";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import AnimationForm from "@/components/common/Animation/AnimationForm";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const crumbs = [
   {
@@ -246,6 +247,9 @@ const EditLeads = ({}) => {
         transition={{ duration: 0.6, ease: "easeInOut" }}
         className="flex justify-center"
       >
+        <div className="my-6 text-[0.8rem] bg-[#fff] hover:bg-gray-300 h-fit px-2 py-1  cursor-pointer hidden text-center sm:block w-fit boxShadow ">
+          <Link href={`/leads`}>Back</Link>
+        </div>
         <ScrollArea className="h-[80vh] px-3 py-3 w-[100%] xl:w-[75vw]">
           <form
             onSubmit={handleSubmit}

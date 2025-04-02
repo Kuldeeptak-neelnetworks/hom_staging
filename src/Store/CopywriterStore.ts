@@ -20,13 +20,15 @@ export type CopywriterState = {
   copywriterData: CopywriterDataType[] | any;
   message?: string;
   loading: boolean;
-  currentPage: number;
-  totalCopywriterTrackers: number;
-  totalPages: number;
 };
 
 export type CopywriterActions = {
-  fetchCopywriterData: (page: any, limit: any) => void;
+  fetchCopywriterData: ({
+    page,
+    limit,
+    searchInput,
+    filters,
+  }: any) => Promise<void>;
   addCopywriterData: (data: any, customerId: string) => void;
 };
 
@@ -34,28 +36,29 @@ export const useCopywriterStore = create<CopywriterState & CopywriterActions>()(
   devtools((set) => ({
     copywriterData: [],
     loading: false,
-    currentPage: 1,
-    totalCopywriterTrackers: 0,
-    totalPages: 0,
 
-    fetchCopywriterData: async (page, limit) => {
+    fetchCopywriterData: async (params) => {
       set({ loading: true });
+      const {
+        page = 1,
+        limit = 20,
+        searchInput = "",
+        filters = [],
+      } = params || {};
       try {
-        // const response = await baseInstance.get("/copywritertrackers");
-        const response = await baseInstance.get("/copywritertrackers", {
-          params: {
-            ...(page && { page }),
-            ...(limit && { limit }),
-          },
-        });
-        // console.log("response", response);
+        const queryParams = new URLSearchParams();
+        if (page) queryParams.append("page", String(page));
+        if (limit) queryParams.append("limit", String(limit));
+        if (searchInput) queryParams.append("search", searchInput);
+        if (filters) queryParams.append("status", filters?.status);
+
+        const response = await baseInstance.get(
+          `/copywritertrackers?${queryParams.toString()}`
+        );
+
         if (response.status === 200) {
           set({
-            copywriterData: response.data?.data?.copywriterTrackers,
-            currentPage: response.data?.data?.currentPage,
-            totalCopywriterTrackers:
-              response.data?.data?.totalCopywriterTrackers,
-            totalPages: response.data?.data?.totalPages,
+            copywriterData: response?.data?.data,
             loading: false,
           });
         } else {

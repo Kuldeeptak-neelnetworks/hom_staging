@@ -37,6 +37,7 @@ import { useUserStore } from "@/Store/UserStore";
 import { useCustomerStore } from "@/Store/CustomerStore";
 import { useAmendmentStore } from "@/Store/AmendmentStore";
 import { AsyncPaginate } from "react-select-async-paginate";
+import Link from "next/link";
 
 interface AddAmendmentFormProps {
   setOpen: (newValue: boolean | ((prevCount: boolean) => boolean)) => void;
@@ -297,6 +298,9 @@ const AddAmendmentForm = ({}: any) => {
       </div>
 
       <div className="flex justify-center">
+        <div className="my-6 text-[0.8rem] bg-[#fff] hover:bg-gray-300 h-fit px-2 py-1  cursor-pointer hidden text-center sm:block w-fit boxShadow ">
+          <Link href={`/amendment`}>Back</Link>
+        </div>
         <ScrollArea className="h-[80vh]  px-3 py-3 w-[100%] xl:w-[75vw]">
           <form
             onSubmit={handleSubmit}

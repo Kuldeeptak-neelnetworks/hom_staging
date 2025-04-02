@@ -133,7 +133,7 @@ export const columns = [
     cell: ({ row }: any) => (
       <SideDrawer
         leadId={row?.original?._id}
-        length={row?.original?.updates?.length}
+        length={row?.original?.updateCount}
         customerName={
           row?.original?.customer_id?.companyName
             ? row?.original?.customer_id?.companyName
@@ -199,9 +199,9 @@ export const columns = [
                 </Avatar>
               </TooltipCommon> */}
               <UserProfileHover
-                picture={row?.original?.generated_by?.avatar}
-                name={row?.original?.generated_by?.fullName}
-                designation={row?.original?.generated_by?.avatar?.role}
+                picture={row?.original?.generatedByUser?.avatar}
+                name={row?.original?.generatedByUser?.fullName}
+                designation={row?.original?.generatedByUser?.role}
               />
             </div>
           );

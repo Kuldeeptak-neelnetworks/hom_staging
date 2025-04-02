@@ -105,7 +105,7 @@ export const columns = [
       return (
         <SideDrawer
           copywriterId={row?.original?._id}
-          length={row?.original?.updates?.length}
+          length={row?.original?.updateCount}
           customerName={
             row?.original?.customer?.companyName &&
             row?.original?.customer?.companyName

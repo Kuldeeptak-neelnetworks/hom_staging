@@ -154,7 +154,7 @@
 }
 .react-select-custom-styling__option--is-selected:hover {
   /* background-color: #29354f !important; */
-  color: #fff;
+  color: black !important;
 }
 /* ================================= */
 

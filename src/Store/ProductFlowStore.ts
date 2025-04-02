@@ -12,45 +12,70 @@ import { devtools } from "zustand/middleware";
 export type ProductFlowDataType = {
   id: number;
   customer: any;
-  currentStage:string;
-  datePhase1Instructed:string,
-  datePhase2Instructed:string,
-  demoLink:string,
-  demoCompletedDate:string,
-  liveDate:string,
-  notes:string
-
-
+  currentStage: string;
+  datePhase1Instructed: string;
+  datePhase2Instructed: string;
+  demoLink: string;
+  demoCompletedDate: string;
+  liveDate: string;
+  notes: string;
 };
 
 export type ProductFlowState = {
-productFlowData: ProductFlowDataType[] | any;
+  productFlowData: ProductFlowDataType[] | any;
   message?: string;
   loading: boolean;
 };
 
 export type ProductFlowActions = {
-  fetchProductFlowData: () => void;
+  fetchProductFlowData: ({
+    page,
+    limit,
+    searchInput,
+    filters,
+  }: any) => Promise<void>;
   addProductFlowData: (data: any, customerId: string) => void;
 };
 
-export const useProductflowStore = create<ProductFlowState & ProductFlowActions>()(
+export const useProductflowStore = create<
+  ProductFlowState & ProductFlowActions
+>()(
   devtools((set) => ({
     productFlowData: [],
     loading: false,
 
-    fetchProductFlowData: async () => {
+    fetchProductFlowData: async (params) => {
       set({ loading: true });
+      const {
+        page = 1,
+        limit = 20,
+        searchInput = "",
+        filters = [],
+      } = params || {};
       try {
-        const response = await baseInstance.get("/productflows");
+        const queryParams = new URLSearchParams();
+        if (page) queryParams.append("page", String(page));
+        if (limit) queryParams.append("limit", String(limit));
+        if (searchInput) queryParams.append("search", searchInput);
+        if (filters) queryParams.append("currentStage", filters?.currentStage);
+
+        const response = await baseInstance.get(
+          `/productflows?${queryParams.toString()}`
+        );
         if (response.status === 200) {
-          set({ productFlowData: response.data?.data?.productFlows, loading: false });
+          set({
+            productFlowData: response.data?.data?.productFlows,
+            loading: false,
+          });
         } else {
           set({ productFlowData: response.data?.message, loading: false });
         }
       } catch (error: any) {
         logOutFunction(error?.response?.data?.message);
-        set({ productFlowData: error?.response?.data?.message, loading: false });
+        set({
+          productFlowData: error?.response?.data?.message,
+          loading: false,
+        });
       }
     },
 

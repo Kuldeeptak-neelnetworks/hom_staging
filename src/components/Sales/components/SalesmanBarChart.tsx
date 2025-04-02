@@ -52,7 +52,7 @@ const SalesmanBarChart: React.FC<SalesmanBarChartProps> = ({ orderStats }) => {
       {
         label: "Total Order Value",
         data: totalOrderValueData,
-        backgroundColor: "rgba(153, 102, 255, 0.6)",
+        backgroundColor: "#0f464ad1",
       },
     ],
   };

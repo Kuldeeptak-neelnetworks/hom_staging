@@ -43,7 +43,7 @@ const productFlowStatusStyles: { [key: string]: string } = {
 
 const renderProductFlowStatus = (productFlowTaskStatus: string) => (
   <div
-    className={`p-1 rounded text-center font-bold border border-l-8 w-[150px] ${
+    className={`p-1  text-center font-bold border border-l-8 w-[150px] ${
       productFlowStatusStyles[productFlowTaskStatus] || ""
     }`}
   >
@@ -108,7 +108,7 @@ export const columns = [
       return (
         <SideDrawer
           productFlowId={row?.original?._id}
-          length={row?.original?.updates?.length}
+          length={row?.original?.updateCount}
           customerName={
             row?.original?.customer?.companyName &&
             row?.original?.customer?.companyName

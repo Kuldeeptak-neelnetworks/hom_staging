@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   Select,
   SelectContent,
@@ -24,8 +24,11 @@ import { LoaderIconSVG } from "@/utils/SVGs/SVGs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useCustomerStore } from "@/Store/CustomerStore";
 import { useWebsiteContentStore } from "@/Store/WebsiteContentStore";
+import Link from "next/link";
 
 const AddWebsiteContentForm = ({}: any) => {
+  const pathname = usePathname();
+  console.log("pathname", pathname);
   const router = useRouter();
   const [customerLoading, setCustomerLoading] = useState(false);
   const [isWebsiteContentValid, setIsWebsiteContentValid] = useState(false);
@@ -214,7 +217,10 @@ const AddWebsiteContentForm = ({}: any) => {
         </div>
 
         <div className="flex justify-center">
-          <ScrollArea className="h-[80vh]   px-3 py-3 w-[100%] xl:w-[56vw]">
+          <div className="my-3 text-[0.8rem] hover:bg-gray-300 h-fit px-2 py-1 rounded cursor-pointer hidden text-center sm:block w-fit bg-[#fff] boxShadow">
+            <Link href={`/websiteContent`}>Back</Link>
+          </div>
+          <ScrollArea className="h-[80vh]   px-3 py-3 w-[100%] xl:w-[75vw]">
             <form
               onSubmit={handleSubmit}
               className="border p-6 text-[0.8rem] bg-[#fff]  boxShadow"
@@ -1003,7 +1009,7 @@ const AddWebsiteContentForm = ({}: any) => {
               <div className="my-6 ">
                 <Button
                   type="submit"
-                  className="lg:w-[6vw] cursor-pointer  border border-primary bg-primary px-4 py-1 text-white transition hover:bg-opacity-90 text-md"
+                  className="lg:w-[6vw] cursor-pointer  border border-primary bg-[#004d4b] hover:bg-[#004d4b] hover:scale-[95%] px-4 py-1 text-white transition hover:bg-opacity-90 text-md"
                 >
                   {isWebsiteContentValid ? (
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />

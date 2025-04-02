@@ -249,6 +249,7 @@ const AmendmentContent: React.FC = () => {
       <div className="w-[300px] lg:absolute z-[52] mt-2 ">
         <Select
           className="text-[0.8rem] boxShadow"
+          classNamePrefix="react-select-custom-styling"
           closeMenuOnSelect={false}
           components={animatedComponents}
           isClearable
@@ -262,18 +263,6 @@ const AmendmentContent: React.FC = () => {
             setPage(1);
           }}
           placeholder="Select a Status"
-          styles={{
-            option: (provided, state) => ({
-              ...provided,
-              backgroundColor: state.isSelected
-                ? "#29354f"
-                : provided.backgroundColor,
-              color: state.isSelected ? "white" : provided.color,
-              ":hover": {
-                backgroundColor: state.isSelected ? "#29354f" : "#f0f0f0",
-              },
-            }),
-          }}
         />
       </div>
 

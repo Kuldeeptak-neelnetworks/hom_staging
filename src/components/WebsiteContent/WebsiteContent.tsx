@@ -1,8 +1,8 @@
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { columns } from "./components/columns";
 import { DataTable } from "../common/data-table";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Select from "react-select";
@@ -21,6 +21,8 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useWebsiteContentStore } from "@/Store/WebsiteContentStore";
+import CustomPagination from "../CustomPagination/CustomPagination";
+import { debounce } from "lodash";
 
 const animatedComponents = makeAnimated();
 
@@ -40,14 +42,53 @@ const WebsiteContent: React.FC = () => {
   const [filtering, setFiltering] = React.useState("");
   const data = useMemo(() => allWebsiteContent, [allWebsiteContent]);
   const [filters, setFilters] = useState<any>({
-    status: [],
+    typeOfCustomer: [],
   });
   const searchParams = useSearchParams();
   const queryParams = searchParams.get("id");
 
+  const pathname = usePathname();
+  const [searchInput, setSearchInput] = useState("");
+  const [totalPages, setTotalPages] = useState(1);
+  const initialPage = Number(searchParams.get("page")) || 1;
+  const initialLimit = Number(searchParams.get("limit")) || 20;
+  const [page, setPage] = useState(initialPage);
+  const [limit, setLimit] = useState(initialLimit);
+
   useEffect(() => {
-    fetchWebsiteContentData();
-  }, []);
+    if (searchInput !== "") {
+      setPage(1);
+    }
+  }, [searchInput]);
+
+  const debouncedSearch = useCallback(
+    debounce((searchInput) => {
+      fetchWebsiteContentData({
+        page,
+        limit,
+        searchInput,
+        filters,
+      });
+    }, 500),
+    [fetchWebsiteContentData, filters, page, limit]
+  );
+
+  useEffect(() => {
+    if (searchInput.trim().length > 0) {
+      debouncedSearch(searchInput);
+    } else {
+      fetchWebsiteContentData({
+        page,
+        limit,
+        searchInput,
+        filters,
+      });
+    }
+
+    return () => {
+      debouncedSearch.cancel();
+    };
+  }, [searchInput, debouncedSearch, page, limit, filters]);
 
   useEffect(() => {
     if (
@@ -60,9 +101,13 @@ const WebsiteContent: React.FC = () => {
       router.push("/auth/login");
     } else {
       setLoader(false);
-      setAllWebsiteContent(websiteContentData ? websiteContentData || [] : []);
+      setAllWebsiteContent(
+        websiteContentData?.newWebsiteContent
+          ? websiteContentData?.newWebsiteContent || []
+          : []
+      );
     }
-  }, [websiteContentData, router]);
+  }, [websiteContentData?.newWebsiteContent, router]);
 
   const statusOptions = [
     { label: "Renewal", value: "Renewal" },
@@ -87,7 +132,18 @@ const WebsiteContent: React.FC = () => {
 
       setAllWebsiteContent(filterByTypeofCustomer);
     }
-  }, [filters?.typeOfCustomer, websiteContentData]);
+  }, [filters?.typeOfCustomer, websiteContentData?.newWebsiteConten]);
+
+  const onPageChange = (newPage: number, newLimit: number) => {
+    setPage(newPage);
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.set("page", newPage.toString());
+    params.set("limit", newLimit.toString());
+
+    router.push(`${pathname}?${params.toString()}`);
+  };
+
   const tableInstance = useReactTable({
     data,
     columns,
@@ -127,29 +183,28 @@ const WebsiteContent: React.FC = () => {
       <div className="w-[300px] lg:absolute  z-[52] mt-2">
         <Select
           className="text-[0.8rem] boxShadow"
+          classNamePrefix="react-select-custom-styling"
           closeMenuOnSelect={false}
           components={animatedComponents}
-          isMulti
+          isClearable
           options={statusOptions}
-          onChange={(selectedOptions) => {
-            const selectedValues =
-              selectedOptions &&
-              selectedOptions.map((option: any) => option.value);
+          onChange={(selectedOption: any) => {
+            const selectedValues = selectedOption ? selectedOption.value : [];
             setFilters((prev: any) => ({
               ...prev,
               typeOfCustomer: selectedValues,
             }));
+            setPage(1);
           }}
           placeholder="Select type of customer"
         />
       </div>
 
       <div className="md:flex justify-center sm:justify-end my-2">
-        {websiteContentData && websiteContentData.length > 0 ? (
-          <PageHeader tableInstance={tableInstance} />
-        ) : (
-          ""
-        )}
+        <PageHeader
+          tableInstance={tableInstance}
+          setSearchInput={setSearchInput}
+        />
 
         <div className="flex justify-normal lg:justify-end">
           <Link href={"/websiteContent/addWebsiteContent"}>
@@ -164,11 +219,19 @@ const WebsiteContent: React.FC = () => {
       </div>
 
       <DataTable
-        text=""
+        text="website-content"
         queryParams={queryParams ? queryParams : ""}
         columns={columns}
         tableInstance={tableInstance}
         loading={loading}
+      />
+      <CustomPagination
+        setLimit={setLimit}
+        limit={limit}
+        page={page}
+        onPageChange={onPageChange}
+        data={allWebsiteContent}
+        totalPages={totalPages}
       />
     </div>
   );

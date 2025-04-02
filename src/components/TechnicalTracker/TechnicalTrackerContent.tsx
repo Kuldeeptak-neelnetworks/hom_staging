@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { columns } from "./components/columns";
 import { DataTable } from "../common/data-table";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import BreadcrumbSection from "../common/BreadcrumbSection";
 
 import Select from "react-select";
@@ -36,6 +36,8 @@ import TechnicalPage from "@/app/technical/page";
 import { useTechnicalStore } from "@/Store/TechnicalStore";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import CustomPagination from "../CustomPagination/CustomPagination";
+import { debounce } from "lodash";
 const animatedComponents = makeAnimated();
 
 // Crumbs Array
@@ -57,7 +59,6 @@ const TechnicalTrackerContent: React.FC = () => {
   const router = useRouter();
   const { fetchTechnicalData, technicalData, loading } = useTechnicalStore();
   const [allTechnicals, setAllTechnicals] = useState<any>([]);
-  const [loader, setLoader] = useState(true);
 
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
@@ -75,6 +76,16 @@ const TechnicalTrackerContent: React.FC = () => {
   const searchParams = useSearchParams();
   const queryParams = searchParams.get("id");
 
+  const pathname = usePathname();
+
+  const [searchInput, setSearchInput] = useState("");
+  const [totalPages, setTotalPages] = useState(1);
+  const initialPage = Number(searchParams.get("page")) || 1;
+  const initialLimit = Number(searchParams.get("limit")) || 20;
+  const [page, setPage] = useState(initialPage);
+  const [limit, setLimit] = useState(initialLimit);
+  const [loader, setLoader] = useState(true);
+
   // const statusOptions = [
   //   { label: "In Progress", value: "In Progress" },
   //   { label: "In Query", value: "In Query" },
@@ -82,8 +93,39 @@ const TechnicalTrackerContent: React.FC = () => {
   // ];
 
   useEffect(() => {
-    fetchTechnicalData();
-  }, []);
+    if (searchInput !== "") {
+      setPage(1);
+    }
+  }, [searchInput]);
+
+  const debouncedSearch = useCallback(
+    debounce((searchInput) => {
+      fetchTechnicalData({
+        page,
+        limit,
+        searchInput,
+        filters,
+      });
+    }, 500),
+    [fetchTechnicalData, filters, page, limit]
+  );
+
+  useEffect(() => {
+    if (searchInput?.trim()?.length > 0) {
+      debouncedSearch(searchInput);
+    } else {
+      fetchTechnicalData({
+        page,
+        limit,
+        searchInput,
+        filters,
+      });
+    }
+
+    return () => {
+      debouncedSearch.cancel();
+    };
+  }, [searchInput, debouncedSearch, page, limit, filters]);
 
   useEffect(() => {
     if (
@@ -96,9 +138,9 @@ const TechnicalTrackerContent: React.FC = () => {
       router.push("/auth/login");
     } else {
       setLoader(false);
-      setAllTechnicals(technicalData ? technicalData || [] : []);
+      setAllTechnicals(technicalData ? technicalData?.trackers || [] : []);
     }
-  }, [technicalData, router]);
+  }, [technicalData?.trackers, router]);
 
   const statusOptions = [
     { label: "In Process", value: "In Process" },
@@ -108,10 +150,10 @@ const TechnicalTrackerContent: React.FC = () => {
   ];
 
   useEffect(() => {
-    if (Array.isArray(technicalData)) {
+    if (Array.isArray(technicalData?.trackers)) {
       const filterByStatus =
-        technicalData &&
-        technicalData?.filter((elem: any) => {
+        technicalData?.trackers &&
+        technicalData?.trackers?.filter((elem: any) => {
           if (filters?.status?.length > 0) {
             return filters?.status?.includes(elem?.status);
           } else {
@@ -121,7 +163,17 @@ const TechnicalTrackerContent: React.FC = () => {
 
       setAllTechnicals(filterByStatus);
     }
-  }, [filters?.status, technicalData]);
+  }, [filters?.status, technicalData?.trackers]);
+
+  const onPageChange = (newPage: number, newLimit: number) => {
+    setPage(newPage);
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.set("page", newPage.toString());
+    params.set("limit", newLimit.toString());
+
+    router.push(`${pathname}?${params.toString()}`);
+  };
 
   const tableInstance = useReactTable({
     data,
@@ -162,30 +214,34 @@ const TechnicalTrackerContent: React.FC = () => {
       <div className="w-[300px] lg:absolute z-[52] mt-2">
         <Select
           className="text-[0.8rem] boxShadow"
+          classNamePrefix="react-select-custom-styling"
           closeMenuOnSelect={false}
           components={animatedComponents}
-          isMulti
+          isClearable
           options={statusOptions}
           // value={filters.status}
-          onChange={(selectedOptions) => {
-            const selectedValues =
-              selectedOptions &&
-              selectedOptions.map((option: any) => option.value);
+          onChange={(selectedOption: any) => {
+            const selectedValues = selectedOption ? selectedOption.value : [];
             setFilters((prev: any) => ({
               ...prev,
               status: selectedValues,
             }));
+            setPage(1);
           }}
           placeholder="Select a Status"
         />
       </div>
 
       <div className="md:flex justify-center sm:justify-end my-2">
-        {technicalData && technicalData.length > 0 ? (
+        <PageHeader
+          tableInstance={tableInstance}
+          setSearchInput={setSearchInput}
+        />
+        {/* {technicalData && technicalData.length > 0 ? (
           <PageHeader tableInstance={tableInstance} />
         ) : (
           ""
-        )}
+        )} */}
         {/* <AddTechnicalDialoge getAllTechnical={fetchTechnicalData} /> */}
         <div className="flex justify-normal lg:justify-end">
           <Link href={"/technical/addTechnicalTracker"}>
@@ -200,11 +256,19 @@ const TechnicalTrackerContent: React.FC = () => {
       </div>
 
       <DataTable
-        text=""
+        text="technical"
         queryParams={queryParams ? queryParams : ""}
         columns={columns}
         tableInstance={tableInstance}
         loading={loading}
+      />
+      <CustomPagination
+        setLimit={setLimit}
+        limit={limit}
+        page={page}
+        onPageChange={onPageChange}
+        data={allTechnicals}
+        totalPages={totalPages}
       />
     </div>
   );

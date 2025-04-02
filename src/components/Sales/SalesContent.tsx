@@ -518,11 +518,11 @@ const SalesContent: React.FC = () => {
       {/* OrderTables  */}
       <div className="px-4 py-4 relative my-5 ">
         <div className="flex gap-2  my-2">
-          <p className="bg-slate-100 w-fit p-2 ">
+          <p className="bg-[#8fe9e4cc] w-fit p-2 ">
             <span className="font-bold">Total Order Count</span> :{" "}
             {MonthlySalesData?.totalOrders?.totalOrderCount}
           </p>
-          <p className="bg-slate-100 w-fit p-2 ">
+          <p className="bg-[#8fe9e4cc] w-fit p-2 ">
             <span className="font-bold">Total Order Value</span> :{" "}
             {MonthlySalesData?.totalOrders?.totalOrderValue}
           </p>

@@ -43,7 +43,7 @@ import MenuItem from "../components/MenuItem";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 // import NotificationCard from "../../Appbar/components/NotificationCard";
 import { useNotificationStore } from "@/Store/NotificationStore";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import MenuItemData from "./MenuItemData";
 interface MenuItemIF {
   id: string;
@@ -137,6 +137,7 @@ const SideBar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
   const [openSmallSideBar, setOpenSmallSideBar] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const searchParams = useSearchParams();
+  const pathname = usePathname();
   const queryParams = searchParams.get("id");
   const initialPage = Number(searchParams.get("page")) || 1;
   const initialLimit = Number(searchParams.get("limit")) || 20;
@@ -146,6 +147,8 @@ const SideBar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
 
   const logoSrc = Logo.src;
   const MiniLogoSrc = MiniLogo.src;
+
+  console.log("pathnameSidebar", pathname);
 
   const togglerFunction = () => {
     setToggleSider((prev) => !prev);

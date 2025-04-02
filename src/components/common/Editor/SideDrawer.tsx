@@ -208,7 +208,13 @@ export default function SideDrawer({
         ) : (
           <>
             <ChatBubbleIcon className="h-[1.35rem] w-[1.55rem] p-1 text-black cursor-pointer" />
-            <div className="absolute top-0 bg-green-500 text-white rounded-full w-[0.9rem] h-[0.9rem] flex items-center justify-center cursor-pointer text-[9px] font-semibold">
+            <div
+              className={`absolute top-0 bg-green-500 text-white rounded-full flex items-center justify-center cursor-pointer text-[9px] font-semibold pt-1 ${
+                length >= 100
+                  ? "w-[1.4rem] h-[1.2rem] text-[8px]"
+                  : "w-[0.9rem] h-[0.9rem] text-[9px]"
+              }`}
+            >
               {length ? length : ""}
             </div>
           </>

@@ -26,6 +26,7 @@ import {
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 import SideDrawer from "@/components/common/Editor/SideDrawer";
+import { WebsitelargeDataHoverBox } from "@/components/common/HoverCard/WebsiteLargeDataHoverBox";
 
 const ChatModel = dynamic(
   () => import("@/components/common/Editor/ChatModel"),
@@ -406,7 +407,7 @@ export const columns = [
       return (
         <SideDrawer
           websiteContentId={row?.original?._id}
-          length={row?.original?.updates?.length}
+          length={row?.original?.updateCount}
           customerName={
             row?.original?.customer?.companyName &&
             row?.original?.customer?.companyName
@@ -524,24 +525,36 @@ export const columns = [
     header: ({ column }: any) => (
       <DataTableColumnHeader column={column} title="SocialMedia" />
     ),
-    cell: ({ row }: any) =>
-      row?.original?.socialMedia || <div className="text-gray-400">-</div>,
+    cell: ({ row }: any) => (
+      <div className="text-nowrap">
+        <WebsitelargeDataHoverBox data={row?.original?.socialMedia} />
+      </div>
+    ),
+    // row?.original?.socialMedia || <div className="text-gray-400">-</div>,
   },
   {
     accessorKey: "keyPhrasesAgreed",
     header: ({ column }: any) => (
       <DataTableColumnHeader column={column} title="Key Phrases Agreed" />
     ),
-    cell: ({ row }: any) =>
-      row?.original?.keyPhrasesAgreed || <div className="text-gray-400">-</div>,
+    cell: ({ row }: any) => (
+      <div className="text-nowrap">
+        <WebsitelargeDataHoverBox data={row?.original?.keyPhrasesAgreed} />
+      </div>
+    ),
+    // row?.original?.keyPhrasesAgreed || <div className="text-gray-400">-</div>,
   },
   {
     accessorKey: "keyAreasAgreed",
     header: ({ column }: any) => (
       <DataTableColumnHeader column={column} title="Key Areas Agreed" />
     ),
-    cell: ({ row }: any) =>
-      row?.original?.keyAreasAgreed || <div className="text-gray-400">-</div>,
+    cell: ({ row }: any) => (
+      <div className="text-nowrap">
+        <WebsitelargeDataHoverBox data={row?.original?.keyAreasAgreed} />
+      </div>
+    ),
+    // row?.original?.keyAreasAgreed || <div className="text-gray-400">-</div>,
   },
 
   {
@@ -549,8 +562,12 @@ export const columns = [
     header: ({ column }: any) => (
       <DataTableColumnHeader column={column} title="Theme" />
     ),
-    cell: ({ row }: any) =>
-      row?.original?.theme || <div className="text-gray-400">-</div>,
+    cell: ({ row }: any) => (
+      <div className="text-nowrap">
+        <WebsitelargeDataHoverBox data={row?.original?.theme} />
+      </div>
+    ),
+    // row?.original?.theme || <div className="text-gray-400">-</div>,
   },
   {
     accessorKey: "colours",
@@ -663,8 +680,12 @@ export const columns = [
     header: ({ column }: any) => (
       <DataTableColumnHeader column={column} title="Page Name" />
     ),
-    cell: ({ row }: any) =>
-      row?.original?.pageName || <div className="text-gray-400">-</div>,
+    cell: ({ row }: any) => (
+      <div className="text-nowrap">
+        <WebsitelargeDataHoverBox data={row?.original?.pageName} />
+      </div>
+    ),
+    // row?.original?.pageName || <div className="text-gray-400">-</div>,
   },
   {
     accessorKey: "contentRequired",
@@ -706,7 +727,10 @@ export const columns = [
       // <div className="text-nowrap">{row?.original?.notesForDesign}</div> || (
       //   <div className="text-gray-400">-</div>
       // ),
-      <div className="text-nowrap">{row?.original?.notesForDesign}</div>
+      // <div className="text-nowrap">{row?.original?.notesForDesign}</div>
+      <div className="text-nowrap">
+        <WebsitelargeDataHoverBox data={row?.original?.notesForDesign} />
+      </div>
     ),
   },
 
@@ -716,7 +740,10 @@ export const columns = [
       <DataTableColumnHeader column={column} title="Notes For Copywriter" />
     ),
     cell: ({ row }: any) => (
-      <div className="text-nowrap">{row?.original?.notesForCopywriter}</div>
+      // <div className="text-nowrap">{row?.original?.notesForCopywriter}</div>
+      <div className="text-nowrap">
+        <WebsitelargeDataHoverBox data={row?.original?.notesForCopywriter} />
+      </div>
     ),
     // (
     //   <div className="text-nowrap">{row?.original?.notesForCopywriter}</div>

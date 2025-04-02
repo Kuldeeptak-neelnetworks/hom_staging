@@ -77,7 +77,7 @@ const TableHead = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-      "h-10 px-4 text-left  bg-[#0f464a] align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 overflow-x-auto first:sticky first:left-0 z-40 first:bg-[#0f464a] first:shadow-right",
+      "h-10 px-4 text-left  bg-[#0f464a] align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 overflow-x-auto first:sticky first:left-0 first:z-50 first:bg-[#0f464a] first:shadow-right",
       isScrolling ? "first:shadow-md" : "",
       className
     )}

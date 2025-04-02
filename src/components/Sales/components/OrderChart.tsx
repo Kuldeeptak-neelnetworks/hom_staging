@@ -30,7 +30,7 @@ const OrderChart: React.FC<{ data: TotalOverallResult }> = ({ data }) => {
           overall?.renewal?.totalOrderValue,
           overall?.newBusiness?.totalOrderValue,
         ],
-        backgroundColor: ["#36A2EB", "#FF6384"],
+        backgroundColor: ["rgba(75, 192, 192, 0.6)", "#0f464ad1"],
         hoverOffset: 4,
       },
     ],

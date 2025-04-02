@@ -58,22 +58,22 @@ export const getColumns = (userRole: string | null) => [
   //   enableSorting: false,
   //   enableHiding: false,
   // },
-  {
-    accessorKey: "avatar",
-    header: "Profile Picture",
-    cell: ({ row }: any) => {
-      return (
-        <div className="flex items-center">
-          <Avatar>
-            <AvatarImage src={row?.original?.employeeId?.avatar} className="" />
-            <AvatarFallback>
-              <img src={UserPic} className="" />
-            </AvatarFallback>
-          </Avatar>
-        </div>
-      );
-    },
-  },
+  // {
+  //   accessorKey: "avatar",
+  //   header: "Profile Picture",
+  //   cell: ({ row }: any) => {
+  //     return (
+  //       <div className="flex items-center">
+  //         <Avatar>
+  //           <AvatarImage src={row?.original?.employeeId?.avatar} className="" />
+  //           <AvatarFallback>
+  //             <img src={UserPic} className="" />
+  //           </AvatarFallback>
+  //         </Avatar>
+  //       </div>
+  //     );
+  //   },
+  // },
 
   {
     accessorKey: "fullName",
@@ -82,15 +82,23 @@ export const getColumns = (userRole: string | null) => [
     ),
     cell: ({ row }: any) =>
       row?.original?.employeeId?.fullName ? (
-        <Link
-          href={`/employeeLeaveManagement/employeeLeaveDetails/${row?.original?._id}`}
-        >
-          <span className="hover:underline hover:cursor-pointer text-nowrap">
-            {row?.original?.employeeId?.fullName
-              ? row?.original?.employeeId?.fullName
-              : "N/A"}
-          </span>
-        </Link>
+        <div className="flex items-center gap-1">
+          <Avatar>
+            <AvatarImage src={row?.original?.employeeId?.avatar} className="" />
+            <AvatarFallback>
+              <img src={UserPic} className="" />
+            </AvatarFallback>
+          </Avatar>
+          <Link
+            href={`/employeeLeaveManagement/employeeLeaveDetails/${row?.original?._id}`}
+          >
+            <span className="hover:underline hover:cursor-pointer text-nowrap">
+              {row?.original?.employeeId?.fullName
+                ? row?.original?.employeeId?.fullName
+                : "N/A"}
+            </span>
+          </Link>
+        </div>
       ) : (
         <div className="text-gray-400">N/A</div>
       ),
@@ -136,7 +144,7 @@ export const getColumns = (userRole: string | null) => [
     ),
     cell: ({ row }: any) =>
       row?.original?.leaveReason ? (
-        <span className="text-nowrap flex justify-center">
+        <span className="text-nowrap flex ">
           <span>
             {row?.original?.leaveReason ? row?.original?.leaveReason : "N/A"}
           </span>
@@ -156,7 +164,7 @@ export const getColumns = (userRole: string | null) => [
 
       return (
         <TooltipCommon text={`${row?.original?.totalDayHoliday} Days`}>
-          <span className="text-nowrap flex justify-center cursor-pointer">
+          <span className="text-nowrap flex  cursor-pointer">
             <span className=" bg-slate-200 px-3 py-1">
               {`${formatDate(startDate)} - ${formatDate(endDate)}`}
             </span>
@@ -215,7 +223,7 @@ export const getColumns = (userRole: string | null) => [
     ),
     cell: ({ row }: any) =>
       row?.original?.managerResponse ? (
-        <span className="text-nowrap flex justify-center">
+        <span className="text-nowrap flex ">
           <span>
             {row?.original?.managerResponse
               ? renderResponse(row?.original?.managerResponse)

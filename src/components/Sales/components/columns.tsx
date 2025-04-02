@@ -26,6 +26,7 @@ import { useParams } from "next/navigation";
 import React from "react";
 // import ChatModel from "./ChatModel";
 import Link from "next/link";
+import { UserProfileHover } from "@/components/common/HoverCard/UserProfileHover";
 const UserPic = User.src;
 // const companyLogo = Logo.src;
 
@@ -129,7 +130,7 @@ export const columns = [
         if (row?.original?.createdBy?.avatar !== "") {
           return (
             <div className="flex items-center">
-              <TooltipCommon text={row?.original?.createdBy?.fullName}>
+              {/* <TooltipCommon text={row?.original?.createdBy?.fullName}>
                 <Avatar className="cursor-pointer">
                   <AvatarImage
                     src={row?.original?.createdBy?.avatar}
@@ -139,7 +140,12 @@ export const columns = [
                     <img src={UserPic} className="" />
                   </AvatarFallback>
                 </Avatar>
-              </TooltipCommon>
+              </TooltipCommon> */}
+              <UserProfileHover
+                picture={row?.original?.createdBy?.avatar}
+                name={row?.original?.createdBy?.fullName}
+                designation={row?.original?.createdBy?.role}
+              />
             </div>
           );
         } else {

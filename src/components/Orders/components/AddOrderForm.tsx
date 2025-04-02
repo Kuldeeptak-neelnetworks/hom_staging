@@ -37,6 +37,7 @@ import SelectReactSelect from "react-select";
 import { ValueType } from "tailwindcss/types/config";
 import { LoaderIconSVG } from "@/utils/SVGs/SVGs";
 import { AsyncPaginate } from "react-select-async-paginate";
+import Link from "next/link";
 
 interface FormData {
   dateOfOrder: string;
@@ -584,6 +585,9 @@ const AddOrderForm = ({ fetchAllOrdersData }: any) => {
       </div>
 
       <div className="flex justify-center">
+        <div className="my-6 text-[0.8rem] bg-[#fff] hover:bg-gray-300 h-fit px-2 py-1  cursor-pointer hidden text-center sm:block w-fit boxShadow ">
+          <Link href={`/orders`}>Back</Link>
+        </div>
         <ScrollArea className="h-[91.7vh]   px-3 py-1 w-[100%] xl:w-[75vw]">
           <form
             onSubmit={formik.handleSubmit}

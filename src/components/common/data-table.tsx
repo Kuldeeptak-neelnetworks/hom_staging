@@ -158,17 +158,17 @@ export function DataTable<TData, TValue>({
       <div className="border">
         <div
           ref={scrollContainerRef}
-          className="h-[82vh] overflow-x-auto bg-[#fff] boxShadow"
+          className="h-[82vh] overflow-x-auto boxShadow"
         >
           <Table className="bg-[#fff]" isScrolling={isScrolling}>
-            <TableHeader className="bg-[#29354f] sticky top-0 z-50">
+            <TableHeader className="bg-[#29354f] sticky top-0 z-30">
               {tableInstance?.getHeaderGroups()?.map((headerGroup: any) => (
                 <TableRow key={headerGroup?.id}>
                   {headerGroup?.headers?.map((header: any) => (
                     <TableHead
                       key={header?.id}
                       colSpan={header?.colSpan}
-                      className={`text-nowrap text-white`}
+                      className={`text-nowrap text-white `}
                       isScrolling={isScrolling}
                     >
                       {header?.isPlaceholder
@@ -242,7 +242,13 @@ export function DataTable<TData, TValue>({
           </Table>
         </div>
       </div>
-      {text === "orders" || text === "cutomer" || text === "amendment" ? (
+      {text === "orders" ||
+      text === "cutomer" ||
+      text === "amendment" ||
+      text === "website-content" ||
+      text === "product-flow" ||
+      text === "lead" ||
+      text === "copywriter" ? (
         ""
       ) : (
         <DataTablePagination table={tableInstance} />
