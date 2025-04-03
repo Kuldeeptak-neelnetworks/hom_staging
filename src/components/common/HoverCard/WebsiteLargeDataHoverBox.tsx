@@ -23,7 +23,7 @@ export function WebsitelargeDataHoverBox({ data }: any) {
           <div className="text-nowrap text-gray-300">{truncatedText}</div>
         )}
       </HoverCardTrigger>
-      <HoverCardContent className="w-[800px] text-wrap">
+      <HoverCardContent className="w-[100%] max-w-[500px] text-wrap">
         <div className="flex justify-between space-x-4 ">
           <div className="space-y-1">
             <p className="text-sm  text-white">{data || "N/A"}</p>

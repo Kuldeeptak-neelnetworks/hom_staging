@@ -244,6 +244,7 @@ export function DataTable<TData, TValue>({
       </div>
       {text === "orders" ||
       text === "cutomer" ||
+      text === "technical" ||
       text === "amendment" ||
       text === "website-content" ||
       text === "product-flow" ||

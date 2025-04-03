@@ -156,29 +156,21 @@ const CustomersContent: React.FC = () => {
   //   setAllCustomers(filterByStatus);
   // }, [filters?.status, customerData]);
 
-  useEffect(() => {
-    if (Array.isArray(customerData?.customers)) {
-      const filterByStatus: any =
-        customerData &&
-        customerData?.customers?.filter((elem: any) => {
-          if (filters?.status?.length > 0) {
-            return filters?.status?.includes(elem?.status);
-          } else {
-            return true;
-          }
-        });
-
-      setAllCustomers(filterByStatus);
-    }
-  }, [filters?.status, customerData?.customers]);
-
-  const [pagination, setPagination] = useState({
-    pageIndex: 0,
-    pageSize: 10,
-  });
   // useEffect(() => {
-  //   fetchAllCustomerData(pagination.pageIndex + 1, pagination.pageSize);
-  // }, [pagination]);
+  //   if (Array.isArray(customerData?.customers)) {
+  //     const filterByStatus: any =
+  //       customerData &&
+  //       customerData?.customers?.filter((elem: any) => {
+  //         if (filters?.status?.length > 0) {
+  //           return filters?.status?.includes(elem?.status);
+  //         } else {
+  //           return true;
+  //         }
+  //       });
+
+  //     setAllCustomers(filterByStatus);
+  //   }
+  // }, [filters?.status, customerData?.customers]);
 
   const onPageChange = (newPage: number, newLimit: number) => {
     setPage(newPage);
@@ -189,12 +181,6 @@ const CustomersContent: React.FC = () => {
 
     router.push(`${pathname}?${params.toString()}`);
   };
-
-  useEffect(() => {
-    if (searchInput !== "") {
-      setPage(1);
-    }
-  }, [searchInput]);
 
   // ========================================
 

@@ -73,6 +73,7 @@ import OrderChart from "./components/OrderChart";
 import MonthlySalesBarChart from "./components/MonthlySalesBarChart";
 import RenewalsBarChart from "./components/RenewalBarChart";
 import { columns as cols } from "./components/columns";
+import CustomPagination from "../CustomPagination/CustomPagination";
 const animatedComponents = makeAnimated();
 
 // Crumbs Array
@@ -89,14 +90,24 @@ const crumbs = [
   },
 ];
 
+interface salesDetailsType {
+  orderStats: [];
+  orders: [];
+  totalOverallResult: {};
+}
+
 const SalesContent: React.FC = () => {
-  const { fetchSalesData, fetchMonthlySalesData, SalesData, MonthlySalesData } =
-    useSalesStore();
+  const {
+    fetchSalesData,
+    fetchMonthlySalesData,
+    SalesData,
+    MonthlySalesData,
+    loading,
+  } = useSalesStore();
   // Hooks and States
   const router = useRouter();
-  const { fetchTechnicalData, technicalData, loading } = useTechnicalStore();
-  const [allTechnicals, setAllTechnicals] = useState<any>([]);
   const [loader, setLoader] = useState(true);
+  const [salesDetails, setSalesDetails] = useState<salesDetailsType>();
 
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
@@ -106,11 +117,7 @@ const SalesContent: React.FC = () => {
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [filtering, setFiltering] = React.useState("");
-  const [statusValue, setStatusValue] = React.useState("");
-  const data = useMemo(() => allTechnicals, [allTechnicals]);
-  const [filters, setFilters] = useState<any>({
-    status: [],
-  });
+
   const [orderYear, setOrderYear] = useState<any>("");
   const [orderMonth, setOrderMonth] = useState<any>("");
   const [orderMonthlyYear, setOrderMonthlyYear] = useState<any>("");
@@ -124,10 +131,6 @@ const SalesContent: React.FC = () => {
   // ];
 
   useEffect(() => {
-    fetchTechnicalData();
-  }, []);
-
-  useEffect(() => {
     const currentDate = new Date();
     const month = (currentDate.getMonth() + 1).toString().padStart(2, "0"); // Get month and format as two digits
     const year = currentDate.getFullYear().toString();
@@ -139,41 +142,18 @@ const SalesContent: React.FC = () => {
 
   useEffect(() => {
     if (
-      technicalData === "Invalid refresh token" ||
-      technicalData === "User not found" ||
-      technicalData === "Invalid User Access Token" ||
-      technicalData === "Invalid access token" ||
-      technicalData === "Unauthorized request: No access or refresh token"
+      SalesData === "Invalid refresh token" ||
+      SalesData === "User not found" ||
+      SalesData === "Invalid User Access Token" ||
+      SalesData === "Invalid access token" ||
+      SalesData === "Unauthorized request: No access or refresh token"
     ) {
       router.push("/auth/login");
     } else {
       setLoader(false);
-      setAllTechnicals(technicalData ? technicalData || [] : []);
+      setSalesDetails(SalesData ? SalesData || {} : {});
     }
-  }, [technicalData, router]);
-
-  const statusOptions = [
-    { label: "In Process", value: "In Process" },
-    { label: "In Query", value: "In Query" },
-    { label: "Complete", value: "Complete" },
-    { label: "Back With Repo", value: "Back With Repo" },
-  ];
-
-  useEffect(() => {
-    if (Array.isArray(technicalData)) {
-      const filterByStatus =
-        technicalData &&
-        technicalData?.filter((elem: any) => {
-          if (filters?.status?.length > 0) {
-            return filters?.status?.includes(elem?.status);
-          } else {
-            return true;
-          }
-        });
-
-      setAllTechnicals(filterByStatus);
-    }
-  }, [filters?.status, technicalData]);
+  }, [SalesData, router]);
 
   useEffect(() => {
     fetchSalesData(orderYear);
@@ -184,6 +164,7 @@ const SalesContent: React.FC = () => {
   }, [orderMonth, orderMonthlyYear]);
 
   const columns = useMemo(() => cols, [cols]);
+
   const dataOrders = useMemo(
     () => MonthlySalesData?.totalOrders?.orders,
     [MonthlySalesData?.totalOrders?.orders]
@@ -232,6 +213,8 @@ const SalesContent: React.FC = () => {
   };
   const yearOptions = getYearOptions();
 
+  console.log("salesDetails", salesDetails);
+
   return (
     <>
       {/* Yearly  */}
@@ -263,18 +246,6 @@ const SalesContent: React.FC = () => {
                       {year}
                     </SelectItem>
                   ))}
-                  {/* <SelectItem value="2022" className="text-[0.8rem]">
-                    2022
-                  </SelectItem>
-                  <SelectItem value="2023" className="text-[0.8rem]">
-                    2023
-                  </SelectItem>
-                  <SelectItem value="2024" className="text-[0.8rem]">
-                    2024
-                  </SelectItem>
-                  <SelectItem value="2025" className="text-[0.8rem]">
-                    2025
-                  </SelectItem> */}
                 </SelectGroup>
               </SelectContent>
             </Selector>
@@ -293,7 +264,7 @@ const SalesContent: React.FC = () => {
               <CardContent>
                 <SalesmanBarChart
                   orderStats={
-                    SalesData?.orderStats ? SalesData?.orderStats : ""
+                    salesDetails?.orderStats ? salesDetails?.orderStats : []
                   }
                 />
               </CardContent>
@@ -534,6 +505,14 @@ const SalesContent: React.FC = () => {
           tableInstance={tableInstance}
           loading={loading}
         />
+        {/* <CustomPagination
+          setLimit={setLimit}
+          limit={limit}
+          page={page}
+          onPageChange={onPageChange}
+          data={allProductflow}
+          totalPages={totalPages}
+        /> */}
       </div>
     </>
   );

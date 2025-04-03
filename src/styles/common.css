@@ -150,7 +150,7 @@
 .react-select-custom-styling__option--is-selected {
   background-color: #e8f4f1 !important;
   /* background-color: #29354f !important; */
-  color: black;
+  color: black !important;
 }
 .react-select-custom-styling__option--is-selected:hover {
   /* background-color: #29354f !important; */

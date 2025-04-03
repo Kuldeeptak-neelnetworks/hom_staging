@@ -106,6 +106,7 @@ const WebsiteContent: React.FC = () => {
           ? websiteContentData?.newWebsiteContent || []
           : []
       );
+      setTotalPages(websiteContentData?.totalPages);
     }
   }, [websiteContentData?.newWebsiteContent, router]);
 

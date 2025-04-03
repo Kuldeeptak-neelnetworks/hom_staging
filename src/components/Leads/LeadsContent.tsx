@@ -159,21 +159,21 @@ const LeadsContent: React.FC = () => {
   //   setAllLeads(() => filterByOutcome);
   // }, [outcomeValue, leadData]);
 
-  useEffect(() => {
-    if (Array.isArray(leadData?.leads)) {
-      const filterByStatus =
-        leadData?.leads &&
-        leadData?.leads?.filter((elem: any) => {
-          if (filters?.outcome?.length > 0) {
-            return filters?.outcome?.includes(elem?.outcome);
-          } else {
-            return true;
-          }
-        });
+  // useEffect(() => {
+  //   if (Array.isArray(leadData?.leads)) {
+  //     const filterByStatus =
+  //       leadData?.leads &&
+  //       leadData?.leads?.filter((elem: any) => {
+  //         if (filters?.outcome?.length > 0) {
+  //           return filters?.outcome?.includes(elem?.outcome);
+  //         } else {
+  //           return true;
+  //         }
+  //       });
 
-      setAllLeads(filterByStatus);
-    }
-  }, [filters?.outcome, leadData?.leads]);
+  //     setAllLeads(filterByStatus);
+  //   }
+  // }, [filters?.outcome, leadData?.leads]);
 
   const onPageChange = (newPage: number, newLimit: number) => {
     setPage(newPage);
@@ -196,7 +196,7 @@ const LeadsContent: React.FC = () => {
         <Select
           className="text-[0.8rem] boxShadow"
           classNamePrefix="react-select-custom-styling"
-          closeMenuOnSelect={false}
+          closeMenuOnSelect={true}
           isClearable
           components={animatedComponents}
           options={outcome}

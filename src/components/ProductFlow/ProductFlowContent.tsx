@@ -110,6 +110,7 @@ const ProductflowContent: React.FC = () => {
       setAllProductflow(
         productFlowData ? productFlowData?.productFlows || [] : []
       );
+      setTotalPages(productFlowData?.totalPages);
     }
   }, [productFlowData?.productFlows, router]);
 

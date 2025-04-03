@@ -58,7 +58,7 @@ export type OrderActions = {
     limit,
     searchInput,
     orderType,
-    year,
+    orderYear,
     filters,
   }: any) => Promise<void>;
 };
@@ -68,25 +68,29 @@ export const useOrderStore = create<OrderState & OrderActions>()(
     orderData: [],
     addedOrder: {},
     loading: false,
-    fetchAllOrdersData: async ({
-      page = 1,
-      limit = 10,
-      searchInput = "",
-      filters = "",
-      year,
-    } = {}) => {
+    fetchAllOrdersData: async (params) => {
       set({ loading: true });
+      const {
+        page = 1,
+        limit = 10,
+        searchInput = "",
+        filters = [],
+        orderYear = "",
+      } = params || {};
       try {
         const queryParams = new URLSearchParams();
         if (page) queryParams.append("page", String(page));
         if (limit) queryParams.append("limit", String(limit));
-        if (searchInput) queryParams.append("search", searchInput);
-        if (filters) queryParams.append("orderType", filters?.orderType);
-        if (year) queryParams.append("year", String(year));
+        if (searchInput && searchInput !== "" && searchInput !== undefined)
+          queryParams.append("search", searchInput);
+        if (filters?.orderType !== undefined)
+          queryParams.append("orderType", filters?.orderType);
+        if (orderYear) queryParams.append("year", String(orderYear));
 
         const response = await baseInstance.get(
           `/orders?${queryParams.toString()}`
         );
+
         if (response.status === 200) {
           set({ orderData: response?.data?.data, loading: false });
         } else {
