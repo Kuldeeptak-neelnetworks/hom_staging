@@ -156,7 +156,7 @@ const AddUserForm: React.FC = () => {
         if (response?.status === 201) {
           successToastingFunction(response?.data?.message);
           setIsUserValid(() => false);
-          fetchUsersData();
+          fetchUsersData({ page: 1, limit: 10, searchInput: "", filters: {} });
           router.push("/users");
         } else {
           alert("Something went Wrong !!");

@@ -191,21 +191,21 @@ const AmendmentContent: React.FC = () => {
     }
   }, [amendmentData]);
 
-  useEffect(() => {
-    if (Array.isArray(amendmentData?.amendments)) {
-      const filterByStatus =
-        amendmentData?.amendments &&
-        amendmentData?.amendments?.filter((elem: any) => {
-          if (filters?.status?.length > 0) {
-            return filters?.status?.includes(elem?.status);
-          } else {
-            return true;
-          }
-        });
+  // useEffect(() => {
+  //   if (Array.isArray(amendmentData?.amendments)) {
+  //     const filterByStatus =
+  //       amendmentData?.amendments &&
+  //       amendmentData?.amendments?.filter((elem: any) => {
+  //         if (filters?.status?.length > 0) {
+  //           return filters?.status?.includes(elem?.status);
+  //         } else {
+  //           return true;
+  //         }
+  //       });
 
-      setAllAmendments(filterByStatus);
-    }
-  }, [filters?.status, amendmentData?.amendments]);
+  //     setAllAmendments(filterByStatus);
+  //   }
+  // }, [filters?.status, amendmentData?.amendments]);
 
   const tableInstance = useReactTable({
     data,

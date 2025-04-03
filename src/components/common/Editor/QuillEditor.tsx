@@ -65,7 +65,7 @@ const QuillEditor: React.FC<QuillEditorProps> = ({
   const { fetchUsersData, userData, loading } = useUserStore();
 
   useEffect(() => {
-    fetchUsersData();
+    fetchUsersData({ page: 1, limit: 10, searchInput: "", filters: {} });
   }, []);
 
   useEffect(() => {

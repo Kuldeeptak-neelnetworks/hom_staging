@@ -2,10 +2,14 @@
 
 import SideBarContent from "@/components/Sidebar/SideBarContent";
 import AddUserContent from "@/components/Users/components/AddUserContent";
+import { useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 
 const AddUserPage = () => {
-  const [toggleWidth, setToggleWidth] = useState<boolean>(false);
+  // const searchParams = useSearchParams();
+  // const role = searchParams.get("setIsUpdated");
+
+  // console.log("ffff", role);
   return (
     <div className="col-span-6">
       {/* <div>

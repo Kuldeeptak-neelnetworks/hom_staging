@@ -29,30 +29,46 @@ export type FetchedUserType = {
 
 export type UserState = {
   userData: UserDataType[] | any;
-  userTotalOrderData:UserOrderDataType[] | any;
+  userTotalOrderData: UserOrderDataType[] | any;
   message?: string;
   loading: boolean;
 };
 
 export type UserActions = {
   addNewUser: (data: UserDataType) => void;
-  fetchUsersData: () => void;
+  fetchUsersData: ({ page, limit, searchInput, filters }: any) => Promise<void>;
 };
 
 export const useUserStore = create<UserState & UserActions>()(
   devtools((set) => ({
     userData: [],
-    userTotalOrderData:[],
+    userTotalOrderData: [],
     loading: false,
     addNewUser: (data: UserDataType) =>
       set((state) => ({
         userData: [...state.userData, data],
       })),
 
-    fetchUsersData: async () => {
+    fetchUsersData: async (params) => {
       set({ loading: true });
+      const {
+        page = 1,
+        limit = 10,
+        searchInput = "",
+        filters = [],
+      } = params || {};
       try {
-        const response = await baseInstance.get("/users");
+        const queryParams = new URLSearchParams();
+        if (page) queryParams.append("page", String(page));
+        if (limit) queryParams.append("limit", String(limit));
+        if (searchInput && searchInput !== "" && searchInput !== undefined)
+          queryParams.append("search", searchInput);
+        if (filters?.role !== undefined)
+          queryParams.append("role", filters?.role);
+
+        const response = await baseInstance.get(
+          `/users?${queryParams.toString()}`
+        );
         if (response.status === 200) {
           set({ userData: response.data?.data, loading: false });
         } else {
@@ -63,7 +79,6 @@ export const useUserStore = create<UserState & UserActions>()(
         set({ userData: error?.response?.data?.message, loading: false });
       }
     },
-
 
     fetchUsersToatlOrders: async () => {
       set({ loading: true });
@@ -76,11 +91,11 @@ export const useUserStore = create<UserState & UserActions>()(
         }
       } catch (error: any) {
         logOutFunction(error?.response?.data?.message);
-        set({ userTotalOrderData: error?.response?.data?.message, loading: false });
+        set({
+          userTotalOrderData: error?.response?.data?.message,
+          loading: false,
+        });
       }
     },
   }))
 );
-
-
-

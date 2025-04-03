@@ -18,6 +18,7 @@ import { DataTablePagination } from "./data-table-pagination";
 import { LoaderIconSVG } from "@/utils/SVGs/SVGs";
 import "../../styles/common.css";
 import { ScrollArea } from "../ui/scroll-area";
+import { Skeleton } from "../ui/skeleton";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -184,18 +185,29 @@ export function DataTable<TData, TValue>({
             </TableHeader>
             <TableBody>
               {loading ? (
-                <TableRow>
-                  <TableCell colSpan={columns.length} className="h-24">
-                    <div className="flex justify-center">
-                      <LoaderIconSVG />
-                      <span className="px-2">Loading...</span>
-                    </div>
-                  </TableCell>
-                </TableRow>
+                // <TableRow>
+                //   <TableCell colSpan={columns.length} className="h-24">
+                //     <div className="flex justify-center">
+                //       <LoaderIconSVG />
+                //       <span className="px-2">Loading...</span>
+                //     </div>
+                //   </TableCell>
+                // </TableRow>
+                tableInstance
+                  ?.getRowModel()
+                  ?.rows?.map((_: any, index: any) => (
+                    <TableRow key={index}>
+                      {columns.map((_, colIndex) => (
+                        <TableCell key={colIndex}>
+                          <Skeleton className="h-4 w-full" />
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))
               ) : tableInstance?.getRowModel()?.rows?.length !== 0 ? (
                 tableInstance
-                  .getRowModel()
-                  .rows.map((row: any, index: number) => {
+                  ?.getRowModel()
+                  ?.rows?.map((row: any, index: number) => {
                     const isHighlighted = row.original._id === queryParams; // Check if the row ID matches queryParams
                     return (
                       <TableRow
@@ -229,8 +241,8 @@ export function DataTable<TData, TValue>({
               ) : (
                 <TableRow>
                   <TableCell
-                    colSpan={columns.length}
-                    className="h-24 text-center"
+                    colSpan={columns?.length}
+                    className="h-20 text-center"
                   >
                     <div role="status" className="flex justify-center">
                       No data Found !!
@@ -244,6 +256,7 @@ export function DataTable<TData, TValue>({
       </div>
       {text === "orders" ||
       text === "cutomer" ||
+      text === "users" ||
       text === "technical" ||
       text === "amendment" ||
       text === "website-content" ||

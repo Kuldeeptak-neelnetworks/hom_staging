@@ -357,22 +357,7 @@ const CustomersContent: React.FC = () => {
         tableInstance={tableInstance}
         loading={loading}
       />
-      {/* <div className="absolute bottom-[-20px] bg-white text-[0.89rem] boxShadow">
-        <div className="p-1">
-          <div>
-            <span className="font-bold">Total Order Value :</span>
-            <span className="px-1">
-              {customerData?.totals?.totalOrderValue.toFixed(2)}
-            </span>
-          </div>
-          <div>
-            <span className="font-bold">Total Dd Monthly :</span>
-            <span className="px-1">
-              {customerData?.totals?.totalDdMonthly.toFixed(2)}
-            </span>
-          </div>
-        </div>
-      </div> */}
+
       <CustomPagination
         setLimit={setLimit}
         limit={limit}
