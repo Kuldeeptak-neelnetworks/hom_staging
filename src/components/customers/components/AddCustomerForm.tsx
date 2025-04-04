@@ -43,6 +43,7 @@ import { LoaderIconSVG } from "@/utils/SVGs/SVGs";
 import { useUserStore } from "@/Store/UserStore";
 import { useCustomerStore } from "@/Store/CustomerStore";
 import AnimationForm from "@/components/common/Animation/AnimationForm";
+import { motion } from "framer-motion";
 // interface AddCustomerFormProps {
 //   setOpen: (newValue: boolean | ((prevCount: boolean) => boolean)) => void;
 //   getMyCustomerData: () => void;
@@ -109,6 +110,7 @@ const AddCustomerForm: React.FC = () => {
   useEffect(() => {
     fetchUsersData();
   }, []);
+
   const handleLogoChange = (e: any) => {
     const file = e.target.files[0];
     if (file) {
@@ -285,11 +287,11 @@ const AddCustomerForm: React.FC = () => {
 
   return (
     <ScrollArea className=" p-7 w-full lg:w-[70%] border my-5 h-[90vh] bg-[#fff] boxShadow  text-green-800">
-      <form onSubmit={handleSubmit} className="text-[0.8rem] ">
+      <form onSubmit={handleSubmit} className="text-[0.8rem] text-[#004d4b]">
         <div className="mb-3 lg:flex gap-3">
           {/* User List */}
           {/* <div className="w-full mb-2 lg:mb-0">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
+            <label className="mb-2.5 block font-semibold text-black dark:text-white">
               Assigned User
             </label>
             <div className="relative">
@@ -324,10 +326,16 @@ const AddCustomerForm: React.FC = () => {
           {/* Assigned User */}
           {role !== "salesman" ? (
             <AnimationForm className="mb-3 w-full">
-              <label className="mb-2.5 block font-medium text-black dark:text-white">
+              <label className="mb-2.5 block font-semibold">
                 Assigned User
               </label>
-              <div className="relative">
+              <motion.div
+                className="relative"
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
+              >
                 {!userLoading && userData?.length === 0 ? (
                   <div className="flex justify-start">
                     <LoaderIconSVG />
@@ -360,28 +368,32 @@ const AddCustomerForm: React.FC = () => {
                     {formik.errors.selectedUserId}
                   </div>
                 ) : null}
-              </div>
+              </motion.div>
             </AnimationForm>
           ) : (
             <AnimationForm className="mb-3 w-full">
-              <label className="mb-2.5 block font-medium text-black dark:text-white">
+              <label className="mb-2.5 block font-semibold">
                 Assigned User
               </label>
               <div className="relative">
-                <input
+                <motion.input
+                  whileHover={{
+                    borderColor: "#2e8b57",
+                    boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                  }}
                   type="text"
                   value={userNameHOM || ""}
                   id="assignUser"
                   readOnly
                   placeholder="Enter User Name"
-                  className="w-full border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                  className="w-full  border border-[lightseagreen] text-black bg-transparent py-2 pl-3 pr-10  outline-none focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input "
                 />
               </div>
             </AnimationForm>
           )}
           {/* Contact Name  */}
           <AnimationForm fromLeft={false} className="w-full">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
+            <label className="mb-2.5 block font-semibold dark:text-white">
               Contact Name
             </label>
             <div className="relative">
@@ -392,7 +404,7 @@ const AddCustomerForm: React.FC = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.contactName}
-                className="w-full border border-stroke bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full border border-[lightseagreen] text-black bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               {touched.contactName && errors.contactName ? (
                 <div className="text-red-500 text-[0.8rem] pl-2">
@@ -410,7 +422,7 @@ const AddCustomerForm: React.FC = () => {
         <div className="mb-3 lg:flex gap-3">
           {/* Company Name  */}
           <AnimationForm className="w-full mb-2 lg:mb-0">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
+            <label className="mb-2.5 block font-semibold">
               Company Name <span className="text-red-500">*</span>
             </label>
             <div className="relative">
@@ -421,7 +433,7 @@ const AddCustomerForm: React.FC = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.companyName}
-                className="w-full border border-stroke bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full border border-[lightseagreen] text-black bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               {touched.companyName && errors.companyName ? (
                 <div className="text-red-500 text-[0.8rem] pl-2">
@@ -436,9 +448,7 @@ const AddCustomerForm: React.FC = () => {
           </AnimationForm>
           {/* Email  */}
           <AnimationForm fromLeft={false} className="w-full">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
-              Email Address
-            </label>
+            <label className="mb-2.5 block font-semibold">Email Address</label>
             <div className="relative">
               <input
                 type="email"
@@ -447,7 +457,7 @@ const AddCustomerForm: React.FC = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.customerEmail}
-                className="w-full border border-stroke bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full border border-[lightseagreen] bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               {touched.customerEmail && errors.customerEmail ? (
                 <div className="text-red-500 text-[0.8rem] pl-2">
@@ -479,9 +489,7 @@ const AddCustomerForm: React.FC = () => {
         <div className="mb-3 lg:flex gap-3">
           {/* Mobile No.  */}
           <AnimationForm className="w-full mb-2 lg:mb-0">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
-              Mobile No.
-            </label>
+            <label className="mb-2.5 block font-semibold">Mobile No.</label>
             <div className="relative">
               <input
                 type="tel"
@@ -490,7 +498,7 @@ const AddCustomerForm: React.FC = () => {
                 value={values.mobileNo}
                 id="mobileNo"
                 name="mobileNo"
-                className="w-full border border-stroke bg-transparent py-2 pl-6 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full border border-[lightseagreen] bg-transparent text-black py-2 pl-6 pr-10  outline-none  focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white "
               />
               {touched.mobileNo && errors.mobileNo ? (
                 <div className="text-red-500 text-[0.8rem] pl-2">
@@ -506,7 +514,7 @@ const AddCustomerForm: React.FC = () => {
 
           {/* Landline No.  */}
           <AnimationForm fromLeft={false} className="w-full">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
+            <label className="mb-2.5 block font-semibold ">
               Landline No. (Optional)
             </label>
             <div className="relative">
@@ -517,7 +525,7 @@ const AddCustomerForm: React.FC = () => {
                 value={values.landlineNo}
                 id="landlineNo"
                 name="landlineNo"
-                className="w-full border border-stroke bg-transparent py-2 pl-6 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full border border-[lightseagreen] text-black bg-transparent py-2 pl-6 pr-10  outline-none  focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               {touched.landlineNo && errors.landlineNo ? (
                 <div className="text-red-500 text-[0.8rem] pl-2">
@@ -535,7 +543,7 @@ const AddCustomerForm: React.FC = () => {
         <div className="mb-3 lg:flex gap-3">
           {/* Street No. and Name */}
           <AnimationForm className="w-full mb-2 lg:mb-0">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
+            <label className="mb-2.5 block font-semibold">
               Street No. and Name
             </label>
             <div className="relative">
@@ -546,7 +554,7 @@ const AddCustomerForm: React.FC = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.streetNoName}
-                className="w-full border border-stroke bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full border border-[lightseagreen] bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               {touched.streetNoName && errors.streetNoName ? (
                 <div className="text-red-500 text-[0.8rem] pl-2">
@@ -557,9 +565,7 @@ const AddCustomerForm: React.FC = () => {
           </AnimationForm>
           {/* Town */}
           <AnimationForm fromLeft={false} className="w-full">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
-              Town
-            </label>
+            <label className="mb-2.5 block font-semibold ">Town</label>
             <div className="relative">
               <input
                 type="text"
@@ -568,7 +574,7 @@ const AddCustomerForm: React.FC = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.town}
-                className="w-full border border-stroke bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full border border-[lightseagreen] bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               {touched.town && errors.town ? (
                 <div className="text-red-500 text-[0.8rem] pl-2">
@@ -582,9 +588,7 @@ const AddCustomerForm: React.FC = () => {
         <div className="mb-3 lg:flex gap-3">
           {/* County */}
           <AnimationForm className="w-full mb-2 lg:mb-0">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
-              County
-            </label>
+            <label className="mb-2.5 block font-semibold">County</label>
             <div className="relative">
               <input
                 type="text"
@@ -593,7 +597,7 @@ const AddCustomerForm: React.FC = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.county}
-                className="w-full border border-stroke bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full border border-[lightseagreen] bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               {touched.county && errors.county ? (
                 <div className="text-red-500 text-[0.8rem] pl-2">
@@ -604,9 +608,7 @@ const AddCustomerForm: React.FC = () => {
           </AnimationForm>
           {/* Post Code  */}
           <AnimationForm fromLeft={false} className="w-full">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
-              Post Code
-            </label>
+            <label className="mb-2.5 block font-semibold">Post Code</label>
             <div className="relative">
               <input
                 type="text"
@@ -615,7 +617,7 @@ const AddCustomerForm: React.FC = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.postcode}
-                className="w-full border border-stroke bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full border border-[lightseagreen] bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               {touched.postcode && errors.postcode ? (
                 <div className="text-red-500 text-[0.8rem] pl-2">
@@ -629,9 +631,7 @@ const AddCustomerForm: React.FC = () => {
         <div className="mb-3 lg:flex gap-3">
           {/* URL  */}
           <AnimationForm className="w-full mb-2 lg:mb-0">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
-              URL
-            </label>
+            <label className="mb-2.5 block font-semibold">URL</label>
             <div className="relative">
               <input
                 type="text"
@@ -640,15 +640,13 @@ const AddCustomerForm: React.FC = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.url}
-                className="w-full border border-stroke bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full border border-[lightseagreen] bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
             </div>
           </AnimationForm>
           {/* SSL  */}
           <AnimationForm fromLeft={false} className="w-full">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
-              SSL
-            </label>
+            <label className="mb-2.5 block font-semibold ">SSL</label>
             <div className="relative">
               <input
                 type="text"
@@ -657,7 +655,7 @@ const AddCustomerForm: React.FC = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.ssl}
-                className="w-full border border-stroke bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full border border-[lightseagreen] bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
             </div>
           </AnimationForm>
@@ -666,9 +664,7 @@ const AddCustomerForm: React.FC = () => {
         <div className="mb-3 lg:flex gap-3">
           {/* SiteMap  */}
           <AnimationForm className="w-full mb-2 lg:mb-0">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
-              Site Map
-            </label>
+            <label className="mb-2.5 block font-semibold ">Site Map</label>
             <div className="relative">
               <input
                 type="text"
@@ -677,7 +673,7 @@ const AddCustomerForm: React.FC = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.sitemap}
-                className="w-full border border-stroke bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full border border-[lightseagreen] bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               {touched.sitemap && errors.sitemap ? (
                 <div className="text-red-500 text-[0.8rem] pl-2">
@@ -688,9 +684,7 @@ const AddCustomerForm: React.FC = () => {
           </AnimationForm>
           {/* HT Access  */}
           <AnimationForm fromLeft={false} className="w-full">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
-              HT Access
-            </label>
+            <label className="mb-2.5 block font-semibold ">HT Access</label>
             <div className="relative">
               <input
                 type="text"
@@ -699,7 +693,7 @@ const AddCustomerForm: React.FC = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.htAccess}
-                className="w-full border border-stroke bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full border border-[lightseagreen] bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               {touched.htAccess && errors.htAccess ? (
                 <div className="text-red-500 text-[0.8rem] pl-2">
@@ -713,9 +707,7 @@ const AddCustomerForm: React.FC = () => {
         <div className="mb-3 lg:flex gap-3">
           {/* GA Code  */}
           <AnimationForm className="w-full mb-2 lg:mb-0">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
-              GA Code
-            </label>
+            <label className="mb-2.5 block font-semibold">GA Code</label>
             <div className="relative">
               <input
                 type="text"
@@ -724,7 +716,7 @@ const AddCustomerForm: React.FC = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.gaCode}
-                className="w-full border border-stroke bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full border border-[lightseagreen] bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               {touched.gaCode && errors.gaCode ? (
                 <div className="text-red-500 text-[0.8rem] pl-2">
@@ -735,9 +727,7 @@ const AddCustomerForm: React.FC = () => {
           </AnimationForm>
           {/* New GA Code  */}
           <AnimationForm fromLeft={false} className="w-full">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
-              New GA Code
-            </label>
+            <label className="mb-2.5 block font-semibold ">New GA Code</label>
             <div className="relative">
               <input
                 type="text"
@@ -746,7 +736,7 @@ const AddCustomerForm: React.FC = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.newGACode}
-                className="w-full border border-stroke bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full border border-[lightseagreen] bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               {touched.newGACode && errors.newGACode ? (
                 <div className="text-red-500 text-[0.8rem] pl-2">
@@ -760,9 +750,7 @@ const AddCustomerForm: React.FC = () => {
         <div className="mb-3 lg:flex gap-3">
           {/* Status */}
           <AnimationForm className="w-full mb-2 lg:mb-0">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
-              Status
-            </label>
+            <label className="mb-2.5 block font-semibold ">Status</label>
             <div className="relative">
               <Select
                 onValueChange={(value: any) => {
@@ -801,9 +789,7 @@ const AddCustomerForm: React.FC = () => {
           </AnimationForm>
           {/* Logo */}
           <AnimationForm fromLeft={false} className="w-full">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
-              Logo
-            </label>
+            <label className="mb-2.5 block font-semibold ">Logo</label>
             <div className="relative">
               <input
                 type="file"
@@ -814,7 +800,7 @@ const AddCustomerForm: React.FC = () => {
                 onChange={handleLogoChange}
                 id="logo"
                 name="logo"
-                className="w-full border border-stroke bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full border border-[lightseagreen] bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               {logoPreview && (
                 <div className="mt-2">
@@ -831,16 +817,14 @@ const AddCustomerForm: React.FC = () => {
 
         {/* Live Date  */}
         <AnimationForm fromLeft={false} className="w-full">
-          <label className="mb-2.5 block font-medium text-black dark:text-white">
-            Live Date
-          </label>
+          <label className="mb-2.5 block font-semibold">Live Date</label>
           <div className="relative">
             <Popover>
               <PopoverTrigger asChild>
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "w-[250px] justify-start text-left font-normal text-black",
+                    "w-[250px] justify-start text-left font-normal text-black border border-[lightseagreen]",
                     !date && "text-muted-foreground"
                   )}
                 >
@@ -851,7 +835,7 @@ const AddCustomerForm: React.FC = () => {
                 </Button>
               </PopoverTrigger>
 
-              <PopoverContent className="w-auto p-0">
+              <PopoverContent className="w-auto p-0 ">
                 <div className="flex justify-between p-2">
                   <Select
                     onValueChange={(month) => handleMonthChange(month)}

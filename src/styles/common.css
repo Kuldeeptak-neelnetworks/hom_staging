@@ -159,8 +159,9 @@
 /* ================================= */
 
 .css-13cymwt-control {
-  border-color: #9da4b0 !important;
+  border-color: lightseagreen !important;
   border-radius: 0px !important;
+  border-width: 0.003rem !important;
 }
 
 .css-t3ipsp-control {
@@ -222,6 +223,7 @@
 .boxShadow {
   /* box-shadow: 0 2px 10px 0 rgba(58, 53, 65, 0.1); */
   box-shadow: 0 2px 10px 0 rgba(7, 48, 51, 0.1);
+  /* border-color: "#2e8b57"; */
 }
 
 /* CSS for dialog panel */

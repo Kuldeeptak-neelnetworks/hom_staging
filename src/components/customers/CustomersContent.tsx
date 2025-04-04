@@ -19,24 +19,6 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import {
-  Select as Selector,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-// import {
-//   Select,
-//   SelectContent,
-//   SelectGroup,
-//   SelectItem,
-//   SelectLabel,
-//   SelectTrigger,
-//   SelectValue,
-// } from "@/components/ui/select";
 
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
@@ -46,12 +28,6 @@ import { debounce } from "lodash";
 import { usePathname } from "next/navigation";
 import CustomPagination from "../CustomPagination/CustomPagination";
 const animatedComponents = makeAnimated();
-
-// interface CustomerData {
-//   message: string;
-//   users_data: any[];
-//   customer_list: any[];
-// }
 
 // Crumbs Array
 const crumbs = [
@@ -108,10 +84,6 @@ const CustomersContent: React.FC = () => {
     { label: "Will Get Cancelled", value: "WILL GET CANCELLED" },
   ];
 
-  // useEffect(() => {
-  //   fetchAllCustomerData();
-  // }, []);
-
   useEffect(() => {
     if (
       customerData === "Invalid refresh token" ||
@@ -130,48 +102,6 @@ const CustomersContent: React.FC = () => {
     }
   }, [customerData, router, customerData?.totalPages]);
 
-  // useEffect(() => {
-  //   const filterByStatus = customerData.customers?.filter((elem: any) => {
-  //     if (statusValue !== "all") {
-  //       return statusValue ? elem.status === statusValue : elem;
-  //     } else {
-  //       return customerData;
-  //     }
-  //   });
-
-  //   setAllCustomers(() => filterByStatus);
-  // }, [statusValue, customerData]);
-
-  // Table Instance
-
-  // useEffect(() => {
-  //   const filterByStatus = customerData?.customers?.filter((elem: any) => {
-  //     if (filters?.status?.length > 0) {
-  //       return filters?.status?.includes(elem?.status);
-  //     } else {
-  //       return true;
-  //     }
-  //   });
-
-  //   setAllCustomers(filterByStatus);
-  // }, [filters?.status, customerData]);
-
-  // useEffect(() => {
-  //   if (Array.isArray(customerData?.customers)) {
-  //     const filterByStatus: any =
-  //       customerData &&
-  //       customerData?.customers?.filter((elem: any) => {
-  //         if (filters?.status?.length > 0) {
-  //           return filters?.status?.includes(elem?.status);
-  //         } else {
-  //           return true;
-  //         }
-  //       });
-
-  //     setAllCustomers(filterByStatus);
-  //   }
-  // }, [filters?.status, customerData?.customers]);
-
   const onPageChange = (newPage: number, newLimit: number) => {
     setPage(newPage);
     const params = new URLSearchParams(searchParams.toString()); // ✅ Convert to string first
@@ -181,34 +111,6 @@ const CustomersContent: React.FC = () => {
 
     router.push(`${pathname}?${params.toString()}`);
   };
-
-  // ========================================
-
-  // Debounced search API call
-  // const debouncedSearch = useCallback(
-  //   debounce((searchInput) => {
-  //     fetchAllCustomerData({
-  //       page,
-  //       limit,
-  //       searchInput,
-  //       filters,
-  //     });
-  //   }, 500),
-  //   [fetchAllCustomerData, filters, page, limit]
-  // );
-
-  // useEffect(() => {
-  //   debouncedSearch(searchInput);
-  //   fetchAllCustomerData({
-  //     page,
-  //     limit,
-  //     searchInput,
-  //     filters,
-  //   });
-  //   return () => {
-  //     debouncedSearch.cancel();
-  //   };
-  // }, [searchInput, debouncedSearch, page, limit, filters]);
 
   const tableInstance = useReactTable({
     data,
@@ -286,13 +188,10 @@ const CustomersContent: React.FC = () => {
     filters,
     fetchAllCustomerData,
   ]);
-  // ==========================
+  // ==========================================================
 
   return (
     <div className="pr-0 pl-2 py-1 relative ">
-      {/* <div className="text-xl font-semibold absolute top-[-54px]">
-        Customers
-      </div> */}
       {/* <div className="mb-1">
         <BreadcrumbSection crumbs={crumbs} />
       </div> */}
@@ -301,7 +200,7 @@ const CustomersContent: React.FC = () => {
         <Select
           className="text-[0.8rem] boxShadow border-none"
           classNamePrefix="react-select-custom-styling"
-          closeMenuOnSelect={false}
+          closeMenuOnSelect={true}
           isClearable
           components={animatedComponents}
           options={statusOptions}
@@ -315,24 +214,10 @@ const CustomersContent: React.FC = () => {
             setPage(1);
           }}
           placeholder="Select a Status"
-          // styles={{
-          //   option: (provided, state) => ({
-          //     ...provided,
-          //     backgroundColor: state.isSelected
-          //       ? "#0f464a"
-          //       : provided.backgroundColor,
-          //     color: state.isSelected ? "white" : provided.color,
-          //     ":hover": {
-          //       backgroundColor: state.isSelected ? "#29354f" : "#f0f0f0",
-          //     },
-          //   }),
-          // }}
         />
       </div>
 
       <div className="md:flex justify-center sm:justify-end my-2">
-        {/* {customerData?.customers?.length ||
-        customerData?.customers?.length > 0 ? ( */}
         <PageHeader
           tableInstance={tableInstance}
           setSearchInput={setSearchInput}

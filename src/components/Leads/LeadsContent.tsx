@@ -19,21 +19,12 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-// import {
-//   Select,
-//   SelectContent,
-//   SelectGroup,
-//   SelectItem,
-//   SelectLabel,
-//   SelectTrigger,
-//   SelectValue,
-// } from "@/components/ui/select";
+
 import Select from "react-select";
 import PageHeader from "../common/PageHeader";
 import makeAnimated from "react-select/animated";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import SideDrawer from "../common/Editor/SideDrawer";
 import CustomPagination from "../CustomPagination/CustomPagination";
 import { debounce } from "lodash";
 
@@ -53,7 +44,6 @@ const crumbs = [
 ];
 
 const LeadsContent: React.FC = () => {
-  const [open, setOpen] = useState<boolean>(true);
   const { fetchAllLeadData, leadData, loading }: any = useLeadStore();
   const searchParams = useSearchParams();
   const queryParams = searchParams.get("id");
@@ -88,18 +78,6 @@ const LeadsContent: React.FC = () => {
     { label: "Arrange an Appointment", value: "Arrange an Appointment" },
   ];
 
-  const debouncedSearch = useCallback(
-    debounce((input) => {
-      fetchAllLeadData({ page, limit, searchInput: input, filters });
-    }, 500),
-    [fetchAllLeadData, filters, page, limit]
-  );
-
-  useEffect(() => {
-    debouncedSearch(searchInput);
-    return () => debouncedSearch.cancel();
-  }, [searchInput, page, limit, filters, debouncedSearch]);
-
   useEffect(() => {
     if (
       leadData === "Invalid refresh token" ||
@@ -111,11 +89,62 @@ const LeadsContent: React.FC = () => {
       router.push("/auth/login");
     } else {
       setAllLeads(leadData ? leadData?.leads || [] : []);
+      setTotalPages(leadData?.totalPages);
     }
   }, [leadData?.leads, leadData, router]);
 
-  const data = useMemo(() => allLeads, [allLeads]);
+  const onPageChange = (newPage: number, newLimit: number) => {
+    setPage(newPage);
+    const params = new URLSearchParams(searchParams.toString()); // ✅ Convert to string first
 
+    params.set("page", newPage.toString());
+    params.set("limit", newLimit.toString());
+
+    router.push(`${pathname}?${params.toString()}`);
+  };
+
+  // ==========================
+  useEffect(() => {
+    if (searchInput !== "") {
+      setPage(1);
+    }
+  }, [searchInput]);
+
+  const debouncedSearch = useCallback(
+    debounce((searchInput) => {
+      fetchAllLeadData({
+        page,
+        limit,
+        searchInput,
+        filters,
+      });
+    }, 500),
+    [fetchAllLeadData, filters, page, limit]
+  );
+
+  useEffect(() => {
+    fetchAllLeadData({
+      page,
+      limit,
+      searchInput,
+      filters,
+    });
+  }, [page, limit, searchInput, filters, fetchAllLeadData]);
+
+  useEffect(() => {
+    if (searchInput !== "") {
+      debouncedSearch(searchInput);
+    } else {
+      fetchAllLeadData({ page, limit, searchInput, filters });
+    }
+
+    return () => {
+      debouncedSearch.cancel();
+    };
+  }, [searchInput, debouncedSearch, page, limit, filters, fetchAllLeadData]);
+  // ==========================================================
+
+  const data = useMemo(() => allLeads, [allLeads]);
   const tableInstance = useReactTable({
     data,
     columns,
@@ -146,48 +175,8 @@ const LeadsContent: React.FC = () => {
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
-  // Filter
-  // useEffect(() => {
-  //   const filterByOutcome = leadData?.filter((elem: any) => {
-  //     if (filters.outcome) {
-  //       return filters.outcome ? elem.outcome === filters.outcome : elem;
-  //     } else {
-  //       return leadData;
-  //     }
-  //   });
-
-  //   setAllLeads(() => filterByOutcome);
-  // }, [outcomeValue, leadData]);
-
-  // useEffect(() => {
-  //   if (Array.isArray(leadData?.leads)) {
-  //     const filterByStatus =
-  //       leadData?.leads &&
-  //       leadData?.leads?.filter((elem: any) => {
-  //         if (filters?.outcome?.length > 0) {
-  //           return filters?.outcome?.includes(elem?.outcome);
-  //         } else {
-  //           return true;
-  //         }
-  //       });
-
-  //     setAllLeads(filterByStatus);
-  //   }
-  // }, [filters?.outcome, leadData?.leads]);
-
-  const onPageChange = (newPage: number, newLimit: number) => {
-    setPage(newPage);
-    const params = new URLSearchParams(searchParams.toString());
-
-    params.set("page", newPage.toString());
-    params.set("limit", newLimit.toString());
-
-    router.push(`${pathname}?${params.toString()}`);
-  };
-
   return (
     <div className="px-4 py-2 relative">
-      {/* <div className="text-xl font-semibold absolute top-[-60px]">Leads</div> */}
       {/* <div className="mb-1">
         <BreadcrumbSection crumbs={crumbs} />
       </div> */}
@@ -210,22 +199,14 @@ const LeadsContent: React.FC = () => {
             setPage(1);
           }}
           placeholder="Select an Outcome"
-          // className="react-select-custom-styling__container "
-          // classNamePrefix="react-select-custom-styling"
         />
       </div>
 
       <div className="md:flex justify-center sm:justify-end my-2">
-        {/* {allLeads?.length > 0 ? (
-          <PageHeader tableInstance={tableInstance} />
-        ) : (
-          ""
-        )} */}
         <PageHeader
           tableInstance={tableInstance}
           setSearchInput={setSearchInput}
         />
-        {/* <AddLeadDialoge getMyLeadData={fetchAllLeadData} /> */}
         <div className="flex justify-normal lg:justify-end ">
           <Link href={"/leads/addLead"}>
             <Button

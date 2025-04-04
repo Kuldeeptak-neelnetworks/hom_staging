@@ -16,24 +16,6 @@ import {
   SalesIconSVG,
   NotificationBellIconSVG,
 } from "@/utils/SVGs/SVGs";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-// import { NotificationBellIconSVG } from "@/utils/SVGs/SVGs";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import Appbar from "../../Appbar/Appbar";
 import Link from "next/link";
 import Logo from "../../../asset/images/logo.png";
@@ -147,8 +129,6 @@ const SideBar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
 
   const logoSrc = Logo.src;
   const MiniLogoSrc = MiniLogo.src;
-
-  console.log("pathnameSidebar", pathname);
 
   const togglerFunction = () => {
     setToggleSider((prev) => !prev);
@@ -332,16 +312,7 @@ const SideBar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
         </div>
 
         {/* Render Menu Items */}
-        {/* <ul>
-          {menuItems.map((item) => (
-            <MenuItemData
-              key={item.href}
-              {...item}
-              isCollapsed={isCollapsed}
-              notificationData={notificationData}
-            />
-          ))}
-        </ul> */}
+
         {role === "salesman" ? (
           <ul>
             {menuItems

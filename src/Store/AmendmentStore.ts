@@ -64,11 +64,18 @@ export const useAmendmentStore = create<AmendmentState & AmendmentActions>()(
         filters = "",
       } = params || {};
 
+      if (page > 1) {
+        set({ loading: false });
+      } else {
+        set({ loading: true });
+      }
+
       try {
         const queryParams = new URLSearchParams();
         if (page) queryParams.append("page", String(page));
         if (limit) queryParams.append("limit", String(limit));
-        if (searchInput) queryParams.append("search", searchInput);
+        if (searchInput && searchInput !== "" && searchInput !== undefined)
+          queryParams.append("search", searchInput);
         if (filters?.status !== undefined)
           queryParams.append("status", filters?.status);
 

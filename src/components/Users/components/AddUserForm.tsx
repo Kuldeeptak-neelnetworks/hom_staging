@@ -95,8 +95,8 @@ const AddUserForm: React.FC = () => {
   const formik = useFormik({
     initialValues: {
       fullName: "",
-      userEmail: "",
-      userPassword: "",
+      email: "",
+      password: "",
       role: "",
       mobileNo: "",
       address: "",
@@ -108,7 +108,7 @@ const AddUserForm: React.FC = () => {
       fullName: Yup.string()
         .min(2, "Must be 2 characters or more")
         .required("Name Required"),
-      userPassword: Yup.string()
+      password: Yup.string()
         .min(8, "Must be 8 characters or more")
         .max(20, "Not More than 20 Characters")
         .required("Password Required"),
@@ -119,26 +119,23 @@ const AddUserForm: React.FC = () => {
         )
         .required("Email Required"),
       role: Yup.string().required("User Role Required"),
-      // timeZone: Yup.string().required("Time Zone Required"),
-      // mobileNo: Yup.string()
-      //   .required("Contact No. Required")
-      //   .matches(/^[0-9]{10}$/, "Must be a 10-digit number"),
+
       jobtitle: Yup.string().required("Job title Required"),
-      // address: Yup.string().required("Address Required"),
     }),
 
     onSubmit: async (values) => {
+      console.log("values", values);
       try {
         setIsUserValid(() => true);
         const formData = new FormData();
         formData.append("fullName", values.fullName);
-        formData.append("email", values.userEmail);
-        formData.append("password", values.userPassword);
+        formData.append("email", values.email);
+        formData.append("password", values.password);
         formData.append("role", values.role);
         formData.append("mobileNo", `0${values.mobileNo}`);
         formData.append("jobtitle", values.jobtitle);
-        formData.append("timeZone", values.timeZone);
         formData.append("address", values.address);
+        formData.append("timeZone", values.timeZone);
 
         // if (values.timeZone) {
         //   const abbreviation = getAbbreviation(values.timeZone);
@@ -184,14 +181,19 @@ const AddUserForm: React.FC = () => {
   } = formik;
 
   return (
-    <ScrollArea className="w-[75%]   p-7 my-5 border boxShadow bg-[#fff]">
+    <ScrollArea className="w-[75%]  p-7 my-5 border boxShadow bg-[#fff]">
       <form onSubmit={handleSubmit} className="text-[0.8rem]  text-[#004d4b]">
         <div className="mb-3 flex gap-3 ">
           {/* Name  */}
           <AnimationForm className="w-full">
             <label className="mb-2.5 block font-semibold">Name</label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
+                transition={{ duration: 0.3 }}
                 type="text"
                 id="fullName"
                 name="fullName"
@@ -199,7 +201,7 @@ const AddUserForm: React.FC = () => {
                 onBlur={handleBlur}
                 value={values.fullName}
                 placeholder="Name"
-                className="w-full  border border-[#2e8b577d] bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               {touched.fullName && errors.fullName ? (
                 <div className="text-red-500">{errors.fullName}</div>
@@ -214,19 +216,24 @@ const AddUserForm: React.FC = () => {
           <AnimationForm className="w-full" fromLeft={false}>
             <label className="mb-2.5 block font-semibold">Email Address</label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
+                transition={{ duration: 0.3 }}
                 type="email"
                 id="email"
                 name="email"
                 autoComplete="off"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.userEmail}
+                value={values.email}
                 placeholder="Enter Your Email"
-                className="w-full  border border-[#2e8b577d] bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
-              {touched.userEmail && errors.userEmail ? (
-                <div className="text-red-500">{errors.userEmail}</div>
+              {touched.email && errors.email ? (
+                <div className="text-red-500">{errors.email}</div>
               ) : null}
 
               <span className="absolute right-4 top-2">
@@ -255,19 +262,24 @@ const AddUserForm: React.FC = () => {
           <AnimationForm className="w-full">
             <label className="mb-2.5 block font-semibold">Password</label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
+                transition={{ duration: 0.3 }}
                 type="password"
-                autoComplete="off"
+                // autoComplete="off"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.userPassword}
+                value={values.password}
                 id="password"
                 name="password"
                 placeholder="6+ Characters, 1 Capital letter"
-                className="w-full  border border-[#2e8b577d] bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
-              {touched.userPassword && errors.userPassword ? (
-                <div className="text-red-500">{errors.userPassword}</div>
+              {touched.password && errors.password ? (
+                <div className="text-red-500">{errors.password}</div>
               ) : null}
 
               <span className="absolute right-4 top-2">
@@ -296,7 +308,14 @@ const AddUserForm: React.FC = () => {
           {/* User Role */}
           <AnimationForm className="w-full" fromLeft={false}>
             <label className="mb-2.5 block font-semibold ">User Role</label>
-            <div className="relative">
+            <motion.div
+              className="relative"
+              whileHover={{
+                borderColor: "#2e8b57",
+                boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+              }}
+              transition={{ duration: 0.3 }}
+            >
               <Select
                 onValueChange={(value: any) =>
                   formik.setFieldValue("role", value)
@@ -320,15 +339,22 @@ const AddUserForm: React.FC = () => {
               {touched.role && errors.role ? (
                 <div className="text-red-500">{errors.role}</div>
               ) : null}
-            </div>
+            </motion.div>
           </AnimationForm>
         </div>
         {/* TimeZone  */}
         <AnimationForm fromLeft={false} className="mb-3 ">
           <label className="mb-2.5 block font-semibold">Time Zone</label>
-          <div className="relative">
+          <motion.div
+            className="relative"
+            whileHover={{
+              borderColor: "#2e8b57",
+              boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+            }}
+            transition={{ duration: 0.3 }}
+          >
             <TimezoneSelect
-              className="w-full rounded-0  border  bg-transparent  text-black outline-none focus:border-primary focus-visible:shadow-none  dark:bg-form-input dark:text-white "
+              className="w-full  rounded-0  bg-transparent  text-black outline-none focus:border-primary  dark:text-white "
               value={selectedTimezone.value}
               name="timeZone"
               id="timeZone"
@@ -342,7 +368,7 @@ const AddUserForm: React.FC = () => {
             {touched.timeZone && errors.timeZone ? (
               <div className="text-red-500">{errors.timeZone}</div>
             ) : null}
-          </div>
+          </motion.div>
         </AnimationForm>
 
         <div className="mb-5 flex gap-3">
@@ -350,7 +376,12 @@ const AddUserForm: React.FC = () => {
           <AnimationForm className="w-full">
             <label className="mb-2.5 block font-semibold">Contact</label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
+                transition={{ duration: 0.3 }}
                 type="tel"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -358,7 +389,7 @@ const AddUserForm: React.FC = () => {
                 id="mobileNo"
                 name="mobileNo"
                 placeholder="Enter Your Number"
-                className="w-full  border border-[#2e8b577d] bg-transparent py-2 pl-6 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-6 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               {formik.touched.mobileNo && formik.errors.mobileNo ? (
                 <div className="text-red-500">{formik.errors.mobileNo}</div>
@@ -373,7 +404,12 @@ const AddUserForm: React.FC = () => {
           <AnimationForm className="w-full" fromLeft={false}>
             <label className="mb-2.5 block font-semibold">Job Title</label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
+                transition={{ duration: 0.3 }}
                 type="text"
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -381,7 +417,7 @@ const AddUserForm: React.FC = () => {
                 id="jobtitle"
                 name="jobtitle"
                 placeholder="Enter Job Title"
-                className="w-full  border border-[#2e8b577d] bg-transparent py-2 pl-6 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-6 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               {touched.jobtitle && errors.jobtitle ? (
                 <div className="text-red-500">{errors.jobtitle}</div>
@@ -402,14 +438,19 @@ const AddUserForm: React.FC = () => {
         >
           <label className="mb-2.5 block font-semibold">Address</label>
           <div className="relative">
-            <textarea
+            <motion.textarea
+              whileHover={{
+                borderColor: "#2e8b57",
+                boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+              }}
+              transition={{ duration: 0.3 }}
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.address}
               id="address"
               name="address"
               placeholder="Enter Your Address"
-              className="w-full  border border-[#2e8b577d] bg-transparent py-2 pl-6 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+              className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-6 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input text-black dark:text-white dark:focus:border-primary"
             />
             {touched.address && errors.address ? (
               <div className="text-red-500">{errors.address}</div>
@@ -420,7 +461,12 @@ const AddUserForm: React.FC = () => {
         <AnimationForm fromLeft={false} className="mb-3">
           <label className="mb-2.5 block font-semibold ">Profile Picture</label>
           <div className="relative">
-            <input
+            <motion.input
+              whileHover={{
+                borderColor: "#2e8b57",
+                boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+              }}
+              transition={{ duration: 0.3 }}
               type="file"
               accept="image/png, image/jpeg, image/jpg"
               // value={formik.values.profilePic}
@@ -431,7 +477,7 @@ const AddUserForm: React.FC = () => {
               id="avatar"
               name="avatar"
               placeholder="choose your file"
-              className="w-full  border border-[#2e8b577d] bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+              className="w-full cursor-pointer  border border-[lightseagreen] bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
             />
             {logoPreview && (
               <div className="mt-2">
