@@ -379,10 +379,8 @@ const CustomerDetailsContent = ({ handleUpdate }: any) => {
     return filename;
   };
 
-  console.log("customerDetails", customerDetails);
-
   return (
-    <div className="py-3 relative text-[0.8rem] ">
+    <div className="py-3 relative text-[0.8rem]">
       {/* <div className="text-xl font-semibold absolute top-[-50px]">
         Customer Details
       </div> */}
@@ -398,7 +396,7 @@ const CustomerDetailsContent = ({ handleUpdate }: any) => {
       {/* Main Customer details section  */}
       <div className="lg:flex gap-1  justify-start">
         <AnimationForm className="w-full lg:w-[50%] mb-3 lg:mb-0">
-          <Card className="h-[230px] border-[#d9eeee] shadow-[1px_1px_1px_#d9eeee,-1px_-1px_1px_#d9eeee,1px_-1px_1px_#d9eeee,-1px_1px_1px_#d9eeee]">
+          <Card className="h-[230px] border-[#d9eeee]  shadow-[1px_1px_1px_#d9eeee,-1px_-1px_1px_#d9eeee,1px_-1px_1px_#d9eeee,-1px_1px_1px_#d9eeee]">
             <CardContent className="p-0">
               <div className="flex justify-end pr-4 pt-2">
                 <TooltipCommon text="Edit Customer">
@@ -849,7 +847,7 @@ const CustomerDetailsContent = ({ handleUpdate }: any) => {
         initial={{ opacity: 0, scale: 0.9, y: 30 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="lg gap-1  justify-start border-[#d9eeee] shadow-[1px_1px_1px_#d9eeee,-1px_-1px_1px_#d9eeee,1px_-1px_1px_#d9eeee,-1px_1px_1px_#d9eeee]"
+        className="lg gap-1 justify-start border-[#d9eeee] shadow-[1px_1px_1px_#d9eeee,-1px_-1px_1px_#d9eeee,1px_-1px_1px_#d9eeee,-1px_1px_1px_#d9eeee]"
       >
         {(textTab === "activity" ||
           textTab === "updates" ||

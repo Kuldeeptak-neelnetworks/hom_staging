@@ -26,7 +26,7 @@ import UpdateLead from "@/components/Leads/components/UpdateLead";
 import PDF from "../../../asset/images/pdf.png";
 import { PlusCircleIcon } from "lucide-react";
 import { ChatBubbleIcon } from "@radix-ui/react-icons";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const PDFPic = PDF.src;
 
@@ -220,113 +220,132 @@ export default function SideDrawer({
           </>
         )}
       </div>
-      <Dialog open={open} onClose={setOpen} className="relative z-[54]">
-        <div
-          onClick={() => setOpen(false)}
-          className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
-        />
+      <AnimatePresence>
+        {open && (
+          <Dialog open={open} onClose={setOpen} className="relative z-[54]">
+            <div
+              onClick={() => setOpen(false)}
+              className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+            />
 
-        <div className="fixed inset-0 flex justify-end ">
-          <DialogPanel className="w-screen max-w-[60rem]">
-            <motion.div
-              initial={{ x: "100%" }} // Start fully outside (right)
-              animate={{ x: 0 }} // Slide in smoothly
-              exit={{ x: "100%" }} // Slide out when closing
-              transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="w-screen max-w-[60rem]  shadow-xl h-full overflow-scroll bg-[rgb(149,207,206)] bg-gradient-to-r from-[#84b9b9c4] to-green-50 via-[#84b9b9c4]/95"
-            >
-              <div className="flex flex-col  shadow-xl h-[100vh] overflow-scroll">
-                <div className="flex-1 ">
-                  {/* Header */}
-                  <div className=" px-4 sm:px-6">
-                    <div className="flex items-start justify-between space-x-3">
-                      <div className="flex h-7 items-center">
-                        <button
-                          type="button"
-                          onClick={() => setOpen(false)}
-                          className="relative hover:bg-[white] hover:text-gray-500"
-                        >
-                          <span className="absolute -inset-2.5" />
-                          <span className="sr-only">Close panel</span>
-                          <XMarkIcon aria-hidden="true" className="size-6" />
-                        </button>
+            <div className="fixed inset-0 flex justify-end ">
+              <DialogPanel className="w-screen max-w-[60rem]">
+                <motion.div
+                  initial={{ x: "100%" }} // Start fully outside (right)
+                  animate={{ x: 0 }} // Slide in smoothly
+                  exit={{ x: "100%" }} // Slide out when closing
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  className="w-screen max-w-[60rem]  shadow-xl h-full overflow-scroll bg-[rgb(149,207,206)] bg-gradient-to-r from-[#84b9b9c4] to-green-50 via-[#84b9b9c4]/95"
+                >
+                  <div className="flex flex-col  shadow-xl h-[100vh] overflow-scroll">
+                    <div className="flex-1 ">
+                      {/* Header */}
+                      <div className=" px-4 sm:px-6">
+                        <div className="flex items-start justify-between space-x-3">
+                          <div className="flex h-7 items-center">
+                            <button
+                              type="button"
+                              onClick={() => setOpen(false)}
+                              className="relative hover:bg-[white] hover:text-gray-500"
+                            >
+                              <span className="absolute -inset-2.5" />
+                              <span className="sr-only">Close panel</span>
+                              <XMarkIcon
+                                aria-hidden="true"
+                                className="size-6"
+                              />
+                            </button>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
 
-                  <div className="p-8 model-update-btn">
-                    <CardTitle>{customerName}</CardTitle>
-                    <div className="w-full mt-2">
-                      <Tabs defaultValue="updates" className="w-full">
-                        <TabsList className="grid grid-cols-2">
-                          <TabsTrigger value="updates" className="bg-[#bae2e2]">
-                            Updates
-                          </TabsTrigger>
-                          <TabsTrigger value="files" className="bg-[#bae2e2]">
-                            Files
-                          </TabsTrigger>
-                          {/* <TabsTrigger value="invoices" className="bg-[#fff]">
+                      <div className="p-8 model-update-btn">
+                        <CardTitle>{customerName}</CardTitle>
+                        <div className="w-full mt-2">
+                          <Tabs defaultValue="updates" className="w-full">
+                            <TabsList className="grid grid-cols-2">
+                              <TabsTrigger
+                                value="updates"
+                                className="bg-[#bae2e2]"
+                              >
+                                Updates
+                              </TabsTrigger>
+                              <TabsTrigger
+                                value="files"
+                                className="bg-[#bae2e2]"
+                              >
+                                Files
+                              </TabsTrigger>
+                              {/* <TabsTrigger value="invoices" className="bg-[#fff]">
                               Invoices
                             </TabsTrigger> */}
-                        </TabsList>
-                        <TabsContent value="updates">
-                          <Card>
-                            <CardContent className="space-y-2  overflow-auto">
-                              <p
-                                className="w-full text-gray-500 border border-[#288c8170] cursor-pointer border-stroke bg-transparent text-[0.8rem] my-3 py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                                onClick={handleOpenQuillEditor}
-                              >
-                                Click here to write something...
-                              </p>
-                              {openQuill && (
-                                <div className="space-y-1 ">
-                                  <QuillEditor
-                                    amendmentId={amendmentId || ""}
-                                    orderId={orderId || ""}
-                                    customerId={""}
-                                    indicatorText="post"
-                                    technicalId={technicalId || ""}
-                                    leadId={leadId || ""}
-                                    updateId={updateId || ""}
-                                    productFlowId={productFlowId || ""}
-                                    handleEdit={""}
-                                    setOpenQuill={setOpenQuill}
-                                    setIsOpenReplyModel={() => {}}
-                                    copywriterId={copywriterId || ""}
-                                    websiteContentId={websiteContentId || ""}
-                                    quillSize="size"
-                                    // text=""
-                                  />
-                                </div>
-                              )}
+                            </TabsList>
+                            <TabsContent value="updates">
+                              <Card>
+                                <CardContent className="space-y-2  overflow-auto">
+                                  <p
+                                    className="w-full text-gray-500 border border-[#288c8170] cursor-pointer border-stroke bg-transparent text-[0.8rem] my-3 py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                                    onClick={handleOpenQuillEditor}
+                                  >
+                                    Click here to write something...
+                                  </p>
+                                  {openQuill && (
+                                    <div className="space-y-1 ">
+                                      <QuillEditor
+                                        amendmentId={amendmentId || ""}
+                                        orderId={orderId || ""}
+                                        customerId={""}
+                                        indicatorText="post"
+                                        technicalId={technicalId || ""}
+                                        leadId={leadId || ""}
+                                        updateId={updateId || ""}
+                                        productFlowId={productFlowId || ""}
+                                        handleEdit={""}
+                                        setOpenQuill={setOpenQuill}
+                                        setIsOpenReplyModel={() => {}}
+                                        copywriterId={copywriterId || ""}
+                                        websiteContentId={
+                                          websiteContentId || ""
+                                        }
+                                        quillSize="size"
+                                        // text=""
+                                      />
+                                    </div>
+                                  )}
 
-                              <ScrollArea className="overflow-auto h-[68vh]">
-                                <UpdateLead leadId={leadId} />
-                                <UpdateOrder orderId={orderId} />
-                                <UpdateTechnical technicalId={technicalId} />
-                                <UpdateAmendment amendmentId={amendmentId} />
-                                <UpdateProductFlow
-                                  productFlowId={productFlowId}
-                                />
-                                <UpdateCopywriter copywriterId={copywriterId} />
-                                <UpdateWebsiteContent
-                                  websiteContentId={websiteContentId}
-                                />
-                              </ScrollArea>
-                            </CardContent>
-                          </Card>
-                        </TabsContent>
-                        <TabsContent value="files">
-                          <Card>
-                            <CardContent
-                              className="space-y-2 overflow-y-scroll my-2"
-                              style={{ height: "75vh" }}
-                            >
-                              <UpdateFilesSection
-                                updateFileDetails={updateFileDetails}
-                                getUpdateFiles={getUpdateFiles}
-                              />
-                              {/* <QuillEditor
+                                  <ScrollArea className="overflow-auto h-[68vh]">
+                                    <UpdateLead leadId={leadId} />
+                                    <UpdateOrder orderId={orderId} />
+                                    <UpdateTechnical
+                                      technicalId={technicalId}
+                                    />
+                                    <UpdateAmendment
+                                      amendmentId={amendmentId}
+                                    />
+                                    <UpdateProductFlow
+                                      productFlowId={productFlowId}
+                                    />
+                                    <UpdateCopywriter
+                                      copywriterId={copywriterId}
+                                    />
+                                    <UpdateWebsiteContent
+                                      websiteContentId={websiteContentId}
+                                    />
+                                  </ScrollArea>
+                                </CardContent>
+                              </Card>
+                            </TabsContent>
+                            <TabsContent value="files">
+                              <Card>
+                                <CardContent
+                                  className="space-y-2 overflow-y-scroll my-2"
+                                  style={{ height: "75vh" }}
+                                >
+                                  <UpdateFilesSection
+                                    updateFileDetails={updateFileDetails}
+                                    getUpdateFiles={getUpdateFiles}
+                                  />
+                                  {/* <QuillEditor
                                       amendmentId={amendmentId || ""}
                                       orderId={orderId || ""}
                                       customerId={""}
@@ -343,10 +362,10 @@ export default function SideDrawer({
                                       quillSize="size"
                                       // text=""
                                     /> */}
-                            </CardContent>
-                          </Card>
-                        </TabsContent>
-                        {/* <TabsContent value="invoices">
+                                </CardContent>
+                              </Card>
+                            </TabsContent>
+                            {/* <TabsContent value="invoices">
                             <Card>
                               <CardContent className="overflow-y-auto mt-4 flex items-center">
 
@@ -372,15 +391,17 @@ export default function SideDrawer({
                               </CardContent>
                             </Card>
                           </TabsContent> */}
-                      </Tabs>
+                          </Tabs>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </motion.div>
-          </DialogPanel>
-        </div>
-      </Dialog>
+                </motion.div>
+              </DialogPanel>
+            </div>
+          </Dialog>
+        )}
+      </AnimatePresence>
     </>
   );
 }

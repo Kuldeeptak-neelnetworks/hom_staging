@@ -174,7 +174,7 @@ const UpdateOrder = ({ orderId }: any) => {
             )}
 
             <section className="bg-white text-gray-800 border border-[#288c8170]  my-2">
-              <div className="px-6 py-4 mx-auto bg-[#ecfbff]">
+              <div className="px-6 py-4 mx-auto ">
                 <div className="flex flex-wrap -m-4">
                   <div className="p-4 md:w-full flex flex-col items-start">
                     <div className="flex items-center justify-between w-full border-b border-[#288c8170] pb-2 mb-2 relative">
@@ -206,7 +206,7 @@ const UpdateOrder = ({ orderId }: any) => {
                         <DotsHorizontalIcon className="h-5 w-5 text-gray-700 hover:text-gray-900" />
                       </div>
                       {isModalOpen && selectedEditorId === editor._id && (
-                        <div className="absolute top-0 right-0 bg-white w-52 z-50  shadow-lg p-4">
+                        <div className="absolute top-0 right-0 bg-white w-52 z-50  shadow-lg p-4 border border-[#1fa8a8]">
                           <div className="">
                             <div
                               className="cursor-pointer flex justify-end "

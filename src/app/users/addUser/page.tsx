@@ -9,7 +9,6 @@ const AddUserPage = () => {
   // const searchParams = useSearchParams();
   // const role = searchParams.get("setIsUpdated");
 
-  // console.log("ffff", role);
   return (
     <div className="col-span-6">
       {/* <div>

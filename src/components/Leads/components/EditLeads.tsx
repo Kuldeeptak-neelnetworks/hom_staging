@@ -262,7 +262,11 @@ const EditLeads = ({}) => {
                   Contact Person <span style={{ opacity: "0.5" }}> * </span>
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     required
                     value={values.contactPerson}
                     onChange={handleChange}
@@ -270,7 +274,7 @@ const EditLeads = ({}) => {
                     type="text"
                     id="contactPerson"
                     name="contactPerson"
-                    className="w-full border-[#2e8b577d]  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full border-[#2e8b577d]  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {formik.touched.contactPerson &&
                   formik.errors.contactPerson ? (
@@ -285,7 +289,13 @@ const EditLeads = ({}) => {
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                   Lead Type <span style={{ opacity: "0.5" }}> * </span>
                 </label>
-                <div className="relative">
+                <motion.div
+                  className="relative"
+                  whileHover={{
+                    borderColor: "#2e8b57",
+                    boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                  }}
+                >
                   <Select
                     onValueChange={(value: any) =>
                       formik.setFieldValue("lead_type", value)
@@ -318,7 +328,7 @@ const EditLeads = ({}) => {
                       {formik.errors.lead_type}
                     </div>
                   ) : null}
-                </div>
+                </motion.div>
               </AnimationForm>
             </div>
             {/* OutCome */}
@@ -326,7 +336,13 @@ const EditLeads = ({}) => {
               <label className="mb-2.5 block font-medium text-black dark:text-white">
                 Outcome <span style={{ opacity: "0.5" }}> * </span>
               </label>
-              <div className="relative">
+              <motion.div
+                className="relative"
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
+              >
                 <Select
                   onValueChange={(value: any) =>
                     formik.setFieldValue("outcome", value)
@@ -356,7 +372,7 @@ const EditLeads = ({}) => {
                 {formik.touched.outcome && formik.errors.outcome ? (
                   <div className="text-red-500">{formik.errors.outcome}</div>
                 ) : null}
-              </div>
+              </motion.div>
             </AnimationForm>
             {/*  Status*/}
             {values.outcome === "SOLD" && (
@@ -366,7 +382,13 @@ const EditLeads = ({}) => {
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
                     Status
                   </label>
-                  <div className="relative">
+                  <motion.div
+                    className="relative"
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
+                  >
                     <Select
                       onValueChange={(value: any) =>
                         formik.setFieldValue("status", value)
@@ -394,7 +416,7 @@ const EditLeads = ({}) => {
                         </SelectGroup>
                       </SelectContent>
                     </Select>
-                  </div>
+                  </motion.div>
                 </AnimationForm>
 
                 <AnimationForm className="mb-3" fromLeft={false}>
@@ -402,14 +424,18 @@ const EditLeads = ({}) => {
                     Town
                   </label>
                   <div className="relative">
-                    <input
+                    <motion.input
+                      whileHover={{
+                        borderColor: "#2e8b57",
+                        boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                      }}
                       type="text"
                       value={values.town}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       id="town"
                       name="town"
-                      className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </AnimationForm>
@@ -419,14 +445,18 @@ const EditLeads = ({}) => {
                     County
                   </label>
                   <div className="relative">
-                    <input
+                    <motion.input
+                      whileHover={{
+                        borderColor: "#2e8b57",
+                        boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                      }}
                       type="text"
                       value={values.county}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       id="county"
                       name="county"
-                      className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </AnimationForm>
@@ -436,14 +466,18 @@ const EditLeads = ({}) => {
                     Post Code
                   </label>
                   <div className="relative">
-                    <input
+                    <motion.input
+                      whileHover={{
+                        borderColor: "#2e8b57",
+                        boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                      }}
                       type="text"
                       value={values.postcode}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       id="postcode"
                       name="postcode"
-                      className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </AnimationForm>
@@ -457,14 +491,18 @@ const EditLeads = ({}) => {
                   Current website
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="text"
                     value={values.currentWebsite}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     id="currentWebsite"
                     name="currentWebsite"
-                    className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {formik.touched.currentWebsite &&
                   formik.errors.currentWebsite ? (
@@ -480,14 +518,18 @@ const EditLeads = ({}) => {
                   Email Address <span style={{ opacity: "0.5" }}>*</span>
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="email"
                     id="emailAddress"
                     name="emailAddress"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.emailAddress}
-                    className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {formik.touched.emailAddress && formik.errors.emailAddress ? (
                     <div className="text-red-500">
@@ -523,14 +565,18 @@ const EditLeads = ({}) => {
                   Mobile No.
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="tel"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.mobileNumber}
                     id="mobileNumber"
                     name="mobileNumber"
-                    className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {formik.touched.mobileNumber && formik.errors.mobileNumber ? (
                     <div className="text-red-500">
@@ -549,14 +595,18 @@ const EditLeads = ({}) => {
                   Landline No.
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="tel"
                     onBlur={handleBlur}
                     value={values.landlineNumber}
                     onChange={handleChange}
                     id="landlineNumber"
                     name="landlineNumber"
-                    className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {formik.touched.landlineNumber &&
                   formik.errors.landlineNumber ? (
@@ -576,14 +626,18 @@ const EditLeads = ({}) => {
                 Order Forecast
               </label>
               <div className="relative">
-                <input
+                <motion.input
+                  whileHover={{
+                    borderColor: "#2e8b57",
+                    boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                  }}
                   type="tel"
                   value={values.orderForecast}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   id="orderForecast"
                   name="orderForecast"
-                  className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                  className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                 />
                 {formik.touched.orderForecast && formik.errors.orderForecast ? (
                   <div className="text-red-500">
@@ -598,7 +652,11 @@ const EditLeads = ({}) => {
                 Notes
               </label>
               <div className="relative">
-                <textarea
+                <motion.textarea
+                  whileHover={{
+                    borderColor: "#2e8b57",
+                    boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                  }}
                   value={values.notes}
                   onChange={handleChange}
                   onBlur={formik.handleBlur}
@@ -606,7 +664,7 @@ const EditLeads = ({}) => {
                   id="notes"
                   name="notes"
                   minLength={4}
-                  className="w-full resize-none   border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                  className="w-full resize-none   border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                 />
                 {formik.touched.notes && formik.errors.notes ? (
                   <div className="text-red-500">{formik.errors.notes}</div>

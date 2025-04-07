@@ -392,13 +392,15 @@ const DashBoardPage: React.FC = () => {
                       blockData(allLeads)?.map((item, index) => (
                         <li
                           className={`my-2  ${
-                            index === 4 ? "border-none" : "border-b-2"
+                            index === 4
+                              ? "border-none"
+                              : "border-b-2 hover:border-[#228b2259]"
                           }`}
                           key={item?._id}
                         >
                           <div className="p-[1rem] text-center  flex justify-between gap-3 flex-col lg:flex-row">
                             <Link
-                              className="font-bold  text-[0.8rem] xl:text-[0.9rem] lg:text-left lg:w-[40%] overflow-x-auto hover:underline"
+                              className="font-bold text-[0.8rem] xl:text-[0.9rem] lg:text-left lg:w-[40%] overflow-x-auto hover:underline"
                               href={`/leads/leadsDetails/${item?._id}`}
                             >
                               {item?.customer_id?.companyName
@@ -474,14 +476,16 @@ const DashBoardPage: React.FC = () => {
                       blockData(allOrders)?.map((item, index) => (
                         <li
                           className={`my-2  ${
-                            index === 4 ? "border-none" : "border-b-2"
+                            index === 4
+                              ? "border-none"
+                              : "border-b-2 hover:border-[#228b2259]"
                           }`}
                           key={item?._id}
                         >
                           <div className="p-[1rem] text-center flex justify-between gap-3 flex-col lg:flex-row">
                             <p className="font-bold text-[0.8rem] xl:text-[0.9rem] lg:text-left lg:w-[40%] overflow-x-auto">
                               <Link
-                                className="font-bold  text-[0.8rem] xl:text-[0.9rem] lg:text-left lg:w-[40%] overflow-x-auto hover:underline"
+                                className="font-bold text-[0.8rem] xl:text-[0.9rem] lg:text-left lg:w-[40%] overflow-x-auto hover:underline"
                                 href={`/orders/orderDetails/${item?._id}`}
                               >
                                 <span>
@@ -555,7 +559,9 @@ const DashBoardPage: React.FC = () => {
                       blockData(allAmendments)?.map((item, index) => (
                         <li
                           className={`my-2 ${
-                            index === 4 ? "border-none" : "border-b-2"
+                            index === 4
+                              ? "border-none"
+                              : "border-b-2 hover:border-[#228b2259]"
                           }`}
                           key={item?._id}
                         >

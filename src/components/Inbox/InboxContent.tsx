@@ -20,15 +20,7 @@ import {
   timeAgo,
 } from "@/common/commonFunctions";
 import { useNotificationStore } from "@/Store/NotificationStore";
-import {
-  Select as Selector,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import AddDialoge from "./AddDialoge";
 import {
   ColumnFiltersState,
@@ -49,6 +41,8 @@ import { columns } from "./columns";
 import SideDrawer from "../common/Editor/SideDrawer";
 import DeleteDialoge from "../Orders/components/DeleteDialoge";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { motion } from "framer-motion";
+
 const UserPic = User.src;
 
 const InboxContent: React.FC = () => {
@@ -196,7 +190,12 @@ const InboxContent: React.FC = () => {
         <AddDialoge />
       </div>
 
-      <div className="px-4 py-0 relative">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+        className="px-4 py-0 relative"
+      >
         <InfiniteScroll
           dataLength={notificationList.length}
           next={() => {
@@ -400,7 +399,7 @@ const InboxContent: React.FC = () => {
             </Table>
           </div>
         </InfiniteScroll>
-      </div>
+      </motion.div>
     </>
   );
 };

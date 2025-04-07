@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import AddCustomerForm from "./AddCustomerForm";
+import { motion } from "framer-motion";
 
 const crumbs = [
   {
@@ -29,9 +30,14 @@ const AddCustomerContent = () => {
       {/* <div className="mb-4">
         <BreadcrumbSection crumbs={crumbs} />
       </div> */}
-      <div className=" flex gap-5 justify-center ">
+      <motion.div
+        initial={{ opacity: 0, x: -50, rotate: -5, scale: 0.95 }}
+        animate={{ opacity: 1, x: 0, rotate: 0, scale: 1 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+        className=" flex gap-5 justify-center "
+      >
         <AddCustomerForm />
-      </div>
+      </motion.div>
     </div>
   );
 };

@@ -350,7 +350,11 @@ const EditCustomerContent = () => {
                   Contact Name
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="text"
                     id="contactName"
                     name="contactName"
@@ -358,7 +362,7 @@ const EditCustomerContent = () => {
                     onBlur={handleBlur}
                     value={values.contactName}
                     placeholder="Name"
-                    className="w-full border border-stroke bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full border border-[lightseagreen] bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {touched.contactName && errors.contactName ? (
                     <div className="text-red-500 text-[0.8rem] pl-2">
@@ -377,7 +381,11 @@ const EditCustomerContent = () => {
                   Company Name <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="text"
                     id="companyName"
                     name="companyName"
@@ -385,7 +393,7 @@ const EditCustomerContent = () => {
                     onBlur={handleBlur}
                     value={values.companyName}
                     placeholder="Company Name"
-                    className="w-full border border-stroke bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full border border-[lightseagreen] bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {touched.companyName && errors.companyName ? (
                     <div className="text-red-500 text-[0.8rem] pl-2">
@@ -406,7 +414,11 @@ const EditCustomerContent = () => {
                   Email Address
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="email"
                     id="customerEmail"
                     name="customerEmail"
@@ -414,7 +426,7 @@ const EditCustomerContent = () => {
                     onBlur={handleBlur}
                     value={values.customerEmail}
                     placeholder="Enter Your Email"
-                    className="w-full border border-stroke bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full border border-[lightseagreen] bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {touched.customerEmail && errors.customerEmail ? (
                     <div className="text-red-500 text-[0.8rem] pl-2">
@@ -433,7 +445,11 @@ const EditCustomerContent = () => {
                   Mobile No.
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="tel"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -441,7 +457,7 @@ const EditCustomerContent = () => {
                     id="mobileNo"
                     name="mobileNo"
                     placeholder="Enter Your Mobile Number"
-                    className="w-full border border-stroke bg-transparent py-2 pl-3  pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full border border-[lightseagreen] bg-transparent py-2 pl-3  pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {touched.mobileNo && errors.mobileNo ? (
                     <div className="text-red-500 text-[0.8rem] pl-2">
@@ -462,7 +478,11 @@ const EditCustomerContent = () => {
                   Landline No. (Optional)
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="tel"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -470,7 +490,7 @@ const EditCustomerContent = () => {
                     id="landlineNo"
                     name="landlineNo"
                     placeholder="Enter Your Landline Number"
-                    className="w-full border border-stroke bg-transparent py-2 pl-3  pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full border border-[lightseagreen] bg-transparent py-2 pl-3  pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {touched.landlineNo && errors.landlineNo ? (
                     <div className="text-red-500 text-[0.8rem] pl-2">
@@ -489,7 +509,11 @@ const EditCustomerContent = () => {
                   Street No. and Name
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="text"
                     id="streetNoName"
                     name="streetNoName"
@@ -497,7 +521,7 @@ const EditCustomerContent = () => {
                     onBlur={handleBlur}
                     value={values.streetNoName}
                     placeholder="Street No. and Names"
-                    className="w-full border border-stroke bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full border border-[lightseagreen] bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {touched.streetNoName && errors.streetNoName ? (
                     <div className="text-red-500 text-[0.8rem] pl-2">
@@ -514,7 +538,11 @@ const EditCustomerContent = () => {
                   Town
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="text"
                     id="town"
                     name="town"
@@ -522,7 +550,7 @@ const EditCustomerContent = () => {
                     onBlur={handleBlur}
                     value={values.town}
                     placeholder="Town Name"
-                    className="w-full border border-stroke bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full border border-[lightseagreen] bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {touched.town && errors.town ? (
                     <div className="text-red-500 text-[0.8rem] pl-2">
@@ -537,7 +565,11 @@ const EditCustomerContent = () => {
                   County
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="text"
                     id="county"
                     name="county"
@@ -545,7 +577,7 @@ const EditCustomerContent = () => {
                     onBlur={handleBlur}
                     value={values.county}
                     placeholder="Enter County"
-                    className="w-full border border-stroke bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full border border-[lightseagreen] bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {touched.county && errors.county ? (
                     <div className="text-red-500 text-[0.8rem] pl-2">
@@ -560,7 +592,11 @@ const EditCustomerContent = () => {
                   Post Code
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="text"
                     id="postcode"
                     name="postcode"
@@ -568,7 +604,7 @@ const EditCustomerContent = () => {
                     onBlur={handleBlur}
                     value={values.postcode}
                     placeholder="Enter Post Code"
-                    className="w-full border border-stroke bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full border border-[lightseagreen] bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {touched.postcode && errors.postcode ? (
                     <div className="text-red-500 text-[0.8rem] pl-2">
@@ -585,7 +621,11 @@ const EditCustomerContent = () => {
                   URL
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="text"
                     id="url"
                     name="url"
@@ -593,7 +633,7 @@ const EditCustomerContent = () => {
                     onBlur={handleBlur}
                     value={values.url}
                     placeholder="Enter URL"
-                    className="w-full border border-stroke bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full border border-[lightseagreen] bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                 </div>
               </AnimationForm>
@@ -602,7 +642,13 @@ const EditCustomerContent = () => {
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                   Live Date
                 </label>
-                <div className="relative">
+                <motion.div
+                  whileHover={{
+                    borderColor: "#2e8b57",
+                    boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                  }}
+                  className="relative"
+                >
                   {/* <input
                   type="date"
                   id="liveDate"
@@ -611,7 +657,7 @@ const EditCustomerContent = () => {
                   onBlur={handleBlur}
                   value={formatDate(values.liveDate)}
                   placeholder="Enter Live Date"
-                  className="w-full border border-stroke bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                  className="w-full border border-[lightseagreen] bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                 /> */}
 
                   <Popover>
@@ -619,7 +665,7 @@ const EditCustomerContent = () => {
                       <Button
                         variant={"outline"}
                         className={cn(
-                          "w-[100%] justify-start text-left font-normal text-md",
+                          "w-[100%] justify-start text-left font-normal text-md border border-[lightseagreen]",
                           !date && "text-muted-foreground"
                         )}
                       >
@@ -640,7 +686,7 @@ const EditCustomerContent = () => {
                       </div>
                     </PopoverContent>
                   </Popover>
-                </div>
+                </motion.div>
               </AnimationForm>
             </div>
             <div className="lg:flex gap-5">
@@ -650,7 +696,11 @@ const EditCustomerContent = () => {
                   SSL
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="text"
                     id="ssl"
                     name="ssl"
@@ -658,7 +708,7 @@ const EditCustomerContent = () => {
                     onBlur={handleBlur}
                     value={values.ssl}
                     placeholder="Enter SSL"
-                    className="w-full border border-stroke bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full border border-[lightseagreen] bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                 </div>
               </AnimationForm>
@@ -668,7 +718,11 @@ const EditCustomerContent = () => {
                   Site Map
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="text"
                     id="sitemap"
                     name="sitemap"
@@ -676,7 +730,7 @@ const EditCustomerContent = () => {
                     onBlur={handleBlur}
                     value={values.sitemap}
                     placeholder="Enter Site Map"
-                    className="w-full  border border-stroke bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                 </div>
               </AnimationForm>
@@ -688,7 +742,11 @@ const EditCustomerContent = () => {
                   HT Access
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="text"
                     id="htAccess"
                     name="htAccess"
@@ -696,7 +754,7 @@ const EditCustomerContent = () => {
                     onBlur={handleBlur}
                     value={values.htAccess}
                     placeholder="Enter HT Access"
-                    className="w-full border border-stroke bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full border border-[lightseagreen] bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                 </div>
               </AnimationForm>
@@ -706,7 +764,11 @@ const EditCustomerContent = () => {
                   GA Code
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="text"
                     id="gaCode"
                     name="gaCode"
@@ -714,7 +776,7 @@ const EditCustomerContent = () => {
                     onBlur={handleBlur}
                     value={values.gaCode}
                     placeholder="Enter GA Code"
-                    className="w-full border border-stroke bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full border border-[lightseagreen] bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                 </div>
               </AnimationForm>
@@ -726,7 +788,11 @@ const EditCustomerContent = () => {
                   New GA Code
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="text"
                     id="newGACode"
                     name="newGACode"
@@ -734,7 +800,7 @@ const EditCustomerContent = () => {
                     onBlur={handleBlur}
                     value={values.newGACode}
                     placeholder="Enter New GA Code"
-                    className="w-full  border border-stroke bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                 </div>
               </AnimationForm>
@@ -744,7 +810,11 @@ const EditCustomerContent = () => {
                   Orders/Renewals
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="text"
                     id="ordersRenewals"
                     name="ordersRenewals"
@@ -752,7 +822,7 @@ const EditCustomerContent = () => {
                     onBlur={handleBlur}
                     value={values.ordersRenewals}
                     placeholder="Enter Orders/Renewals"
-                    className="w-full border border-stroke bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full border border-[lightseagreen] bg-transparent py-2 pl-3  pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                 </div>
               </AnimationForm>
@@ -763,7 +833,13 @@ const EditCustomerContent = () => {
                 <label className="mb-2.5 block font-medium text-[#29354f] dark:text-white">
                   Status
                 </label>
-                <div className="relative">
+                <motion.div
+                  whileHover={{
+                    borderColor: "#2e8b57",
+                    boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                  }}
+                  className="relative"
+                >
                   <Select
                     value={values.status}
                     onValueChange={(value) =>
@@ -795,7 +871,7 @@ const EditCustomerContent = () => {
                       {formik.errors.status}
                     </div>
                   ) : null}
-                </div>
+                </motion.div>
               </AnimationForm>
               {/* User Name */}
               {/* <div className="mb-3 w-full">
@@ -848,7 +924,13 @@ const EditCustomerContent = () => {
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
                     Assigned User
                   </label>
-                  <div className="relative">
+                  <motion.div
+                    className="relative"
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
+                  >
                     {!userLoading && userData?.length === 0 ? (
                       <div className="flex justify-start">
                         <LoaderIconSVG />
@@ -880,7 +962,7 @@ const EditCustomerContent = () => {
                         {formik.errors.createdBy}
                       </div>
                     ) : null}
-                  </div>
+                  </motion.div>
                 </AnimationForm>
               ) : (
                 <AnimationForm className="mb-3 w-full" fromLeft={false}>
@@ -888,7 +970,11 @@ const EditCustomerContent = () => {
                     Assigned User
                   </label>
                   <div className="relative">
-                    <input
+                    <motion.input
+                      whileHover={{
+                        borderColor: "#2e8b57",
+                        boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                      }}
                       type="text"
                       value={userNameHOM || ""}
                       id="assignUser"
@@ -906,14 +992,18 @@ const EditCustomerContent = () => {
                 Logo
               </label>
               <div className="relative">
-                <input
+                <motion.input
+                  whileHover={{
+                    borderColor: "#2e8b57",
+                    boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                  }}
                   type="file"
                   accept="image/png, image/jpeg, image/jpg"
                   onChange={handleLogoChange}
                   id="logo"
                   name="logo"
                   placeholder="choose your Logo"
-                  className="w-full border border-stroke bg-transparent py-2 pl-3  pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                  className="w-full border border-[lightseagreen] bg-transparent py-2 pl-3  pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                 />
                 {logoPreview && (
                   <div className="mt-2">

@@ -38,9 +38,9 @@ const ActivitySection = ({ activityDetails }: any) => {
   //   fetchEditorData()
   //  })
   return (
-    <div className="overflow-x-hidden overflow-y-hidden border border-[#d9eeee] bg-[#fff] px-1 mt-1 py-1 boxShadow w-full h-[50vh] ">
+    <div className="overflow-x-hidden overflow-y-hidden border border-[#d9eeee] bg-[#fff] px-1 mt-1 py-1 boxShadow w-full h-[60vh] ">
       <div className="font-bold ml-3 bg-[#fff] w-fit px-3">Activity</div>
-      <div className="h-[50vh] overflow-y-hidden ">
+      <div className="h-[60vh] overflow-y-hidden ">
         {activityDetails && (
           <div className="relative">
             <table className="border border-collapse w-full mt-2 ">
@@ -56,14 +56,25 @@ const ActivitySection = ({ activityDetails }: any) => {
             </table>
 
             {/* Scrollable body */}
-            <div className="h-[45vh] overflow-y-auto">
+            <div className="h-[60vh] overflow-y-auto">
               <table className="border border-[#305e5e] border-collapse w-full mt-2">
                 <thead className="bg-[#004d4b] sticky top-0 z-10 text-white border-[#2e7a7a]">
                   <tr className="border border-[#2e7a7a]  text-white text-left">
-                    <th className="border px-4 py-2 h-10">Date</th>
-                    <th className="border px-4 py-2 h-10">Full Name</th>
-                    <th className="border px-4 py-2 h-10">Description</th>
-                    <th className="border px-4 py-2 h-10">Related Entity</th>
+                    <th className="border px-4 py-2 h-10 border-[#2e7a7a]">
+                      Sr. No.
+                    </th>
+                    <th className="border px-4 py-2 h-10 border-[#2e7a7a]">
+                      Date
+                    </th>
+                    <th className="border px-4 py-2 h-10 border-[#2e7a7a]">
+                      Full Name
+                    </th>
+                    <th className="border px-4 py-2 h-10 border-[#2e7a7a]">
+                      Description
+                    </th>
+                    <th className="border px-4 py-2 h-10 border-[#2e7a7a]">
+                      Related Entity
+                    </th>
                   </tr>
                 </thead>
                 <tbody>

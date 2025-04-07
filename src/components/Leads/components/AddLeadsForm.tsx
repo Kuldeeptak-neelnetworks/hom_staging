@@ -33,6 +33,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import ReactSelect from "react-select";
 import { useLeadStore } from "@/Store/LeadStore";
 import { AsyncPaginate } from "react-select-async-paginate";
+import { motion } from "framer-motion";
 
 type Customer = {
   id: number;
@@ -239,7 +240,11 @@ const AddLeadForm: React.FC = () => {
     <ScrollArea className=" p-7 w-full lg:w-[70%] border my-5 bg-[#fff] boxShadow">
       <form onSubmit={handleSubmit} className="text-[0.8rem] ">
         <div className="mb-2">
-          <input
+          <motion.input
+            whileHover={{
+              borderColor: "#2e8b57",
+              boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+            }}
             //  className="custom-checkbox"
             type="checkbox"
             id="option1"
@@ -262,7 +267,11 @@ const AddLeadForm: React.FC = () => {
                 Company Name <span style={{ opacity: "0.5" }}> * </span>
               </label>
               <div className="relative">
-                <input
+                <motion.input
+                  whileHover={{
+                    borderColor: "#2e8b57",
+                    boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                  }}
                   type="text"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -270,7 +279,7 @@ const AddLeadForm: React.FC = () => {
                   id="customerName"
                   name="customerName"
                   placeholder="Enter name"
-                  className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                  className="w-full border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none  focus-visible:shadow-none  dark:bg-form-input dark:text-white dark:focus:border-primary"
                 />
               </div>
             </div>
@@ -279,7 +288,13 @@ const AddLeadForm: React.FC = () => {
               <label className="mb-2.5 block font-medium text-black dark:text-white">
                 Company Name <span style={{ opacity: "0.5" }}> * </span>
               </label>
-              <div className="relative">
+              <motion.div
+                className="relative"
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
+              >
                 {customerData?.customers?.length > 0 && (
                   <Select
                     onValueChange={(value: any) => {
@@ -352,7 +367,7 @@ const AddLeadForm: React.FC = () => {
                     placeholder="Select a company name"
                   />
                 )} */}
-              </div>
+              </motion.div>
             </div>
           )}
 
@@ -362,8 +377,11 @@ const AddLeadForm: React.FC = () => {
               Contact Person
             </label>
             <div className="relative">
-              <input
-                autoFocus={true}
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
                 onFocus={handleFocus}
                 type="text"
                 onChange={handleChange}
@@ -372,7 +390,7 @@ const AddLeadForm: React.FC = () => {
                 id="contactPerson"
                 name="contactPerson"
                 placeholder="Enter name"
-                className={`w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary ${
+                className={`w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none  dark:bg-form-input dark:text-white  ${
                   fieldFocused ? "red-border" : ""
                 }`}
               />
@@ -393,7 +411,11 @@ const AddLeadForm: React.FC = () => {
               Email Address
             </label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
                 type="email"
                 id="emailAddress"
                 name="emailAddress"
@@ -401,7 +423,7 @@ const AddLeadForm: React.FC = () => {
                 onBlur={handleBlur}
                 value={values.emailAddress}
                 placeholder="Enter Your Email"
-                className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               {formik.touched.emailAddress && formik.errors.emailAddress ? (
                 <div className="text-red-500">{formik.errors.emailAddress}</div>
@@ -432,7 +454,11 @@ const AddLeadForm: React.FC = () => {
               Mobile No.
             </label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
                 type="tel"
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -440,7 +466,7 @@ const AddLeadForm: React.FC = () => {
                 id="mobileNumber"
                 name="mobileNumber"
                 placeholder="Enter Your Mobile Number"
-                className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               {formik.touched.mobileNumber && formik.errors.mobileNumber ? (
                 <div className="text-red-500">{formik.errors.mobileNumber}</div>
@@ -459,7 +485,11 @@ const AddLeadForm: React.FC = () => {
               Current Website
             </label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
                 type="text"
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -467,7 +497,7 @@ const AddLeadForm: React.FC = () => {
                 id="currentWebsite"
                 name="currentWebsite"
                 placeholder="Enter name"
-                className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full border border-[lightseagreen]  bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               {formik.touched.currentWebsite && formik.errors.currentWebsite ? (
                 <div className="text-red-500">
@@ -481,7 +511,11 @@ const AddLeadForm: React.FC = () => {
               Landline No.
             </label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
                 type="tel"
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -489,7 +523,7 @@ const AddLeadForm: React.FC = () => {
                 id="landlineNumber"
                 name="landlineNumber"
                 placeholder="Enter Your Landline Number"
-                className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               {formik.touched.landlineNumber && formik.errors.landlineNumber ? (
                 <div className="text-red-500">
@@ -508,7 +542,13 @@ const AddLeadForm: React.FC = () => {
             Lead Type
             {/* <span style={{ opacity: "0.5" }}> * </span> */}
           </label>
-          <div className="relative">
+          <motion.div
+            className="relative"
+            whileHover={{
+              borderColor: "#2e8b57",
+              boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+            }}
+          >
             <Select
               onValueChange={(value: any) =>
                 formik.setFieldValue("lead_type", value)
@@ -537,14 +577,20 @@ const AddLeadForm: React.FC = () => {
             {formik.touched.lead_type && formik.errors.lead_type ? (
               <div className="text-red-500">{formik.errors.lead_type}</div>
             ) : null}
-          </div>
+          </motion.div>
         </div>
         <div className="mb-3">
           <label className="mb-2.5 block font-medium text-black dark:text-white">
             Outcome
             {/* <span style={{ opacity: "0.5" }}> * </span> */}
           </label>
-          <div className="relative">
+          <motion.div
+            className="relative"
+            whileHover={{
+              borderColor: "#2e8b57",
+              boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+            }}
+          >
             <Select
               onValueChange={(value: any) =>
                 formik.setFieldValue("outcome", value)
@@ -574,7 +620,7 @@ const AddLeadForm: React.FC = () => {
             {formik.touched.outcome && formik.errors.outcome ? (
               <div className="text-red-500">{formik.errors.outcome}</div>
             ) : null}
-          </div>
+          </motion.div>
         </div>
 
         <div className="mb-3">
@@ -582,7 +628,11 @@ const AddLeadForm: React.FC = () => {
             Order Forecast
           </label>
           <div className="relative">
-            <input
+            <motion.input
+              whileHover={{
+                borderColor: "#2e8b57",
+                boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+              }}
               type="tel"
               onChange={handleChange}
               onBlur={handleBlur}
@@ -590,7 +640,7 @@ const AddLeadForm: React.FC = () => {
               id="orderForecast"
               name="orderForecast"
               placeholder="Enter Your order forecast"
-              className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+              className="w-full border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
             />
             {formik.touched.orderForecast && formik.errors.orderForecast ? (
               <div className="text-red-500">{formik.errors.orderForecast}</div>
@@ -602,7 +652,11 @@ const AddLeadForm: React.FC = () => {
             Notes
           </label>
           <div className="relative">
-            <textarea
+            <motion.textarea
+              whileHover={{
+                borderColor: "#2e8b57",
+                boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+              }}
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.notes}
@@ -611,7 +665,7 @@ const AddLeadForm: React.FC = () => {
               minLength={4}
               placeholder="Enter Your notes"
               rows={4}
-              className="w-full resize-none  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+              className="w-full resize-none  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
             />
             {formik.touched.notes && formik.errors.notes ? (
               <div className="text-red-500">{formik.errors.notes}</div>

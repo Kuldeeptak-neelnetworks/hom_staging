@@ -44,6 +44,8 @@ import {
 import { format, getMonth, getYear, setMonth, setYear } from "date-fns";
 import * as Yup from "yup";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import AnimationForm from "@/components/common/Animation/AnimationForm";
+import { motion } from "framer-motion";
 
 const crumbs = [
   {
@@ -470,7 +472,12 @@ const EditOrder = ({}) => {
         <BreadcrumbSection crumbs={crumbs} />
       </div> */}
 
-      <div className="flex justify-center">
+      <motion.div
+        className="flex justify-center"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+      >
         <div className="my-3 text-[0.8rem] hover:bg-gray-300 h-fit px-2 py-1 rounded cursor-pointer hidden text-center sm:block w-fit bg-[#fff] boxShadow">
           <Link href={`/orders`}>Back</Link>
         </div>
@@ -532,11 +539,17 @@ const EditOrder = ({}) => {
 
               {/* Assigned User */}
               {role !== "salesman" ? (
-                <div className="mb-3 w-full">
+                <AnimationForm className="mb-3 w-full">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
                     Assigned User
                   </label>
-                  <div className="relative">
+                  <motion.div
+                    className="relative"
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
+                  >
                     {!userLoading && userData?.length === 0 ? (
                       <div className="flex justify-start">
                         <LoaderIconSVG />
@@ -568,38 +581,48 @@ const EditOrder = ({}) => {
                         {formik.errors.createdBy}
                       </div>
                     ) : null}
-                  </div>
-                </div>
+                  </motion.div>
+                </AnimationForm>
               ) : (
-                <div className="mb-3 w-full">
+                <AnimationForm className="mb-3 w-full">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
                     Assigned User
                   </label>
                   <div className="relative">
-                    <input
+                    <motion.input
+                      whileHover={{
+                        borderColor: "#2e8b57",
+                        boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                      }}
                       type="text"
                       value={userNameHOM || ""}
                       id="assignUser"
                       readOnly
                       placeholder="Enter User Name"
-                      className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
                   </div>
-                </div>
+                </AnimationForm>
               )}
 
               {/* Date Of Order */}
-              <div className="mb-3 w-full">
+              <AnimationForm fromLeft={false} className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                   Date Of Order
                 </label>
-                <div className="relative">
+                <motion.div
+                  whileHover={{
+                    borderColor: "#2e8b57",
+                    boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                  }}
+                  className="relative"
+                >
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button
                         variant={"outline"}
                         className={cn(
-                          "w-[250px] justify-start text-left font-normal",
+                          "w-full justify-start text-left font-normal border border-[lightseagreen]",
                           !dateOfOrder && "text-muted-foreground"
                         )}
                       >
@@ -754,18 +777,22 @@ const EditOrder = ({}) => {
                       {formik.errors.dateOfOrder}
                     </div>
                   ) : null}
-                </div>
-              </div>
+                </motion.div>
+              </AnimationForm>
             </div>
 
             <div className="lg:flex gap-5">
               {/*  Customer Email */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                   Customer Email
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="email"
                     id="customerEmail"
                     name="customerEmail"
@@ -773,7 +800,7 @@ const EditOrder = ({}) => {
                     onBlur={formik.handleBlur}
                     value={formik.values.customerEmail}
                     placeholder="Enter Your Email"
-                    className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {formik.touched.customerEmail &&
                   formik.errors.customerEmail ? (
@@ -800,14 +827,18 @@ const EditOrder = ({}) => {
                     </svg>
                   </span>
                 </div>
-              </div>
+              </AnimationForm>
               {/* Building Name */}
-              <div className="mb-3 w-full ">
+              <AnimationForm fromLeft={false} className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                   Property/ Building Name
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="text"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -815,7 +846,7 @@ const EditOrder = ({}) => {
                     id="buildingAddress"
                     name="buildingAddress"
                     placeholder="Enter name building address"
-                    className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="border border-[lightseagreen] w-full bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {formik.touched.buildingAddress &&
                   formik.errors.buildingAddress ? (
@@ -824,16 +855,22 @@ const EditOrder = ({}) => {
                     </div>
                   ) : null}
                 </div>
-              </div>
+              </AnimationForm>
             </div>
 
             <div className="lg:flex gap-5">
               {/* Renewal Status */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                   Renewal Status
                 </label>
-                <div className="relative">
+                <motion.div
+                  className="relative"
+                  whileHover={{
+                    borderColor: "#2e8b57",
+                    boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                  }}
+                >
                   <Select
                     onValueChange={(value: any) =>
                       formik.setFieldValue("renewalStatus", value)
@@ -868,22 +905,26 @@ const EditOrder = ({}) => {
                       {formik.errors.renewalStatus}
                     </div>
                   ) : null}
-                </div>
-              </div>
+                </motion.div>
+              </AnimationForm>
               {/* Renewal Notes */}
-              <div className="mb-3 w-full">
+              <AnimationForm fromLeft={false} className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                   Renewal Notes
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     value={formik.values.renewalNotes}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     type="text"
                     id="renewalNotes"
                     name="renewalNotes"
-                    className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {formik.touched.renewalNotes && formik.errors.renewalNotes ? (
                     <div className="text-red-500">
@@ -891,16 +932,22 @@ const EditOrder = ({}) => {
                     </div>
                   ) : null}
                 </div>
-              </div>
+              </AnimationForm>
             </div>
 
             <div className="lg:flex gap-5">
               {/* orderType */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                   Order Type <span style={{ opacity: "0.5" }}> * </span>
                 </label>
-                <div className="relative">
+                <motion.div
+                  whileHover={{
+                    borderColor: "#2e8b57",
+                    boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                  }}
+                  className="relative"
+                >
                   <Select
                     onValueChange={(value: any) =>
                       formik.setFieldValue("orderType", value)
@@ -927,18 +974,22 @@ const EditOrder = ({}) => {
                       {formik.errors.orderType}
                     </div>
                   ) : null}
-                </div>
-              </div>
+                </motion.div>
+              </AnimationForm>
 
               {formik.values.orderType === "New Business" && (
                 <>
-                  <div className="mb-3 w-full">
+                  <AnimationForm fromLeft={false} className="mb-3 w-full">
                     <label className="mb-2.5 block font-medium text-black dark:text-white">
                       Number Of Key Phrase
                       <span style={{ opacity: "0.5" }}> * </span>
                     </label>
                     <div className="relative">
-                      <input
+                      <motion.input
+                        whileHover={{
+                          borderColor: "#2e8b57",
+                          boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                        }}
                         type="number"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -946,7 +997,7 @@ const EditOrder = ({}) => {
                         id="numberOfKeyPhrase"
                         name="numberOfKeyPhrase"
                         placeholder="Enter name number of key phrase"
-                        className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                        className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                       />
                       {formik.touched.numberOfKeyPhrase &&
                       formik.errors.numberOfKeyPhrase ? (
@@ -955,14 +1006,18 @@ const EditOrder = ({}) => {
                         </div>
                       ) : null}
                     </div>
-                  </div>
-                  <div className="mb-3 w-full">
+                  </AnimationForm>
+                  <AnimationForm fromLeft={false} className="mb-3 w-full">
                     <label className="mb-2.5 block font-medium text-black dark:text-white">
                       Number Of Key Areas
                       <span style={{ opacity: "0.5" }}> * </span>
                     </label>
                     <div className="relative">
-                      <input
+                      <motion.input
+                        whileHover={{
+                          borderColor: "#2e8b57",
+                          boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                        }}
                         type="number"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -970,7 +1025,7 @@ const EditOrder = ({}) => {
                         id="numberOfKeyAreas"
                         name="numberOfKeyAreas"
                         placeholder="Enter name number of key areas"
-                        className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                        className="w-full border border-[lightseagreen]  bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                       />
                       {formik.touched.numberOfKeyAreas &&
                       formik.errors.numberOfKeyAreas ? (
@@ -979,19 +1034,23 @@ const EditOrder = ({}) => {
                         </div>
                       ) : null}
                     </div>
-                  </div>
+                  </AnimationForm>
                 </>
               )}
             </div>
 
             <div className="lg:flex gap-5">
               {/*  Order Value  */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                   Order Value
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="number"
                     onChange={handleInputChange}
                     // onChange={formik.handleChange}
@@ -1000,7 +1059,7 @@ const EditOrder = ({}) => {
                     id="orderValue"
                     name="orderValue"
                     placeholder="Enter name order value"
-                    className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full border border-[lightseagreen]  bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {formik.touched.orderValue && formik.errors.orderValue ? (
                     <div className="text-red-500">
@@ -1008,14 +1067,18 @@ const EditOrder = ({}) => {
                     </div>
                   ) : null}
                 </div>
-              </div>
+              </AnimationForm>
               {/* Deposit */}
-              <div className="mb-3 w-full ">
+              <AnimationForm className="mb-3 w-full ">
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                   Deposit
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="number"
                     onChange={handleInputChange}
                     // onChange={formik.handleChange}
@@ -1024,20 +1087,24 @@ const EditOrder = ({}) => {
                     id="deposit"
                     name="deposit"
                     placeholder="Enter deposit value"
-                    className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {formik.touched.deposit && formik.errors.deposit ? (
                     <div className="text-red-500">{formik.errors.deposit}</div>
                   ) : null}
                 </div>
-              </div>
+              </AnimationForm>
               {/* numberOfInstallments */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                   Number Of Installments
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="number"
                     // onChange={formik.handleChange}
                     onChange={handleInputChange}
@@ -1046,7 +1113,7 @@ const EditOrder = ({}) => {
                     id="numberOfInstallments"
                     name="numberOfInstallments"
                     placeholder="Enter number of installments"
-                    className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full border border-[lightseagreen]  bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {formik.touched.numberOfInstallments &&
                   formik.errors.numberOfInstallments ? (
@@ -1055,13 +1122,19 @@ const EditOrder = ({}) => {
                     </div>
                   ) : null}
                 </div>
-              </div>
+              </AnimationForm>
               {/*    Deposite Method */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                   Deposite Method
                 </label>
-                <div className="relative">
+                <motion.div
+                  className="relative"
+                  whileHover={{
+                    borderColor: "#2e8b57",
+                    boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                  }}
+                >
                   <Select
                     onValueChange={(value: any) =>
                       formik.setFieldValue("depositMethod", value)
@@ -1098,12 +1171,15 @@ const EditOrder = ({}) => {
                       {formik.errors.depositMethod}
                     </div>
                   ) : null}
-                </div>
-              </div>
+                </motion.div>
+              </AnimationForm>
             </div>
             {/* CALCULATIONS  */}
             {!loading ? (
-              <div className="lg:flex gap-5 text-[0.8rem]">
+              <AnimationForm
+                fromLeft={false}
+                className="lg:flex gap-5 text-[0.8rem]"
+              >
                 <div className="mb-3  bg-[#d3eae9]  px-5 py-2  flex gap-10">
                   <div className="flex gap-2">
                     <span className="font-bold ">◼ DD Monthly:</span>
@@ -1128,7 +1204,7 @@ const EditOrder = ({}) => {
                     <span className="">{isNaN(ddMonthly) ? 0 : cashFlow}</span>
                   </div>
                 </div>
-              </div>
+              </AnimationForm>
             ) : (
               <div className="flex justify-start">
                 <LoaderIconSVG />
@@ -1196,7 +1272,7 @@ const EditOrder = ({}) => {
                     id="numberOfInstallments"
                     name="numberOfInstallments"
                     placeholder="Enter name number of installments"
-                    className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {formik.touched.numberOfInstallments &&
                   formik.errors.numberOfInstallments ? (
@@ -1209,17 +1285,23 @@ const EditOrder = ({}) => {
             </div>
             <div className="lg:flex gap-5">
               {/* dateOfFirstDd */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                   Date Of First Dd
                 </label>
-                <div className="relative">
+                <motion.div
+                  whileHover={{
+                    borderColor: "#2e8b57",
+                    boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                  }}
+                  className="relative"
+                >
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button
                         variant={"outline"}
                         className={cn(
-                          "w-[250px] justify-start text-left font-normal",
+                          "w-full justify-start text-left font-normal border border-[lightseagreen]",
                           !dateOfFirstDd && "text-muted-foreground"
                         )}
                       >
@@ -1307,21 +1389,25 @@ const EditOrder = ({}) => {
                       />
                     </PopoverContent>
                   </Popover> */}
-                </div>
+                </motion.div>
                 {formik.touched.dateOfFirstDd && formik.errors.dateOfFirstDd ? (
                   <div className="text-red-500">
                     {formik.errors.dateOfFirstDd}
                   </div>
                 ) : null}
-              </div>
+              </AnimationForm>
               {/* customerAccountName */}
 
-              <div className="mb-3 w-full">
+              <AnimationForm fromLeft={false} className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                   Customer Account Name
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     type="text"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -1329,7 +1415,7 @@ const EditOrder = ({}) => {
                     id="customerAccountName"
                     name="customerAccountName"
                     placeholder="Enter Your customer account name"
-                    className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {formik.touched.customerAccountName &&
                   formik.errors.customerAccountName ? (
@@ -1338,23 +1424,27 @@ const EditOrder = ({}) => {
                     </div>
                   ) : null}
                 </div>
-              </div>
+              </AnimationForm>
             </div>
             <div className="lg:flex gap-5">
               {/* customerAccountNumber */}
-              <div className="mb-3 w-full">
+              <AnimationForm className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                   Customer Account Number
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.customerAccountNumber}
                     id="customerAccountNumber"
                     name="customerAccountNumber"
                     placeholder="Enter Your Customer Account Number"
-                    className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {formik.touched.customerAccountNumber &&
                   formik.errors.customerAccountNumber ? (
@@ -1363,21 +1453,25 @@ const EditOrder = ({}) => {
                     </div>
                   ) : null}
                 </div>
-              </div>
+              </AnimationForm>
               {/* customerSortCode */}
-              <div className="mb-3 w-full">
+              <AnimationForm fromLeft={false} className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                   Customer Sort Code
                 </label>
                 <div className="relative">
-                  <input
+                  <motion.input
+                    whileHover={{
+                      borderColor: "#2e8b57",
+                      boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                    }}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.customerSortCode}
                     id="customerSortCode"
                     name="customerSortCode"
                     placeholder="Enter Your Customer Sort Code"
-                    className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {formik.touched.customerSortCode &&
                   formik.errors.customerSortCode ? (
@@ -1386,16 +1480,22 @@ const EditOrder = ({}) => {
                     </div>
                   ) : null}
                 </div>
-              </div>
+              </AnimationForm>
             </div>
 
             <div className="lg:flex gap-5">
               {/* googleEmailRenewCampaign */}
-              <div className=" mb-3 w-full">
+              <AnimationForm className=" mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                   Google Email Renew Campaign
                 </label>
-                <div className="relative">
+                <motion.div
+                  whileHover={{
+                    borderColor: "#2e8b57",
+                    boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                  }}
+                  className="relative"
+                >
                   <Select
                     onValueChange={(value: any) =>
                       formik.setFieldValue("googleEmailRenewCampaign", value)
@@ -1423,22 +1523,28 @@ const EditOrder = ({}) => {
                       {formik.errors.googleEmailRenewCampaign}
                     </div>
                   ) : null}
-                </div>
-              </div>
+                </motion.div>
+              </AnimationForm>
               {/* Customer Signeture */}
 
               {/* renewalDate2024 */}
-              <div className="mb-3 w-full">
+              <AnimationForm fromLeft={false} className="mb-3 w-full">
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
                   Renewal Date 2024
                 </label>
-                <div className="relative">
+                <motion.div
+                  className="relative"
+                  whileHover={{
+                    borderColor: "#2e8b57",
+                    boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                  }}
+                >
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button
                         variant={"outline"}
                         className={cn(
-                          "w-[250px] justify-start text-left font-normal",
+                          "w-full justify-start text-left font-normal border border-[lightseagreen]",
                           !renewalDate && "text-muted-foreground"
                         )}
                       >
@@ -1533,11 +1639,11 @@ const EditOrder = ({}) => {
                       {formik.errors.renewalDate2024}
                     </div>
                   ) : null}
-                </div>
-              </div>
+                </motion.div>
+              </AnimationForm>
             </div>
 
-            <div className="my-1 ">
+            <AnimationForm className="my-1 ">
               <Button
                 type="submit"
                 // value="Sign In"
@@ -1549,10 +1655,10 @@ const EditOrder = ({}) => {
                   "Update"
                 )}
               </Button>
-            </div>
+            </AnimationForm>
           </form>
         </ScrollArea>
-      </div>
+      </motion.div>
     </div>
   );
 };

@@ -397,7 +397,11 @@ const AddCustomerForm: React.FC = () => {
               Contact Name
             </label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
                 type="text"
                 id="contactName"
                 name="contactName"
@@ -426,7 +430,11 @@ const AddCustomerForm: React.FC = () => {
               Company Name <span className="text-red-500">*</span>
             </label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
                 type="text"
                 id="companyName"
                 name="companyName"
@@ -450,7 +458,11 @@ const AddCustomerForm: React.FC = () => {
           <AnimationForm fromLeft={false} className="w-full">
             <label className="mb-2.5 block font-semibold">Email Address</label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
                 type="email"
                 id="customerEmail"
                 name="customerEmail"
@@ -491,7 +503,11 @@ const AddCustomerForm: React.FC = () => {
           <AnimationForm className="w-full mb-2 lg:mb-0">
             <label className="mb-2.5 block font-semibold">Mobile No.</label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
                 type="tel"
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -518,7 +534,11 @@ const AddCustomerForm: React.FC = () => {
               Landline No. (Optional)
             </label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
                 type="tel"
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -547,7 +567,11 @@ const AddCustomerForm: React.FC = () => {
               Street No. and Name
             </label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
                 type="text"
                 id="streetNoName"
                 name="streetNoName"
@@ -567,7 +591,11 @@ const AddCustomerForm: React.FC = () => {
           <AnimationForm fromLeft={false} className="w-full">
             <label className="mb-2.5 block font-semibold ">Town</label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
                 type="text"
                 id="town"
                 name="town"
@@ -590,7 +618,11 @@ const AddCustomerForm: React.FC = () => {
           <AnimationForm className="w-full mb-2 lg:mb-0">
             <label className="mb-2.5 block font-semibold">County</label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
                 type="text"
                 id="county"
                 name="county"
@@ -610,7 +642,11 @@ const AddCustomerForm: React.FC = () => {
           <AnimationForm fromLeft={false} className="w-full">
             <label className="mb-2.5 block font-semibold">Post Code</label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
                 type="text"
                 id="postcode"
                 name="postcode"
@@ -633,7 +669,11 @@ const AddCustomerForm: React.FC = () => {
           <AnimationForm className="w-full mb-2 lg:mb-0">
             <label className="mb-2.5 block font-semibold">URL</label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
                 type="text"
                 id="url"
                 name="url"
@@ -648,7 +688,11 @@ const AddCustomerForm: React.FC = () => {
           <AnimationForm fromLeft={false} className="w-full">
             <label className="mb-2.5 block font-semibold ">SSL</label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
                 type="text"
                 id="ssl"
                 name="ssl"
@@ -666,7 +710,11 @@ const AddCustomerForm: React.FC = () => {
           <AnimationForm className="w-full mb-2 lg:mb-0">
             <label className="mb-2.5 block font-semibold ">Site Map</label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
                 type="text"
                 id="sitemap"
                 name="sitemap"
@@ -686,7 +734,11 @@ const AddCustomerForm: React.FC = () => {
           <AnimationForm fromLeft={false} className="w-full">
             <label className="mb-2.5 block font-semibold ">HT Access</label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
                 type="text"
                 id="htAccess"
                 name="htAccess"
@@ -709,7 +761,11 @@ const AddCustomerForm: React.FC = () => {
           <AnimationForm className="w-full mb-2 lg:mb-0">
             <label className="mb-2.5 block font-semibold">GA Code</label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
                 type="text"
                 id="gaCode"
                 name="gaCode"
@@ -729,7 +785,11 @@ const AddCustomerForm: React.FC = () => {
           <AnimationForm fromLeft={false} className="w-full">
             <label className="mb-2.5 block font-semibold ">New GA Code</label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
                 type="text"
                 id="newGACode"
                 name="newGACode"
@@ -751,7 +811,13 @@ const AddCustomerForm: React.FC = () => {
           {/* Status */}
           <AnimationForm className="w-full mb-2 lg:mb-0">
             <label className="mb-2.5 block font-semibold ">Status</label>
-            <div className="relative">
+            <motion.div
+              whileHover={{
+                borderColor: "#2e8b57",
+                boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+              }}
+              className="relative"
+            >
               <Select
                 onValueChange={(value: any) => {
                   formik.setFieldValue("status", value);
@@ -785,13 +851,17 @@ const AddCustomerForm: React.FC = () => {
                   {errors.status}
                 </div>
               ) : null}
-            </div>
+            </motion.div>
           </AnimationForm>
           {/* Logo */}
           <AnimationForm fromLeft={false} className="w-full">
             <label className="mb-2.5 block font-semibold ">Logo</label>
             <div className="relative">
-              <input
+              <motion.input
+                whileHover={{
+                  borderColor: "#2e8b57",
+                  boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+                }}
                 type="file"
                 accept="image/png, image/jpeg, image/jpg"
                 // onChange={(e: any) => {
@@ -800,7 +870,7 @@ const AddCustomerForm: React.FC = () => {
                 onChange={handleLogoChange}
                 id="logo"
                 name="logo"
-                className="w-full border border-[lightseagreen] bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full border border-[lightseagreen] bg-transparent py-[0.25rem] pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               {logoPreview && (
                 <div className="mt-2">
@@ -818,13 +888,19 @@ const AddCustomerForm: React.FC = () => {
         {/* Live Date  */}
         <AnimationForm fromLeft={false} className="w-full">
           <label className="mb-2.5 block font-semibold">Live Date</label>
-          <div className="relative">
+          <motion.div
+            whileHover={{
+              borderColor: "#2e8b57",
+              boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
+            }}
+            className="relative"
+          >
             <Popover>
               <PopoverTrigger asChild>
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "w-[250px] justify-start text-left font-normal text-black border border-[lightseagreen]",
+                    "w-full justify-start text-left font-normal text-black border border-[lightseagreen]",
                     !date && "text-muted-foreground"
                   )}
                 >
@@ -904,7 +980,7 @@ const AddCustomerForm: React.FC = () => {
                 />
               </PopoverContent>
             </Popover> */}
-          </div>
+          </motion.div>
         </AnimationForm>
 
         <div className="mb-3 mt-3">
