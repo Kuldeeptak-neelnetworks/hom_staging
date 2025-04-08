@@ -570,7 +570,7 @@ const AddLeadForm: React.FC = () => {
                     Contact Metting
                   </SelectItem>
                   <SelectItem value="Old Client">Old Client</SelectItem>
-                  <SelectItem value="Promate Client">Promate Client</SelectItem>
+                  <SelectItem value="Promote Client">Promote Client</SelectItem>
                   <SelectItem value="Renewal">Renewal</SelectItem>
                 </SelectGroup>
               </SelectContent>
