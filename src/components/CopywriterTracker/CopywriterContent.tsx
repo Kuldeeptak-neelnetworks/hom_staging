@@ -232,7 +232,7 @@ const CopywriterContent: React.FC = () => {
             <Link href={"/copywriter/addCopywriter"}>
               <Button
                 variant="outline"
-                className=" text-[0.8rem] text-white bg-[#004d4b]  hover:bg-[#fff] hover:text-[#004d4b] boxShadow"
+                className=" text-[0.8rem] text-white bg-[#004d4b]  hover:bg-[#fff] hover:text-[#004d4b] boxShadow hover:border-[#004d4b]"
               >
                 New Copywriter Tracker
               </Button>

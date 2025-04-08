@@ -31,8 +31,8 @@ const AddCustomerContent = () => {
         <BreadcrumbSection crumbs={crumbs} />
       </div> */}
       <motion.div
-        initial={{ opacity: 0, x: -50, rotate: -5, scale: 0.95 }}
-        animate={{ opacity: 1, x: 0, rotate: 0, scale: 1 }}
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, ease: "easeInOut" }}
         className=" flex gap-5 justify-center "
       >

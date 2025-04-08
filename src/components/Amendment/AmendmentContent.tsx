@@ -216,7 +216,7 @@ const AmendmentContent: React.FC = () => {
           <Link href={"/amendment/addAmendment"}>
             <Button
               variant="outline"
-              className=" text-[0.8rem] text-white bg-[#004d4b] hover:bg-[#fff] hover:text-[#004d4b] boxShadow"
+              className=" text-[0.8rem] text-white bg-[#004d4b] hover:bg-[#fff] hover:text-[#004d4b] boxShadow hover:border-[#004d4b]"
             >
               New Amendment
             </Button>

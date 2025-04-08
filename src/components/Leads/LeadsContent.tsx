@@ -211,7 +211,7 @@ const LeadsContent: React.FC = () => {
           <Link href={"/leads/addLead"}>
             <Button
               variant="outline"
-              className=" text-[0.8rem] text-white bg-[#004d4b] hover:bg-[#fff] hover:text-[#29354f] boxShadow"
+              className=" text-[0.8rem] text-white bg-[#004d4b] hover:bg-[#fff] hover:text-[#29354f] boxShadow hover:border-[#004d4b]"
             >
               New Lead
             </Button>

@@ -34,6 +34,7 @@ import ReactSelect from "react-select";
 import { useLeadStore } from "@/Store/LeadStore";
 import { AsyncPaginate } from "react-select-async-paginate";
 import { motion } from "framer-motion";
+import AnimationForm from "@/components/common/Animation/AnimationForm";
 
 type Customer = {
   id: number;
@@ -261,7 +262,7 @@ const AddLeadForm: React.FC = () => {
         </div>
         <div className="mb-3 lg:flex gap-3">
           {isNewCustomer ? (
-            <div className="w-full mb-2 lg:mb-0">
+            <AnimationForm className="w-full mb-2 lg:mb-0">
               {/* Company Name */}
               <label className="mb-2.5 block font-medium text-black dark:text-white">
                 Company Name <span style={{ opacity: "0.5" }}> * </span>
@@ -282,9 +283,9 @@ const AddLeadForm: React.FC = () => {
                   className="w-full border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none  focus-visible:shadow-none  dark:bg-form-input dark:text-white dark:focus:border-primary"
                 />
               </div>
-            </div>
+            </AnimationForm>
           ) : (
-            <div className="w-full mb-2 lg:mb-0">
+            <AnimationForm className="w-full mb-2 lg:mb-0">
               <label className="mb-2.5 block font-medium text-black dark:text-white">
                 Company Name <span style={{ opacity: "0.5" }}> * </span>
               </label>
@@ -368,11 +369,11 @@ const AddLeadForm: React.FC = () => {
                   />
                 )} */}
               </motion.div>
-            </div>
+            </AnimationForm>
           )}
 
           {/* contactPerson */}
-          <div className="w-full">
+          <AnimationForm fromLeft={false} className="w-full">
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               Contact Person
             </label>
@@ -402,10 +403,10 @@ const AddLeadForm: React.FC = () => {
                 </div>
               ) : null}
             </div>
-          </div>
+          </AnimationForm>
         </div>
 
-        <div className="mb-3 lg:flex gap-3">
+        <AnimationForm className="mb-3 lg:flex gap-3">
           <div className="w-full mb-2 lg:mb-0">
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               Email Address
@@ -477,9 +478,9 @@ const AddLeadForm: React.FC = () => {
               </span>
             </div>
           </div>
-        </div>
+        </AnimationForm>
 
-        <div className="mb-3 lg:flex gap-3">
+        <AnimationForm fromLeft={false} className="mb-3 lg:flex gap-3">
           <div className="w-full mb-2 lg:mb-0">
             <label className="mb-2.5 block font-medium text-black dark:text-white">
               Current Website
@@ -535,9 +536,9 @@ const AddLeadForm: React.FC = () => {
               </span>
             </div>
           </div>
-        </div>
+        </AnimationForm>
 
-        <div className="">
+        <AnimationForm className="">
           <label className="mb-2.5 block font-medium text-black dark:text-white">
             Lead Type
             {/* <span style={{ opacity: "0.5" }}> * </span> */}
@@ -578,8 +579,8 @@ const AddLeadForm: React.FC = () => {
               <div className="text-red-500">{formik.errors.lead_type}</div>
             ) : null}
           </motion.div>
-        </div>
-        <div className="mb-3">
+        </AnimationForm>
+        <AnimationForm fromLeft={false} className="mb-3">
           <label className="mb-2.5 block font-medium text-black dark:text-white">
             Outcome
             {/* <span style={{ opacity: "0.5" }}> * </span> */}
@@ -621,9 +622,9 @@ const AddLeadForm: React.FC = () => {
               <div className="text-red-500">{formik.errors.outcome}</div>
             ) : null}
           </motion.div>
-        </div>
+        </AnimationForm>
 
-        <div className="mb-3">
+        <AnimationForm className="mb-3">
           <label className="mb-2.5 block font-medium text-black dark:text-white">
             Order Forecast
           </label>
@@ -646,8 +647,8 @@ const AddLeadForm: React.FC = () => {
               <div className="text-red-500">{formik.errors.orderForecast}</div>
             ) : null}
           </div>
-        </div>
-        <div className="mb-3">
+        </AnimationForm>
+        <AnimationForm fromLeft={false} className="mb-3">
           <label className="mb-2.5 block font-medium text-black dark:text-white">
             Notes
           </label>
@@ -671,7 +672,7 @@ const AddLeadForm: React.FC = () => {
               <div className="text-red-500">{formik.errors.notes}</div>
             ) : null}
           </div>
-        </div>
+        </AnimationForm>
 
         {/* button  */}
         <div className="mb-3">

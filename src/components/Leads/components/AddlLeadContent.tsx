@@ -2,6 +2,7 @@
 import React from "react";
 import AddLeadForm from "./AddLeadsForm";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const crumbs = [
   {
@@ -28,12 +29,17 @@ const AddLeadContent = () => {
       {/* <div className="mb-4">
         <BreadcrumbSection crumbs={crumbs} />
       </div> */}
-      <div className=" flex gap-5 justify-center">
+      <motion.div
+        className=" flex gap-5 justify-center"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+      >
         <div className="my-6 text-[0.8rem] bg-[#fff] hover:bg-gray-300 h-fit px-2 py-1  cursor-pointer hidden text-center sm:block w-fit boxShadow ">
           <Link href={`/leads`}>Back</Link>
         </div>
         <AddLeadForm />
-      </div>
+      </motion.div>
     </div>
   );
 };
