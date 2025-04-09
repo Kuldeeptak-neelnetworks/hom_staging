@@ -378,6 +378,7 @@ const DashBoardPage: React.FC = () => {
                 <p className="text-[0.8rem] md:text-[0.9rem] lg:text-[1.2rem] pt-5 pb-3 text-center font-semibold">
                   New Leads
                 </p>
+
                 <p className="text-[0.8rem] mb-4 text-[#676879]">
                   Track the Latest Leads
                 </p>

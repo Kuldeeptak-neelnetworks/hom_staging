@@ -8,6 +8,7 @@ import { DeletedUserUIconSVG } from "@/utils/SVGs/SVGs";
 import TooltipCommon from "@/components/common/TooltipCommon";
 import Link from "next/link";
 import { UserProfileHover } from "@/components/common/HoverCard/UserProfileHover";
+import { AnimatedTooltipComponent } from "@/components/common/Animation/AnimatedTooltipComponent";
 
 const UserPic = User.src;
 
@@ -109,7 +110,10 @@ export const columns = [
       <DataTableColumnHeader column={column} title="Rep Name" />
     ),
     cell: ({ row }: any) => {
-      if (row?.original?.createdBy !== null) {
+      if (
+        row?.original?.createdBy !== null ||
+        row?.original?.createdBy !== ""
+      ) {
         if (row?.original?.createdBy?.avatar !== "") {
           return (
             <div className="flex items-center cursor-pointer">
@@ -124,10 +128,18 @@ export const columns = [
                   </AvatarFallback>
                 </Avatar>
               </TooltipCommon> */}
-              <UserProfileHover
+              {/* <UserProfileHover
                 picture={row?.original?.createdBy[0]?.avatar}
                 name={row?.original?.createdBy[0]?.fullName}
                 designation={row?.original?.createdBy[0]?.role}
+              /> */}
+              <AnimatedTooltipComponent
+                item={{
+                  id: row?.original._id,
+                  picture: row?.original?.createdBy[0]?.avatar || UserPic,
+                  name: row?.original?.createdBy[0]?.fullName || "User",
+                  role: row?.original?.createdBy[0]?.role,
+                }}
               />
               {/* <TooltipCommon text={row?.original?.createdBy[0]?.fullName}>
                 <Avatar className="cursor-pointer">
@@ -145,22 +157,38 @@ export const columns = [
         } else {
           return (
             <div className="flex items-center">
-              <TooltipCommon text={row?.original?.createdBy[0]?.fullName}>
+              <AnimatedTooltipComponent
+                item={{
+                  id: row?.original._id,
+                  picture: UserPic,
+                  name: row?.original?.createdBy[0]?.fullName,
+                  role: row?.original?.createdBy[0]?.role,
+                }}
+              />
+              {/* <TooltipCommon text={row?.original?.createdBy[0]?.fullName}>
                 <Avatar className="cursor-pointer">
                   <AvatarImage src={UserPic} className="" />
                 </Avatar>
-              </TooltipCommon>
+              </TooltipCommon> */}
             </div>
           );
         }
       } else {
         return (
           <div className="flex items-center">
-            <Avatar>
+            {/* <Avatar>
               <AvatarFallback>
                 <DeletedUserUIconSVG />
               </AvatarFallback>
-            </Avatar>
+            </Avatar> */}
+            <AnimatedTooltipComponent
+              item={{
+                id: row?.original._id,
+                picture: UserPic,
+                name: "User",
+                role: "",
+              }}
+            />
           </div>
         );
       }

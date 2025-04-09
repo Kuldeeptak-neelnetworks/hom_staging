@@ -931,7 +931,7 @@ const EditCustomerContent = () => {
                       boxShadow: "0px 0px 4px rgba(46, 139, 87, 0.6)",
                     }}
                   >
-                    {!userLoading && userData?.length === 0 ? (
+                    {!userLoading && userData?.users?.length === 0 ? (
                       <div className="flex justify-start">
                         <LoaderIconSVG />
                         <span className="px-2">Loading...</span>
