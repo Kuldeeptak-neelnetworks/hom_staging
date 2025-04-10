@@ -193,7 +193,7 @@ const ProductflowContent: React.FC = () => {
         Product Flow
       </div> */}
 
-      <div className="w-[300px] lg:absolute mt-1 z-[52] ">
+      <div className="w-[300px] lg:absolute mt-1 z-[50] ">
         <Select
           isClearable
           className="text-[0.8rem] boxShadow"

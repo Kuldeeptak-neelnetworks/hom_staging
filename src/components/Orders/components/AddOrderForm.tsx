@@ -66,6 +66,7 @@ interface FormData {
   streetNoName: string;
   createdBy: string;
   selectedUserId: string;
+  selectedCustomerId: string;
 }
 
 const AddOrderForm = ({ fetchAllOrdersData }: any) => {
@@ -142,6 +143,7 @@ const AddOrderForm = ({ fetchAllOrdersData }: any) => {
       streetNoName: "",
       createdBy: "",
       selectedUserId: "",
+      selectedCustomerId: "",
     },
     // validationSchema: Yup.object({
     //   customer_status: Yup.string().required("Customer Status Required"),
@@ -198,7 +200,6 @@ const AddOrderForm = ({ fetchAllOrdersData }: any) => {
 
     onSubmit: async (values: any) => {
       try {
-        // console.log("Form values being submitted:", values);
         setOrder(() => true);
         const formData = new FormData();
         formData.append("customerName", values.customerName);
@@ -302,7 +303,6 @@ const AddOrderForm = ({ fetchAllOrdersData }: any) => {
       //  );
     }
   }, [customerData, router]);
-  // console.log("customerData", customerData);
 
   // Function to convert base64 to Blob
   const base64ToBlob = (base64: string, mimeType: string) => {
@@ -465,20 +465,16 @@ const AddOrderForm = ({ fetchAllOrdersData }: any) => {
   const currentYearRenewalDate = renewalDate
     ? getYear(renewalDate)
     : getYear(new Date());
-  const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1); // Page state
-  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     setCurrentPage(1); // Set to page 1 when the component mounts
   }, []);
-  const [customerOptions, setCustomerOptions] = useState([]);
+
   const loadOptions = async (
     loadedOptions: { options: any },
     { page }: any
   ) => {
-    // console.log("Loading page:", page); // Debug to check if page is received correctly
-
     // Default to page 1 if page is undefined
     page = page || currentPage; // Ensure we have a valid page number
     setCurrentPage(page + 1);
@@ -579,6 +575,85 @@ const AddOrderForm = ({ fetchAllOrdersData }: any) => {
   //     setSelectedCustomerId(selectedCustomerId); // Optionally store selected ID in local state
   //   }
   // };
+
+  const [customerOptions, setCustomerOptions] = useState<any>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!customerOptions?.value || !customerData?.customers?.length) return;
+
+    const selectedCustomer = customerData?.customers?.find(
+      (customer: { _id: any }) => customer?._id === customerOptions?.value
+    );
+    formik.setValues({
+      ...formik.values,
+      selectedCustomerId: customerOptions.value,
+      town: selectedCustomer?.town || "",
+      county: selectedCustomer?.county || "",
+      postcode: selectedCustomer?.postcode || "",
+      customerEmail: selectedCustomer?.customerEmail || "",
+      streetNoName: selectedCustomer?.streetNoName || "",
+      customerName: customerOptions?.value,
+    });
+  }, [customerOptions]);
+
+  const loadCustomerOptions = async (
+    search: any,
+    loadedOptions: any,
+    { page }: any
+  ) => {
+    const currentPageNumber = page || currentPage;
+    setCurrentPage(currentPageNumber + 1);
+
+    try {
+      setLoading(true);
+
+      // Build params dynamically
+      const params: Record<string, any> = {
+        page: currentPageNumber,
+        limit: 20,
+        ...(search && { search: search }),
+      };
+
+      const response = await baseInstance.get("/customers", { params });
+
+      const customers = response.data?.data?.customers || [];
+
+      // Transform the response data
+      const transformedData = customers.map(
+        (customer: { _id: any; companyName: any }) => ({
+          value: customer._id,
+          label: customer.companyName,
+        })
+      );
+
+      // Merge options for infinite scroll
+      const combinedOptions =
+        currentPageNumber === 1
+          ? transformedData
+          : [...(loadedOptions?.options || []), ...transformedData];
+
+      // Handle pagination flag
+      const hasMore = response.data?.data?.hasMore ?? false;
+
+      setCustomerOptions(customers);
+
+      return {
+        options: combinedOptions,
+        hasMore,
+        additional: JSON.stringify({ page: currentPageNumber + 1 }), // Convert to string
+      };
+    } catch (error) {
+      console.error("Error fetching customers:", error);
+      return {
+        options: [],
+        hasMore: false,
+      };
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="p-4 relative">
@@ -737,42 +812,67 @@ const AddOrderForm = ({ fetchAllOrdersData }: any) => {
 
                   {/* )} */}
                   {customerData?.customers?.length > 0 && (
-                    <SelectReactSelect
-                      closeMenuOnSelect={true}
-                      isClearable={true}
-                      options={customerData.customers.map(
-                        (customer: { _id: any; companyName: any }) => ({
-                          value: customer._id,
-                          label: customer.companyName,
-                        })
-                      )}
-                      onChange={(
-                        selectedOption: { value: any; label: string } | null
-                      ) => {
-                        const selectedCustomerId = selectedOption?.value || "";
+                    // <SelectReactSelect
+                    //   closeMenuOnSelect={true}
+                    //   isClearable={true}
+                    //   options={customerData.customers.map(
+                    //     (customer: { _id: any; companyName: any }) => ({
+                    //       value: customer._id,
+                    //       label: customer.companyName,
+                    //     })
+                    //   )}
+                    //   onChange={(
+                    //     selectedOption: { value: any; label: string } | null
+                    //   ) => {
+                    //     const selectedCustomerId = selectedOption?.value || "";
 
-                        formik.setFieldValue(
-                          "selectedCustomerId",
-                          selectedCustomerId
+                    //     formik.setFieldValue(
+                    //       "selectedCustomerId",
+                    //       selectedCustomerId
+                    //     );
+                    //     setSelectedCustomerId(selectedCustomerId);
+
+                    //     const selectedCustomer = customerData.customers.find(
+                    //       (customer: { _id: any }) =>
+                    //         customer._id === selectedCustomerId
+                    //     );
+
+                    //     formik.setValues({
+                    //       ...formik.values,
+                    //       town: selectedCustomer?.town || "",
+                    //       county: selectedCustomer?.county || "",
+                    //       postcode: selectedCustomer?.postcode || "",
+                    //       customerEmail: selectedCustomer?.customerEmail || "",
+                    //       streetNoName: selectedCustomer?.streetNoName || "",
+                    //       customerName: selectedCustomerId,
+                    //     });
+                    //   }}
+                    //   placeholder="Select a Company"
+                    // />
+                    <AsyncPaginate
+                      className="react-select-custom-styling__container border border-[lightseagreen]"
+                      classNamePrefix="react-select-custom-styling"
+                      value={customerOptions}
+                      loadOptions={loadCustomerOptions}
+                      onChange={(selectedOption: any) => {
+                        setCustomerOptions(selectedOption);
+                        setSelectedCustomerId(
+                          selectedOption ? selectedOption.value : null
                         );
-                        setSelectedCustomerId(selectedCustomerId);
-
-                        const selectedCustomer = customerData.customers.find(
-                          (customer: { _id: any }) =>
-                            customer._id === selectedCustomerId
-                        );
-
-                        formik.setValues({
-                          ...formik.values,
-                          town: selectedCustomer?.town || "",
-                          county: selectedCustomer?.county || "",
-                          postcode: selectedCustomer?.postcode || "",
-                          customerEmail: selectedCustomer?.customerEmail || "",
-                          streetNoName: selectedCustomer?.streetNoName || "",
-                          customerName: selectedCustomerId,
-                        });
+                        // handleDropDown("CompanyId", selectedOption);
                       }}
-                      placeholder="Select a Company"
+                      additional={{ page: 1 }}
+                      placeholder="Select Company"
+                      debounceTimeout={300}
+                      noOptionsMessage={({ inputValue }) =>
+                        inputValue
+                          ? `No Company found for "${inputValue}"`
+                          : "No Company found"
+                      }
+                      // onError={(error: any) => {
+                      //   errorToastingFunction("Error loading Client");
+                      //   console.error("Async Paginate Client:", error);
+                      // }}
                     />
                   )}
 

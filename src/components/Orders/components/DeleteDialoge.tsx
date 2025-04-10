@@ -62,7 +62,7 @@ const DeleteDialoge = ({
         )}
       </DialogTrigger>
       {/* form Section  */}
-      <DialogContent className="sm:max-w-[500px] z-[120]">
+      <DialogContent className="sm:max-w-[500px] z-[120] bg-[#e9f5f5] border border-[green]">
         <DialogHeader>
           <DialogTitle className="flex justify-center">
             <div style={{ fontSize: "14px" }}>
@@ -75,7 +75,11 @@ const DeleteDialoge = ({
           </DialogTitle>
         </DialogHeader>
         <div className="flex justify-center gap-4 mt-4">
-          <Button onClick={() => setOpen(false)} variant="outline">
+          <Button
+            onClick={() => setOpen(false)}
+            variant="outline"
+            className="border border-[green]"
+          >
             Cancel
           </Button>
           <Button onClick={handleDelete} variant="destructive">

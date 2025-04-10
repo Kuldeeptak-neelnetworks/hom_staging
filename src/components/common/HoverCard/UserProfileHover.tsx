@@ -11,7 +11,6 @@ import {
 const UserPic = User.src;
 
 export function UserProfileHover({ picture, designation, name }: any) {
-  console.log("name", name);
   return (
     <HoverCard>
       <HoverCardTrigger asChild>

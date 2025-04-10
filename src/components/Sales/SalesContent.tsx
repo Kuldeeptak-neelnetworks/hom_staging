@@ -213,8 +213,6 @@ const SalesContent: React.FC = () => {
   };
   const yearOptions = getYearOptions();
 
-  console.log("salesDetails", salesDetails);
-
   return (
     <>
       {/* Yearly  */}

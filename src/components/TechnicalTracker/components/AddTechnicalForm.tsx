@@ -27,6 +27,7 @@ import { useCustomerStore } from "@/Store/CustomerStore";
 import { useTechnicalStore } from "@/Store/TechnicalStore";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { AsyncPaginate } from "react-select-async-paginate";
 
 interface AddTechnicalFormProps {
   // setOpen: (newValue: boolean | ((prevCount: boolean) => boolean)) => void;
@@ -111,6 +112,67 @@ any) => {
   useEffect(() => {
     fetchAllCustomerData();
   }, []);
+
+  const [customerOptions, setCustomerOptions] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+
+  const loadCustomerOptions = async (
+    search: any,
+    loadedOptions: any,
+    { page }: any
+  ) => {
+    const currentPageNumber = page || currentPage;
+    setCurrentPage(currentPageNumber + 1);
+
+    try {
+      setLoading(true);
+
+      // Build params dynamically
+      const params: Record<string, any> = {
+        page: currentPageNumber,
+        limit: 20,
+        ...(search && { search: search }),
+      };
+
+      const response = await baseInstance.get("/customers", { params });
+
+      const customers = response.data?.data?.customers || [];
+
+      // Transform the response data
+      const transformedData = customers.map(
+        (customer: { _id: any; companyName: any }) => ({
+          value: customer._id,
+          label: customer.companyName,
+        })
+      );
+
+      // Merge options for infinite scroll
+      const combinedOptions =
+        currentPageNumber === 1
+          ? transformedData
+          : [...(loadedOptions?.options || []), ...transformedData];
+
+      // Handle pagination flag
+      const hasMore = response.data?.data?.hasMore ?? false;
+
+      setCustomerOptions(customers);
+
+      return {
+        options: combinedOptions,
+        hasMore,
+        additional: JSON.stringify({ page: currentPageNumber + 1 }), // Convert to string
+      };
+    } catch (error) {
+      console.error("Error fetching customers:", error);
+      return {
+        options: [],
+        hasMore: false,
+      };
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     // <ScrollArea className="h-[23rem]   px-3 py-3">
@@ -311,23 +373,45 @@ any) => {
                     <span className="px-2">Loading...</span>
                   </div>
                 ) : (
-                  <SelectReactSelect
-                    // className="text-[0.8rem] p-0 m-0 h-2"
-                    closeMenuOnSelect={true}
-                    isClearable={true}
-                    options={customerData.customers.map((customer: any) => ({
-                      value: customer._id,
-                      label: customer.companyName,
-                    }))}
-                    onChange={(selectedOption: { value: any } | null) => {
+                  // <SelectReactSelect
+                  //   closeMenuOnSelect={true}
+                  //   isClearable={true}
+                  //   options={customerData.customers.map((customer: any) => ({
+                  //     value: customer._id,
+                  //     label: customer.companyName,
+                  //   }))}
+                  //   onChange={(selectedOption: { value: any } | null) => {
+                  //     setSelectedCustomerId(
+                  //       selectedOption ? selectedOption.value : null
+                  //     );
+                  //   }}
+                  //   placeholder="Select a Company"
+                  // />
+                  <AsyncPaginate
+                    className="react-select-custom-styling__container border border-[lightseagreen]"
+                    classNamePrefix="react-select-custom-styling"
+                    value={customerOptions}
+                    loadOptions={loadCustomerOptions}
+                    onChange={(selectedOption: any) => {
+                      setCustomerOptions(selectedOption);
                       setSelectedCustomerId(
                         selectedOption ? selectedOption.value : null
                       );
                     }}
-                    placeholder="Select a Company"
+                    additional={{ page: 1 }}
+                    placeholder="Select Company"
+                    debounceTimeout={300}
+                    noOptionsMessage={({ inputValue }) =>
+                      inputValue
+                        ? `No Company found for "${inputValue}"`
+                        : "No Company found"
+                    }
+                    // onError={(error: any) => {
+                    //   errorToastingFunction("Error loading Client");
+                    //   console.error("Async Paginate Client:", error);
+                    // }}
                   />
                 )}
-                {/* )}  */}
               </div>
             </div>
             {/* timeTakenMinutes */}
@@ -344,7 +428,7 @@ any) => {
                   id="timeTakenMinutes"
                   name="timeTakenMinutes"
                   placeholder="Enter time taken minutes"
-                  className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                  className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                 />
               </div>
             </div>

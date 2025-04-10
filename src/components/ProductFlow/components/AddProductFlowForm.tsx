@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/select";
 import { format, getMonth, getYear, setMonth, setYear } from "date-fns";
 import SelectReactSelect from "react-select";
-import { errorToastingFunction } from "@/common/commonFunctions";
+import { baseInstance, errorToastingFunction } from "@/common/commonFunctions";
 import { CalendarIcon, Loader2 } from "lucide-react";
 import { LoaderIconSVG, PhoneIconSVG, UserIconSVG } from "@/utils/SVGs/SVGs";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -31,6 +31,7 @@ import { useUserStore } from "@/Store/UserStore";
 import { useCustomerStore } from "@/Store/CustomerStore";
 import { useProductflowStore } from "@/Store/ProductFlowStore";
 import Link from "next/link";
+import { AsyncPaginate } from "react-select-async-paginate";
 
 const AddProductFlowForm = ({}: any) => {
   const router = useRouter();
@@ -308,6 +309,67 @@ const AddProductFlowForm = ({}: any) => {
   const { month: currentMonthLive, year: currentYearLive } =
     getCurrentMonthAndYear(liveDate);
 
+  const [customerOptions, setCustomerOptions] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+
+  const loadCustomerOptions = async (
+    search: any,
+    loadedOptions: any,
+    { page }: any
+  ) => {
+    const currentPageNumber = page || currentPage;
+    setCurrentPage(currentPageNumber + 1);
+
+    try {
+      setLoading(true);
+
+      // Build params dynamically
+      const params: Record<string, any> = {
+        page: currentPageNumber,
+        limit: 20,
+        ...(search && { search: search }),
+      };
+
+      const response = await baseInstance.get("/customers", { params });
+
+      const customers = response.data?.data?.customers || [];
+
+      // Transform the response data
+      const transformedData = customers.map(
+        (customer: { _id: any; companyName: any }) => ({
+          value: customer._id,
+          label: customer.companyName,
+        })
+      );
+
+      // Merge options for infinite scroll
+      const combinedOptions =
+        currentPageNumber === 1
+          ? transformedData
+          : [...(loadedOptions?.options || []), ...transformedData];
+
+      // Handle pagination flag
+      const hasMore = response.data?.data?.hasMore ?? false;
+
+      setCustomerOptions(customers);
+
+      return {
+        options: combinedOptions,
+        hasMore,
+        additional: JSON.stringify({ page: currentPageNumber + 1 }), // Convert to string
+      };
+    } catch (error) {
+      console.error("Error fetching customers:", error);
+      return {
+        options: [],
+        hasMore: false,
+      };
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="p-4 relative">
       <div className="text-[1rem] font-semibold absolute top-[-50px]">
@@ -335,21 +397,50 @@ const AddProductFlowForm = ({}: any) => {
                       <span className="px-2">Loading...</span>
                     </div>
                   ) : (
-                    <SelectReactSelect
-                      closeMenuOnSelect={true}
-                      isClearable={true}
-                      options={customerData.customers.map((customer: any) => ({
-                        value: customer._id,
-                        label: customer.companyName,
-                      }))}
-                      onChange={(selectedOption: { value: string } | null) => {
-                        const customerId = selectedOption
-                          ? selectedOption.value
-                          : "";
-                        setSelectedCustomerId(customerId);
-                        formik.setFieldValue("selectedCustomerId", customerId);
+                    // <SelectReactSelect
+                    //   closeMenuOnSelect={true}
+                    //   isClearable={true}
+                    //   options={customerData.customers.map((customer: any) => ({
+                    //     value: customer._id,
+                    //     label: customer.companyName,
+                    //   }))}
+                    //   onChange={(selectedOption: { value: string } | null) => {
+                    //     const customerId = selectedOption
+                    //       ? selectedOption.value
+                    //       : "";
+                    //     setSelectedCustomerId(customerId);
+                    //     formik.setFieldValue("selectedCustomerId", customerId);
+                    //   }}
+                    //   placeholder="Select a Company"
+                    // />
+                    <AsyncPaginate
+                      className=""
+                      classNamePrefix="react-select-custom-styling"
+                      value={customerOptions}
+                      loadOptions={loadCustomerOptions}
+                      onChange={(selectedOption: any) => {
+                        setCustomerOptions(selectedOption);
+                        setSelectedCustomerId(
+                          selectedOption ? selectedOption.value : null
+                        );
+                        formik.setFieldValue(
+                          "selectedCustomerId",
+                          selectedOption.value
+                        );
+                        // handleDropDown("CompanyId", selectedOption);
                       }}
-                      placeholder="Select a Company"
+                      additional={{ page: 1 }}
+                      placeholder="Select Company"
+                      debounceTimeout={300}
+                      noOptionsMessage={({ inputValue }: any) =>
+                        inputValue
+                          ? `No Company found for "${inputValue}"`
+                          : "No Company found"
+                      }
+                      // onError={(error: any) => {
+                      //   errorToastingFunction("Error loading Client");
+                      //   console.error("Async Paginate Client:", error);
+                      // }}
                     />
                   )}
                   {formik.touched.selectedCustomerId &&

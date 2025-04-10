@@ -38,6 +38,7 @@ import Link from "next/link";
 import { Label } from "@/components/ui/label";
 import { useSalesStore } from "@/Store/SalesStore";
 import { motion } from "framer-motion";
+import { AnimatedGlowingEffect } from "@/components/common/Animation/AnimatedGlowingEffect";
 
 const DashBoardPage: React.FC = () => {
   const { fetchAmendmentData, amendmentData }: any = useAmendmentStore();
@@ -139,7 +140,7 @@ const DashBoardPage: React.FC = () => {
               <Card
                 className={`h-[100px] boxShadow mb-5  ${
                   userRole !== "salesman" ? "sm:w-[70%]" : "sm:w-[60%]"
-                } xl:h-[160px] px-8 py-5 flex flex-col `}
+                } xl:h-[160px] xl:px-6 py-5 flex flex-col `}
               >
                 <p className="text-xl mb-5 font-semibold text-green-800">
                   Total Reports
@@ -289,7 +290,7 @@ const DashBoardPage: React.FC = () => {
               <Card
                 className={`h-[100px] boxShadow mb-5   ${
                   userRole !== "salesman" ? "sm:w-[30%]" : "sm:w-[40%]"
-                }  xl:h-[160px] px-8 py-5 flex flex-col`}
+                }  xl:h-[160px] xl:px-6 px-3 py-5 flex flex-col`}
               >
                 <motion.div
                   initial={{ x: +100, opacity: 0 }}
@@ -352,10 +353,56 @@ const DashBoardPage: React.FC = () => {
             </div>
             <div className="sm:grid sm:grid-cols-3 gap-4 mb-4">
               {/* latest Leads  */}
-              <motion.div
-                // initial={{ x: -100, opacity: 0 }}
-                // animate={{ x: 0, opacity: 1 }}
-                // transition={{ duration: 1, ease: [0.04, 0.62, 0.23, 0.98] }}
+              <AnimatedGlowingEffect
+                data={allLeads}
+                blockData={blockData}
+                title="New Leads"
+                description="Track the Latest Leads"
+                typeText="leads"
+                icon={
+                  <LatestLeadsUIconSVG
+                    cssData={{
+                      fill: "#073336",
+                      width: "38px",
+                      height: "38px",
+                    }}
+                  />
+                }
+              />
+              <AnimatedGlowingEffect
+                data={allOrders}
+                blockData={blockData}
+                title="New Orders"
+                description="Track the Latest Orders"
+                typeText="orders"
+                icon={
+                  <LatestOrdersUIconSVG
+                    cssData={{
+                      fill: "#073336",
+                      width: "38px",
+                      height: "38px",
+                    }}
+                  />
+                }
+              />
+              <AnimatedGlowingEffect
+                data={allAmendments}
+                blockData={blockData}
+                title="New Amendments"
+                description="Track the Latest Amendments"
+                typeText="amendments"
+                icon={
+                  <LatestAmendmentsUIconSVG
+                    cssData={{
+                      fill: "#073336",
+                      width: "38px",
+                      height: "38px",
+                    }}
+                  />
+                }
+              />
+              {/* latest Leads  */}
+              {/* <motion.div
                 initial={{ x: -100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 whileHover={{
@@ -410,7 +457,6 @@ const DashBoardPage: React.FC = () => {
                                 ? item?.customerName
                                 : "-"}
                             </Link>
-                            {/* </Link> */}
                             <p className="font-semibold lg:text-left text-[#676879] lg:w-[33%] overflow-x-auto">
                               <span className="text-left">
                                 {item?.customer_id?.contactName
@@ -435,13 +481,10 @@ const DashBoardPage: React.FC = () => {
                     )}
                   </ul>
                 </div>
-              </motion.div>
+              </motion.div> */}
 
               {/* New Orders  */}
-              <motion.div
-                // initial={{ x: -100, opacity: 0 }}
-                // animate={{ x: 0, opacity: 1 }}
-                // transition={{ duration: 1, ease: [0.04, 0.62, 0.23, 0.98] }}
+              {/* <motion.div
                 initial={{ x: -100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 whileHover={{
@@ -518,13 +561,10 @@ const DashBoardPage: React.FC = () => {
                     )}
                   </ul>
                 </div>
-              </motion.div>
+              </motion.div> */}
 
               {/* New Amendments  */}
-              <motion.div
-                // initial={{ x: -100, opacity: 0 }}
-                // animate={{ x: 0, opacity: 1 }}
-                // transition={{ duration: 1, ease: [0.04, 0.62, 0.23, 0.98] }}
+              {/* <motion.div
                 initial={{ x: -100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 whileHover={{
@@ -591,7 +631,7 @@ const DashBoardPage: React.FC = () => {
                     )}
                   </ul>
                 </div>
-              </motion.div>
+              </motion.div> */}
             </div>
           </div>
         </div>

@@ -244,8 +244,6 @@ const AddAmendmentForm = ({}: any) => {
         ...(search && { search: search }),
       };
 
-      console.log("params", params);
-
       const response = await baseInstance.get("/customers", { params });
 
       const customers = response.data?.data?.customers || [];
@@ -333,7 +331,7 @@ const AddAmendmentForm = ({}: any) => {
                   // />
                   <AsyncPaginate
                     className="react-select-custom-styling__container"
-                    classNamePrefix="react-select-custom-styling"
+                    classNamePrefix="react-select-custom-styling "
                     value={customerOptions}
                     loadOptions={loadCustomerOptions}
                     onChange={(selectedOption: any) => {
@@ -436,7 +434,7 @@ const AddAmendmentForm = ({}: any) => {
                     <Button
                       variant={"outline"}
                       className={cn(
-                        "w-[250px] justify-start text-left font-normal",
+                        "w-full justify-start text-left font-normal border border-[lightseagreen]",
                         !date && "text-muted-foreground"
                       )}
                     >

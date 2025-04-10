@@ -643,8 +643,6 @@ const AllForm = ({
         ...(search && { search: search }),
       };
 
-      console.log("params", params);
-
       const response = await baseInstance.get("/customers", { params });
 
       const customers = response.data?.data?.customers || [];

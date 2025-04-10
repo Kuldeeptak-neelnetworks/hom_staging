@@ -11,7 +11,11 @@ import {
 const UserPic = User.src;
 
 export function WebsitelargeDataHoverBox({ data }: any) {
-  const truncatedText = data ? `${data.slice(0, 10)}...` : "N/A";
+  const truncatedText = data
+    ? data.length > 8
+      ? `${data.slice(0, 8)}...`
+      : data
+    : "N/A";
   return (
     <HoverCard>
       <HoverCardTrigger asChild>

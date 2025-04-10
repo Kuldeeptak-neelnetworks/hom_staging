@@ -176,13 +176,12 @@ const AddLeadForm: React.FC = () => {
     fetchAllCustomerData();
   }, []);
 
-  const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1); // Page state
-  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     setCurrentPage(1); // Set to page 1 when the component mounts
   }, []);
+
   // const [customerOptions, setCustomerOptions] = useState([]);
   // const loadOptions = async (loadedOptions: { options: any; }, { page }: any) => {
   //   console.log("Loading page:", page); // Debug to check if page is received correctly
@@ -237,6 +236,67 @@ const AddLeadForm: React.FC = () => {
   //     setLoading(false); // Set loading state to false once data is loaded
   //   }
   // };
+
+  const [customerOptions, setCustomerOptions] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+
+  const loadCustomerOptions = async (
+    search: any,
+    loadedOptions: any,
+    { page }: any
+  ) => {
+    const currentPageNumber = page || currentPage;
+    setCurrentPage(currentPageNumber + 1);
+
+    try {
+      setLoading(true);
+
+      // Build params dynamically
+      const params: Record<string, any> = {
+        page: currentPageNumber,
+        limit: 20,
+        ...(search && { search: search }),
+      };
+
+      const response = await baseInstance.get("/customers", { params });
+
+      const customers = response.data?.data?.customers || [];
+
+      // Transform the response data
+      const transformedData = customers.map(
+        (customer: { _id: any; companyName: any }) => ({
+          value: customer._id,
+          label: customer.companyName,
+        })
+      );
+
+      // Merge options for infinite scroll
+      const combinedOptions =
+        currentPageNumber === 1
+          ? transformedData
+          : [...(loadedOptions?.options || []), ...transformedData];
+
+      // Handle pagination flag
+      const hasMore = response.data?.data?.hasMore ?? false;
+
+      setCustomerOptions(customers);
+
+      return {
+        options: combinedOptions,
+        hasMore,
+        additional: JSON.stringify({ page: currentPageNumber + 1 }), // Convert to string
+      };
+    } catch (error) {
+      console.error("Error fetching customers:", error);
+      return {
+        options: [],
+        hasMore: false,
+      };
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <ScrollArea className=" p-7 w-full lg:w-[70%] border my-5 bg-[#fff] boxShadow">
       <form onSubmit={handleSubmit} className="text-[0.8rem] ">
@@ -297,29 +357,54 @@ const AddLeadForm: React.FC = () => {
                 }}
               >
                 {customerData?.customers?.length > 0 && (
-                  <Select
-                    onValueChange={(value: any) => {
-                      setSelectedCustomerId(value);
+                  // <Select
+                  //   onValueChange={(value: any) => {
+                  //     setSelectedCustomerId(value);
+                  //   }}
+                  //   name="customerName"
+                  // >
+                  //   <SelectTrigger className="text-black">
+                  //     <SelectValue placeholder="Select a Company" />
+                  //   </SelectTrigger>
+                  //   <SelectContent className="text-black">
+                  //     <SelectGroup>
+                  //       <SelectLabel>Select</SelectLabel>
+                  //       {customerData?.customers?.length > 0 &&
+                  //         customerData?.customers?.map((customer: any) => {
+                  //           return (
+                  //             <SelectItem value={"" + customer?._id}>
+                  //               {customer?.companyName}
+                  //             </SelectItem>
+                  //           );
+                  //         })}
+                  //     </SelectGroup>
+                  //   </SelectContent>
+                  // </Select>
+                  <AsyncPaginate
+                    className=""
+                    classNamePrefix="react-select-custom-styling"
+                    value={customerOptions}
+                    loadOptions={loadCustomerOptions}
+                    onChange={(selectedOption: any) => {
+                      setCustomerOptions(selectedOption);
+                      setSelectedCustomerId(
+                        selectedOption ? selectedOption.value : null
+                      );
+                      // handleDropDown("CompanyId", selectedOption);
                     }}
-                    name="customerName"
-                  >
-                    <SelectTrigger className="text-black">
-                      <SelectValue placeholder="Select a Company" />
-                    </SelectTrigger>
-                    <SelectContent className="text-black">
-                      <SelectGroup>
-                        <SelectLabel>Select</SelectLabel>
-                        {customerData?.customers?.length > 0 &&
-                          customerData?.customers?.map((customer: any) => {
-                            return (
-                              <SelectItem value={"" + customer?._id}>
-                                {customer?.companyName}
-                              </SelectItem>
-                            );
-                          })}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
+                    additional={{ page: 1 }}
+                    placeholder="Select Company"
+                    debounceTimeout={300}
+                    noOptionsMessage={({ inputValue }) =>
+                      inputValue
+                        ? `No Company found for "${inputValue}"`
+                        : "No Company found"
+                    }
+                    // onError={(error: any) => {
+                    //   errorToastingFunction("Error loading Client");
+                    //   console.error("Async Paginate Client:", error);
+                    // }}
+                  />
                 )}
                 {/* <AsyncPaginate
                     loadOptions={loadOptions} // Function to load customer options asynchronously

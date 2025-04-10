@@ -18,13 +18,14 @@ import SelectDomainTransferred from "react-select";
 import SelectCustomerEmails from "react-select";
 import SelectIsCopywriterRequired from "react-select";
 import SelectBlogToBeAdded from "react-select";
-import { errorToastingFunction } from "@/common/commonFunctions";
+import { baseInstance, errorToastingFunction } from "@/common/commonFunctions";
 import { Loader2 } from "lucide-react";
 import { LoaderIconSVG } from "@/utils/SVGs/SVGs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useCustomerStore } from "@/Store/CustomerStore";
 import { useWebsiteContentStore } from "@/Store/WebsiteContentStore";
 import Link from "next/link";
+import { AsyncPaginate } from "react-select-async-paginate";
 
 const AddWebsiteContentForm = ({}: any) => {
   const pathname = usePathname();
@@ -174,11 +175,12 @@ const AddWebsiteContentForm = ({}: any) => {
         };
 
         await addWebsiteContentData(data, selectedCustomerId);
+        router.push("/websiteContent");
         if (
           Array.isArray(websiteContentData) &&
           websiteContentData.length !== 0
         ) {
-          router.push("/websiteContent");
+          // router.push("/websiteContent");
           await fetchWebsiteContentData();
         }
       } catch (error: any) {
@@ -209,6 +211,67 @@ const AddWebsiteContentForm = ({}: any) => {
     fetchAllCustomerData();
   }, []);
 
+  const [customerOptions, setCustomerOptions] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+
+  const loadCustomerOptions = async (
+    search: any,
+    loadedOptions: any,
+    { page }: any
+  ) => {
+    const currentPageNumber = page || currentPage;
+    setCurrentPage(currentPageNumber + 1);
+
+    try {
+      setLoading(true);
+
+      // Build params dynamically
+      const params: Record<string, any> = {
+        page: currentPageNumber,
+        limit: 20,
+        ...(search && { search: search }),
+      };
+
+      const response = await baseInstance.get("/customers", { params });
+
+      const customers = response.data?.data?.customers || [];
+
+      // Transform the response data
+      const transformedData = customers.map(
+        (customer: { _id: any; companyName: any }) => ({
+          value: customer._id,
+          label: customer.companyName,
+        })
+      );
+
+      // Merge options for infinite scroll
+      const combinedOptions =
+        currentPageNumber === 1
+          ? transformedData
+          : [...(loadedOptions?.options || []), ...transformedData];
+
+      // Handle pagination flag
+      const hasMore = response.data?.data?.hasMore ?? false;
+
+      setCustomerOptions(customers);
+
+      return {
+        options: combinedOptions,
+        hasMore,
+        additional: JSON.stringify({ page: currentPageNumber + 1 }), // Convert to string
+      };
+    } catch (error) {
+      console.error("Error fetching customers:", error);
+      return {
+        options: [],
+        hasMore: false,
+      };
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <div className="p-4 relative">
@@ -236,22 +299,51 @@ const AddWebsiteContentForm = ({}: any) => {
                       <span className="px-2">Loading...</span>
                     </div>
                   ) : (
-                    <SelectReactSelect
+                    // <SelectReactSelect
+                    //   classNamePrefix="react-select-custom-styling"
+                    //   closeMenuOnSelect={true}
+                    //   isClearable={true}
+                    //   options={customerData.customers.map((customer: any) => ({
+                    //     value: customer._id,
+                    //     label: customer.companyName,
+                    //   }))}
+                    //   onChange={(selectedOption: { value: string } | null) => {
+                    //     const customerId = selectedOption
+                    //       ? selectedOption.value
+                    //       : "";
+                    //     setSelectedCustomerId(customerId);
+                    //     formik.setFieldValue("selectedCustomerId", customerId);
+                    //   }}
+                    //   placeholder="Select a Company"
+                    // />
+                    <AsyncPaginate
+                      className=""
                       classNamePrefix="react-select-custom-styling"
-                      closeMenuOnSelect={true}
-                      isClearable={true}
-                      options={customerData.customers.map((customer: any) => ({
-                        value: customer._id,
-                        label: customer.companyName,
-                      }))}
-                      onChange={(selectedOption: { value: string } | null) => {
-                        const customerId = selectedOption
-                          ? selectedOption.value
-                          : "";
-                        setSelectedCustomerId(customerId);
-                        formik.setFieldValue("selectedCustomerId", customerId);
+                      value={customerOptions}
+                      loadOptions={loadCustomerOptions}
+                      onChange={(selectedOption: any) => {
+                        setCustomerOptions(selectedOption);
+                        setSelectedCustomerId(
+                          selectedOption ? selectedOption.value : null
+                        );
+                        formik.setFieldValue(
+                          "selectedCustomerId",
+                          selectedOption.value
+                        );
+                        // handleDropDown("CompanyId", selectedOption);
                       }}
-                      placeholder="Select a Company"
+                      additional={{ page: 1 }}
+                      placeholder="Select Company"
+                      debounceTimeout={300}
+                      noOptionsMessage={({ inputValue }) =>
+                        inputValue
+                          ? `No Company found for "${inputValue}"`
+                          : "No Company found"
+                      }
+                      // onError={(error: any) => {
+                      //   errorToastingFunction("Error loading Client");
+                      //   console.error("Async Paginate Client:", error);
+                      // }}
                     />
                   )}
                   {formik.touched.selectedCustomerId &&
@@ -313,7 +405,7 @@ const AddWebsiteContentForm = ({}: any) => {
                       id="currentDomain"
                       name="currentDomain"
                       placeholder="Enter current domain"
-                      className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </div>
@@ -331,7 +423,7 @@ const AddWebsiteContentForm = ({}: any) => {
                       id="newDomain"
                       name="newDomain"
                       placeholder="Enter new domain"
-                      className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </div>
@@ -347,7 +439,7 @@ const AddWebsiteContentForm = ({}: any) => {
                       id="domainInfo"
                       name="domainInfo"
                       placeholder="Enter domain info"
-                      className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </div>
@@ -396,7 +488,7 @@ const AddWebsiteContentForm = ({}: any) => {
                         id="registrarName"
                         name="registrarName"
                         placeholder="Enter registrar Name"
-                        className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                        className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                       />
                       {formik.touched.registrarName &&
                       formik.errors.registrarName ? (
@@ -472,7 +564,7 @@ const AddWebsiteContentForm = ({}: any) => {
                         id="emailsToBeCreated"
                         name="emailsToBeCreated"
                         placeholder="Enter emails to be created"
-                        className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                        className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                       />
                       {formik.touched.emailsToBeCreated &&
                       formik.errors.emailsToBeCreated ? (
@@ -498,7 +590,7 @@ const AddWebsiteContentForm = ({}: any) => {
                         id="existingEmailsAttached"
                         name="existingEmailsAttached"
                         placeholder="Enter existing emails attached"
-                        className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                        className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                       />
                       {formik.touched.existingEmailsAttached &&
                       formik.errors.existingEmailsAttached ? (
@@ -524,7 +616,7 @@ const AddWebsiteContentForm = ({}: any) => {
                       id="theme"
                       name="theme"
                       placeholder="Enter theme"
-                      className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </div>
@@ -540,7 +632,7 @@ const AddWebsiteContentForm = ({}: any) => {
                       id="colours"
                       name="colours"
                       placeholder="Enter colours"
-                      className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </div>
@@ -615,7 +707,7 @@ const AddWebsiteContentForm = ({}: any) => {
                         },
                         {
                           value: "Take from current website",
-                          Label: "Take from current website",
+                          label: "Take from current website",
                         },
                       ]}
                     />
@@ -636,7 +728,7 @@ const AddWebsiteContentForm = ({}: any) => {
                       id="notesForDesign"
                       name="notesForDesign"
                       placeholder="Enter notes for design"
-                      className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </div>
@@ -742,7 +834,7 @@ const AddWebsiteContentForm = ({}: any) => {
                       id="pageName"
                       name="pageName"
                       placeholder="Enter page name"
-                      className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </div>
@@ -758,7 +850,7 @@ const AddWebsiteContentForm = ({}: any) => {
                       id="socialMedia"
                       name="socialMedia"
                       placeholder="Enter social media"
-                      className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </div>
@@ -777,7 +869,7 @@ const AddWebsiteContentForm = ({}: any) => {
                       id="keyPhrasesAgreed"
                       name="keyPhrasesAgreed"
                       placeholder="Enter key phrases agreed"
-                      className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </div>
@@ -793,7 +885,7 @@ const AddWebsiteContentForm = ({}: any) => {
                       id="keyAreasAgreed"
                       name="keyAreasAgreed"
                       placeholder="Enter key areas agreed"
-                      className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </div>
@@ -836,7 +928,7 @@ const AddWebsiteContentForm = ({}: any) => {
                         id="keyWordForBlogPosts"
                         name="keyWordForBlogPosts"
                         placeholder="Enter keyword for blog posts"
-                        className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                        className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                       />
                       {formik.touched.keyWordForBlogPosts &&
                       formik.errors.keyWordForBlogPosts ? (
@@ -894,7 +986,7 @@ const AddWebsiteContentForm = ({}: any) => {
                         id="linkToCurrentGoogleReviews"
                         name="linkToCurrentGoogleReviews"
                         placeholder="Enter link to current google reviews"
-                        className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                        className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                       />
                       {formik.touched.linkToCurrentGoogleReviews &&
                       formik.errors.linkToCurrentGoogleReviews ? (
@@ -959,7 +1051,7 @@ const AddWebsiteContentForm = ({}: any) => {
                         id="newContactInformation"
                         name="newContactInformation"
                         placeholder="Enter new contact information"
-                        className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                        className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                       />
                       {formik.touched.newContactInformation &&
                       formik.errors.newContactInformation ? (
@@ -984,7 +1076,7 @@ const AddWebsiteContentForm = ({}: any) => {
                     id="notesForCopywriter"
                     name="notesForCopywriter"
                     placeholder="Enter notes for copywriter"
-                    className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                 </div>
               </div>
@@ -1001,7 +1093,7 @@ const AddWebsiteContentForm = ({}: any) => {
                     id="preferredPageNamesForBlog"
                     name="preferredPageNamesForBlog"
                     placeholder="Enter preferred page names for blog"
-                    className="w-full  border border-stroke bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full  border border-[lightseagreen] bg-transparent py-2 pl-3 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                 </div>
               </div>
